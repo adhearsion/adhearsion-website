@@ -1,0 +1,172 @@
+- title "FAQ"
+%p
+  Do you have a question that you think would be appropriate here? Feel free to ask your question and make a suggestion to include it here on
+  %a{:href => "http://groups.google.com/group/adhearsion"} the mailing list
+
+%h2 Adhearsion is for Ruby on Rails?
+
+%p
+  This is one of the biggest misconceptions about Adhearsion. It should be strongly stressed that Adhearsion is a Ruby framework,
+  %strong not
+  a Ruby on Rails plugin or the like. Ruby on Rails, a
+  %strong web
+  development framework, is probably the most popular Ruby software, but it has little to do with the Ruby language per se besides simply using it. The Ruby language is a general purpose programming language with which both Ruby on Rails and Adhearsion are written.
+
+%p Adhearsion does help facilitate integration with Rails applications and it shares a few libraries with Rails, such as ActiveSupport and ActiveRecord. In Rails-integration mode, Adhearsion still exists as a completely separate process.
+
+%h2 How can Adhearsion talk to landline or cell phones without special hardware?
+
+%p This is usually so simple that it can catch people by surprise. With the proliferation of VoIP over the past few years, many VoIP providers have sprung up which offer very inexpensive so-called "termination" services. Skype and Vonage are popular examples of these. The term "termination" simply means that they operate the technologies that turn a VoIP call made up of internet packets into a phone call on the entirely separate public telephone network.
+
+%p When funneling all calls through a service provider like this, it's often called "trunking" because, like the trunk of a tree, the many branches converge into one big point all the way to the ground where the roots then branch from the tree.
+
+%p The following diagram should help illustrate how it works.
+
+%img{:alt => "Diagram of telephony topology", :src => "/images/telephony-topology.jpg"}/
+
+%p
+  The VoIP protocol most often used for the VoIP calling is called
+  %a{:href => "http://en.wikipedia.org/wiki/Session_initiation_protocol"} Session Initiation Protocol
+  or SIP. If you're looking for services which offer this, try googling for "sip trunk" or "sip termination service" or you may find a list
+  %a{:href => "http://www.voip-info.org/wiki-VOIP+Service+Providers"} here.
+
+%h2 What is Asterisk?
+
+%p
+  %a{:href => "http://asterisk.org"} Asterisk
+  is an open-source telephony-engine which Adhearsion uses to handle low-level telephony details. Asterisk is written in C for performance and talks to Adhearsion via socket-based protocols.
+
+%p
+  Asterisk is normally exceptionally difficult to use and has been the source of the inordinately high barrier to entry for potential voice application developers. Adhearsion not only abstracts Asterisk but provides things it has never offered and likely never will offer. There is virtually nothing you can do in Asterisk that you can't also do in Adhearsion. Adhearsion is a
+  %em superset
+  of Asterisk functionality.
+
+%h2 Something is behaving strangely. Is it an Adhearsion bug?
+
+%p
+  It's very possible. The most common points of failure or peculiarities are at the SIP trunk level, the Asterisk level, at the Adhearsion framework level and at the application (your code) level. You can try asking on the
+  %a{:href => "/irc"} IRC channel
+  or
+  %a{:href => "http://groups.google.com/group/adhearsion"} the mailing list
+  for help. If it turns out to be an Adhearsion framework bug, please
+  %a{:href => "http://adhearsion.lighthouseapp.com"} file a bug report
+  More details on bug reporting may be found
+  %a{:href => "http://docs.adhearsion.com/pages/viewpage.action?pageId=688226"} here
+
+%h2 How do I contribute my patch?
+
+%p
+  Adhearsion uses Github.com to manage all patches. See the
+  %a{:href => "/contributing"} Contributing
+  page for more information.
+
+%h2 Why Ruby?
+
+%p For several reasons:
+
+%ul
+  %li Ruby strongly promotes code-reuse through first-class Object Oriented Programming.
+  %li Ruby code emphasizes being clean and concise.
+  %li Ruby has many interpreters, drastically extending the code-reuse potential. The main alternative interpreter is JRuby, a stable interpreter capable of running Adhearsion atop the JVM, but other interpreters are in the works for .NET, Objective-C and Smalltalk.
+  %li Ruby has a fantastic package manager named RubyGems which makes code reuse and distribution even easier and simpler.
+  %li The Ruby community is a progressive community with intelligent and pragmatic individuals with a unique culture. Things such as Agile software development and Test Driven Development are a part of the fabric of the Ruby community.
+  %li Adhearsion wants to attract people who get excited about learning new things.
+
+%p
+  If you've never used Ruby before, I recommend playing with the
+  %a{:href => "http://tryruby.hobix.com"} online interactive Ruby tutorial
+  to get a feel for the language. Even if you've never programmed before, give it a try! I think you'll see what we mean by simple and clean.
+
+%h2 What is Object Oriented Programming?
+
+%p From Wikipedia:
+
+%p "Object-oriented programming (OOP) is a programming paradigm that uses 'objects' and their interactions to design applications and computer programs. Programming techniques may include features such as encapsulation, modularity, polymorphism, and inheritance. It was not commonly used in mainstream software application development until the early 1990s. Many modern programming languages now support OOP."
+
+%p
+  \- source and more details
+  %a{:href => "http://en.wikipedia.org/wiki/Object_oriented_programming", :target => "_blank"} here
+
+%h2 How does Adhearsion run on the JVM?
+
+%p
+  The
+  %a{:href => "http://jruby.codehaus.org"} JRuby
+  interpreter is a full re-implementation of the Ruby programming langauge using only Java. Adhearsion strives to maintain 100% compatibility with the mainline Ruby interpreter (called Matz's Ruby Interpreter or MRI) and JRuby.
+
+%h2 Is Adhearsion an MVC framework?
+
+%p No, Adhearsion is more "MC", with no View. In the RESTful web, it's easy to understand the utility of a view: a particular RESTful resource can be rendered in different formats as requested. With telephony, there's no "rendering" step and no (substantive) content besides audio. Are audio waves some kind of view? We certainly don't think so. If someone can demonstrate a truly useful example of why MVC (or another paradigm) is appropriate, we'll certainly consider it.
+
+%h2 Can Adhearsion do Automatic Speech Recognition (ASR)?
+
+%p
+  Adhearsion does support the ability to call third party ASR libraries through components. These may be, but are not limited to, Lumenvox, Nuance or
+  %a{:href => "http://cmusphinx.sourceforge.net/html/cmusphinx.php"} CMUSphinx
+
+%h2 Can Adhearsion do Text to Speech (TTS)?
+
+%p
+  Adhearsion does support the ability to call third party ASR libraries such as
+  %a{:href => "http://festvox.org/festival/"} Festival
+  (open source) and Cepstral/Swift.
+
+%h2 Is Adhearsion slow because of Ruby?
+
+%p The bottom line is Adhearsion will probably not be your bottleneck. Often, especially with Asterisk, it will be the telephony engine underneath Adhearsion that will be limiting your scaling. The servicing of a call with Adhearsion is almost always computationally simpler than serving even one page load with Ruby on Rails, with the main distinction that an Adhearsion call maintains a Thread and is a back-and-forth dialog, not one big textual response.
+
+%p That said, if you do experience Adhearsion to be a bottleneck, you can always scale it horizontally, balancing calls between Adhearsion instances. Because Adhearsion supports message queues and database integration, dealing with shared state between Adhearsion instances is extremely easy.
+
+%h2 How mature is the project?
+
+%p Adhearsion is in use at many companies around the world.  The authors have seen it scale to hundreds of simultaneous calls on a single instance.  While no code is perfect, Adhearsion benefits from several years of real-world production experience.
+
+%h2 Does Adhearsion run on Windows?
+
+%p Not officially, though any Windows incompatibility is considered a bug and will therefore be fixed with due urgency. There are various technological inconsistencies when trying to make Windows behave normally vis-à-vis Linux / BSD / Unix. Adhearsion's developers are all Mac OS X and Linux users, therefore Windows bugs are not found immediately.
+
+%p
+  In the meantime it is possible to use the freely available
+  %a{:href => "http://www.vmware.com/products/server/", :target => "_blank"} VMWare Server
+  to install a Linux instance on Windows and use this to run Adhearsion.
+
+%h2 Do I have to recompile Asterisk to use Adhearsion?
+
+%p Not at all! Adhearsion communicates with Asterisk via a socket and the standard Asterisk APIs. You can use Adhearsion on a vanilla Asterisk v1.4 system.
+
+%h2 Which APIs does Adhearsion use to connect to Asterisk?
+
+%p
+  Adhearsion uses both the
+  %a{:href => "http://www.voip-info.org/wiki-Asterisk+AGI"} Application Gateway Interface
+  (AGI) and
+  %a{:href => "http://www.voip-info.org/wiki-Asterisk+manager+API"} Manager API
+  (AMI) interfaces of Asterisk.
+
+%h2 Can I try Adhearsion safely on my production Asterisk machine?
+
+%p
+  Yes! You can have a special SIP account route exclusively to Adhearsion very easily, leaving the rest of the logic perfectly intact. You can even have a single
+  %em extension
+  route to Adhearsion if you'd like. You Asterisk installation's extensions.conf only has to invoke the AGI application
+  %em somewhere
+  in it. We leave it up to you to choose where.
+
+%h2 Why does Adhearsion have an account system?
+
+%p The account system is used for a number of things:
+
+%ul
+  %li You will get free access to the Adhearsion sandbox. For the sandbox to work, we have to identify users uniquely.
+  %li You can share Adhearsion examples that you write on our site
+
+%h2 Is Adhearsion threadsafe?
+
+%p Yes, Adhearsion is threadsafe.
+
+%h2
+  Adhearsion compared to
+  %a{:href => "http://rubyforge.org/projects/ragi/"} RAGI
+  %a{:href => "http://rubyforge.org/projects/rami/"} RAMI
+
+%p There are several key differences. First, Adhearsion is a framework, not a library. Second, Adhearsion is an active project with the latest major release in January 2009 and regular on-going updates. Both RAGI and RAMI have had no updates since 2005 and are largely unsupported projects. Third, Adhearsion provides complete support for both the Asterisk AMI and AGI in one framework, whereas RAGI is for AGI and RAMI for AMI. Fourth, given that complete Asterisk support is one framework, you have the ability to develop sophisticated applications with much more ease rather than merging two outdated libraries.

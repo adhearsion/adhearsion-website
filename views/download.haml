@@ -1,0 +1,134 @@
+- title "Download Adhearsion"
+
+%h2 Latest Adhearsion Release
+
+%p
+  If you're not familiar with Ruby, virtually all Ruby software is distributed through the use of RubyGems, the official Ruby package management system. If you don't have RubyGems installed, see the section below entitled
+  %a{:href => "/download#getting_adhearsion"} "Getting Ruby, RubyGems and Adhearsion"
+
+%p With RubyGems installed, simply type the following command to install Adhearsion:
+
+%pre sudo gem install adhearsion
+
+%p And that's it! You now have the "ahn" command and can create and execute Adhearsion applications. Go read one of the Getting Started guides in the left toolbar for help writing your first application.
+
+%p Note: Windows/rvm users shouldn't prefix the gem command with sudo.
+
+%h2 Edge Adhearsion
+
+%p
+  The latest and greatest of Adhearsion, called "Edge Adhearsion," can be found on
+  %a{:href => "http://github.com/adhearsion/adhearsion"} the Adhearsion Github project
+  There are two ways to download Edge Adhearsion from Github: using the git Source Code Management (SCM) tool or an auto-generated tarball snapshot.
+
+%p To download the code with git, type...
+
+%pre git clone git://github.com/adhearsion/adhearsion.git
+
+%p
+  Or download
+  %a{:href => "http://github.com/adhearsion/adhearsion/tarball/master"} the latest tarball
+  of Edge Adhearsion from Github without git.
+
+%p
+  The code on the Github master branch is usually always stable and usable. Most of the development of Adhearsion actually happens on separate branches (git makes branching extremely easy) and Jay merges the changes into master when they're ready. This keeps the master branch relatively stable but not entirely up-to-date feature-wise. If you wish to browse activity on other branches, check out Github's
+  %a{:href => "http://github.com/adhearsion/adhearsion/network"} Network Viewer
+
+%h2
+  %a{:name => "getting_adhearsion"} Getting Ruby, RubyGems and Adhearsion
+
+%p Choose one of the operating systems below for installation instructions.
+
+#installation-accordion
+  %h3.installation-instruction-toggler Mac OS X Leopard/Snow Leopard
+
+  #leopard-installation.installation-instructions
+    %p
+      Since you use Leopard, you already have Ruby and RubyGems installed! All you have to do is install Adhearsion using the
+      %kbd gem
+      command:
+
+    %pre sudo gem install adhearsion
+
+    %p
+      This will automatically add the
+      %kbd ahn
+      command to your system, allowing you to create and start applications in the following step.
+
+    %p Yep, that's it!
+
+  %h3.installation-instruction-toggler Mac OS X Tiger
+
+  #tiger-installation.installation-instructions
+
+    %p
+      We recommend installing Ruby and RubyGems together using MacPorts. MacPorts is a package manager for Mac OS X similar to the package managers that come with virtually every Linux distribution. Download MacPorts from
+      %a{:href => "http://www.macports.org/", :target => "_blank"} HERE
+      and follow the install instructions on the website.
+
+    %p
+      MacPorts installs the
+      %kbd port
+      command. Use this to install Ruby and RubyGems by doing...
+
+    %pre sudo port install ruby rb-rubygems
+
+    %p Now, just install Adhearsion by doing
+
+    %pre sudo gem install adhearsion
+
+    %p
+      This will automatically add the
+      %kbd ahn
+      command to your system, allowing you to create and start applications in the following step.
+
+  %h3.installation-instruction-toggler Linux/BSD
+
+  #linux-installation.installation-instructions
+
+    %p On Linux it's best to use your distro's package manager to install Ruby and RubyGems, then have RubyGems update itself.
+
+    %p On Debian and Ubuntu you may install Ruby and RubyGems by doing
+
+    %pre
+      :preserve
+        sudo apt-get install -y ruby1.8-dev rubygems1.8 \
+            irb1.8 libsqlite3-ruby1.8      %p On the Red Hat variants such as RHEL, Fedora, and CentOS, run the following command:
+
+    %pre
+      :preserve
+        sudo yum install -y ruby ruby-rdoc ruby-irb \
+            ruby-sqlite3       %h4 Updating RubyGems
+
+    %p Before we install any gems with RubyGems, let's make sure we're using the latest version. Upgrade RubyGems by running the following command.
+
+    %pre sudo gem update --system
+
+    %p
+      Now, we'll use the
+      %kbd gem
+      command to install Adhearsion:
+
+    %pre sudo gem install adhearsion
+
+    %p
+      This will automatically add the
+      %kbd ahn
+      command to your system, allowing you to create and start applications in the following step.
+
+  %h3.installation-instruction-toggler Microsoft Windows
+
+  #windows-installation.installation-instructions
+    %p
+      %em
+        Note: Currently Ahearsion does not support Windows, although we are working to have this support. In the meantime please refer to the
+        %a{:href => "/faq#windows"} FAQ
+        for updates and how to use Adhearsion in the meantime.
+
+:javascript
+  $("#installation-accordion").accordion({
+    alwaysOpen: false,
+    header: "h3",
+    active: true,
+    autoHeight: false
+  });

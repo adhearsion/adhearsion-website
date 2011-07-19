@@ -1,0 +1,17 @@
+- title "Open-Source Telephony Development Framework", false
+
+%h1
+  Community News Feed
+  %a{:href => "http://pipes.yahoo.com/pipes/pipe.run?_id=DkJE9pns3RGlyDwlBR50VA&_render=rss", :title => "Subscribe to the Adhearsion Community News Feed", :rel => "alternate", :type => "application/rss+xml"}
+    %img{:src => "http://www.feedburner.com/fb/images/pub/feed-icon16x16.png", :alt => "Subscribe to this blog", :style => "border:0"}
+
+#homepage-news
+  - @blog_posts.each do |post|
+    .blog-post
+      %p
+        %a{:href => post[:url]}
+          %span.title= post[:title]
+          %br
+          %span.homepage-news-date
+            = relative_time_ago post[:date]
+            ago

@@ -1,16 +1,13 @@
 source "http://rubygems.org"
-source "http://gemcutter.org"
-gem "rails", "= 2.3.10"
-gem "rake"
-gem "test-spec"
-gem "rspec"
-gem "rspec-rails"
-gem "hpricot"
-gem "libxml-ruby"
-gem "syntax"
-gem "verhoeff"
-gem "aasm"
+
+gem "sinatra"
+gem "sinatra_more", :require => 'sinatra_more/markup_plugin'
+gem "i18n"
+gem "rack-cache", :require => 'rack/cache'
+gem 'haml'
+gem 'haml-coderay'
 
 group :development do
-  gem "sqlite3"
+  gem 'capistrano'
+  gem 'railsless-deploy'
 end

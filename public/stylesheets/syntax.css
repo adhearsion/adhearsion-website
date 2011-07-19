@@ -1,13 +1,11 @@
 pre {
-    background-color: #f1f1f3;
-    color: #112;
-    padding: 10px;
-    overflow: auto;
-    margin: 4px 0px;
-          width: 95%;
+  background-color: #f1f1f3;
+  color: #112;
+  padding: 10px;
+  overflow: auto;
+  margin: 4px 0px;
+  width: 95%;
 }
-
-
 
 /* Syntax highlighting */
 pre .normal {}

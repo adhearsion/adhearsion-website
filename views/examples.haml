@@ -1,0 +1,714 @@
+- title "Dialplan Examples"
+
+%p
+  The "dialplan" is the main place where you control phone calls with Adhearsion. When you create a new Adhearsion app, you'll immediately see the
+  %code dialplan.rb
+  file in which you can begin writing your custom telephony app's realtime call control logic. The examples should help you get started.
+
+.examples
+  .example
+    %h3.example-name.ui-state-default.ui-corner-all
+      %a{:href => "#"} Play a sound file
+    .content-html
+      %p
+        When using Adhearsion with Asterisk, you have
+        %a{:href => "http://www.voip-info.org/wiki/view/Asterisk+sound+files"} hundreds
+        of sound files to use right out of the box.
+      %p These range from the useful everyday sound files to pure novelties such as monkeys screaming and practical jokes.
+      %p
+        To play a sound file, use the
+        %a{:href => "http://api.adhearsion.com/Adhearsion/VoIP/Asterisk/Commands.html#play-instance_method"}
+          %code play
+        method like below.
+      :coderay
+        #!ruby
+        play "hello-world"
+      %p You can play multiple files in sequence too.
+      :coderay
+        #!ruby
+        play "please-enter-your", "extension"
+      %p
+        If this is your first time seeing Ruby,
+        %code play
+        is actually a method. Ruby does not require you wrap a method's arguments with parenthesis.
+
+  .example
+    %h3.example-name.ui-state-default.ui-corner-all
+      %a{:href => "#"} Sharing variables between contexts
+    .content-html
+      %p Adhearsion creates a number of variables for you when it runs your dialplan which are available in any context you may jump around to.
+      %p For example, the following dialplan will speak back whatever extension the user dials.
+      :coderay
+        #!ruby
+        adhearsion {
+          play extension
+        }
+      %p
+        The
+        %code extension
+        variable in this case is actually not an variable. It's a method that, because of Ruby's cleanliness, simply look like local variable. This may be a little confusing to you at first. Consider the following example:
+        :coderay
+          #!ruby
+          adhearsion {
+            extension = extension + 1
+            play extension
+            +player
+          }
+          player {
+            play extension
+          }
+      %p
+        When the
+        %code adhearsion
+        context jumps to the
+        %code player
+        context, you may think both contexts will speak the same number. It actually won't for a slightly technical reason:
+      %p
+        When
+        %code extension
+        is defined with the
+        %code =
+        sign, Ruby will make that into a local variable and "shadow" anything else in a higher scope that may have that same name. Because the method
+        %code extension
+        is in a higher scope, the local variable will take precedence, but
+        %em only in the local scope
+        The
+        %code player
+        context has its own, separate scope and, therefore, the
+        %code extension
+        instance method is used.
+      %p To share information between contexts, simply use Ruby instance variables. We can rewrite the previous example properly as follows:
+      :coderay
+        #!ruby
+        adhearsion {
+          @extension += 1
+          play @extension
+          +player
+        }
+        player {
+          play @extension
+        }
+      %p All contexts will run within the same Execution Environment object and therefore all instance variables will remain in scope no matter how many times you jump around.
+
+  .example
+    %h3.example-name.ui-state-default.ui-corner-all
+      %a{:href => "#"} Receiving keypad input
+    .content-html
+      %p Taking input via phone keypad input is extremely simple.
+      :coderay
+        #!ruby
+        desired_extension = input
+      %p
+        The example above shows a Ruby principle at work:
+        %em convention over configuration
+        All of
+        %a{:href => "http://api.adhearsion.com/Adhearsion/VoIP/Asterisk/Commands.html#input-instance_method"}
+          %code input
+        parameters are optional. The code above simply receives any number of digits with no timeout until the user presses the "#" key. The result is then bound to the
+        %code desired_extension
+        variable with the delimiting "#" removed.
+      %p Or you can explicitly receive a number of digits with a timeout.
+      :coderay
+        #!ruby
+        desired_extension = input 3, :timeout => 1.minute
+      %p
+        This takes in three digits, waiting up to one minute for each successive key entry. Though a one minute timeout is a bit contrived, this example shows an interesting feature of Ruby: everything, even numbers, is an object. Objects have methods, therefore a
+        %code minute
+        method makes perfect sense.
+
+  .example
+    %h3.example-name.ui-state-default.ui-corner-all
+      %a{:href => "#"} Joining a conference bridge
+    .content-html
+      %p
+        Want the user to join a conference bridge? Just tell them to
+        %a{:href => "http://api.adhearsion.com/Adhearsion/VoIP/Asterisk/Commands.html#join-instance_method"} join
+        something.
+      :coderay
+        #!ruby
+        join "sales"
+      %p You can make the conference name virtually anything. For example, if you create a web-based tool to manage your company's conferences, you can make the conference name the unique ID of that conference's database record.
+      %p
+        The join method uses the Asterisk
+        %a{:href => "http://www.voip-info.org/wiki-Asterisk+cmd+MeetMe"} MeetMe
+        application. Alternatively, you may use the add-on application
+        %a{:href => "http://www.voip-info.org/wiki/view/Asterisk+cmd+Conference"} Conference
+        using the
+        %a{:href => "http://api.adhearsion.com/Adhearsion/VoIP/Asterisk/Commands.html#execute-instance_method"} execute
+        method as follows:
+      :coderay
+        #!ruby
+        execute "Conference", "room/S"
+
+  .example
+    %h3.example-name.ui-state-default.ui-corner-all
+      %a{:href => "#"} Using dialplan contexts
+    .content-html
+      %p
+        The Adhearsion dialplan.rb mirrors the Asterisk concept of a context. Within the
+        %a{:href => "http://www.voip-info.org/tiki-index.php?page=Asterisk%20config%20extensions.conf"} extensions.conf
+        file of Asterisk you may have these
+        %a{:href => "http://www.voip-info.org/wiki-Asterisk+Dialplan+Introduction"} contexts
+      :coderay
+        #!plaintext
+        [from_dallas]
+        exten => _X.,1,AGI(agi://localhost)
+        exten => _X.,n,Hangup
+
+        [from_chicago]
+        exten => _X.,1,AGI(agi://localhost)
+        exten => _X.,n,Hangup
+      %p You would then have these corresponding contexts in the Adhearsion dialplan.rb:
+      :coderay
+        #!ruby
+        from_texas {
+          play 'hello', 'texas'
+          # do more here
+        }
+
+        from_illinois {
+          play 'hello', 'illinois'
+          # do more here
+        }
+      %p Further, you may have additional contexts in the Adhearsion dialplan.rb that may be mixed in as follows:
+      :coderay_raw
+        #!ruby
+        from_omaha {
+          play 'hello', 'omaha', 'and'
+          +from_nebraska
+        }
+
+        from_nebraska {
+          play 'hello', 'nebraska'
+          # do more here
+        }
+
+      %p With this feature you may have reusable code in contexts within dialplan.rb.
+
+
+  .example
+    %h3.example-name.ui-state-default.ui-corner-all
+      %a{:href => "#"} Simple menu example
+    .content-html
+      %p
+        The
+        %a{:href => "http://api.adhearsion.com/Adhearsion/VoIP/Asterisk/Commands.html#menu-instance_method"} menu
+        command solves the problem of building enormous input-fetching state machines in Ruby without first-class message passing facilities or an external DSL. In otherwords, build complex menus to collect actionable user input via
+        %a{:href => "http://en.wikipedia.org/wiki/Dtmf"} DTMF
+      %p Here is an example dialplan which uses the menu command effectively:
+      :coderay_raw
+        #!ruby
+        from_pstn {
+          menu 'welcome', 'for-spanish-press-8', 'main-ivr',
+               :timeout => 8.seconds, :tries => 3 do |link|
+            link.shipment_status  1
+            link.ordering         2
+            link.representative   4
+            link.spanish          8
+            link.employee         900..999
+
+            link.on_invalid { play 'invalid' }
+
+            link.on_premature_timeout do |str|
+              play 'sorry'
+            end
+
+            link.on_failure do
+              play 'goodbye'
+              hangup
+            end
+          end
+        }
+
+        shipment_status {
+          # Fetch a tracking number and pass it to a web service.
+        }
+
+        ordering {
+          # Enter another menu that lets them enter credit card
+          # information and place their order over the phone.
+        }
+
+        representative {
+          # Place the caller into a queue
+        }
+
+        spanish {
+          # Special options for the spanish menu.
+        }
+
+        employee {
+          dial "SIP/#{extension}" # Overly simplistic
+        }
+
+  .example
+    %h3.example-name.ui-state-default.ui-corner-all
+      %a{:href => "#"} Executing arbitrary Asterisk commands
+    .content-html
+      %p
+        While Adhearsion provides an extensive set of methods to
+        %code dialplan.rb
+        files, there may be times you want to execute an Asterisk command (known as an "application" in Asterisk parlance) that has not been exposed by Adhearsion.
+      %p
+        The
+        %a{:href => "http://api.adhearsion.com/Adhearsion/VoIP/Asterisk/Commands.html#execute-instance_method"}
+          %code execute
+        method accepts as its first argument the name of the Asterisk command followed by an arbitrarily long sequence of arguments.
+      :coderay
+        #!ruby
+        execute "DISA", 1234, "disa_context"
+
+      %p
+        Voip-Info.org has an extensive list of the available Asterisk commands
+        %a{:href => "http://www.voip-info.org/wiki-Asterisk+-+documentation+of+application+commands"} here
+      %p
+        %strong Note:
+        Asterisk itself has no dialplan-level concept of arguments. The example above is equivalent to
+        %code DISA(1234|disa_context)
+        in
+        %code extensions.conf
+        When Asterisk runs the DISA command, it passes the arguments between the parenthesis as a
+        %strong raw string
+        and it's up to the application to parse it. For this reason, you may need to pass a String as the second argument to
+        %code execute
+        to manually format a finicky command's arguments.
+
+%h2 Relational database examples
+%p These examples show basic usage of ActiveRecord, an Object Relational Mapper library for accessing relational data from popular relational databases such as MySQL, PostgreSQl, or sqlite3 as if they were Ruby objects.
+.examples
+  .example
+    %h3.example-name.ui-state-default.ui-corner-all
+      %a{:href => "#"} Writing an ActiveRecord &quot;model&quot;
+    .content-html
+      %p
+        ActiveRecord is an
+        %a{:href => "http://en.wikipedia.org/wiki/Object-relational_mapping"} object-relational mapper (ORM)
+        for Ruby which makes persistent database data look exactly like Ruby objects. Because ActiveRecord handles all of the SQL for you, it will work on virtually
+        %em any
+        SQL server for which it has adapters.
+      %p If you are not using Rails, then you may still want to access a database with your own models, which is possible with Adhearsion. When building a model, you are simply creating a class that represents the table definition as the class (ie - the columns) while each row becomes an instantiated object of that class.
+      %p
+        One thing to keep in mind is that ActiveRecord works with
+        %a{:href => "http://mandhro.com/2006/06/16/designing-databases-with-activerecord-conventions/"} conventions
+        so you will want to do some research on the best way to design your database (don't worry, AR may do legacy stuff too).
+      %p With this in mind, if you have two tables named 'customers' and 'orders' you may create their models as follows:
+      :coderay
+        #!ruby
+        class Customer < ActiveRecord::Base
+        end
+
+        class Order < ActiveRecord::Base
+        end
+      %p As long as you have followed conventions, that is it really. Then you may reference the table rows as follows:
+      :coderay_raw
+        #!ruby
+        Customer.all.each do |customer|
+          puts "#{customer.first_name} #{customer.last_name}"
+        end
+  .example
+    %h3.example-name.ui-state-default.ui-corner-all
+      %a{:href => "#"} Iterating over all records in a table
+    .content-html
+      %p
+        With Adhearsion it is easy to access an
+        %a{:href => "http://en.wikipedia.org/wiki/RDBMS"} RDBMS
+        either through Rails or directly with
+        %a{:href => "http://api.rubyonrails.org/classes/ActiveRecord/Base.html"} ActiveRecord
+        Once you have your models setup, you may fetch information in a database and then iterate over it in your dialplan.rb.
+      %p
+        In this example we will show pulling information from a database to build a
+        %a{:href => "http://en.wikipedia.org/wiki/Text_to_speech"} text to speech (TTS)
+        audio file to playback to the caller.
+      :coderay_raw
+        #!ruby
+        # parking_lot.rb
+        class ParkingLot < ActiveRecord::Base
+        end
+
+        # dialplan.rb
+        parking_spaces_available {
+          messages =
+
+          # Fetch the parking lot details from the database
+          parking_lots = ParkingLot.all
+
+          # Then iterate over the results to build a menu
+          messages = ["Welcome to the parking info service."] + parking_lots.collect do |parking_lot|
+            "#{parking_lot.name} has #{parking_lot.spaces} spaces available."
+          end
+
+          # Then if you have Festival TTS installed you may
+          # build your TTS file and play it back to the caller
+          filename = "parking_spaces_available.ulaw"
+          system "echo #{messages.join ' '} | text2wave -o #{filename} -otype ulaw"
+          play filename
+        }
+  .example
+    %h3.example-name.ui-state-default.ui-corner-all
+      %a{:href => "#"} Finding the first record by a column value
+    .content-html
+      %p In this example we will show finding one record from the database and using information from that row.
+      :coderay_raw
+        #!ruby
+        # parking_lot.rb
+        class ParkingLot < ActiveRecord::Base
+        end
+
+        # dialplan.rb
+        parking_lot_menu {
+          menu 'welcome', 'for-bush-st-press1', 'for-hyde-press2',
+               :timeout => 8.seconds, :tries => 3 do |link|
+            link.bush_st 1
+            link.hyde_st 2
+          end
+        }
+
+        bush_st {
+          # Here you may see we find the parking lot name
+          # based on the column 'name'
+          parking_lot = ParkingLot.where(:name => "Bush St").first
+
+          play "bush-st-has", parking_lot.spaces, "spaces-available"
+        }
+
+        hyde_st {
+          # Do the same thing here
+        }
+
+%h2 Working with Components
+%p
+  Adhearsion's
+  %a{:href => "http://docs.adhearsion.com/display/adhearsion/Components"} component
+  system is a robust way of developing plugins to the framework. Trading telephony functionality in the past has been prohibitively difficult because telephony platforms are closed or monolithic. The component system allows the industry to take a step forward and start trading open-source telephony functionality.
+  Functionality that you might trade with components varies quite a bit. You may want to trade something as simple as a single new dialplan method or something as complex as a full embedded web GUI. The examples below should help
+.examples
+  .example
+    %h3.example-name.ui-state-default.ui-corner-all
+      %a{:href => "#"} Creating a new component
+    .content-html
+      %p
+        Creating a new
+        %a{:href => "http://docs.adhearsion.com/display/adhearsion/Components"} component
+        is easy with the built-in Adhearsion generators. From within your ~/ahn_project/ directory type:
+      :coderay
+        #!plaintext
+        ahn create component my_shiny_new_component
+
+      %p With this you get a directory and files as follows:
+      :coderay_raw
+        #!plaintext
+        ~/ahn_project/components/my_shiny_new_component/my_shiny_new_component.rb
+        ~/ahn_project/components/my_shiny_new_component/my_shiny_new_component.yml
+
+      %p You may then disable the component as follows:
+      :coderay
+        #!plaintext
+        ahn disable component my_shiny_new_component
+
+      %p And enable as follows:
+      :coderay
+        #!plaintext
+        ahn enable component my_shiny_new_component
+
+  .example
+    %h3.example-name.ui-state-default.ui-corner-all
+      %a{:href => "#"} Adding a new dialplan method
+    .content-html
+      %p Now that you have created your component, you may begin to create methods accessible to the different subsystems of Adhearsion. To add a method in your component that becomes available to your dialplan.rb, simply do the following:
+      :coderay_raw
+        #!ruby
+        # In your my_shiny_new_component.rb file
+        methods_for :dialplan do
+          # Totally useless method to count to 10
+          def count_to_ten
+            cnt = 0
+            while cnt < 11
+              cnt += 1
+            end
+            cnt
+          end
+        end
+
+        # Then in your dialplan.rb the method is available
+        inbound {
+          ten = count_to_ten
+        }
+
+  .example
+    %h3.example-name.ui-state-default.ui-corner-all
+      %a{:href => "#"} Defining a globally-recognized method
+    .content-html
+      %p Any component methods defined within the :global scope will be available anywhere in the Ruby process.
+      :coderay
+        #!ruby
+        methods_for :global do
+          def open_door
+            RestClient.get "http://front-door/control/open"
+          end
+        end
+      %p
+        When methods are defined in the global scope, you should make the assumption that you will only have access to other globally-available methods. Don't use dialplan methods such a
+        %code play
+        in your global methods; this would work when your dialplan calls the global method but blow up when another part of the framework calls it.
+
+%h2 Events examples
+%p An Adhearsion application may have much more going on than just call handling. What if you want to do something when a call hangup happens? What if you want to do something when an instant message is received? The asynchronous Adhearsion events subsystem lets you handle these actions concurrently.
+.examples
+  .example
+    %h3.example-name.ui-state-default.ui-corner-all
+      %a{:href => "#"} Handling a telephony platform event with a particular name
+    .content-html
+      %p
+        The events.rb subsystem provides all events that the Asterisk
+        %a{:href => "http://www.voip-info.org/tiki-index.php?page=Asterisk%20config%20manager.conf"} manager.conf
+        specifies for that user. Therefore you may want to deal with only certain events to trigger various actions.
+      %p In the events.rb you may do something like this:
+      :coderay_raw
+        #!ruby
+        events.asterisk.manager_interface.each do |event|
+
+          # I always downcase so I do not have to remember too much
+          case event.name.downcase.to_sym
+          when :newstate
+            # If the call was answered
+            if event.headers["State"] == "Up"
+              # do something
+            end
+          when :hangup
+            # do something
+          end
+
+        end
+
+  .example
+    %h3.example-name.ui-state-default.ui-corner-all
+      %a{:href => "#"} Run code after Adhearsion fully initializes
+    .content-html
+      %p
+        In your component, just register a callback for the
+        %code :after_initialized
+        namespace.
+      :coderay
+        #!ruby
+          initialization do
+            Events.register_callback :after_initialized do
+              ahn_log "Do stuff here!"
+            end
+          end
+
+%h2 Other web framework examples
+%p These examples show how to build web interfaces for Adhearsion with frameworks other than Ruby on Rails.
+.examples
+  .example
+    %h3.example-name.ui-state-default.ui-corner-all
+      %a{:href => "#"} Talking to your Adhearsion app from PHP
+    .content-html
+      %p
+        Below is a sample PHP class you can use to talk with the Adhearsion
+        %code restful_rpc
+        component. The
+        %code restful_rpc
+        component comes disabled by default in all newly-generated applications.
+      :coderay
+        #!php
+          <?php
+
+          // Define an Adhearsion PHP class for a REST HTTP connection
+          class Adhearsion {
+
+            public $url;
+            public $username;
+            public $password;
+
+            function __construct($url, $username, $password) {
+              $this->url = $url;
+              $this->username = $username;
+              $this->password = $password;
+            }
+
+            function invoke($method_name) {
+              $json = json_encode(array_slice(func_get_args(), 1));
+
+              $url = "$this->url/$method_name";
+              return json_decode(http_post_data($url,
+                                                $json,
+                                                array("httpauth" => "$this->username:$this->password")));
+            }
+
+          }
+
+          // Connect to the REST API of Adhearsion
+          $ahn = new Adhearsion("localhost:5000", "jicksta", "roflcopterz");
+
+          //Build an array of the options for calling
+          $call_options = array(array ('channel' => 'SIP/303',
+                                 'context' => 'inbound',
+                                 'exten' => '1000',
+                                 'priority' => '1',
+                                 'async' => 'true',
+                                 'variable' => 'destination=304');
+
+          // Invoke the Adhearsion originate method via an HTTP POST of a JSON object
+          $ahn->invoke("call_into_context", $call_options);
+          ?>
+      %p
+        In this example, it does an "origination" to asynchronously call out to a SIP extension (103 in this case). When the callee answers, it will start executing the
+        %code inbound
+        Adhearsion context. In dialplan example below, we're extracting a variable set in the origination and using it to dial out again.
+      :coderay_raw
+        #!ruby
+        inbound {
+          dial "SIP/#{get_variable 'destination'}"
+        }
+
+%h2 Using web services
+%p
+  Adhearsion helps you integrate voice into your business and web services which are the
+  %i lingua franca
+  of most businesses' internal systems.
+.examples
+  .example
+    %h3.example-name.ui-state-default.ui-corner-all
+      %a{:href => "#"} Consuming RESTful resources
+    .content-html
+      %p
+        Adhearsion has a great RPC interface out of the box that may be accessed via
+        %a{:href => "http://en.wikipedia.org/wiki/Representational_State_Transfer"} REST
+        You may then access Adhearsion objects and methods from virtually any modern lanugage. In this case we will show Ruby consuming the web services (keep in mind Adhearsion uses
+        %a{:href => "http://en.wikipedia.org/wiki/Json"} JSON
+      :coderay_raw
+        #!ruby
+        require 'json'
+        require 'rest_client'
+
+        # First we create the class that handles the connection
+        class RESTfulAdhearsion
+
+          DEFAULT_OPTIONS = {
+            # Note: :user and :password are non-existent by default
+            :host         => "localhost",
+            :port         => "5000",
+            :path_nesting => "/"
+          }
+
+          def initialize(options = {})
+            @options = DEFAULT_OPTIONS.merge options
+
+            @path_nesting = @options.delete :path_nesting
+            @host = @options.delete :host
+            @port = @options.delete :port
+
+            @url_beginning = "http://#{@host}:#{@port}#{@path_nesting}"
+          end
+
+          def method_missing(method_name, *args)
+            JSON.parse RestClient::Resource.new(@url_beginning + method_name.to_s, @options).post(args.to_json)
+          end
+
+        end
+
+        #Create our Adhearsion object connected to the RESTful API of Adhearsion
+        Adhearsion = RESTfulAdhearsion.new(:host     => "localhost",
+                                              :port     => 5000,
+                                              :user     => "jicksta",
+                                              :password => "roflcopterz")
+
+        # Then make a call to it to place a phone call
+        Adhearsion.originate(:channel => "SIP/3000",
+                              :context  => "outbound",
+                              :priority => "1",
+                              :exten    => "1000",
+                              :async    => "true")
+
+  .example
+    %h3.example-name.ui-state-default.ui-corner-all
+      %a{:href => "#"} Consuming the Yahoo Query Language
+    .content-html
+      %p
+        Example consuming the
+        %a{:href => "http://developer.yahoo.com/yql/"} Yahoo Query Language
+        The dialplan below will ask the user for their zipcode, fetch the weather based on zipcode and then play the temperature back to the user.
+      :coderay_raw
+        #!ruby
+        sandbox {
+
+          play 'welcome'
+
+          response = input 5,
+                     :play    => ['please-enter-your', 'zip-code'],
+                     :timeout => 10,
+                     :retries => 3
+
+          query = "SELECT * FROM weather.forecast WHERE location = #{response}"
+
+          url = URI.encode "http://query.yahooapis.com/v1/public/yql?format=json&q=#{query}"
+
+          json_data = open(url).read
+          weather_data = JSON.parse json_data
+
+          play 'temperature', weather_data["query"]["results"]["channel"]["item"]["condition"]["temp"]
+
+        }
+
+%h2 Using Adhearsion with JRuby
+%p
+  Adhearsion fully supports running on
+  %a{:href => "http://jruby.codehaus.org/"} JRuby
+  This section will show you how to run and leverage JRuby to get the most of of running on the
+  %a{:href => "http://en.wikipedia.org/wiki/Java_virtual_machine"} Java Virtual Machine
+.examples
+  .example
+    %h3.example-name.ui-state-default.ui-corner-all
+      %a{:href => "#"} Starting Adhearsion with JRuby
+    .content-html
+      %p JRuby has its own, separate gem repository and requires gems be installed using its own gem executable. If you have the normal Ruby interpreter installed on your system you would be accustomed to using the 'gem' command to install new gems. For JRuby you may simply use 'jgem'.
+      %p Adhearsion has a separate jahn executable with a shebang line of #!/usr/bin/env jruby. If your jruby is available in your path, you can simply execute jahn directly as you would the ahn command.
+      :coderay
+        #!plaintext
+          jahn start /path/to/my/app
+
+%h2 Full Component Examples
+%p We have created several fully working component examples that you may download and use.
+.examples
+  .example
+    %h3.example-name.ui-state-default.ui-corner-all
+      %a{:href => "#"} Click to call
+    .content-html
+      %p Example component for Adhearsion showing a browser-based click to call application. Also shows how to use the RESTful API of Adhearsion.
+      %p
+        You may access the component
+        %a{:href => "http://github.com/jsgoecke/restful_clicktocall"} here
+  .example
+    %h3.example-name.ui-state-default.ui-corner-all
+      %a{:href => "#"} An Adhearsion Stress Tester
+    .content-html
+      %p The Call Tester is used to generate live inbound call load on an Asterisk or any other telephony system. The Call Tester also provides a facility to play DTMF tones at the beginning of a call in order to traverse an IVR menu and reach various inbound call routes. The intent is use this facility in both engineering QA as well as a tool for operations in the field to load test each and every Asterisk or voice platform implementation.
+      %p
+        You may download the component
+        %a{:href => "http://github.com/jsgoecke/call-tester"} here
+  .example
+    %h3.example-name.ui-state-default.ui-corner-all
+      %a{:href => "#"} Web scraping - Ann Arbor Parking
+    .content-html
+      %p Provides an example Adhearsion component that exposes the Ann Arbor, MI parking lot space availability via an IVR. This example was inspired by the folks @ VoIP Tech Chat and their Perl example.
+      %p
+        You may download the component
+        %a{:href => "http://github.com/jsgoecke/annarbor_parking/"} here
+  .example
+    %h3.example-name.ui-state-default.ui-corner-all
+      %a{:href => "#"} Phone Surveys
+    .content-html
+      %p Provides an example Adhearsion component that conducts call surveys. The component also provides a Rails GUI.
+      %p
+        You may download the component
+        %a{:href => "http://github.com/jsgoecke/surveys/"} here
+
+:javascript
+  $(document).ready(function() {
+    $(".examples").accordion({
+      alwaysOpen: false,
+      header: "h3",
+      active: true,
+      autoHeight: false
+    });
+  });

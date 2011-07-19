@@ -1,0 +1,128 @@
+%html
+  %head
+    %title
+      Adhearsion:
+      = yield_content(:title) || ''
+
+    = stylesheet_link_tag "default", "syntax", "theme/ui.all"
+    %link{:rel => "shortcut icon", :href => "/favicon.ico"}
+
+    %meta{:'http-equiv' => "content-type", :content => "text/html; charset=utf-8"}
+    %meta{:name => "description", :content => "description"}
+    %meta{:name => "keywords", :content => "keywords"}
+    %meta{:name => "author", :content => "author"}
+
+    = javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js', "https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js"
+
+    :javascript
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22818641-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+  %body
+    .container
+
+      #header
+        %h1
+          %a{:href => "/"} Adhearsion
+
+      .main_right
+
+        .padded
+
+          %h1 Adhearsion is...
+          %p
+            Adhearsion is a new way to write voice-enabled applications. It's not just an API or library &mdash; it's a
+            %strong fully-featured framework
+            , the first of its kind, designed for maximal code reuse and intuitiveness. The name "Adhearsion" is a combination of "adhesion" and "hear" because Adhearsion shines best when integrating technologies with voice.
+
+          %h1 It's modern
+          %p
+            Adhearsion uses the high-level
+            %a{:href => "http://ruby-lang.org"} Ruby programming language
+            and has a comprehensive regression test suite. In the age of the social web, what other technologies are more social than voice? Adhearsion aims to help merge this so-called "Web 2.0" world with the previously untamable telephony world.
+
+          %h1 It's intuitive
+          %p
+            Voice applications don't have to be hard. Adhearsion abstracts much of the complicated telephony domain, allowing you to focus on what's really important: the
+            %em business
+            domain. Take a look at the
+            %a{:href => "/examples"} Examples
+            to see what we mean.
+
+          %h1 It's open-source
+          %p We take open-source software seriously. The telecom industry, above all, needs fresh innovative talent and Adhearsion's here to foster it. This is one of the final major frontiers for open-source to truly make a transformative impact and now is an exciting time to be a part of it.
+
+          %h1 We think it's fun
+          %p Many hackers' faces light up the first time they run code which makes the cell phone in their pocket ring. Whether you're a veteran telephony engineer or a web developer wanting a new experiment to do over the weekend, we think Adhearsion is enough of a departure from classical telephony to tickle your fancy.
+
+      .subnav
+        %h1 Information
+        %ul
+          %li
+            %a{:href => "/"} Home
+          %li
+            %a{:href => "/download"} Download
+          %li
+            %a{:href => "/faq"} FAQ
+          %li
+            %a{:href => "http://wiki.github.com/adhearsion/adhearsion/roadmap"} Roadmap
+          %li
+            %a{:href => "/contributing"} Contributing
+          %li
+            %a{:href => "/contact"} Contact
+          %li
+            %a{:href => "http://mojolingo.com/adhearsion-consulting.php"} Adhearsion Consulting
+
+        %h1 Documentation
+        %ul
+          %li
+            %a{:href => "http://github.com/adhearsion/adhearsion/wiki/Getting-Started"} Getting Started
+          %li
+            %a{:href => "/examples"} Examples
+          %li
+            %a{:href => "/screencasts"} Screencasts
+          %li
+            %a{:href => "http://wiki.github.com/adhearsion/adhearsion"} Wiki
+          %li
+            %a{:href => "http://rubydoc.info/github/adhearsion/adhearsion/master/frames"} API Reference
+
+        %h1 Community
+        %ul
+          %li
+            %a{:href => "http://ahnhub.com/"} AHNHub.com
+          %li
+            %a{:href => "http://github.com/adhearsion/adhearsion"} Adhearsion @ Github
+          %li
+            %a{:href => "http://adhearsion.lighthouseapp.com"} Bug Tracker
+          %li
+            %a{:href => "/irc"} IRC Chatroom
+          %li
+            %a{:href => "http://groups.google.com/group/adhearsion"} Mailing List &amp; Forum
+
+      .main
+        .padded
+          = content_tag :h1, yield_content(:title), :class => 'title' if show_title?
+          = yield
+
+      .clearer
+        %span
+
+      .footer
+        %span.left
+          %a{:rel => "license", :href => "http://creativecommons.org/licenses/by/3.0/us/"}
+            %img{:alt => "Creative Commons License", :style => "border-width:0", :src => "http://i.creativecommons.org/l/by/3.0/us/80x15.png"}
+          All content on this site is licensed under the Creative Commons Attribution 3.0 United States License
+
+        %span.right
+          Thanks to
+          %a{:href => "http://templates.arcsin.se"} Arcsin
+
+        .clearer
+          %span
