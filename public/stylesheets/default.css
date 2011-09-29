@@ -412,3 +412,60 @@ div.sponsors li {
   list-style: none;
   text-align: center;
 }
+
+.sponsors .upperSponsors {
+	width: 100%;
+	height: 150px;
+	border-top: 1px dotted;
+}
+
+.sponsors .upperSponsors .left, .sponsors .upperSponsors .right {
+	float: left;
+	width: 45%;
+	height: 70%;
+}
+
+.sponsors .upperSponsors .left {
+  border-right: 1px dotted;
+	padding: 35px 5px 0 5px;
+	margin: 10px 7px 0 0;
+}
+
+.sponsors .upperSponsors .right {
+	padding-top: 20px;
+}
+
+.sponsors .lowerSponsors {
+	width: 100%;
+	height: 95px;
+	border-top: 1px dotted;
+	padding-top: 10px;
+}
+
+.sponsors .lowerSponsors .small, .sponsors .lowerSponsors .small2 {
+	float: left;
+	margin: 5px;
+	width: 25%;
+	height: 85%;
+	padding-top: 10px;
+}
+
+.sponsors .lowerSponsors .small2 {
+	padding-left: 5px;
+	width: 24%;
+}
+
+.sponsors .lowerSponsors .small {
+	padding-top: 20px;
+	margin-left: 5px;
+}
+
+.sponsors .lowerSponsors .large {
+	float: left;
+	margin: 0 0 0 15px;
+	width: 39%;
+	height: 85%;
+	border-right: 1px dotted;
+	border-left: 1px dotted;
+	padding: 40px 0 0 10px;
+}

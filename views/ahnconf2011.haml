@@ -203,28 +203,29 @@
   Many conference attendees will be staying at the
   %a{:href => 'http://www.hotelunionsquare.com'} Hotel Union Square
   \. It's a
-  %span{:class => 'presentation-link', :style => 'font-weight:bold', :rel => '#venue-map'} short walk
+  %a{:href => '#venue-map', :style => 'font-weight:bold', :rel => '#venue-map'} short walk
   away from our conference venue and across from San Francisco's famous Union Square.  Our special conference rate has expired and rooms are filling up so get your room soon!
 
 %h2 Thanks to our sponsors
 %div{:class => 'sponsors'}
-  %ul
-    %li
-      %a{:href => 'http://www.tropo.com'}
-        = image_tag 'sponsor_tropo.jpg', :class => 'sponsor_img'
-    %li
-      %a{:href => 'http://mojolingo.com'}
-        = image_tag 'sponsor_mojolingo.jpg', :class => 'sponsor_img'
-    %li
-      %a{:href => 'http://www.digium.com'}
-        = image_tag 'sponsor_digium.jpg', :class => 'sponsor_img'
-    %li
+  %div{:class => 'upperSponsors'}
+    %div{:class => 'left'}
       %a{:href => 'http://bluevia.com'}
-        = image_tag 'sponsor_bluevia.jpg', :class => 'sponsor_img'
-    %li
+        = image_tag 'bluevia.png', :class => 'sponsor_img'
+    %div{:class => 'right'}
+      %a{:href => 'http://mojolingo.com'}
+        = image_tag 'mojo.png', :class => 'sponsor_img'
+  %div{:class => 'lowerSponsors'}
+    %div{:class => 'small'}
+      %a{:href => 'http://www.digium.com'}
+        = image_tag 'digium.png', :class => 'sponsor_img'
+    %div{:class => 'large'}
+      %a{:href => '#'}
+        = image_tag 'byphone.png', :class => 'sponsor_img'
+    %div{:class => 'small2'}
       %a{:href => 'http://www.tropo.com'}
-        = image_tag 'sponsor_tropo.jpg', :class => 'sponsor_img'
+        = image_tag 'tropo.png', :class => 'sponsor_img'
 
 %script{:type => 'text/javascript'}
   $("td[rel]").overlay();
-  $("span[rel]").overlay();
+  $("a[rel]").overlay();
