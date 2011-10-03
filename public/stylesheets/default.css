@@ -455,6 +455,17 @@ div.sponsors li {
 	width: 24%;
 }
 
+.sponsors .lowerSponsors .small2 img {
+    width: 100%;
+    top: 25%;
+    position: relative;
+}
+
+.sponsors .upperSponsors .left img {
+    margin: auto;
+    display: block;
+}
+
 .sponsors .lowerSponsors .small {
 	padding-top: 20px;
 	margin-left: 5px;
