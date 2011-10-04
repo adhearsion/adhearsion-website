@@ -381,11 +381,13 @@ img.ahnconfbanner {
 .overlay .title {
   font-size: 1.5em;
   font-weight: bold;
+  display: inline;
 }
 
 .overlay .presenter {
   font-size: 1.4em;
   font-style: italic;
+  clear: both;
 }
 
 .overlay .description, .overlay .presenter-bio {
@@ -480,3 +482,4 @@ div.sponsors li {
 	border-left: 1px dotted;
 	padding: 40px 0 0 10px;
 }
+
