@@ -355,7 +355,7 @@ img.ahnconfbanner {
 .overlay {
   position: fixed;
   width: 800px;
-  height: 400px;
+  height: 420px;
   margin: auto;
   top: 15%;
   left: 27%;
@@ -390,13 +390,36 @@ img.ahnconfbanner {
   clear: both;
 }
 
+.overlay .video {
+  margin-left: 22%;
+  display: inline;
+}
+
+.overlay .lightning_talk {
+  height: 140px;
+  display: block;
+}
+
+.overlay .lightning_talk .video {
+  width: 25%;
+  margin-left: 5%;
+}
+
+.overlay .lightning_talk .info {
+  float: right;
+  width: 60%;
+}
+
 .overlay .description, .overlay .presenter-bio {
   font-size: 1.2em;
 }
 
 .overlay .presenter-bio {
   font-style: italic;
+  font-size: 1.1em;
+  margin-top: 2%;
 }
+
 
 .overlay .close {
 	background-image:url(/images/close.png);
