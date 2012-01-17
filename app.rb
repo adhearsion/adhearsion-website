@@ -38,6 +38,10 @@ get '/api' do
   redirect 'http://rubydoc.info/github/adhearsion/adhearsion'
 end
 
+get '/contribute' do
+  redirect 'https://github.com/adhearsion/adhearsion/wiki/Contributing'
+end
+
 not_found do
   redirect '/'
 end
