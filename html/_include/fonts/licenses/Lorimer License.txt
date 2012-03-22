@@ -1,0 +1,83 @@
+Dunwich Type Founders Standard Business Use License Agreement
+
+Version 2.6
+
+Within this agreement the term “font” shall refer to the font or fonts specified in the applicable receipt.
+
+This Agreement, in conjunction with the receipt for purchase of the font, and any addenda, contain the entire agreement of the parties with respect to the subject matter of this Agreement, and supersede all prior negotiations, agreements and understandings with respect thereto. This Agreement may only be amended by a written document duly executed by all parties.
+
+1. Allowed uses
+
+This license allows only Standard Business Use of the font. No other use is permitted. “Standard Business Use” is defined as follows:
+
+I. Use of the font to create static images on any surface such as computer or television screens, paper, web pages, photographs, printed material, T-shirts, and other surfaces where the image is a fixed size.
+
+II. Use of the font to create EPS files or other scalable drawings.
+
+2. Special Uses
+
+“Special Use” is defined as uses of the font that require purchase of a Special Use License in addition to this license. The following uses are defined as Special Use:
+
+I. Products For Sale Based on the Font
+
+A Special Use License must be purchased to use the font to create products for sale based on or derived from the outlines within the font. This includes but is not limited to rubber stamps, stickers, rubdown letters, stencils, three-dimensional letters, embroidery patterns, or any other product that physically reproduces the letters in the font. 
+
+II. Embedding in Software, Video Games, and Electronic Devices
+
+A Special Use License must be purchased to embed the font or outline data from the font into software or electronic devices. This includes converting the font to another format, including raster images such as TIFF, GIF, and JPEG files, for the purpose of embedding the font into software or electronic devices. Software or electronic devices include but are not limited to computer software, appliances, video games, cellular phones, gaming and gambling machines, and sewing or embroidery machines. 
+
+3. Number of Users and Font Management Servers
+
+The maximum number of simultaneous users is specified in the applicable receipt. Every computer the font is installed on constitutes one user. You may install the font on a server for the purpose of managing use of the font over a computer network via font management server software such as Universal Type Server and FontExplorer X. 
+
+4. Third parties and Transferability 
+
+You may not provide the font or make it accessible to any other third parties except as specified below. You may not resell this font license. You may not transfer this license to freelance designers, independent contractors, or temporary workers. 
+
+I. If you are a designer purchasing this license on behalf of a client, you may transfer the license to the client provided that you retain no copies of the font software.
+
+II. You may provide the font to a printer or other service bureau that is working on your behalf only if they agree to use the font exclusively for your work, agree to the terms of this license, and retain no copies of the font on completion of the work.
+
+III. You may make the font available for internet downloading only by as permitted by Section Five of this license.
+
+5. Electronic Document Embedding and Linking 
+
+You may not make the font available via the internet either by linking or embedding except as specified below. “Embedding“ and “linking” include, but are not limited to, Typeface.JS, Cufón, sIFR, and directly linking to the font for use with the CSS @Font-Face tag.
+
+I. You may embed the font into an electronic document, such as a PDF file, provided that document allows no editing using the font.
+
+II. You may embed the font into a web site using Flash only if the text contained within the Flash file is static and users are not able to create content featuring the font. 
+
+III. You may use the font with software that automatically generates bitmap or vector images, such as Typeface.JS, Cufón, sIFR, and FLIR, provided that you purchase a license for each computer running the software.
+
+6. Modifications, Alterations and Derivative Works
+
+You may not alter, modify, adapt, translate, or create derivative works based on the licensed font itself. 
+
+7. Copyright
+
+The font and the accompanying materials are copyrighted and contain proprietary information and trade secrets belonging to The Dunwich Type Foundry. Unauthorized copying of the Product even if modified, merged, or included with other software, or of the written materials, is expressly forbidden. You may be held legally responsible for any infringement of the foundry’s intellectual property rights that is caused or encouraged by your failure to abide by the terms of this Agreement.
+
+8. Termination
+
+This Agreement is effective until terminated. This Agreement will terminate automatically without notice from Dunwich Type Founders or the Foundry if you fail to comply with any provision contained herein. Upon termination, you must destroy the written materials, the Product, and all copies of them, in part and in whole, including modified copies, if any.
+
+9. Product Upgrades
+
+Dunwich Type Founders may, from time to time, update the Product. Product upgrade pricing may apply.
+
+10. Disclaimer and Limited Warranty
+
+Dunwich Type Founders warrants the Product to be free from defects in materials and workmanship under normal use for a period of twenty one (21) days from the date of delivery as shown on your receipt. Dunwich Type Founders' entire liability and your exclusive remedy as to a defective product shall be, at Dunwich Type Founders' option, either return of purchase price or replacement of any such product that is returned to Dunwich Type Founders with a copy of the invoice. Dunwich Type Founders shall have no responsibility to replace the product or refund the purchase price if failure results from accident, abuse or misapplication, or if any product is lost or damaged due to theft, fire, or negligence. Any replacement product will be warranted for twenty one (21) days. This warranty gives you specific legal rights. You may have other rights, which vary from state to state.
+
+EXCEPT AS EXPRESSLY PROVIDED ABOVE, THE PRODUCT, IS PROVIDED “AS IS”. DUNWICH TYPE FOUNDERS MAKES NO WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+
+The entire risk as to the quality and performance of the Product rests upon you. Neither Dunwich Type Founders nor the Foundry warrants that the functions contained in the Product will meet your requirements or that the operation of the software will be uninterrupted or error free.
+
+DUNWICH TYPE FOUNDERS SHALL NOT BE LIABLE FOR ANY DIRECT, INDIRECT, CONSEQUENTIAL, OR INCIDENTAL DAMAGES (INCLUDING DAMAGES FROM LOSS OF BUSINESS PROFITS, BUSINESS INTERRUPTION, LOSS OF BUSINESS INFORMATION, AND THE LIKE) ARISING OUT OF THE USE OF OR INABILITY TO USE THE PRODUCT EVEN IF DUNWICH TYPE FOUNDERS OR THE FOUNDRY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+Because some states do not allow the exclusion or limitation of liability for consequential or incidental damages, the above limitation may not apply to you.
+
+11. Governing Law
+
+This agreement shall be interpreted under the laws of the State of New York. Any litigation under this agreement shall be resolved in the trial courts of New York City, State of New York.

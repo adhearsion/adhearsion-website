@@ -1,0 +1,41 @@
+/* ========================================================================== */
+/*  Roundabout                                                    */
+/* ========================================================================== */
+.roundabout {
+  width:460px;
+  height:466px;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top:20px;
+  display:block;
+}
+.roundabout-holder {
+    list-style: none;
+	width: 70%;
+    height: 466px;
+    padding:0px;
+    margin-top:0px !important;
+    margin-bottom:0px !important;
+    margin-left:auto !important;
+    margin-right:auto !important;
+}
+.roundabout-moveable-item {
+   background:none !important;
+    display:block;
+    height:465px;
+    width: 240px;
+    overflow:hidden;
+    border: none;
+    cursor: pointer;
+    text-align:center;
+    margin:0px !important;
+    padding:0px !important;
+}
+.roundabout-moveable-item img {
+	height: 100%;
+	width: 100%;
+    display:block;
+}
+.roundabout-in-focus {
+    cursor: auto;
+}

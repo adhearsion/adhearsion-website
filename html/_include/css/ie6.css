@@ -1,0 +1,163 @@
+/* ========================================================================== */
+/*  IE6 Specific Fixes                                                        */
+/* ========================================================================== */
+html, body {
+   overflow-x:hidden;
+}
+.style-switcher {
+        position: absolute;
+}
+.clear {
+        clear: both;
+        height: 1px;
+        margin-top: -1px;
+        visibility: none;
+}
+a.picture-frame-fourth {
+   margin-bottom:0px;
+}
+
+.top .mainmenu ul li a {
+  display:block;
+  padding-top:10px;
+  padding-bottom:10px;
+  padding-left:10px;
+  padding-right:10px;
+}
+
+.full-width {
+        width: 960px;
+        margin-left: auto;
+        margin-right: auto;
+        min-width: 960px;
+}
+.full-width .one-full {
+        width:940px;
+        margin-right: 0px;
+        margin-left: 0px;
+        padding-left:10px;
+        padding-right:10px;
+        overflow:hidden;
+}
+.full-width .one-half {
+        width: 460px;
+        float: left;
+        margin-right: 0px;
+        margin-left: 0px;
+        padding-left:10px;
+        padding-right:10px;
+        overflow:hidden;
+}
+.full-width .one-half-last {
+        width: 470px;
+        float: left;
+        margin-right: 0px;
+        margin-left: 0px;
+        padding-left:10px;
+        overflow:hidden;
+}
+.full-width .one-third {
+        width: 300px;
+        float: left;
+        margin-right: 0px;
+        margin-left: 0px;
+        padding-left:10px;
+        padding-right:10px;
+        overflow:hidden;
+}
+.full-width .one-third-last {
+        width: 310px;
+        float: left;
+        margin-right: 0px;
+        margin-left: 0px;
+        padding-left:10px;
+        overflow:hidden;
+}
+.full-width .two-third {
+        width: 620px;
+        float: left;
+        margin-right: 0px;
+        margin-left: 0px;
+        padding-left:10px;
+        padding-right:10px;
+        overflow:hidden;
+}
+.full-width .two-third-last {
+        width: 630px;
+        float: left;
+        margin-right: 0px;
+        margin-left: 0px;
+        padding-left:10px;
+        overflow:hidden;
+}
+.full-width .one-fourth {
+        width: 220px;
+        float: left;
+        margin-right: 0px;
+        margin-left: 0px;
+        padding-left:10px;
+        padding-right:10px;
+        overflow:hidden;
+}
+.full-width .one-fourth-last {
+        width: 230px;
+        float: left;
+        margin-right: 0px;
+        margin-left: 0px;
+        padding-left:10px;
+        overflow:hidden;
+}
+.full-width .three-fourth {
+        width: 700px;
+        float: left;
+        margin-right: 0px;
+        margin-left: 0px;
+        padding-left:10px;
+        padding-right:10px;
+        overflow:hidden;
+}
+.full-width .three-fourth-last {
+        width: 710px;
+        float: left;
+        margin-right: 0px;
+        margin-left: 0px;
+        padding-left:10px;
+        overflow:hidden;
+}
+.full-width .two-fourth {
+        width: 460px;
+        overflow: hidden;
+        margin-right: 0px;
+        margin-left: 0px;
+        padding-left:10px;
+        padding-right:10px;
+        overflow:hidden;
+}
+.full-width .two-fourth-last {
+        width: 460px;
+        overflow: hidden;
+        margin-right: 0px;
+        margin-left: 0px;
+        padding-left:10px;
+        overflow:hidden;
+}
+
+/* form action button */
+.form-button { border:0px; margin:0px; padding:0px;  height:33px; margin-right: 15px; padding-right: 12px;}
+.form-button span { border:0px; margin:0px; padding:0px; padding: 0px 0px 5px 12px; text-align:center; }
+.form-button:hover { border:0px; margin:0px; padding:0px; margin-right: 15px;  padding-right: 12px; }
+.form-button:hover span{ border:0px; margin:0px; padding:0px; padding: 0px 0px 5px 12px; }
+
+.roundabout {
+  width:460px !important;
+  padding-left:10px;
+  padding-right:10px;
+  height:347px !important;
+  overflow:hidden !important;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top:20px;
+  display:block;
+  z-index:1;
+  position:relative;
+}

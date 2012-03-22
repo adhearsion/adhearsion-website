@@ -1,0 +1,162 @@
+/* ========================================================================== */
+/*  General Style Enhancements                                                */
+/* ========================================================================== */
+
+.style-switcher-body {
+ -moz-border-radius:10px 10px 10px 10px; -webkit-border-radius:10px 10px 10px 10px; border-radius:10px 10px 10px 10px;
+}
+
+.round-top-left {
+-webkit-border-top-left-radius: 10px;
+-moz-border-radius-topleft: 10px;
+border-top-left-radius: 10px;
+}
+.round-top-right {
+-webkit-border-top-right-radius: 10px;
+-moz-border-radius-topright: 10px;
+border-top-right-radius: 10px;
+}
+.round-btm-left {
+-webkit-border-bottom-left-radius: 10px;
+-moz-border-radius-bottomleft: 10px;
+border-bottom-left-radius: 10px;
+}
+.round-btm-right {
+-webkit-border-bottom-right-radius: 10px;
+-moz-border-radius-bottomright: 10px;
+border-bottom-right-radius: 10px;
+}
+.round-top-btm-left {
+-webkit-border-top-left-radius: 10px;
+-webkit-border-bottom-left-radius: 10px;
+-moz-border-radius-topleft: 10px;
+-moz-border-radius-bottomleft: 10px;
+border-top-left-radius: 10px;
+border-bottom-left-radius: 10px;
+}
+.round-top-btm-right {
+-webkit-border-top-right-radius: 10px;
+-webkit-border-bottom-right-radius: 10px;
+-moz-border-radius-topright: 10px;
+-moz-border-radius-bottomright: 10px;
+border-top-right-radius: 10px;
+border-bottom-right-radius: 10px;
+}
+
+.pricing ul.first {
+-moz-border-radius:10px 0px 0px 10px; -webkit-border-radius:10px 0px 0px 10px; border-radius:10px 0px 0px 10px;
+}
+.pricing ul.first li.button {   -moz-border-radius:0px 0px 0px 10px; -webkit-border-radius:0px 0px 0px 10px; border-radius:0px 0px 0px 10px; }
+.pricing ul.first .tops {  -moz-border-radius:10px 0px 0px 0px; -webkit-border-radius:10px 0px 0px 0px; border-radius:10px 0px 0px 0px; }
+
+.pricing ul.last {
+-moz-border-radius:0px 10px 10px 0px; -webkit-border-radius:0px 10px 10px 0px; border-radius:0px 10px 10px 0px;
+}
+.pricing ul.last li.button {   -moz-border-radius:0 0 10px 0px; -webkit-border-radius:0 0 10px 0px; border-radius:0 0 10px 0px; }
+.pricing ul.last .tops {  -moz-border-radius:0px 10px 0 0; -webkit-border-radius:0px 10px 0 0; border-radius:0px 10px 0 0; }
+
+
+.outer-rounded-box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+ }
+ .outer-rounded-box-bold {
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  border-radius: 12px;
+ }
+.inner-rounded-box-filled-grey {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+ }
+ .inner-rounded-box-filled-white {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+ }
+ .inner-rounded-box-gradient-up {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+.inner-rounded-box-gradient-down {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.simple-rounded-box {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+
+form input, form textarea {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  }
+form select {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+ }
+
+.success, .errors, .notification  {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+
+ul.css-tabs a {
+  -webkit-border-top-left-radius: 5px;
+  -webkit-border-top-right-radius: 5px;
+  -moz-border-radius-topleft: 5px;
+  -moz-border-radius-topright: 5px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.accordion-faq span {
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+}
+.accordion-faq span.current {
+ -webkit-border-top-left-radius: 8px;
+-webkit-border-top-right-radius: 8px;
+-moz-border-radius-topleft: 8px;
+-moz-border-radius-topright: 8px;
+border-top-left-radius: 8px;
+border-top-right-radius: 8px;
+-webkit-border-bottom-right-radius: 0px;
+-webkit-border-bottom-left-radius: 0px;
+-moz-border-radius-bottomright: 0px;
+-moz-border-radius-bottomleft: 0px;
+border-bottom-right-radius: 0px;
+border-bottom-left-radius: 0px;
+}
+.accordion-faq .pane {
+-webkit-border-bottom-right-radius: 8px;
+-webkit-border-bottom-left-radius: 8px;
+-moz-border-radius-bottomright: 8px;
+-moz-border-radius-bottomleft: 8px;
+border-bottom-right-radius: 8px;
+border-bottom-left-radius: 8px;
+}
+
+/* make button tag behave across all bw */
+.form-button span, x:-moz-any-link, x:default {
+  margin-top:-1px !important;
+}
+@media screen and (-webkit-min-device-pixel-ratio:0){
+  .form-button span {  margin-top:-1px !important; }
+}
+.form-button:hover span, x:-moz-any-link, x:default {
+  margin-top:-1px !important;
+}
+@media screen and (-webkit-min-device-pixel-ratio:0){
+  .form-button:hover span {  margin-top:-1px !important; }
+}

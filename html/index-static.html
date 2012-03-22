@@ -1,0 +1,426 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head profile="http://gmpg.org/xfn/11">
+
+	<title>Apptastik HTML</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="keywords" content="Apptastik, XHTML, HTML, Theme, Template" />
+	<meta name="description" content="Apptastik HTML Theme" />
+	<meta name="author" content="Bogdan Rosu" />
+	<meta name="copyright" content="&copy; 2011 Bogdan Rosu. All rights reserved." />
+    <link rel="shortcut icon" href="_include/images/icons/favicon.ico" type="image/x-icon" />
+
+    <!-- Load Jquery -->
+    <script src="_include/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <!-- End Load -->
+
+    <!-- for IE6 i'm sorry but there is too much wrong with it, needs warning at least, you can disable it by delething this load. -->
+    <script src="_include/js/jquery.badBrowser.js" type="text/javascript" charset="utf-8"></script>
+    <!-- End Load -->
+
+    <!-- ALL jQuery Tools. jQuery library -->
+    <script src="_include/js/jquery.tools.js" type="text/javascript" charset="utf-8"></script>
+    <!-- End Load -->
+
+    <!-- Load Jquery Easing -->
+    <script src="_include/js/jquery.easing.js" type="text/javascript"></script>
+    <script src="_include/js/jquery.css-transform.js" type="text/javascript"></script>
+    <script src="_include/js/jquery.css-rotate-scale.js" type="text/javascript"></script>
+    <!-- End Load -->
+
+    <!-- Load Cufon and Adiacent Font Files, Applying the fonts, and configuring is done in _include/js/custom.js -->
+    <script src="_include/js/cufon.js" type="text/javascript"></script>
+    <!-- Locally hosted fonts -->
+    <script src="_include/fonts/arials.font.js" type="text/javascript"></script>
+    <!-- Fonts Hosted Online, Can't be packed in the zip - For Licence Issues, but Safe to Download and then Use Locally after Download (for Personal Use) -->
+    <script src="http://www.bogdanrosu.com/temp/fonts/zurich.font.js" type="text/javascript"></script>
+    <!-- ...and some Local Hosted alternatives -->
+    <!--
+    <script src="_include/fonts/ptsans.font.js" type="text/javascript"></script>
+    <script src="_include/fonts/gnuolane.font.js" type="text/javascript"></script>
+    <script src="_include/fonts/yanone.font.js" type="text/javascript"></script>
+     -->
+    <!-- ...and some Online Hosted alternatives -->
+    <!--
+    <script src="http://www.bogdanrosu.com/temp/fonts/univers.font.js" type="text/javascript"></script>
+    <script src="http://www.bogdanrosu.com/temp/fonts/trade.font.js" type="text/javascript"></script>
+    <script src="http://www.bogdanrosu.com/temp/fonts/helv.font.js" type="text/javascript"></script>
+    <script src="http://www.bogdanrosu.com/temp/fonts/frutiger.font.js" type="text/javascript"></script>
+    <script src="http://www.bogdanrosu.com/temp/fonts/zurich.font.js" type="text/javascript"></script>
+    <script src="http://www.bogdanrosu.com/temp/fonts/human.font.js" type="text/javascript"></script>
+     -->
+    <!-- End Load -->
+
+    <!-- Load Pretty Photo -->
+    <link rel="stylesheet" href="_include/css/jquery.prettyPhoto.css" type="text/css" media="screen" />
+    <script src="_include/js/jquery.prettyPhoto.js" type="text/javascript"></script>
+    <!-- End Load -->
+
+    <!-- Load SWFObject, used for video embedding -->
+    <script src="_include/js/swfobject.js" type="text/javascript" charset="utf-8"></script>
+    <!-- End Load -->
+
+    <!-- Load Captify -->
+    <script src="_include/js/jquery.captify.js" type="text/javascript"></script>
+    <!-- End Load -->
+
+    <!-- Load Bubble Tip -->
+	<script src="_include/js/jquery.bubbletip.js" type="text/javascript"></script>
+	<link href="_include/css/jquery.bubbletip.css" rel="stylesheet" type="text/css" />
+
+	<!--[if IE]>
+	    <link href="_include/css/jquery.bubbletip-ie.css" rel="stylesheet" type="text/css" />
+	<![endif]-->
+    <!-- End Load -->
+
+    <!-- Load Roundies -->
+    <script src="_include/js/browserdetect.js" type="text/javascript"></script>
+    <script src="_include/js/roundies.js" type="text/javascript"></script>
+    <!-- End Load -->
+
+    <!-- Load Jquery Twitter -->
+    <script src="_include/js/jquery.tweet.js" type="text/javascript"></script>
+    <!-- End Load -->
+
+    <!-- Load some small custom scripts -->
+    <script src="_include/js/custom.js" type="text/javascript"></script>
+    <!-- End Load -->
+
+    <!-- Load Main Stylesheets and Default Color and Style -->
+    <link rel="stylesheet" href="_include/css/style.css" type="text/css" media="screen" />
+
+    <!-- IMPORTANT: This line above is the generic style, should be left alone -->
+    <link rel="stylesheet" href="_include/css/style-pink.css" type="text/css" media="screen" title="pink" />
+    <!-- IMPORTANT: This line above is the line that sets wich style you use by default, after you select wich you like to use, plug it in the line above the disable the style switcher, to do that either read the documentation or folow the note below refering to this -->
+    <!-- End Load -->
+
+    <!-- Load Alternate Stylesheets, can be disabled if not used -->
+    <link rel="alternate stylesheet" href="_include/css/style-green.css" type="text/css" media="screen" title="green"/>
+    <link rel="alternate stylesheet" href="_include/css/style-orange.css" type="text/css" media="screen" title="orange"/>
+    <link rel="alternate stylesheet" href="_include/css/style-pink-dark.css" type="text/css" media="screen" title="pink-dark" />
+    <link rel="alternate stylesheet" href="_include/css/style-green-dark.css" type="text/css" media="screen" title="green-dark"/>
+    <link rel="alternate stylesheet" href="_include/css/style-orange-dark.css" type="text/css" media="screen" title="orange-dark"/>
+    <script src="_include/js/styleswitch.js" type="text/javascript" charset="utf-8"></script>
+    <!-- End Load -->
+
+    <!-- NOTE: Uncomment this following comment if you want to hide Style Switcher -->
+    <!--
+    <style type="text/css">
+        .style-switcher { display:none !important;  }
+    </style>
+    -->
+
+    <!-- Load Main Enhancements Stylesheet border radius, transparency, shadows and such things -->
+    <link rel="stylesheet" href="_include/css/style-enhance.css" type="text/css" media="screen" />
+    <!-- End Load -->
+
+    <!-- Load IE6 Stylesheet -->
+    <!--[if IE 6]>
+        <link rel="stylesheet" href="_include/css/ie6.css" type="text/css" media="screen" />
+    <![endif]-->
+    <!-- End Load -->
+
+    <!-- Load IE7 Stylesheet -->
+    <!--[if IE 7]>
+        <link rel="stylesheet" href="_include/css/ie7.css" type="text/css" media="screen" />
+    <![endif]-->
+    <!-- End Load -->
+
+    <!-- Load PNG Fix older IE Versions -->
+    <!--[if lt IE 7]>
+        <script type="text/javascript" src="_include/js/pngfix.js"></script>
+        <script type="text/javascript">DD_belatedPNG.fix('*');</script>
+    <![endif]-->
+    <!-- End Load -->
+
+    <!-- Load google Analytics -->
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-19270306-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    <!-- End Load google Analytics -->
+    <!-- Be sure to CHANGE _setAccount to your UA Number  or remove this whole script if you dont need it -->
+
+</head>
+<body>
+
+<!-- start style switcher -->
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".trigger").click(function(){
+		$(".style-switcher-body").toggle("fast");
+		$(this).toggleClass("active");
+		return false;
+	});
+});
+</script>
+<div class="style-switcher clearfix">
+        <div class="style-switcher-toggler">
+             <a class="trigger" href="#"><img src="_include/images/misc/x.gif" width="30" height="123" alt="" /></a>
+        </div>
+        <div class="style-switcher-body">
+            <h4>Choose a Color</h4>
+            <ul class="clearfix">
+                <li><a href="javascript:chooseStyle('pink', 60)"><img src="_include/images/misc/color-pink.png" alt="pink" /></a></li>
+                <li><a href="javascript:chooseStyle('green', 60)"><img src="_include/images/misc/color-green.png" alt="green" /></a></li>
+                <li><a href="javascript:chooseStyle('orange', 60)"><img src="_include/images/misc/color-orange.png" alt="orange" /></a></li>
+                <li><a href="javascript:chooseStyle('pink-dark', 60)"><img src="_include/images/misc/color-pink-dark.png" alt="pink-dark" /></a></li>
+                <li><a href="javascript:chooseStyle('green-dark', 60)"><img src="_include/images/misc/color-green-dark.png" alt="green-dark" /></a></li>
+                <li><a href="javascript:chooseStyle('orange-dark', 60)"><img src="_include/images/misc/color-orange-dark.png" alt="orange-dark" /></a></li>
+            </ul>
+        </div>
+</div>
+<!-- end style switcher -->
+
+<!-- start top -->
+<div class="top">
+    <div class="full-width rel">
+        <div class="one-third"><div class="logo"><a href="index.html"><img src="_include/images/misc/logo.png" alt="Apptastik HTML" /></a></div></div>
+        <div class="two-third">
+            <div class="rel">
+                <div class="abs utility">
+                    <div class="icon-to-left"><img src="_include/images/icons/smallphone.png" alt="" /></div>Give us a Call: <strong>1-800-APTSTIK</strong> or <a href="#">E-mail Us</a> Directly.<div class="clear"></div>
+                </div>
+            </div>
+            <div class="mainmenu">
+            <ul>
+                <li ><a href="index.html"><span>Home</span></a></li>
+                <li class="active"><a href="index-static.html"><span>Static</span></a></li>
+                <li ><a href="index-roundabout.html"><span>Roundabout</span></a></li>
+                <li ><a href="features.html"><span>Features</span></a></li>
+                <li ><a href="pricing.html"><span>Pricing</span></a></li>
+                <li ><a href="faq.html"><span>FAQ</span></a></li>
+                <li ><a href="contact.html"><span>Contact</span></a></li>
+            </ul>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+<!-- end top -->
+<!-- start middle -->
+<div class="middle">
+
+<!-- start hime -->
+<div class="home">
+
+    <!-- start header -->
+                 <div class="header-image-right gradient-down-color">
+                      <div class="full-width">
+                          <div class="one-half pt10">
+                                      <h1>Mobile Lorem ditor Trixum it</h1>
+                                      <h3 class="mb20">Connectivity lorem Facebook Lispum Dor</h3>
+
+                                      <div class="faded-to-right"><!--  --></div>
+                                      <div class="icon-to-left"><a href="http://www.youtube.com/watch?v=Jek0HCeFGy0"  rel="prettyPhoto"><img src="_include/images/icons/wand.png" width="64" height="64" alt="" /></a><div class="small-plus"><!--  --></div></div>
+                                      <h4>Connect lorem misum</h4>
+                                      <p class="limit">Lorem ipsum dolor amet, consectetur adipiscing elit. Nunc in fermentum lorem. Curabitur eget orci risus, nec euismod tortor dolor sit amet, consectetur.</p>
+                                      <div class="faded-to-right"><!--  --></div>
+                                      <div class="icon-to-left"><a href="_include/images/misc/pretty.jpg"  rel="prettyPhoto"><img src="_include/images/icons/network.png" width="64" height="64" alt="" /></a><div class="small-play"><!--  --></div></div>
+                                      <h4>Sores Mitor</h4>
+                                      <p class="limit">Lorem ipsum dolor sit amet, consectetur adipiscing, Nunc in fermentum lorem. Curabitur eget orci risus, nec euismod Curabitur eget orci.</p>
+                                      <div class="faded-to-right"><!--  --></div>
+                                      <div class="action-buttons clearfix">
+                                            <a href="http://themeforest.net/item/apptastik-html/164769?ref=bogdanspn" id="trigger1_up" class="btn-big-action-fixed"><span><img src="_include/images/icons/button-arrow.png" width="30" height="30" alt=""/> Download App</span></a>
+                                            <a href="http://themeforest.net/item/apptastik-html/164769?ref=bogdanspn" class="btn-big-neutral-fixed"><span>Learn More</span></a>
+                                            <div id="tip1_up" style="display:none;">
+                                                <div class="tip" style="width:240px;">
+                                                    <h4>Nunc in fermentum</h4>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing</p>
+                                                    <img src="_include/images/icons/download-small.png" width="16" height="16" alt="" class="vm"/>&nbsp;&nbsp;  for iPhone: <a href="#">Lorem Ipsum v.2.02</a><br/>
+                                                    <div class="separator"><!--  --></div>
+                                                    <img src="_include/images/icons/download-small.png" width="16" height="16" alt="" class="vm"/>&nbsp;&nbsp;  for Android: <a href="#">Lorem Ipsum v.2.02</a>
+                                                </div>
+                                            </div>
+                                     </div>
+                              <div class="clear"></div>
+                          </div>
+                          <div class="one-half">
+                              <div class="rel images">
+                                  <img src="_include/images/icons/phones.png" width="349" height="466" alt="" />
+                                  <div class="bubble-one">
+                                      <h2>FREE</h2>
+                                      <h3>for Android</h3>
+                                      <p>ver.2.20</p>
+                                  </div>
+                                  <div class="bubble-two">
+                                      <h2>FREE</h2>
+                                      <h3>for iPhone</h3>
+                                      <p>ver.2.20</p>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="clear"></div>
+                      </div>
+                 </div>
+  <!-- end header -->
+
+
+  <!-- start quotes -->
+  <div class="gradient-up-darker-with-border">
+    <div class="full-width pt30 pb30">
+        <div class="one-fourth">
+             <h4 class="mb20">Lorem ipsum dolor sit amet maecenas...</h4>
+             <img src="_include/images/icons/users.png" width="126"  alt="" />
+        </div>
+        <div class="one-fourth">
+            <blockquote><div class="icon-to-left"><img src="_include/images/icons/quotes.png" alt="" /></div><p>Maece purus libero nas purus libe ssim purlipsum mules ditum ertur ro, cursus ut dignissim in, cursus ut purus libero, adipiscing vel enim.</p><div class="clear"></div></blockquote>
+            <cite>John Doe, Lorem</cite>
+        </div>
+        <div class="one-fourth">
+            <blockquote><div class="icon-to-left"><img src="_include/images/icons/quotes.png" alt="" /></div><p>Maecenas purus libero, gnissim purus libero in, cursus ut digni cu cursus ut dignirsus ut purus libero, adipiscing vel enim.</p><div class="clear"></div></blockquote>
+            <cite>John Doe, Lorem</cite>
+        </div>
+        <div class="one-fourth">
+             <blockquote><div class="icon-to-left"><img src="_include/images/icons/quotes.png" alt="" /></div><p>Maecenas cursus ut digni cursus ut digni purus libero, purus libero cursus ut dignissim in, cursus ut purus libero, adipiscing vel enim purus libero.</p><div class="clear"></div></blockquote>
+            <cite>John Doe, Lorem</cite>
+        </div>
+        <div class="clear"></div>
+    </div>
+  </div>
+  <!-- end quotes -->
+
+
+  <!-- start features -->
+  <div class="features gradient-up-with-border">
+    <div class="full-width">
+        <div class="two-third">
+                         <h2>Some Features Connecätiveus</h2>
+                         <ul class="feature-list mb0">
+                            <li>
+                                    <a href="#" class="icon"><img src="_include/images/icons/tools.png" width="52" height="52" alt="" /></a>
+                                    <div class="text">
+                                        <h4><a href="#">Lorem ipsum dolor sit</a></h4>
+                                        <p>Maecenas purus libero, cursus ut dignissim in, cursus ut purus libero, adipiscing vel cursus ut dignissim enimut pur.</p>
+                                        <a href="#" class="text-link">Learn More</a>
+                                    </div>
+                            </li>
+                            <li class="last">
+                                    <a href="#" class="icon"><img src="_include/images/icons/id.png" width="52" height="52" alt="" /></a>
+                                    <div class="text">
+                                        <h4><a href="#">Ut quis mauris at</a></h4>
+                                        <p>Maecenas purus libero, cursus ut dignissim in, cursus ut purus libero, adipiscing vel cursus ut dignissim enimut pur.</p>
+                                        <a href="#" class="text-link">Learn More</a>
+                                    </div>
+                            </li>
+                            <li>
+                                    <a href="#" class="icon"><img src="_include/images/icons/key.png" width="52" height="52" alt="" /></a>
+                                    <div class="text">
+                                        <h4><a href="#">Lorem ipsum dolor sit</a></h4>
+                                        <p>Maecenas purus libero, cursus ut dignissim in, cursus ut cursus ut dignissim purus libero, adipiscing vel enim.</p>
+                                        <a href="#" class="text-link">Learn More</a>
+                                    </div>
+                            </li>
+                            <li class="last">
+                                    <a href="#" class="icon"><img src="_include/images/icons/recycle.png" width="52" height="52" alt="" /></a>
+                                    <div class="text">
+                                        <h4><a href="#">Ut quis mauris at</a></h4>
+                                        <p>Maecenas purus libero, cursus ut dignissim in, cursus ut purus libero, cursus ut dignissim adipiscing vel enim.</p>
+                                        <a href="#" class="text-link">Learn More</a>
+                                    </div>
+                            </li>
+                        </ul>
+                        <div class="clear"></div>
+        </div>
+        <div class="one-third-last">
+                         <h2>Avaliable Lorem Bis</h2>
+                         <ul class="feature-list mb0">
+                            <li class="last">
+                                <h4 class="mb20">Morbi interdum mollis leo id situ suscipit. Aenean risus quam, it volutpat eu tristique vitae.</h4>
+                                <a href="#" class="btn-superbig-neutral" style="width:230px;"><span><b class="for-iphone"><!--  --></b></span></a>
+                                <a href="#" class="btn-superbig-neutral" style="width:230px;"><span><b class="for-android"><!--  --></b></span></a>
+                                <div class="center"><small>FREE, Version 2.02 - 02/02/2010</small></div>
+                            </li>
+                          </ul>
+                          <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+
+    </div>
+  </div>
+  <!-- end features -->
+
+</div>
+<!-- end home -->
+</div>
+<!-- end middle -->
+
+<!-- start footer -->
+<div class="footer">
+    <div class="footer-big">
+        <div class="full-width">
+            <div class="one-fourth footer-panel">
+               <h3>Nunc vulputate interädum</h3>
+               <ul>
+                    <li><a href="#">Phasellus a neque</a></li>
+                    <li><a href="#">Nunc vulputate interdum vitae</a></li>
+                    <li><a href="#">Quis justo entesque</a></li>
+                    <li><a href="#">Culputate interdum vitae</a></li>
+                    <li><a href="#">Nunc vulputate interdum vitae</a></li>
+                    <li><a href="#">Quis justo entesque</a></li>
+               </ul>
+            </div>
+            <div class="one-fourth footer-panel">
+               <h3>Latest Tweets</h3>
+            		<div class="tweet"><!--  --></div>
+            </div>
+            <div class="one-fourth footer-panel">
+               <h3>Vulputate interdum</h3>
+               <ul>
+                    <li><a href="#">Phasellus a neque</a></li>
+                    <li><a href="#">Nunc vulputate interdum vitae</a></li>
+                    <li><a href="#">Quis justo entesque</a></li>
+                    <li><a href="#">Culputate interdum vitae</a></li>
+                    <li><a href="#">Nunc vulputate interdum vitae</a></li>
+                    <li><a href="#">Quis justo entesque</a></li>
+               </ul>
+            </div>
+            <div class="one-fourth footer-panel">
+               <h3>Get Social &amp; Such</h3>
+               <ul class="social">
+                    <li><a href="#" class="twitter">Twitter</a></li>
+                    <li class="last"><a href="#" class="facebook">Facebook</a></li>
+                    <li><a href="#" class="vimeo">Vimeo</a></li>
+                    <li class="last"><a href="#" class="youtube">YouTube</a></li>
+                    <li><a href="#" class="flickr">Flickr</a></li>
+                    <li class="last"><a href="#" class="rss">RSS</a></li>
+                    <li><!-- &nbsp; --></li>
+                    <li class="last"><!-- &nbsp; --></li>
+               </ul>
+               <div class="clear"></div>
+               <div class="rel mt10">
+                   <!-- Uncomment these for facebook and twitter Buttons, also edit URLs according to yours -->
+                   <!--
+                   <script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script>
+                   <a href="http://twitter.com/share?url=http%3A%2F%2Fwww.bogdanrosu.com%2Fthemeforest%2Fapptastik%2Fphp%2F" class="twitter-share-button">Tweet</a>
+
+                   <iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.bogdanrosu.com%2Fthemeforest%2Fapptastik%2Fphp%2F&amp;layout=button_count&amp;show_faces=false&amp;width=88&amp;action=like&amp;font=arial&amp;colorscheme=dark&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:90px; height:21px;" allowTransparency="true"></iframe>
+                    -->
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="footer-small">
+        <div class="full-width">
+            <div class="one-half left">&copy; 2011 Bogdan Rosu. All rights reserved.</div>
+            <div class="one-half right">Apptastik HTML by Bogdan Rosu available exclusively at <a href="http://themeforest.net/user/bogdanspn/portfolio?ref=bogdanspn">Themeforest</a>.</div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+<!-- end footer -->
+
+<!-- execute cufon for IE flickering -->
+<script type="text/javascript"> Cufon.now(); </script>
+<!-- end cufon execute -->
+</body>
+</html>
