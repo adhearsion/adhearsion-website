@@ -1,0 +1,84 @@
+/* ========================================================================== */
+/*  Cycle                                                   */
+/* ========================================================================== */
+#slideshow {
+        width: 100%;
+        height: 466px;
+        overflow: hidden;
+        background: #ffffff;
+}
+#slideshow .slide {
+        width: 100%;
+        height: 466px;
+        overflow: hidden;
+}
+
+#slideshownav {
+        float:left;
+        background: transparent;
+        width: auto;
+        min-height:20px;
+        margin-right: 0px;
+        margin-left: 0px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        padding-left: 0px;
+        padding-right: 0px;
+        padding-top: 15px;
+        padding-bottom: 10px;
+}
+#slideshownav li {
+        background: url(../images/cycle/noff.png) no-repeat;
+        width: 16px;
+        height: 16px;
+        float: left;
+        list-style: none;
+        padding: 0px;
+        margin-left: 9px;
+}
+#slideshownav li:hover {
+        background: url(../images/cycle/noff.png) no-repeat;
+        width: 16px;
+        height: 16px;
+        float: left;
+        list-style: none;
+        padding: 0px;
+        margin-left: 9px;
+}
+#slideshownav a {
+        color: #ffffff;
+        font-weight: bold;
+        text-decoration: none;
+        display: block;
+        width: 16px;
+        height: 16px;
+        padding: 0px;
+        text-align: center;
+}
+#slideshownav a.activeSlide {
+        color: #057aa8;
+        background: url(../images/cycle/non.png) no-repeat;
+        width: 16px;
+        height: 16px;
+        padding: 0px;
+        text-align: center;
+}
+#slideshownav li.activeSlide a {
+        color: #057aa8;
+        background: url(../images/cycle/non.png) no-repeat;
+        width: 16px;
+        height: 16px;
+        padding: 0px;
+        text-align: center;
+}
+#slideshownav a:focus { outline: none;}
+#slideshownav img {  border: none; }
+
+#slideshowcontrol {  float:right; padding-right:10px; }
+#slideshowcontrol #button_next { float:left; padding-left:15px; padding-top:13px; }
+#slideshowcontrol #button_next a { display:block; background:url(../images/cycle/cycle-next.png) no-repeat; width:14px; height:21px; }
+#slideshowcontrol #button_next a:hover  { display:block; background:url(../images/cycle/cycle-nexth.png) no-repeat; width:14px; height:21px; }
+#slideshowcontrol #button_prev { float:left; padding-top:13px; }
+#slideshowcontrol #button_prev a { display:block; background:url(../images/cycle/cycle-prev.png) no-repeat; width:14px; height:21px; }
+#slideshowcontrol #button_prev a:hover  { display:block; background:url(../images/cycle/cycle-prevh.png) no-repeat; width:14px; height:21px; }
+

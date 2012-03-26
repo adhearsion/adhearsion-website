@@ -1,0 +1,758 @@
+/* ========================================================================== */
+/*  Defaults & Tool Styles                                                    */
+/* ========================================================================== */
+body {
+    background:#595959;
+    color:#666666;
+}
+blockquote p {
+    color: #666666;
+}
+cite {
+    background:url(../images/icons/user.png) no-repeat left;
+}
+a { color:#327cba;  }
+a:hover { color:#659319;  }
+
+.highlight1 {
+  background:#cde2a4;
+  color:#6a921d;
+}
+.highlight2 {
+  background:#b8e5ff;
+  color:#327cba;
+}
+
+/* ========================================================================== */
+/*  General Styles                                                            */
+/* ========================================================================== */
+
+/* top and main menu  */
+.top {
+  background: #4c4847 url(../images/backgrounds/gradient-top.gif) repeat-x bottom;
+  color:#ffffff;
+}
+.top .mainmenu ul {
+  bottom:0px;
+  right:10px;
+}
+.top .mainmenu ul li {
+  margin-left:0px;
+}
+.top .mainmenu ul li a {
+  padding-top:10px;
+  padding-bottom:10px;
+  padding-left:20px;
+  padding-right:20px;
+  font-size:16px;
+  color:#797979;
+  text-shadow: 1px 1px #ffffff;
+}
+.top .mainmenu ul li a:hover {
+  font-size:16px;
+  color:#659319;
+}
+.top .mainmenu ul li.active a {
+  font-size:16px;
+  color:#659319;
+}
+.top .mainmenu ul li.active a:hover {
+  font-size:16px;
+  color:#659319;
+}
+.top .mainmenu ul {
+  border-right:1px solid #d0d0d0; /* for the last item */
+}
+.top .mainmenu ul li a {
+  background: #efefef url(../images/backgrounds/gradient-main-menu-tab-off.gif) no-repeat left bottom;
+  border-left:1px solid #d0d0d0;
+  border-top:1px solid #d0d0d0;
+  border-bottom:1px solid #d0d0d0;
+}
+.top .mainmenu ul li a:hover {
+  background: #efefef url(../images/backgrounds/gradient-main-menu-tab-off.gif) no-repeat left bottom;
+}
+.top .mainmenu ul li.active a {
+  background: #ffffff url(../images/backgrounds/gradient-main-menu-tab-on.gif) repeat-x top;
+  border-left:1px solid #d0d0d0;
+  border-top:1px solid #d0d0d0;
+  border-bottom:1px solid #ffffff;
+}
+.top .mainmenu ul li.active a:hover {
+  background: #ffffff url(../images/backgrounds/gradient-main-menu-tab-on.gif) repeat-x top;
+}
+.top .utility {
+   text-shadow: 1px 1px #2d2d2d;
+}
+
+/* middle area specific classes */
+.middle {
+  background:#ffffff;
+}
+.middle .inner .hr , .middle .home .hr {
+  height:2px;
+  background: url(../images/misc/longhr-faded-ends.png) center repeat-x;
+}
+.middle ul li {
+  background:url(../images/backgrounds/bullet-blue.png) no-repeat left;
+}
+.middle .home {
+  background: transparent;
+}
+.home h4, .inner h4 {
+   text-shadow: 1px 1px #ffffff;
+}
+.home p, .inner p, .inner li, .home cite , .inner cite {
+   text-shadow: 1px 1px #ffffff;
+}
+.home .slide h4, .home .slide p, .home .header-image-right p, .home .header-image-left p, .home .header-center p, .home .header-image-right h4, .home .header-image-left h4, .home .header-center h4{
+  color:#666666;
+  text-shadow: 1px 1px #ffffff;
+}
+.middle .white {
+  background: transparent;
+}
+.middle .inner h2, .middle .inner h1  {
+   text-shadow: 1px 1px #ffffff;
+}
+
+
+/* gradient backgrouns with and without bottom/top bordering for raised effect */
+.gradient-down-color {
+  background:#ffffff url(../images/backgrounds/gradient-green-bottom.jpg) repeat-x bottom;
+}
+.gradient-up-color {
+  background:#ffffff url(../images/backgrounds/gradient-green-top.jpg) repeat-x top;
+}
+.gradient-up {
+  background:#ffffff url(../images/backgrounds/gradient-at-the-top.gif) repeat-x top;
+}
+.gradient-up-with-border {
+  background:#ffffff url(../images/backgrounds/gradient-at-the-top-wborder.gif) repeat-x top;
+}
+.gradient-up-darker {
+  background:#ffffff url(../images/backgrounds/gradient-at-the-top-darker.gif) repeat-x top;
+}
+.gradient-up-darker-with-border {
+  background:#ffffff url(../images/backgrounds/gradient-at-the-top-darker-wborder.gif) repeat-x top;
+}
+.gradient-down {
+  background:#ffffff url(../images/backgrounds/gradient-at-the-bottom.gif) repeat-x bottom;
+}
+.gradient-down-with-border {
+  background:#ffffff url(../images/backgrounds/gradient-at-the-bottom-wborder.gif) repeat-x bottom;
+}
+.gradient-dark {
+  background:#191919 url(../images/backgrounds/gradient-nav.gif) repeat-x top;
+}
+
+ /* general header styles */
+.faded-to-right {
+  background:url(../images/misc/separator-faded-right.png) no-repeat right;
+}
+.faded-to-left  {
+  background:url(../images/misc/separator-faded-left.png) no-repeat left;
+}
+
+/* header version with main image bang on center */
+.header-center {  color:#767676;  }
+.header-center h1 {
+    color:#659319;
+}
+.header-center h3 {
+    color:#767676;
+}
+
+/* header version with main image to right */
+.header-image-right {  color:#767676;  }
+.header-image-right h1 {
+    color:#659319;
+}
+.header-image-right h3 {
+    color:#767676;
+}
+
+/* header version with main image to left */
+.header-image-left {  color:#767676;  }
+.header-image-left h1 {
+    color:#659319;
+}
+.header-image-left h3 {
+    color:#767676;
+}
+
+/* small overlay icons for play and zoom */
+.small-plus {
+   background:url(../images/icons/small-plus.png) no-repeat;
+}
+.small-play {
+   background:url(../images/icons/small-play.png) no-repeat;
+}
+.plus {
+   background:url(../images/icons/plus.png) no-repeat;
+}
+.play {
+   background:url(../images/icons/play.png) no-repeat;
+}
+
+/* overlay bubble one */
+.bubble-one {
+  background:url(../images/backgrounds/bubble-green.png) no-repeat;
+  color:#ffffff;
+}
+.bubble-one h2 {
+  color:#ffffff;
+}
+.bubble-one h3 {
+  color:#ffffff;
+}
+.bubble-one p {
+  color:#ffffff !important;
+}
+
+/* overlay bubble one alternate (a bit smaller) */
+.bubble-one-alt {
+  background:url(../images/backgrounds/bubble-green-alternate.png) no-repeat;
+  color:#ffffff;
+}
+.bubble-one-alt  h2 {
+  color:#ffffff;
+}
+.bubble-one-alt  h3 {
+  color:#ffffff;
+}
+.bubble-one-alt p {
+  color:#ffffff !important;
+}
+
+/* overlay bubble two */
+.bubble-two {
+  background:url(../images/backgrounds/bubble-blue.png) no-repeat;
+  color:#ffffff;
+}
+.bubble-two h2 {
+  color:#ffffff;
+}
+.bubble-two h3 {
+  color:#ffffff;
+}
+.bubble-two p {
+  color:#ffffff !important;
+}
+
+/* add text shadow to bubbles */
+.bubble-one h2, .bubble-one h3, .bubble-one p, .bubble-one-alt h2, .bubble-one-alt h3, .bubble-one-alt p {
+    text-shadow: 1px 1px #507512 !important;
+}
+.bubble-two h2, .bubble-two h3, .bubble-two p {
+    text-shadow: 1px 1px #125ea1 !important;
+}
+
+
+/* features area on homepages */
+.features h2 {
+   color:#659319;
+}
+
+/* square boxes with outer and inner region for fine borders */
+.outer-box {
+  background:#ffffff;
+  border:1px solid #dddddd;
+}
+.inner-box-filled-grey {
+  background:#fafafa;
+}
+.inner-box-filled-white {
+  background:#ffffff;
+}
+.inner-box-gradient-up {
+  background:#ffffff url(../images/backgrounds/gradient-at-the-top.gif) repeat-x top;
+}
+.inner-box-gradient-down {
+  background:#ffffff url(../images/backgrounds/gradient-at-the-bottom.gif) repeat-x bottom;
+}
+
+/* rounded boxes  with outer and inner region for fine borders  */
+.outer-rounded-box-bold {
+  background:#ebebeb;
+}
+.outer-rounded-box {
+  background:#ffffff;
+  border:1px solid #dddddd;
+}
+.inner-rounded-box-filled-grey {
+  background:#fafafa;
+}
+.inner-rounded-box-filled-white {
+  background:#ffffff;
+}
+.inner-rounded-box-gradient-up {
+  background:#ffffff url(../images/backgrounds/gradient-at-the-top.gif) repeat-x top;
+}
+.inner-rounded-box-gradient-down {
+  background:#ffffff url(../images/backgrounds/gradient-at-the-bottom.gif) repeat-x bottom;
+}
+
+/* simple boxes */
+.simple-box {
+  border:1px solid #dddddd;
+  background:#ffffff;
+}
+.simple-rounded-box {
+  border:1px solid #dddddd;
+  background:#ffffff;
+}
+
+
+/* one fourth picture frame with shadow */
+a.picture-frame-fourth {
+   background:#ffffff;
+   border:1px solid #dbdbdb;
+}
+a.picture-frame-fourth:hover {
+   border:1px solid #80b122;
+   background:#ffffff;
+}
+
+/* one fifth picture frame with shadow */
+a.picture-frame-fifth {
+   background:#ffffff;
+   border:1px solid #dbdbdb;
+}
+a.picture-frame-fifth:hover {
+   border:1px solid #80b122;
+}
+a.picture-frame-fifth {
+-moz-box-shadow: 1px 3px 3px #dbdbdb;
+-webkit-box-shadow: 1px 3px 3px #dbdbdb;
+box-shadow: 1px 3px 3px #dbdbdb;
+}
+
+a.picture-frame-fourth {
+-moz-box-shadow: 1px 3px 3px #dbdbdb;
+-webkit-box-shadow: 1px 3px 3px #dbdbdb;
+box-shadow: 1px 3px 3px #dbdbdb;
+}
+
+
+/* code styling */
+code {
+   background: #f1f1f1;
+   border: 1px dotted #dbdbdb;
+   color: #3b3430;
+}
+code strong {
+   color: #444444;
+   border: 1px solid #dcdcdc;
+   background: #ffffff;
+}
+code .comment {
+   color: #aaaaaa;
+}
+
+/* caption color styles */
+.caption-top, .caption-bottom {
+        color: #ffffff;
+        border: 0px solid #334143;
+        background: #000000;
+        text-shadow: 1px 1px 0 #202020;
+}
+.caption-top {
+        border-width: 0px 0px 0px 0px;
+}
+.caption-bottom {
+        border-width: 0px 0px 0px 0px;
+}
+.caption a, .caption a {
+        border: 0 none;
+        text-decoration: none !important;
+        background: #000000;
+}
+.caption a:hover, .caption a:hover {
+        background: #202020;
+}
+.caption-wrapper a, .caption-wrapper a:hover {
+        color: #cbe896;
+        text-decoration: none;
+}
+
+/*success box */
+.success {
+        text-shadow: 1px 1px 1px #ffffff !important;
+}
+/* errors box */
+.errors {
+        text-shadow: 1px 1px 1px #ffffff !important;
+}
+/* notification box */
+.notification {
+        text-shadow: 1px 1px 1px #ffffff !important;
+}
+
+
+/* ========================================================================== */
+/*  Jquery Tools  Stuff                                                       */
+/* ========================================================================== */
+/* generic css tabs - uses jquery tools  */
+ul.css-tabs {
+        border-bottom: 1px solid #dbdbdb;
+}
+ul.css-tabs a {
+        border: 1px solid #dbdbdb;
+        background-color: #efefef;
+        color: #444444;
+}
+ul.css-tabs a:hover {
+        background-color: #f7f7f7;
+        color: #333333;
+}
+ul.css-tabs a.current {
+        background:#ffffff;
+        border-bottom:1px solid #ffffff;
+        color:#749b29;
+}
+.css-panes div {
+        border: 1px solid #dbdbdb;
+        border-width: 0 1px 1px 1px;
+        background-color: #ffffff;
+}
+
+/* accordion used on the faq page  - uses jquery tools */
+.accordion-faq span {
+        color: #327cba;
+}
+.accordion-faq span.current {
+        color: #80b122;
+}
+.accordion-faq .pane h3 {
+        color: #555555;
+}
+.accordion-faq span {
+        background: #ffffff url(../images/backgrounds/faq-open-left.png) top left no-repeat;
+        background-position:15px 16px;
+        border-top:1px solid #dddddd;
+        border-bottom:1px solid #dddddd;
+        border-left:1px solid #dddddd;
+        border-right:1px solid #dddddd;
+}
+.accordion-faq span.current {
+        background: #ffffff url(../images/backgrounds/faq-close-left.png) top left no-repeat;
+        background-position:15px 14px;
+        border-top:1px solid #dddddd;
+        border-bottom:0px solid #dddddd;
+        border-left:1px solid #dddddd;
+        border-right:1px solid #dddddd;
+}
+.accordion-faq .pane {
+        color: #444444;
+        background:#ffffff;
+        border-bottom:1px solid #dddddd;
+        border-left:1px solid #dddddd;
+        border-right:1px solid #dddddd;
+}
+
+
+/* ========================================================================== */
+/*  Twitter Styles                                                            */
+/* ========================================================================== */
+.tweet, .query { color:#dff8b7; }
+.tweet .tweet_list li a, .query .tweet_list li a {  color: #dff8b7 !important; }
+.tweet .tweet_list li a:hover, .query .tweet_list li a:hover {  color: #ffffff !important; }
+.tweet .tweet_list .tweet_even, .query .tweet_list .tweet_even {  }
+
+/* ========================================================================== */
+/*  General Headings                                                          */
+/* ========================================================================== */
+
+h1 {
+    color:#659319;
+}
+
+/* ========================================================================== */
+/*  Footer                                                                    */
+/* ========================================================================== */
+
+/* big footer style */
+.footer-big {
+  background: #679118 url(../images/backgrounds/gradient-big-footer-green.gif) top repeat-x;
+  color:#dff8b7;
+  text-shadow: 1px 1px #567e13;
+}
+.footer-big h3 {
+  color:#ffffff;
+  text-shadow: 1px 1px #567e13;
+}
+.footer .footer-panel ul li {
+  border-top:1px solid #80aa3e;
+}
+.footer .footer-panel ul li a {
+  color:#dff8b7;  text-decoration:none;
+}
+.footer .footer-panel ul li a:hover {
+  color:#ffffff;  text-decoration:none;
+}
+.footer-small {
+  background: #585858 url(../images/backgrounds/gradient-small-footer.gif) top repeat-x;
+  color:#d9d9d9;
+}
+.footer-small {
+   text-shadow: 1px 1px #3e3b3a;
+}
+.footer-small a {
+  color:#d9d9d9; text-decoration:underline;
+}
+.footer-small a:hover {
+  color:#ffffff; text-decoration:none;
+}
+/* social list */
+.footer ul.social li {
+  border-top:1px solid #80aa3e;
+}
+
+/* ========================================================================== */
+/*  Buttons                                                                   */
+/* ========================================================================== */
+
+/* text link */
+a.text-link { }
+a.text-link:hover { }
+
+/* a tag button big action color  - fixed width, and transparent */
+a.btn-big-action-fixed {  background:url(../images/buttons/btn-big-green-fixed-width.png) no-repeat;  color:#ffffff;  text-shadow: 1px 1px #567e13; }
+a.btn-big-action-fixed:hover {  background:url(../images/buttons/btn-big-green-fixed-widthh.png) no-repeat; color:#ffffff; text-shadow: 1px 1px #567e13; }
+
+/* a tag button big neutral color  - fixed width, and transparent */
+a.btn-big-neutral-fixed {  background:url(../images/buttons/btn-big-grey-fixed-width.png) no-repeat; color:#5b5b5b; text-shadow: 1px 1px #ffffff; }
+a.btn-big-neutral-fixed:hover {  background:url(../images/buttons/btn-big-grey-fixed-widthh.png) no-repeat; color:#5b5b5b; text-shadow: 1px 1px #ffffff; }
+
+/* a tag button big neutral color */
+a.btn-big-action { background: transparent url(../images/buttons/btn-big-green-right.jpg) no-repeat scroll top right; color:#ffffff; text-shadow: 1px 1px #567e13; }
+a.btn-big-action span { background: transparent url(../images/buttons/btn-big-green-left.jpg) no-repeat;  }
+a.btn-big-action:hover { background: transparent url(../images/buttons/btn-big-green-righth.jpg) no-repeat scroll top right; }
+a.btn-big-action:hover span{ background: transparent url(../images/buttons/btn-big-green-lefth.jpg) no-repeat;  color:#ffffff !important; text-shadow: 1px 1px #567e13; }
+
+/* a tag button small action color */
+a.btn-small-action { background: transparent url(../images/buttons/btn-small-green-right.jpg) no-repeat scroll top right; color:#ffffff; text-shadow: 1px 1px #567e13; }
+a.btn-small-action span { background: transparent url(../images/buttons/btn-small-green-left.jpg) no-repeat;  }
+a.btn-small-action:hover { background: transparent url(../images/buttons/btn-small-green-righth.jpg) no-repeat scroll top right;  }
+a.btn-small-action:hover span{ background: transparent url(../images/buttons/btn-small-green-lefth.jpg) no-repeat;  color:#ffffff !important; text-shadow: 1px 1px #567e13; }
+
+/* a tag button big neutral color */
+a.btn-big-neutral { background: transparent url(../images/buttons/btn-big-grey-right.jpg) no-repeat scroll top right; color:#5b5b5b; text-shadow: 1px 1px #ffffff; }
+a.btn-big-neutral span { background: transparent url(../images/buttons/btn-big-grey-left.jpg) no-repeat;  }
+a.btn-big-neutral:hover { background: transparent url(../images/buttons/btn-big-grey-righth.jpg) no-repeat scroll top right;  }
+a.btn-big-neutral:hover span{ background: transparent url(../images/buttons/btn-big-grey-lefth.jpg) no-repeat; color:#5b5b5b !important;  text-shadow: 1px 1px #ffffff; }
+
+/* a tag button small neutral color */
+a.btn-small-neutral { background: transparent url(../images/buttons/btn-small-grey-right.jpg) no-repeat scroll top right; color:#5b5b5b; text-shadow: 1px 1px #ffffff; }
+a.btn-small-neutral span { background: transparent url(../images/buttons/btn-small-grey-left.jpg) no-repeat; }
+a.btn-small-neutral:hover { background: transparent url(../images/buttons/btn-small-grey-righth.jpg) no-repeat scroll top right;  }
+a.btn-small-neutral:hover span{ background: transparent url(../images/buttons/btn-small-grey-lefth.jpg) no-repeat;  color:#5b5b5b !important; text-shadow: 1px 1px #ffffff; }
+
+/* a tag button superbig neutral color */
+a.btn-superbig-neutral { background: transparent url(../images/buttons/btn-superbig-gray-right.jpg) no-repeat scroll top right; color:#5b5b5b;text-shadow: 1px 1px #567e13; }
+a.btn-superbig-neutral span { background: transparent url(../images/buttons/btn-superbig-gray-left.jpg) no-repeat; }
+a.btn-superbig-neutral:hover { background: transparent url(../images/buttons/btn-superbig-gray-righth.jpg) no-repeat scroll top right;  }
+a.btn-superbig-neutral:hover span{ background: transparent url(../images/buttons/btn-superbig-gray-lefth.jpg) no-repeat;  color:#5b5b5b !important; text-shadow: 1px 1px #567e13; }
+
+.for-android {
+  background:url(../images/misc/for-android.png) no-repeat;
+}
+.for-iphone {
+  background:url(../images/misc/for-iphone.png) no-repeat;
+}
+
+/* form action button */
+.form-button { border:0px; margin:0px; padding:0px; display: block;  float: left; height:33px; margin-right: 15px; padding-right: 12px; text-decoration: none;font-family: Arial, Helvetica, sans-serif;  font-size:14px; font-weight:normal; background: transparent url(../images/buttons/btn-small-green-right.jpg) no-repeat scroll top right; color: #ffffff; text-shadow: 1px 1px #567e13; cursor:pointer; }
+.form-button span {  border:0px; margin:0px; padding:0px; display:block;  line-height: 33px; padding: 0px 0px 5px 12px; margin-top:0px;  text-align:center; background: transparent url(../images/buttons/btn-small-green-left.jpg) no-repeat;  }
+.form-button:hover {  border:0px; margin:0px; padding:0px; margin-right: 15px;  padding-right: 12px; background: transparent url(../images/buttons/btn-small-green-righth.jpg) no-repeat scroll top right;   }
+.form-button:hover span{ border:0px; margin:0px; padding:0px; padding: 0px 0px 5px 12px; text-align:center; margin-top:0px; background: transparent url(../images/buttons/btn-small-green-lefth.jpg) no-repeat;  color:#ffffff !important; text-shadow: 1px 1px #567e13; }
+
+/* ========================================================================== */
+/*  Lists  & Tables                                                           */
+/* ========================================================================== */
+
+/* list features with icons and title - one third column size */
+ul.feature-list { list-style:none !important; }
+ul.feature-list li { background:transparent !important; }
+ul.feature-list li { border-top:1px solid #dfdfdf;  }
+
+/* list features with icons and title - one fourth column size */
+ul.feature-list-smaller { list-style:none !important; }
+ul.feature-list-smaller li { background:transparent !important;  }
+ul.feature-list-smaller li { border-top:1px solid #dfdfdf;  }
+
+/* list with the checkmark */
+ul.checklist {}
+ul.checklist li {
+        background:url(../images/icons/icon-check.png) no-repeat left !important;
+        font-style: normal !important;
+        font-size: 14px !important;
+        background-position: 0px 0px !important;
+        padding-left: 35px !important;
+        padding-top: 2px !important;
+        padding-bottom: 2px !important;
+        margin-bottom: 2px !important;
+        margin-left:5px !important;
+        line-height: 21px !important;
+}
+
+/* Pricing col one fourth size  */
+.pricing {
+  background:url(../images/backgrounds/wide-shadow-faded.png) no-repeat bottom center;
+  padding-bottom:15px;
+}
+.pricing .first li {
+  background: #ffffff url(../images/backgrounds/pricing-shadow-right.png) right repeat-y;
+}
+.pricing .first li.button {
+  background: #ffffff url(../images/backgrounds/pricing-shadow-right.png) right repeat-y !important;
+}
+
+.pricing .shadow-right li {
+  background: #ffffff url(../images/backgrounds/pricing-shadow-right1.png) right repeat-y;
+}
+.pricing .shadow-right li.button {
+  background: #ffffff url(../images/backgrounds/pricing-shadow-right1.png) right repeat-y !important;
+}
+
+.pricing .last li {
+  background: #ffffff url(../images/backgrounds/pricing-shadow-left.png) left repeat-y;
+}
+.pricing .last li.button {
+  background: #ffffff url(../images/backgrounds/pricing-shadow-left.png) left repeat-y !important;
+}
+
+.pricing .shadow-left li {
+  background: #ffffff url(../images/backgrounds/pricing-shadow-left1.png) left repeat-y;
+}
+.pricing .shadow-left li.button {
+  background: #ffffff url(../images/backgrounds/pricing-shadow-left1.png) left repeat-y !important;
+}
+
+ .pricing .first li.tops {
+  background:#729c21  url(../images/backgrounds/pricing-shadow-right.png) right repeat-y !important;
+}
+.pricing .shadow-right li.tops {
+  background:#729c21  url(../images/backgrounds/pricing-shadow-right1.png) right repeat-y !important;
+}
+.pricing .last li.tops {
+  background:#729c21  url(../images/backgrounds/pricing-shadow-left.png) left repeat-y !important;
+}
+.pricing .shadow-left li.tops {
+  background:#729c21  url(../images/backgrounds/pricing-shadow-left1.png) left repeat-y !important;
+}
+ul.pricing-col {
+  border:1px solid #d1d1d1;
+}
+ul.pricing-col li {
+  border-bottom:1px solid #d1d1d1;
+}
+ul.pricing-col li.tops {
+  background:#729c21;
+  color:#ffffff;
+  border-bottom:1px solid #d1d1d1;
+}
+ul.pricing-col .price {
+  color:#ffffff;
+}
+ul.pricing-col-highlight {
+  border:1px solid #d1d1d1;
+}
+ul.pricing-col-highlight li {
+  border-bottom:1px solid #d1d1d1;
+}
+ul.pricing-col-highlight li.tops {
+  background:#729c21;
+  color:#ffffff;
+  border-bottom:1px solid #d1d1d1;
+}
+ul.pricing-col-highlight .price {
+  color:#ffffff;
+}
+/* add text shadow to pricing tops */
+ul.pricing-col li.tops h2, ul.pricing-col li.tops  {
+   text-shadow: 1px 1px #5d801a !important;
+}
+ul.pricing-col-highlight li.tops h2, ul.pricing-col-highlight li.tops {
+   text-shadow: 1px 1px #5d801a !important;
+}
+
+/* data table vertical odd/even */
+.data-table-vertical {
+        border: 1px dotted #dbdbdb;
+        background: #ffffff;
+}
+.data-table-vertical th {
+        border-right: 1px dotted #dbdbdb;
+}
+.data-table-vertical th.odd {
+        background: #749b29;
+        color: #ffffff;
+}
+.data-table-vertical th.even {
+        background: #82ab34;
+        color: #ffffff;
+}
+.data-table-vertical td {
+        border-top: 1px dotted #e1e1e1;
+}
+.data-table-vertical .odd {
+        background: #f1f1f1;
+}
+.data-table-vertical .even {
+        background: #ffffff;
+}
+.data-table-vertical .highlight {
+        border: 3px solid #749b29;
+}
+/* data table horizontal odd/even */
+.data-table-horizontal {
+        border: 1px dotted #dbdbdb;
+        background: #ffffff;
+}
+.data-table-horizontal th {
+        background: #749b29;
+        color: #ffffff;
+        border-right: 1px dotted #ffffff;
+}
+/*.data-table-horizontal th.first {
+  background:#ffffff;
+}*/
+.data-table-horizontal td {
+        border-top: 1px dotted #e1e1e1;
+        border-right: 1px dotted #dbdbdb;
+}
+.data-table-horizontal .odd {
+        background: #f1f1f1;
+}
+.data-table-horizontal .odd .first {
+        background: #a7a7a7;
+        color: #ffffff;
+}
+.data-table-horizontal .even {
+        background: #ffffff;
+}
+.data-table-horizontal .even .first {
+        background: #919191;
+        color: #ffffff;
+}
+.data-table-horizontal .highlight {
+        border: 3px solid #749b29;
+}
+
+
+
+/* ========================================================================== */
+/* Form Styles                                                                */
+/* ========================================================================== */
+
+form .error { color:#9a448b;  }
+form ol.forms .inputError:focus {  border-color: #9bbc5a; }
+form ol.forms .inputError textarea:focus {  border-color: #9bbc5a; }
+form .required { color:#327cba; font-weight:normal; font-family: Arial, sans-serif; }
+form input:focus, form textarea:focus, form select:focus {  border-color: #9bbc5a; }
+form input:hover, form textarea:hover, form select:focus {  border-color: #9bbc5a; }
+
+input, textarea, form input, form textarea {  border:1px solid #dddddd; color:#333333; background: url(../images/backgrounds/input-background.png) bottom repeat-x; }
+select, form select { border:1px solid #dddddd; color:#333333; background: url(../images/backgrounds/input-background.png) bottom repeat-x; }

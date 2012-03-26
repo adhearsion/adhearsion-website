@@ -1,0 +1,45 @@
+/* ========================================================================== */
+/*  IE7 Specific Fixes                                                        */
+/* ========================================================================== */
+html, body {
+   overflow-x:hidden;
+}
+.clear {
+        clear: both;
+        height: 1px;
+        margin-top: -1px;
+        visibility: none;
+}
+a.picture-frame-fourth {
+   margin-bottom:0px;
+}
+
+/* form action button */
+.form-button { border:0px; margin:0px; padding:0px;  height:33px; margin-right: 15px; padding-right: 12px;}
+.form-button span { border:0px; margin:0px; padding:0px; padding: 0px 0px 5px 12px; text-align:center; }
+.form-button:hover { border:0px; margin:0px; padding:0px; margin-right: 15px;  padding-right: 12px; }
+.form-button:hover span{ border:0px; margin:0px; padding:0px; padding: 0px 0px 5px 12px; }
+
+.roundabout {
+  width:460px !important;
+  padding-left:10px;
+  padding-right:10px;
+  height:347px !important;
+  overflow:hidden !important;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top:20px;
+  display:block;
+  z-index:1;
+  position:relative;
+}
+
+ul.feature-list .text { float:left;  }
+ul.feature-list-smaller .text { float:left;  }
+
+.pricing {
+  position:static;  
+  padding-top:0px;
+  margin-top:35px;
+  margin-bottom:0px;
+}
