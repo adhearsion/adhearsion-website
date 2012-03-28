@@ -1,9 +1,9 @@
-require 'open-uri'
+require 'rubygems'
+require 'bundler'
 
-use Rack::Cache,
-  :verbose     => true,
-  :metastore   => 'file:tmp/cache/rack/meta',
-  :entitystore => 'file:tmp/cache/rack/body'
+Bundler.require
+
+require 'open-uri'
 
 Sinatra.register SinatraMore::MarkupPlugin
 
@@ -11,7 +11,6 @@ app_start_time = Time.now
 
 before do
   cache_control :public, :must_revalidate, :max_age => 1.hour
-  last_modified app_start_time
 end
 
 get '/' do
