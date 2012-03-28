@@ -10,4 +10,6 @@ gem 'haml-coderay'
 group :development do
   gem 'capistrano'
   gem 'railsless-deploy'
+  gem 'guard'
+  gem 'rake'
 end
