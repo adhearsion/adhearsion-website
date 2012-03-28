@@ -4,14 +4,13 @@
       Adhearsion:
       = yield_content(:title) || ''
 
-    = stylesheet_link_tag "syntax", "theme/ui.all", "jquery.prettyPhoto", "jquery.bubbletip", "style", "style-pink", "style-enhance"
+    = stylesheet_link_tag "syntax", "theme/ui.all", "jquery.prettyPhoto", "jquery.bubbletip", "style", "style-pink", "style-enhance", "ansi2html", "terminal"
+
+    :css
+      {{ pygments['pastie.css'] }}
+
+    %link{:rel => "stylesheet", :href => "_include/fonts/Inconsolata.ttf"}
     %link{:rel => "shortcut icon", :href => "/favicon.ico"}
-    %link{:rel => "shortcut icon", :href => "/favicon.ico"}
-    / %link{:rel => "alternate stylesheet", :href => "/stylesheets/style-green.css", :type => "text/css", :media => "screen", :title => "green"}
-    / %link{:rel => "alternate stylesheet", :href => "/stylesheets/style-orange.css", :type => "text/css", :media => "screen", :title => "orange"}
-    / %link{:rel => "alternate stylesheet", :href => "/stylesheets/style-pink-dark.css", :type => "text/css", :media => "screen", :title => "pink-dark"}
-    / %link{:rel => "alternate stylesheet", :href => "/stylesheets/style-green-dark.css", :type => "text/css", :media => "screen", :title => "green-dark"}
-    / %link{:rel => "alternate stylesheet", :href => "/stylesheets/style-orange-dark.css", :type => "text/css", :media => "screen", :title => "orange-dark"}
 
     %meta{:'http-equiv' => "content-type", :content => "text/html; charset=utf-8"}
     %meta{:name => "description", :content => "description"}

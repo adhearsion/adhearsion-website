@@ -1,0 +1,16 @@
+This is the Adhearsion documentation site
+
+Requirements (most of these can be installed with easy_install, case SeNsItIvE!):
+* ansi2html
+* pexpect
+* Markdown
+
+Dexy must be installed from Git:
+
+git clone git://github.com/ananelson/dexy.git
+cd dexy
+pip install -e .
+
+Note that if you are using the default Python with OSX you will need to run the easy_install and pip as root *or* have write permissions on /usr/local/bin.
+
+To generate the documentation, run rake docs in the top level directory and navigate to localhost:9292/docs (you must run the sinatra app).

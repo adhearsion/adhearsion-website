@@ -1,0 +1,81 @@
+<div class="docs">
+  <div class="full-width">
+<p>[TOC]</p>
+<h3>Install the Adhearsion gem</h3>
+<p>First, install the Adhearsion gem and its dependencies:
+<pre class="terminal">
+<div class="highlight"><pre><a name="installation.sh-idio-1"></a>gem install --prerelease adhearsion
+</pre></div></p>
+</pre>
+
+<h3>Create an Adhearsion application</h3>
+<p>Next, create your first Adhearsion application:
+<pre class="terminal"></p>
+<p>$ ahn create myapp
+/Users/ben/Developer/.rvm/rubies/ruby-1.9.3-p0/lib/ruby/site_ruby/1.9.1/rubygems/dependency.rb:247:in <code>to_specs': Could not find niceogiri (&amp;gt;= 0.0.4) amongst [activesupport-3.0.9, activesupport-3.0.5, capistrano-2.6.0, capistrano-2.5.20, coderay-0.9.8, coderay-0.9.7, erubis-2.7.0, haml-3.1.2, haml-3.0.25, haml-coderay-0.1.2, haml-coderay-0.1.1, highline-1.6.2, highline-1.6.1, hpricot-0.8.4, i18n-0.6.0, i18n-0.5.0, net-scp-1.0.4, net-sftp-2.0.5, net-ssh-2.1.4, net-ssh-2.1.3, net-ssh-gateway-1.1.0, net-ssh-gateway-1.0.1, rack-1.3.1, rack-1.2.2, rack-cache-1.0.2, rack-cache-1.0, railsless-deploy-1.0.2, ruby_parser-2.0.6, sexp_processor-3.0.5, sinatra-1.2.6, sinatra-1.2.1, sinatra_more-0.3.43, thor-0.14.6, tilt-1.3.2, tilt-1.2.2] (Gem::LoadError)
+    from /Users/ben/Developer/.rvm/rubies/ruby-1.9.3-p0/lib/ruby/site_ruby/1.9.1/rubygems/specification.rb:451:in</code>block in find_in_unresolved'
+    from /Users/ben/Developer/.rvm/rubies/ruby-1.9.3-p0/lib/ruby/site_ruby/1.9.1/rubygems/specification.rb:451:in <code>map'
+    from /Users/ben/Developer/.rvm/rubies/ruby-1.9.3-p0/lib/ruby/site_ruby/1.9.1/rubygems/specification.rb:451:in</code>find_in_unresolved'
+    from /Users/ben/Developer/.rvm/rubies/ruby-1.9.3-p0/lib/ruby/site_ruby/1.9.1/rubygems/custom_require.rb:43:in <code>require'
+    from /Users/ben/Developer/.rvm/gems/ruby-1.9.3-p0/gems/bundler-1.1.0/lib/bundler/dsl.rb:1:in</code>&lt;top (required)&gt;'
+    from /Users/ben/Developer/.rvm/gems/ruby-1.9.3-p0/gems/bundler-1.1.0/lib/bundler/definition.rb:18:in <code>build'
+    from /Users/ben/Developer/.rvm/gems/ruby-1.9.3-p0/gems/bundler-1.1.0/lib/bundler.rb:134:in</code>definition'
+    from /Users/ben/Developer/.rvm/gems/ruby-1.9.3-p0/gems/bundler-1.1.0/lib/bundler.rb:122:in <code>load'
+    from /Users/ben/Developer/.rvm/gems/ruby-1.9.3-p0/gems/bundler-1.1.0/lib/bundler.rb:106:in</code>setup'
+    from /Users/ben/Developer/.rvm/gems/ruby-1.9.3-p0/gems/bundler-1.1.0/lib/bundler/setup.rb:7:in <code>&amp;lt;top (required)&amp;gt;'
+    from /Users/ben/Developer/.rvm/rubies/ruby-1.9.3-p0/lib/ruby/site_ruby/1.9.1/rubygems/custom_require.rb:55:in</code>require'
+    from /Users/ben/Developer/.rvm/rubies/ruby-1.9.3-p0/lib/ruby/site_ruby/1.9.1/rubygems/custom_require.rb:55:in <code>require'
+    from /Users/ben/Developer/.rvm/gems/ruby-1.9.3-p0/gems/adhearsion-2.0.0.rc3/lib/adhearsion/cli.rb:9:in</code>&lt;top (required)&gt;'
+    from /Users/ben/Developer/.rvm/rubies/ruby-1.9.3-p0/lib/ruby/site_ruby/1.9.1/rubygems/custom_require.rb:55:in <code>require'
+    from /Users/ben/Developer/.rvm/rubies/ruby-1.9.3-p0/lib/ruby/site_ruby/1.9.1/rubygems/custom_require.rb:55:in</code>require'
+    from /Users/ben/Developer/.rvm/gems/ruby-1.9.3-p0/gems/adhearsion-2.0.0.rc3/bin/ahn:25:in <code>&amp;lt;top (required)&amp;gt;'
+    from /Users/ben/Developer/.rvm/gems/ruby-1.9.3-p0/bin/ahn:19:in</code>load'
+    from /Users/ben/Developer/.rvm/gems/ruby-1.9.3-p0/bin/ahn:19:in `&lt;main&gt;'
+$ cd myapp
+bash: cd: myapp: No such file or directory
+</pre></p>
+<h3>Configure your application</h3>
+<p>Looking at the output from "ahn create", you will see several files are generated for you.  Here are the most important ones:</p>
+<h4>Gemfile</h4>
+<p>Here is the Gemfile that is generated with your new application:</p>
+<p>-- d['artifacts/myapp/Gemfile|pyg'] --</p>
+<p>In it you can see the Adhearsion framework itself is required.  Also included, but commented out, are several popular or useful plugins.  To enable their usage, simply uncomment the line from the Gemfile.  When you are done with that, install all the plugins you specified by running "bundle install":</p>
+<pre class="terminal">
+
+$ bundle install
+Using activesupport (3.0.9)
+Using highline (1.6.2)
+Using net-ssh (2.1.4)
+Using net-scp (1.0.4)
+Using net-sftp (2.0.5)
+Using net-ssh-gateway (1.1.0)
+Using capistrano (2.6.0)
+Using coderay (0.9.8)
+Using haml (3.1.2)
+Using haml-coderay (0.1.2)
+Using i18n (0.6.0)
+Using rack (1.3.1)
+Using railsless-deploy (1.0.2)
+Using tilt (1.3.2)
+Using sinatra (1.2.6)
+Using bundler (1.1.0)
+Using thor (0.14.6)
+Using sinatra_more (0.3.43)
+Updating .gem files in vendor/cache
+<span class="ansi32">Your bundle is complete! It was installed into ./vendor</span>
+</pre>
+
+<h4>config/adhearsion.rb</h4>
+<p>Next is the main Adhearsion configuration file, config/adhearsion.rb:</p>
+<p>-- d['artifacts/myapp/config/adhearsion.rb|pyg'] --</p>
+<p>This is just a skeleton however.  To see the full list of available configuration options avaiable, you can always run "rake config:show".  Note that your output may be different, depending on which plugins you selected above:</p>
+<pre class="terminal">
+
+$ rake config:show
+rake aborted!
+No Rakefile found (looking for: rakefile, Rakefile, rakefile.rb, Rakefile.rb)
+
+(See full trace by running task with --trace)
+</pre>
+  </div>
+</div>

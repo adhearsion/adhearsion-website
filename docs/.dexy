@@ -1,0 +1,15 @@
+{
+    "*.md|jinja|markdown|hd|ft" : { "allinputs" : true },
+    "_*.html|jinja" : {},
+    "*.css" : {},
+    "*.png" : {},
+    "*.gif" : {},
+    "*.jpg" : {},
+    "*.ttf" : {},
+    "*.rb|pyg" : {},
+    "*.rb|rb" : {},
+    "*.sh|idio" : {},
+    "*.sh|idio|shint|ansi2html" : {
+      "timeout" : 600
+    }
+}

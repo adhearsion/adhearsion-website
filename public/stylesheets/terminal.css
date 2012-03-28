@@ -1,0 +1,27 @@
+@font-face {
+  font-family: 'Inconsolata';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Inconsolata'), url('Inconsolata.ttf') format('woff');
+}
+
+pre.terminal {
+  width: 725px;
+  padding: 15px 20px 5px 10px;
+  background-image: url(../images/terminal-top.png), url(../images/terminal-bottom.png), url(../images/terminal-body.png);
+  background-position: left top, center bottom, left top;
+  background-repeat: no-repeat, no-repeat, repeat-y;
+  color: #ccc;
+  -moz-box-shadow: 3px 5px 10px #888;
+  -webkit-box-shadow: 3px 5px 10px #888;
+  box-shadow: 3px 5px 10px #888;
+  border-top: 1px solid #ccc;
+  -moz-border-radius: 5px 5px 0 0px;
+  border-radius: 5px 5px 0 0px;
+  font-family: 'Inconsolata', sans-serif;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap !important;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}

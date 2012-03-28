@@ -42,6 +42,18 @@ get '/contribute' do
   redirect 'https://github.com/adhearsion/adhearsion/wiki/Contributing'
 end
 
+get '/docs' do
+  render_docs_page
+end
+
+get '/docs/:page' do
+  render_docs_page params[:page]
+end
+
+def render_docs_page(page = 'index')
+  erb :"docs/#{page}.html", :layout_engine => :haml
+end
+
 not_found do
   redirect '/'
 end
