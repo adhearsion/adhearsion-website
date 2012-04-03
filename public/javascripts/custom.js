@@ -33,6 +33,7 @@ jQuery(document).ready(function() {
           }).mouseout(function(){
           $(this).removeClass().addClass("pricing-col");
           })}); */
+          jQuery("abbr.timeago").timeago();
 });
 
 // simple hide no animation

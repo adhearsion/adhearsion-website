@@ -1,34 +1,24 @@
 - title "Open Source Telephony Application Framework", false
 
 .home
-  .header-image-right.gradient-down-color
+  .slide.header-center.gradient-down-color
     .full-width
-      .one-half.pt10
+      .center
         %h1 Adhearsion
-        %h3.mb20 Open Source Telephony Application Framework
+      .one-fourth.left
+        .faded-to-right
+        .icon-to-left
+          %img{:src => "/images/icons/wand.png", :width => "24", :height => "24", :alt => ""}
+        %h4 What is it?
+        %p.limit Adhearsion is a full-featured framework for the development of applications which interact with or control voice communications. It facilitates the creation of complex applications with ease, providing a simple API.
 
         .faded-to-right
-        .icon-to-left
-          %a{:href => "http://www.youtube.com/watch?v=Jek0HCeFGy0", :rel => "prettyPhoto"}
-            %img{:src => "/images/icons/wand.png", :width => "64", :height => "64", :alt => ""}
-          .small-plus
-        %h4 What is it?
-        %p.limit Adhearsion is a new way to write voice-enabled applications. It's not just an API or library — it's a fully-featured framework, designed for maximal code reuse and intuitiveness.
-        .faded-to-right
-        .icon-to-left
-          %a{:href => "/images/misc/pretty.jpg", :rel => "prettyPhoto"}
-            %img{:src => "/images/icons/network.png", :width => "64", :height => "64", :alt => ""}
-          .small-play
-        %h4 Why should I care?
-        %p.limit Adhearsion abstracts much of the complicated telephony domain, allowing you to focus on what's really important: the business domain.
-        .faded-to-right
-        .action-buttons.clearfix
-          %a.btn-big-action-fixed{:href => "http://themeforest.net/item/apptastik-html/164769?ref=bogdanspn", :id => "trigger1_up"}
+
+        .action-buttons-left.clearfix
+          %a.btn-big-action-fixed{:href => "/download", :id => "trigger1_up"}
             %span
               %img{:src => "/images/icons/button-arrow.png", :width => "30", :height => "30", :alt => ""}
               Download
-          %a.btn-big-neutral-fixed{:href => "/features"}
-            %span Learn More
           #tip1_up{:style => "display:none;"}
             .tip{:style => "width:240px;"}
               %h4 Where can I get it?
@@ -41,61 +31,57 @@
               %img.vm{:src => "/images/icons/download-small.png", :width => "16", :height => "16", :alt => ""}
               &nbsp;&nbsp; as source:
               %a{:href => "https://github.com/adhearsion/adhearsion"} on Github
-        .clear
-      .one-half
-        .rel.images
-          %img{:src => "/images/icons/phones.png", :width => "349", :height => "466", :alt => ""}
-          .bubble-one
-            %h2 FREE
-            %h3 for Android
-            %p ver.2.20
-          .bubble-two
-            %h2 FREE
-            %h3 for iPhone
-            %p ver.2.20
-      .clear
+      .two-fourth.rel
+        .center
+          %h3.mb20 Open Source Voice Application Framework
+        %pre{:class => "brush: ruby; gutter: false"}
+          :preserve
+            class MyController < Adhearsion::CallController
+              def run
+                answer
+                resp = ask "How many woodchucks?", :limit => 1
+                speak "You said \#{resp}. That's obviously wrong!"
+              end
+            end
+      .one-fourth.right
+        .faded-to-left
+        .icon-to-right
+          %img{:src => "/images/icons/wand.png", :width => "24", :height => "24", :alt => ""}
+        %h4 What is it for?
+        %p.limit Lorem ipsum dolor amet, consectetur adipiscing elit. Cura bitur risus, nec euismod sit amet.
+        .faded-to-right
+        .action-buttons-right.clearfix
+          %a.btn-big-action-fixed{:href => "/docs"}
+            %span Documentation
+
   .gradient-up-darker-with-border
     .full-width.pt30.pb30
       .one-fourth
-        %h4.mb20 These guys seem to love it...
+        %h4.mb20 Latest News
         %img{:src => "/images/icons/users.png", :width => "126", :alt => ""}
 
-      .one-fourth
-        %blockquote
-          .icon-to-left
-            %img{:src => "/images/icons/quotes.png", :alt => ""}
-          %p Maece purus libero nas purus libe ssim purlipsum mules ditum ertur ro, cursus ut dignissim in, cursus ut purus libero, adipiscing vel enim.
-          .clear
-        %cite John Doe, Lorem
-
-      .one-fourth
-        %blockquote
-          .icon-to-left
-            %img{:src => "/images/icons/quotes.png", :alt => ""}
-          %p Maecenas purus libero, gnissim purus libero in, cursus ut digni cu cursus ut dignirsus ut purus libero, adipiscing vel enim.
-          .clear
-        %cite John Doe, Lorem
-
-      .one-fourth
-        %blockquote
-          .icon-to-left
-            %img{:src => "/images/icons/quotes.png", :alt => ""}
-          %p Maecenas cursus ut digni cursus ut digni purus libero, purus libero cursus ut dignissim in, cursus ut purus libero, adipiscing vel enim purus libero.
-          .clear
-        %cite John Doe, Lorem
+      - @blog_posts[0,3].each do |blog_post|
+        .one-fourth
+          %h3
+            %a{:href => blog_post[:url]}= blog_post[:title]
+          %p
+            = blog_post[:description][0,120]
+            \...
+          %cite
+            %abbr.timeago{:title => blog_post[:date]}= blog_post[:date]
       .clear
 
   .features.gradient-up-with-border
     .full-width
       .two-third
-        %h2 Some Features
+        %h2 Some Use Cases
         %ul.feature-list.mb0
           %li
             %a.icon{:href => "#"}
               %img{:src => "/images/icons/tools.png", :width => "52", :height => "52", :alt => ""}
             .text
               %h4
-                %a{:href => "#"} Lorem ipsum dolor sit
+                %a{:href => "#"} IVRs
               %p Maecenas purus libero, cursus ut dignissim in, cursus ut purus libero, adipiscing vel cursus ut dignissim enimut pur.
               %a.text-link{:href => "#"} Learn More
 
@@ -104,7 +90,7 @@
               %img{:src => "/images/icons/id.png", :width => "52", :height => "52", :alt => ""}
             .text
               %h4
-                %a{:href => "#"} Lorem ipsum dolor sit
+                %a{:href => "#"} Call Centre Automation
               %p Maecenas purus libero, cursus ut dignissim in, cursus ut cursus ut dignissim purus libero, adipiscing vel enim.
               %a.text-link{:href => "#"} Learn More
 
@@ -113,7 +99,7 @@
               %img{:src => "/images/icons/key.png", :width => "52", :height => "52", :alt => ""}
             .text
               %h4
-                %a{:href => "#"} Lorem ipsum dolor sit
+                %a{:href => "#"} Data Gathering
               %p Maecenas purus libero, cursus ut dignissim in, cursus ut cursus ut dignissim purus libero, adipiscing vel enim.
               %a.text-link{:href => "#"} Learn More
 
@@ -122,25 +108,17 @@
               %img{:src => "/images/icons/recycle.png", :width => "52", :height => "52", :alt => ""}
             .text
               %h4
-                %a{:href => "#"} Ut quis mauris at
+                %a{:href => "#"} Voice 2.0
               %p Maecenas purus libero, cursus ut dignissim in, cursus ut purus libero, cursus ut dignissim adipiscing vel enim.
               %a.text-link{:href => "#"} Learn More
 
         .clear
 
       .one-third-last
-        %h2 Avaliable Lorem Bis
-        %ul.feature-list.mb0
-          %li.last
-            %h4.mb20 Morbi interdum mollis leo id situ suscipit. Aenean risus quam, it volutpat eu tristique vitae.
-            %a.btn-superbig-neutral{:href => "#", :style => "width:230px;"}
-              %span
-                %b.for-iphone
-            %a.btn-superbig-neutral{:href => "#", :style => "width:230px;"}
-              %span
-                %b.for-android
-            .center
-              %small FREE, Version 2.02 - 02/02/2010
+        %h2 Features
+        %ul
+          %li FooBar
+          %li.last FooBar
 
         .clear
       .clear

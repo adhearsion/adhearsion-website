@@ -1,0 +1,70 @@
+- title "Get Help", false
+
+.inner.gradient-down
+  .full-width
+    .one-half.pb10
+      %h1 Get Some Help
+      %h4.mb20
+        Stuck with your Adhearsion app? Need help with that tricky little feature, or some assistance getting started? The excellent
+        %a{:href => '/community'} Adhearsion community
+        can often help you out, but when you need just that little bit more attention, perhaps calling in the professionals is in order.
+      %p
+        Contact
+        %a{:href => "http://mojolingo.com"} Mojo Lingo
+        using the details below, or get in touch using the contact form.
+      .one-fourth{:style => "margin-left:0px; padding-left:0px;"}
+        %a.picture-frame-fourth{:href => "http://mojolingo.com"}
+          %img{:src => "/images/misc/map.png", :width => "194", :height => "133", :alt => ""}
+          %span.small-plus
+
+      .one-fourth{:style => "margin-right:0px; padding-right:0px;"}
+        %b Mojo Lingo LLC
+        %br/
+        P.O. Box 79322
+        %br/
+        Atlanta, GA 30357-7322
+        %br/
+        Twitter:
+        %a{:href => "http://twitter.com/mojolingo"} @mojolingo
+        %br/
+        E-Mail:
+        %a{:href => "mailto:hello@mojolingo.com"} hello@mojolingo.com
+        %br/
+        Voice:
+        %a{:href => "sip:hello@mojolingo.com"} sip:hello@mojolingo.com
+        or +1 (404) 475 4840
+        %br/
+      .clear
+
+    .one-half.pt20
+      .outer-rounded-box-bold
+        .simple-rounded-box
+          %form#contactForm{:action => "/get-help", :method => "post", :style => "padding-left:10px;"}
+            %ol.forms
+              %li
+                %label{:for => "yourName"} Your Name
+                %input#yourName.requiredField{:type => "text", :name => "yourName", :value => "", :style => "width:370px;"}
+              %li
+                %label{:for => "email"} Email
+                %input#email.requiredField.email{:type => "text", :name => "email", :value => "", :style => "width:370px;"}
+              %li.textarea
+                %label{:for => "queryText"} Query
+                %textarea#queryText.requiredField{:name => "query", :rows => "3", :cols => "56", :style => "width:370px;"}
+            .clear
+            .form-button-left
+              %button.form-button{:type => "submit"}
+                %span Send Query
+            .clear
+
+          - case @contact_status
+          - when 'success'
+            %p.success
+              %strong Thanks!
+              Your email was successfully sent. We should be in touch soon.
+          - when 'error'
+            %p.errors
+              %strong Ooops!
+              There was an error somewhere. Please retry or
+              %a{:href => 'mailto:webmaster@adhearsion.com'} mail the geeks
+              \.
+    .clear

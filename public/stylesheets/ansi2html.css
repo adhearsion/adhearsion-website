@@ -1,0 +1,79 @@
+div.ansi2html {
+	font-family: monospace;
+	color: white;
+	background-color: black;
+	display: inline-block;
+}
+
+/* Without line-height: 0, the dummy line would be still be invisible, but it
+ * would nevertheless blow up the surrounding div vertically (we want the
+ * effect only horizontally) */
+span.ansi2html-dummyline {
+	position: relative;
+	left: -99999px;
+	line-height: 0;
+}
+
+.ansi2html-underline {
+	text-decoration: underline;
+}
+
+.ansi2html-bold {
+	font-weight: bold;
+}
+
+.ansi2html-italic {
+	font-style: italic;
+}
+
+/* foreground colors */
+.ansi2html-fgblack {
+	color: #000;
+}
+.ansi2html-fgcyan {
+	color: #00cdcd;
+}
+.ansi2html-fgblue {
+	color: #0000ee;
+}
+.ansi2html-fggreen {
+	color: #00cd00;
+}
+.ansi2html-fgmagenta {
+	color: #cd00cd;
+}
+.ansi2html-fgred {
+	color: #cd0000;
+}
+.ansi2html-fgwhite {
+	color: #e5e5e5;
+}
+.ansi2html-fgyellow {
+	color: #cdcd00;
+}
+
+/* Background background-colors */
+.ansi2html-bgblack {
+	background-color: #000;
+}
+.ansi2html-bgcyan {
+	background-color: #00cdcd;
+}
+.ansi2html-bgblue {
+	background-color: #0000ee;
+}
+.ansi2html-bggreen {
+	background-color: #00cd00;
+}
+.ansi2html-bgmagenta {
+	background-color: #cd00cd;
+}
+.ansi2html-bgred {
+	background-color: #cd0000;
+}
+.ansi2html-bgwhite {
+	background-color: #e5e5e5;
+}
+.ansi2html-bgyellow {
+	background-color: #cdcd00;
+}
