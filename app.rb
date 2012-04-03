@@ -10,7 +10,7 @@ Sinatra.register SinatraMore::MarkupPlugin
 app_start_time = Time.now
 
 before do
-  # cache_control :public, :must_revalidate, :max_age => 1.hour
+  cache_control :public, :must_revalidate, :max_age => 1.hour
 end
 
 require 'singleton'
@@ -47,8 +47,8 @@ end
 
 get '/' do
   @blog_posts = BlogPostAggregator.instance.posts
-  # last_modified [app_start_time, BlogPostAggregator.instance.posts.first[:date]].max
-  # etag BlogPostAggregator.instance.hash
+  last_modified [app_start_time, BlogPostAggregator.instance.posts.first[:date]].max
+  etag BlogPostAggregator.instance.hash
   haml :index
 end
 
