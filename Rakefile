@@ -9,4 +9,10 @@ task :docs do
     new_path = "views/docs/#{filename}.html.erb"
     File.rename path, new_path
   end
+
+  Dir['docs/output/_include/css/*.css'].each do |path|
+    filename = /docs\/output\/_include\/css\/(.*).css/.match(path)[1]
+    new_path = "public/stylesheets/#{filename}.css"
+    File.rename path, new_path
+  end
 end
