@@ -13,3 +13,5 @@ Voice applications don't have to be hard. Adhearsion abstracts much of the compl
 We take open-source software seriously. The telecom industry, above all, needs fresh innovative talent and Adhearsion's here to foster it. This is one of the final major frontiers for open-source to truly make a transformative impact and now is an exciting time to be a part of it.
 
 Many hackers' faces light up the first time they run code which makes the cell phone in their pocket ring. Whether you're a veteran telephony engineer or a web developer wanting a new experiment to do over the weekend, we think Adhearsion is enough of a departure from classical telephony to tickle your fancy.
+
+<a href="#" rel="docs-nav-active" style="display:none;">docs-nav-getting-started</a>

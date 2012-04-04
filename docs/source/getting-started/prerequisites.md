@@ -32,3 +32,5 @@ Adhearsion 2 supports the following telephony engines:
 * Generally speaking, anything that supports the [Rayo](http://rayo.io) protocol.
 
 Continue to [INSTALLATION](/docs/getting-started/installation)
+
+<a href="#" rel="docs-nav-active" style="display:none;">docs-nav-getting-started</a>

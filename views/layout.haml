@@ -51,19 +51,19 @@
               .clear
           .mainmenu
             %ul
-              %li.active
+              %li#main-nav-home
                 %a{:href => "/"}
                   %span Home
-              %li
+              %li#main-nav-docs
                 %a{:href => "/docs"}
                   %span Documentation
-              %li
+              %li#main-nav-community
                 %a{:href => "/community"}
                   %span Community
-              %li
+              %li#main-nav-get-help
                 %a{:href => "/get-help"}
                   %span Get Help
-              %li
+              %li#main-nav-conference
                 %a{:href => "/conference"}
                   %span Adhearsion Conf
 
@@ -137,6 +137,17 @@
           .clear
 
     :javascript
-      Cufon.now();
-      SyntaxHighlighter.all();
-      CollapsibleLists.apply();
+      jQuery(document).ready(function() {
+        Cufon.now();
+        SyntaxHighlighter.all();
+        CollapsibleLists.apply();
+        var activeDocNavElements = $("a[rel^='docs-nav-active']");
+        for(var i = 0; i < activeDocNavElements.size(); i++) {
+          CollapsibleLists.expand(document.getElementById(activeDocNavElements[i].text));
+        }
+
+        var activeMainNavElements = $("a#main-nav-active");
+        for(var i = 0; i < activeMainNavElements.size(); i++) {
+          $(activeMainNavElements[i].text).addClass('active');
+        }
+      });

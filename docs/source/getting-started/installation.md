@@ -48,3 +48,5 @@ This is just a skeleton however.  To see the full list of available configuratio
 <pre class="terminal">
 {{ d['installation.sh|idio|shint|ansi2html']['rake-config-show'] }}
 </pre>
+
+<a href="#" rel="docs-nav-active" style="display:none;">docs-nav-getting-started</a>
