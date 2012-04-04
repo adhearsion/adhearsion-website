@@ -1,6 +1,0 @@
-/artifacts/
-/logs/
-/output/
-/output-long/
-*.sw*
-*.pyc

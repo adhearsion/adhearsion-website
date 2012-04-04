@@ -1,4 +1,10 @@
 .DS_Store
+.*.sw*
+/docs/artifacts/
+/docs/logs/
+/docs/output/
+/docs/output-long/
+*.pyc
 config/database.yml
 .bundle
 vendor/ruby
