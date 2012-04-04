@@ -8,6 +8,7 @@
 pre.terminal {
   width: 725px;
   padding: 15px 20px 5px 10px;
+  margin-bottom: 20px;
   background-image: url(../images/terminal-top.png), url(../images/terminal-bottom.png), url(../images/terminal-body.png);
   background-position: left top, center bottom, left top;
   background-repeat: no-repeat, no-repeat, repeat-y;
@@ -24,4 +25,8 @@ pre.terminal {
   white-space: -pre-wrap;
   white-space: -o-pre-wrap;
   word-wrap: break-word;
+}
+
+.docs {
+  padding-bottom: 10px;
 }
