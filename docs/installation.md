@@ -3,6 +3,7 @@
 ### Install the Adhearsion gem ###
 
 First, install the Adhearsion gem and its dependencies:
+
 <pre class="terminal">
 {{ d['installation.sh|idio']['install-gem'] }}
 </pre>
@@ -11,6 +12,7 @@ First, install the Adhearsion gem and its dependencies:
 ### Create an Adhearsion application ###
 
 Next, create your first Adhearsion application:
+
 <pre class="terminal">
 {{ d['installation.sh|idio|shint|ansi2html']['create-app'] }}
 </pre>
