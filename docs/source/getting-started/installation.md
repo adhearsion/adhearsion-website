@@ -26,7 +26,7 @@ Looking at the output from "ahn create", you will see several files are generate
 
 Here is the Gemfile that is generated with your new application:
 
-<pre class="terminal">
+<pre class="brush: ruby;">
 {{ d['installation.sh|idio|shint']['create-app:files:source/getting-started/myapp/Gemfile'] }}
 </pre>
 
@@ -40,7 +40,7 @@ In it you can see the Adhearsion framework itself is required.  Also included, b
 
 Next is the main Adhearsion configuration file, config/adhearsion.rb:
 
-<pre class="terminal">
+<pre class="brush: ruby;">
 {{ d['installation.sh|idio|shint']['create-app:files:source/getting-started/myapp/config/adhearsion.rb'] }}
 </pre>
 
