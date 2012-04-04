@@ -21,4 +21,5 @@ end
 
 guard 'docs' do
   watch %r{^docs/source/.+\.(md|html|sh)$}
+  watch 'docs/.dexy'
 end

@@ -1,5 +1,5 @@
 {
-    "*.md|jinja|markdown|hd|ft" : { "allinputs" : true },
+    "*.md|jinja|markdown|hd|ft" : { "allinputs" : true, "markdown" : { "toc" : { "anchorlink" : true } } },
     "_*.html|jinja" : {},
     "*.css" : {},
     "*.png" : {},
