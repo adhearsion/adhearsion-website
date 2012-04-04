@@ -9,6 +9,10 @@
     "*.rb|pyg" : {},
     "*.rb|rb" : {},
     "*.sh|idio" : {},
+    "*.sh|idio|shint" : {
+      "timeout" : 600,
+      "shint" : {"ext" : ".json", "meta" : true}
+    },
     "*.sh|idio|shint|ansi2html" : {
       "timeout" : 600
     }

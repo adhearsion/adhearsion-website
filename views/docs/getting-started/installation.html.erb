@@ -55,7 +55,25 @@ $ cd myapp
 <p>Looking at the output from "ahn create", you will see several files are generated for you.  Here are the most important ones:</p>
 <h4 id="gemfile"><a class="toclink" href="#gemfile">Gemfile</a></h4>
 <p>Here is the Gemfile that is generated with your new application:</p>
-<p>-- d['artifacts/myapp/Gemfile|pyg'] --</p>
+<pre class="terminal">
+source :rubygems
+
+gem "adhearsion", ">=2.0.0.rc4"
+
+#
+# Here are some example plugins you might like to use. Simply
+# uncomment them and run `bundle install`.
+#
+
+# gem 'adhearsion-asterisk'
+# gem 'adhearsion-rails'
+# gem 'adhearsion-activerecord'
+# gem 'adhearsion-ldap'
+# gem 'adhearsion-xmpp'
+# gem 'adhearsion-drb'
+
+</pre>
+
 <p>In it you can see the Adhearsion framework itself is required.  Also included, but commented out, are several popular or useful plugins.  To enable their usage, simply uncomment the line from the Gemfile.  When you are done with that, install all the plugins you specified by running "bundle install":</p>
 <pre class="terminal">
 
@@ -118,7 +136,73 @@ Updating .gem files in vendor/cache
 
 <h4 id="configadhearsionrb"><a class="toclink" href="#configadhearsionrb">config/adhearsion.rb</a></h4>
 <p>Next is the main Adhearsion configuration file, config/adhearsion.rb:</p>
-<p>-- d['artifacts/myapp/config/adhearsion.rb|pyg'] --</p>
+<pre class="terminal">
+# encoding: utf-8
+
+Adhearsion.config do |config|
+
+  # Centralized way to specify any Adhearsion platform or plugin configuration
+  # - Execute rake config:show to view the active configuration values
+  #
+  # To update a plugin configuration you can write either:
+  #
+  #    * Option 1
+  #        Adhearsion.config.<plugin-name> do |config|
+  #          config.<key> = <value>
+  #        end
+  #
+  #    * Option 2
+  #        Adhearsion.config do |config|
+  #          config.<plugin-name>.<key> = <value>
+  #        end
+
+  config.development do |dev|
+    dev.platform.logging.level = :debug
+  end
+
+  ##
+  # Use with Rayo (eg Voxeo PRISM)
+  #
+  # config.punchblock.username = "" # Your XMPP JID for use with Rayo
+  # config.punchblock.password = "" # Your XMPP password
+
+  ##
+  # Use with Asterisk
+  #
+  # config.punchblock.platform = :asterisk # Use Asterisk
+  # config.punchblock.username = "" # Your AMI username
+  # config.punchblock.password = "" # Your AMI password
+  # config.punchblock.host = "127.0.0.1" # Your AMI host
+  # config.punchblock.port = 5038 # Your AMI port
+end
+
+Adhearsion::Events.draw do
+
+  # Register global handlers for events
+  #
+  # eg. Handling Punchblock events
+  # punchblock do |event|
+  #   ...
+  # end
+  #
+  # eg Handling PeerStatus AMI events
+  # ami :name => 'PeerStatus' do |event|
+  #   ...
+  # end
+  #
+end
+
+Adhearsion.router do
+
+  #
+  # Specify your call routes, directing calls with particular attributes to a controller
+  #
+
+  route 'default', SimonGame
+end
+
+</pre>
+
 <p>This is just a skeleton however.  To see the full list of available configuration options avaiable, you can always run "rake config:show".  Note that your output may be different, depending on which plugins you selected above:</p>
 <pre class="terminal">
 
