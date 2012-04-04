@@ -1,8 +1,6 @@
-Adhearsion
-==========
+# Adhearsion
 
-Voice Application Development Made Easy
----------------------------------------
+## Voice Application Development Made Easy
 
 Adhearsion is the first fully-featured open source Ruby framework for telephony and an easy way to write voice-enabled applications. In the age of the social web, what other technologies are more social than voice? Adhearsion empowers your code to handle and route inbound and outbound telephone, VoIP calls and instant messages automatically.
 

@@ -98,7 +98,8 @@ a:hover { color:#975c8c;  }
   background: url(../images/misc/longhr-faded-ends.png) center repeat-x;
 }
 .middle ul li {
-  background:url(../images/backgrounds/bullet-blue.png) no-repeat left;
+  list-style-image:url(../images/backgrounds/bullet-blue.png);
+  list-style-position:inside;
 }
 .middle .home {
   background: transparent;

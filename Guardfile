@@ -20,5 +20,5 @@ module ::Guard
 end
 
 guard 'docs' do
-  watch %r{^docs/\w*\.md$}
+  watch %r{^docs/source/.+\.(md|html|sh)$}
 end

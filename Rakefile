@@ -4,9 +4,11 @@ desc "Generate dexy documentation and copy to views directory"
 task :docs do
   Dir.mkdir 'views/docs' rescue nil
   puts `cd docs && dexy`
-  Dir['docs/output/*.html'].each do |path|
-    filename = /docs\/output\/(.*).html/.match(path)[1]
+  Dir['docs/output/source/**/*.html'].each do |path|
+    filename = /docs\/output\/source\/(.*).html/.match(path)[1]
     new_path = "views/docs/#{filename}.html.erb"
+    new_dir = new_path.split('/')[0..-2].join('/')
+    FileUtils.mkdir_p new_dir
     File.rename path, new_path
   end
 

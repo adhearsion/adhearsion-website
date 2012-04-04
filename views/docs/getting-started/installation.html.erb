@@ -1,0 +1,145 @@
+<div class="docs">
+  <div class="full-width">
+    <div class="two-third">
+<h2><a href="/docs">Getting Started</a> &gt; Installation</h2>
+<p>[TOC]</p>
+<h3>Install the Adhearsion gem</h3>
+<p>First, install the Adhearsion gem and its dependencies:</p>
+<pre class="terminal">
+<div class="highlight"><pre><a name="source-getting-started-installation.sh-idio-1"></a>gem install --prerelease adhearsion
+</pre></div>
+
+</pre>
+
+<h3>Create an Adhearsion application</h3>
+<p>Next, create your first Adhearsion application:</p>
+<pre class="terminal">
+
+$ ahn create myapp
+/Users/ben/Developer/.rvm/gems/ruby-1.9.3-p0/gems/bundler-1.1.0/lib/bundler/runtime.rb:31:in `block in setup': You have already activated celluloid 0.9.0, but your Gemfile requires celluloid 0.10.0. Using bundle exec may solve this. (Gem::LoadError)
+    from /Users/ben/Developer/.rvm/gems/ruby-1.9.3-p0/gems/bundler-1.1.0/lib/bundler/runtime.rb:17:in `setup'
+    from /Users/ben/Developer/.rvm/gems/ruby-1.9.3-p0/gems/bundler-1.1.0/lib/bundler.rb:106:in `setup'
+    from /Users/ben/Developer/.rvm/gems/ruby-1.9.3-p0/gems/bundler-1.1.0/lib/bundler/setup.rb:7:in `&lt;top (required)&gt;'
+    from /Users/ben/Developer/.rvm/rubies/ruby-1.9.3-p0/lib/ruby/site_ruby/1.9.1/rubygems/custom_require.rb:55:in `require'
+    from /Users/ben/Developer/.rvm/rubies/ruby-1.9.3-p0/lib/ruby/site_ruby/1.9.1/rubygems/custom_require.rb:55:in `require'
+    from /Users/ben/Developer/.rvm/gems/ruby-1.9.3-p0/gems/adhearsion-2.0.0.rc4/lib/adhearsion/cli.rb:9:in `&lt;top (required)&gt;'
+    from /Users/ben/Developer/.rvm/rubies/ruby-1.9.3-p0/lib/ruby/site_ruby/1.9.1/rubygems/custom_require.rb:55:in `require'
+    from /Users/ben/Developer/.rvm/rubies/ruby-1.9.3-p0/lib/ruby/site_ruby/1.9.1/rubygems/custom_require.rb:55:in `require'
+    from /Users/ben/Developer/.rvm/gems/ruby-1.9.3-p0/gems/adhearsion-2.0.0.rc4/bin/ahn:25:in `&lt;top (required)&gt;'
+    from /Users/ben/Developer/.rvm/gems/ruby-1.9.3-p0/bin/ahn:19:in `load'
+    from /Users/ben/Developer/.rvm/gems/ruby-1.9.3-p0/bin/ahn:19:in `&lt;main&gt;'
+$ cd myapp
+bash: cd: myapp: No such file or directory
+</pre>
+
+<h3>Configure your application</h3>
+<p>Looking at the output from "ahn create", you will see several files are generated for you.  Here are the most important ones:</p>
+<h4>Gemfile</h4>
+<p>Here is the Gemfile that is generated with your new application:</p>
+<p>-- d['artifacts/myapp/Gemfile|pyg'] --</p>
+<p>In it you can see the Adhearsion framework itself is required.  Also included, but commented out, are several popular or useful plugins.  To enable their usage, simply uncomment the line from the Gemfile.  When you are done with that, install all the plugins you specified by running "bundle install":</p>
+<pre class="terminal">
+
+$ bundle install
+Using rake (0.9.2.2)
+Using i18n (0.6.0)
+Using multi_json (1.2.0)
+Using activesupport (3.2.3)
+Using adhearsion-loquacious (1.9.2)
+Using bundler (1.1.0)
+Using celluloid (0.10.0)
+Using countdownlatch (1.0.0)
+Using deep_merge (1.0.0)
+Using ffi (1.0.11)
+Using future-resource (1.0.0)
+Using connection_pool (0.1.0)
+Using girl_friday (0.9.7)
+Using systemu (2.5.0)
+Using macaddr (1.5.0)
+Using uuid (2.3.5)
+Using has-guarded-handlers (1.2.0)
+Using json (1.6.6)
+Using little-plugger (1.1.3)
+Using logging (1.7.2)
+Using coderay (0.9.8)
+Using sexp_processor (3.1.0)
+Using ruby_parser (2.3.1)
+Using method_source (0.6.7)
+Using slop (2.1.0)
+Using pry (0.9.7.4)
+Using eventmachine (0.12.10)
+Using nokogiri (1.4.7)
+Using niceogiri (1.0.1)
+Using blather (0.7.0)
+Using uuidtools (2.1.2)
+Using ruby_ami (1.0.0)
+Using ruby_speech (1.0.0)
+Using state_machine (1.1.2)
+Using punchblock (0.12.0)
+Using thor (0.14.6)
+Using adhearsion (2.0.0.rc4)
+Using highline (1.6.2)
+Using net-ssh (2.1.4)
+Using net-scp (1.0.4)
+Using net-sftp (2.0.5)
+Using net-ssh-gateway (1.1.0)
+Using capistrano (2.6.0)
+Using guard (1.0.1)
+Using haml (3.1.2)
+Using haml-coderay (0.1.2)
+Using rack (1.3.1)
+Using rack-cache (1.0.2)
+Using railsless-deploy (1.0.2)
+Using tilt (1.3.2)
+Using sinatra (1.2.6)
+Using sinatra_more (0.3.43)
+Updating .gem files in vendor/cache
+<span class="ansi32">Your bundle is complete! It was installed into ./vendor</span>
+</pre>
+
+<h4>config/adhearsion.rb</h4>
+<p>Next is the main Adhearsion configuration file, config/adhearsion.rb:</p>
+<p>-- d['artifacts/myapp/config/adhearsion.rb|pyg'] --</p>
+<p>This is just a skeleton however.  To see the full list of available configuration options avaiable, you can always run "rake config:show".  Note that your output may be different, depending on which plugins you selected above:</p>
+<pre class="terminal">
+
+$ rake config:show
+(in /Users/ben/code/VoIP/adhearsion/website)
+rake aborted!
+Don't know how to build task 'config:show'
+
+(See full trace by running task with --trace)
+</pre>
+    </div>
+
+    <div class="one-third">
+      <div class="outer-rounded-box-bold">
+        <div class="inner-rounded-box-filled-grey clearfix">
+          <h3>Documentation</h3>
+          <ul class="collapsibleList">
+            <li id="docs-nav-getting-started">
+              Getting Started
+              <ul>
+                <li id="docs-nav-getting-started-prerequisites"><a href="/docs/getting-started/prerequisites">Prerequisites</a></li>
+                <li id="docs-nav-getting-started-installation"><a href="/docs/getting-started/installation">Installation</a></li>
+              </ul>
+            </li>
+            <li id="docs-nav-call-controller"><a href="/docs/call-controllers">Call Controllers</a></li>
+            <li id="docs-nav-plugins"><a href="/docs/plugins">Plugins</a></li>
+            <li id="docs-nav-routing"><a href="/docs/routing">Routing</a></li>
+            <li id="docs-nav-config"><a href="/docs/config">Config</a></li>
+            <li id="docs-nav-logging"><a href="/docs/logging">Logging</a></li>
+            <li id="docs-nav-best-practices">
+              Best Practices
+              <ul>
+                <li id="docs-nav-best-practices-prerequisites"><a href="/docs/best-practices/deployment">Deployment</a></li>
+                <li id="docs-nav-best-practices-installation"><a href="/docs/best-practices/testing">Testing</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+</div>

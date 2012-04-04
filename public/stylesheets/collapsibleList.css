@@ -1,0 +1,21 @@
+.collapsibleList {
+  padding: 5px 0px 10px 0px !important;
+}
+
+.collapsibleList li {
+  list-style-image:url('/images/cycle/non.png') !important;
+  list-style-position:inside;
+  cursor:auto;
+}
+
+li.collapsibleListOpen {
+  list-style-image:url('/images/cycle/cycle-downh.png') !important;
+  list-style-position:inside;
+  cursor:pointer;
+}
+
+li.collapsibleListClosed {
+  list-style-image:url('/images/cycle/cycle-nexth.png') !important;
+  list-style-position:inside;
+  cursor:pointer;
+}
