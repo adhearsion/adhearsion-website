@@ -30,3 +30,17 @@ pre.terminal {
 .docs {
   padding: 20px 0px 10px 0px;
 }
+
+.docs-progress-nav {
+  padding-top: 5px;
+}
+
+.docs-progress-nav .forward {
+  align:right;
+  text-align:right;
+}
+
+.docs-progress-nav .back {
+  align:left;
+  text-align:left;
+}

@@ -50,3 +50,12 @@ This is just a skeleton however.  To see the full list of available configuratio
 </pre>
 
 <a href="#" rel="docs-nav-active" style="display:none;">docs-nav-getting-started</a>
+
+<div class='docs-progress-nav'>
+  <span class='back'>
+    Back to <a href="/docs/getting-started/prerequisites">Prerequisites</a>
+  </span>
+  <span class='forward'>
+    Continue to <a href="/docs/call-controllers">Call Controllers</a>
+  </span>
+</div>

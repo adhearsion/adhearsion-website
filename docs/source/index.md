@@ -15,3 +15,9 @@ We take open-source software seriously. The telecom industry, above all, needs f
 Many hackers' faces light up the first time they run code which makes the cell phone in their pocket ring. Whether you're a veteran telephony engineer or a web developer wanting a new experiment to do over the weekend, we think Adhearsion is enough of a departure from classical telephony to tickle your fancy.
 
 <a href="#" rel="docs-nav-active" style="display:none;">docs-nav-getting-started</a>
+
+<div class='docs-progress-nav'>
+  <span class="forward">
+    Continue to <a href="/docs/getting-started/prerequisites">Prerequisites</a>
+  </span>
+</div>

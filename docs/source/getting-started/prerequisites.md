@@ -31,6 +31,13 @@ Adhearsion 2 supports the following telephony engines:
 * [PRISM](http://voxeolabs.com/prism/) version 11.1 with the [rayo-server](https://github.com/rayo/rayo-server) application installed.
 * Generally speaking, anything that supports the [Rayo](http://rayo.io) protocol.
 
-Continue to [INSTALLATION](/docs/getting-started/installation)
+<div class='docs-progress-nav'>
+  <span class='back'>
+    Back to <a href="/docs">Getting Started</a>
+  </span>
+  <span class='forward'>
+    Continue to <a href="/docs/getting-started/installation">Installation</a>
+  </span>
+</div>
 
 <a href="#" rel="docs-nav-active" style="display:none;">docs-nav-getting-started</a>
