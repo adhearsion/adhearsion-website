@@ -1,5 +1,7 @@
 ## [Best Practices](/docs/best-practices) > Testing
 
+[TOC]
+
 <a href="#" rel="docs-nav-active" style="display:none;">docs-nav-best-practices</a>
 
 <div class='docs-progress-nav'>

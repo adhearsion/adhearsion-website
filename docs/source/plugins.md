@@ -1,5 +1,7 @@
 ## Plugins
 
+[TOC]
+
 The ability to easily add reusable functionality to a framework is one of the most important features. Plugins in Adhearsion 2.0 have been completely rebuilt to better suit the new structure and allow them to provide a wider variety of features. Controller methods, initializer code, specific configuration, rake tasks and included generators all are possible with the new plugin classes. In this first post we will be generating a plugin using the CLI and looking through the resulting code.
 
 ### Components in Adhearsion 1.x

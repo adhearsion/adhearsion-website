@@ -2,6 +2,31 @@
   <div class="full-width">
     <div class="two-third">
 <h2 id="plugins"><a class="toclink" href="#plugins">Plugins</a></h2>
+<div class="toc">
+<ul>
+<li><a href="#plugins">Plugins</a><ul>
+<li><a href="#components-in-adhearsion-1x">Components in Adhearsion 1.x</a></li>
+<li><a href="#what-is-an-adhearsion-20-plugin">What is an Adhearsion 2.0 Plugin?</a></li>
+<li><a href="#anatomy-of-a-plugin">Anatomy of a Plugin</a></li>
+<li><a href="#gem-plugin-structure">Gem Plugin Structure</a></li>
+<li><a href="#plugin-files">Plugin Files</a></li>
+<li><a href="#plugin-methods-init-and-run">Plugin Methods: #init and #run</a></li>
+<li><a href="#plugin-methods-config">Plugin Methods: #config</a></li>
+<li><a href="#plugin-methods-tasks">Plugin Methods: #tasks</a></li>
+<li><a href="#plugin-code">Plugin Code</a></li>
+<li><a href="#testing-your-code">Testing your code</a></li>
+<li><a href="#using-the-plugin">Using the plugin</a></li>
+<li><a href="#adding-an-entire-callcontroller">Adding an entire CallController</a><ul>
+<li><a href="#setup">Setup</a></li>
+<li><a href="#tests-first">Tests first!</a></li>
+<li><a href="#our-callcontroller">Our CallController</a></li>
+<li><a href="#routes">Routes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
 <p>The ability to easily add reusable functionality to a framework is one of the most important features. Plugins in Adhearsion 2.0 have been completely rebuilt to better suit the new structure and allow them to provide a wider variety of features. Controller methods, initializer code, specific configuration, rake tasks and included generators all are possible with the new plugin classes. In this first post we will be generating a plugin using the CLI and looking through the resulting code.</p>
 <h3 id="components-in-adhearsion-1x"><a class="toclink" href="#components-in-adhearsion-1x">Components in Adhearsion 1.x</a></h3>
 <p>The previous release of Adhearsion was deeply tied to the concept of a dialplan and related contexts, like the dialplan itself or event handling code. That brought the component architecture to simply define a series of methods that were available in some or all of the contexts. Components, however easy to create and use, were limited in scope and very difficult to properly test. Adhearsion 2.0 completely removes support for components in favor of plugins.</p>

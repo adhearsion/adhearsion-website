@@ -1,5 +1,7 @@
 ## Routing
 
+[TOC]
+
 In Adhearsion applications based on Adhearsion 1.x and earlier, the most popular way to write the meat of the application was directly in dialplan.rb, and applications would look something like this:
 
 <pre class="brush: ruby;">
