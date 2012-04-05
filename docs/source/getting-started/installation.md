@@ -1,8 +1,8 @@
-## [Getting Started](/docs) > Installation
+# [Getting Started](/docs) > Installation
 
 [TOC]
 
-### Install the Adhearsion gem
+## Install the Adhearsion gem
 
 First, install the Adhearsion gem and its dependencies:
 
@@ -10,7 +10,7 @@ First, install the Adhearsion gem and its dependencies:
 {{ d['installation.sh|idio']['install-gem'] }}
 </pre>
 
-### Create an Adhearsion application
+## Create an Adhearsion application
 
 Next, create your first Adhearsion application:
 
@@ -18,11 +18,11 @@ Next, create your first Adhearsion application:
 {{ d['installation.sh|idio|shint|ansi2html']['create-app'] }}
 </pre>
 
-### Configure your application
+## Configure your application
 
 Looking at the output from "ahn create", you will see several files are generated for you.  Here are the most important ones:
 
-#### Gemfile
+### Gemfile
 
 Here is the Gemfile that is generated with your new application:
 
@@ -36,7 +36,7 @@ In it you can see the Adhearsion framework itself is required.  Also included, b
 {{ d['installation.sh|idio|shint|ansi2html']['bundle-install'] }}
 </pre>
 
-#### config/adhearsion.rb
+### config/adhearsion.rb
 
 Next is the main Adhearsion configuration file, config/adhearsion.rb:
 

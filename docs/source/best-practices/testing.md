@@ -1,4 +1,4 @@
-## [Best Practices](/docs/best-practices) > Testing
+# [Best Practices](/docs/best-practices) > Testing
 
 [TOC]
 

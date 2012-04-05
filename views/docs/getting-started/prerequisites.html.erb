@@ -1,7 +1,7 @@
 <div class="docs">
   <div class="full-width">
     <div class="two-third">
-<h2 id="getting-started-prerequisites"><a class="toclink" href="#getting-started-prerequisites"><a href="/docs">Getting Started</a> &gt; Prerequisites</a></h2>
+<h1 id="getting-started-prerequisites"><a class="toclink" href="#getting-started-prerequisites"><a href="/docs">Getting Started</a> &gt; Prerequisites</a></h1>
 <p>To use Adhearsion you will need a few things:</p>
 <ul>
 <li>A Ruby Interpreter</li>
@@ -15,27 +15,29 @@
 <pre class="terminal">
 
 $ rvm install 1.9.3
-<span class="ansi32">Fetching yaml-0.1.4.tar.gz to /Users/bklang/.rvm/archives(B</span>
-<span class="ansi32">Extracting yaml-0.1.4.tar.gz to /Users/bklang/.rvm/src(B</span>
-<span class="ansi32">Configuring yaml in /Users/bklang/.rvm/src/yaml-0.1.4.(B</span>
-<span class="ansi32">Compiling yaml in /Users/bklang/.rvm/src/yaml-0.1.4.(B</span>
-<span class="ansi32">Installing yaml to /Users/bklang/.rvm/usr(B</span>
-<span class="ansi32">Installing Ruby from source to: /Users/bklang/.rvm/rubies/ruby-1.9.3-p125, this may take a while depending on your cpu(s)...
+<span class="ansi32">Fetching yaml-0.1.4.tar.gz to /Users/ben/Developer/.rvm/archives(B</span>
+<span class="ansi32">Extracting yaml-0.1.4.tar.gz to /Users/ben/Developer/.rvm/src(B</span>
+<span class="ansi32">Configuring yaml in /Users/ben/Developer/.rvm/src/yaml-0.1.4.(B</span>
+<span class="ansi32">Compiling yaml in /Users/ben/Developer/.rvm/src/yaml-0.1.4.(B</span>
+<span class="ansi32">Installing yaml to /Users/ben/Developer/.rvm/usr(B</span>
+<span class="ansi32">Installing Ruby from source to: /Users/ben/Developer/.rvm/rubies/ruby-1.9.3-p125, this may take a while depending on your cpu(s)...
 (B</span>
 <span class="ansi32">ruby-1.9.3-p125 - #fetching (B</span>
-<span class="ansi32">ruby-1.9.3-p125 - #extracting ruby-1.9.3-p125 to /Users/bklang/.rvm/src/ruby-1.9.3-p125(B</span>
-<span class="ansi32">ruby-1.9.3-p125 - #extracted to /Users/bklang/.rvm/src/ruby-1.9.3-p125(B</span>
+<span class="ansi32">ruby-1.9.3-p125 - #extracting ruby-1.9.3-p125 to /Users/ben/Developer/.rvm/src/ruby-1.9.3-p125(B</span>
+<span class="ansi32">ruby-1.9.3-p125 - #extracted to /Users/ben/Developer/.rvm/src/ruby-1.9.3-p125(B</span>
+<span class="ansi32">Applying patch 'xcode-debugopt-fix-r34840' (located at /Users/ben/Developer/.rvm/patches/ruby/1.9.3/p125/xcode-debugopt-fix-r34840.diff)(B</span>
+<span class="ansi32">ruby-1.9.3-p125 - #autoreconf(B</span>
 <span class="ansi32">ruby-1.9.3-p125 - #configuring (B</span>
 <span class="ansi32">ruby-1.9.3-p125 - #compiling (B</span>
 <span class="ansi32">ruby-1.9.3-p125 - #installing (B</span>
 <span class="ansi32">Removing old Rubygems files...(B</span>
-<span class="ansi32">Installing rubygems-1.8.17 for ruby-1.9.3-p125 ...(B</span>
+<span class="ansi32">Installing rubygems-1.8.21 for ruby-1.9.3-p125 ...(B</span>
 <span class="ansi32">Installation of rubygems completed successfully.(B</span>
 <span class="ansi32">ruby-1.9.3-p125 - adjusting #shebangs for (gem irb erb ri rdoc testrb rake).(B</span>
-<span class="ansi32">ruby-1.9.3-p125 - #importing default gemsets (/Users/bklang/.rvm/gemsets/)(B</span>
+<span class="ansi32">ruby-1.9.3-p125 - #importing default gemsets (/Users/ben/Developer/.rvm/gemsets/)(B</span>
 <span class="ansi32">Install of ruby-1.9.3-p125 - #complete (B</span>
 $ rvm use 1.9.3
-<span class="ansi32">Using /Users/bklang/.rvm/gems/ruby-1.9.3-p125(B</span>
+<span class="ansi32">Using /Users/ben/Developer/.rvm/gems/ruby-1.9.3-p125(B</span>
 </pre>
 
 <p>If you prefer JRuby, RVM can also install JRuby:</p>
@@ -43,17 +45,17 @@ $ rvm use 1.9.3
 
 $ rvm install jruby
 <span class="ansi32">jruby-1.6.7 - #fetching (B</span>
-<span class="ansi32">jruby-1.6.7 - #extracting jruby-bin-1.6.7 to /Users/bklang/.rvm/src/jruby-1.6.7(B</span>
-<span class="ansi32">jruby-1.6.7 - #extracted to /Users/bklang/.rvm/src/jruby-1.6.7(B</span>
+<span class="ansi32">jruby-1.6.7 - #extracting jruby-bin-1.6.7 to /Users/ben/Developer/.rvm/src/jruby-1.6.7(B</span>
+<span class="ansi32">jruby-1.6.7 - #extracted to /Users/ben/Developer/.rvm/src/jruby-1.6.7(B</span>
 <span class="ansi32">Building Nailgun(B</span>
-<span class="ansi32">jruby-1.6.7 - #installing to /Users/bklang/.rvm/rubies/jruby-1.6.7(B</span>
-<span class="ansi32">jruby-1.6.7 - #importing default gemsets (/Users/bklang/.rvm/gemsets/)(B</span>
+<span class="ansi32">jruby-1.6.7 - #installing to /Users/ben/Developer/.rvm/rubies/jruby-1.6.7(B</span>
+<span class="ansi32">jruby-1.6.7 - #importing default gemsets (/Users/ben/Developer/.rvm/gemsets/)(B</span>
 <span class="ansi32">Copying across included gems(B</span>
 Building native extensions.  This could take a while...
 Successfully installed jruby-launcher-1.0.12-java
 1 gem installed
 $ rvm use jruby
-<span class="ansi32">Using /Users/bklang/.rvm/gems/jruby-1.6.7(B</span>
+<span class="ansi32">Using /Users/ben/Developer/.rvm/gems/jruby-1.6.7(B</span>
 $ # JRuby must run in Ruby 1.9 mode:
 $ export JRUBY_OPTS="--1.9"
 </pre>

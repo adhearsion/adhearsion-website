@@ -1,4 +1,4 @@
-## [Getting Started](/docs) > Prerequisites
+# [Getting Started](/docs) > Prerequisites
 
 To use Adhearsion you will need a few things:
 

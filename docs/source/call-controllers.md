@@ -1,4 +1,4 @@
-## Call Controllers
+# Call Controllers
 
 [TOC]
 
@@ -68,49 +68,19 @@ end
 
 Testing call controllers is easy, but we have covered quite enough for today, so that topic will be revisited in a future blog post. Additionally, there will be other features added to call controllers, probably in Adhearsion 2.1, like ticked timers (allowing, for example, to check an account balance every minute of the call). Further, Adhearsion 2 will include generators for call controllers as well as some test scaffolding. Watch out for further details coming soon.
 
-### Menu DSL
+## Basic call control
+
+## Rendering Output
+
+## Collecting Input
+
+### Ask
+
+### Menu
 
 Rapid and painless creation of complex IVRs has always been one of the defining features of Adhearsion for beginning and advanced programmers alike. Through the #menu DSL method, the framework abstracts and packages the output and input management and the complex state machine needed to implement a complete menu with audio prompts, digit checking, retries and failure handling, making creating menus a breeze.
 
 The menu DSL has received a major overhaul in Adhearsion 2.0, with the goals of clarifying syntax and adding functionality.
-
-#### The Old Way
-
-The Adhearsion 1.x menu structure used to work as follows, with the now obsolete concept of a dialplan and context.
-
-<pre class="brush: ruby;">
-foo {
-  menu "Press 1 for Administration", "Press 2 for Tech Support",
-       :timeout => 8.seconds, :tries => 3 do |link|
-    link.admin 1
-    link.tech 2
-    link.on_invalid do
-      speak 'Invalid input'
-    end
-
-    link.on_premature_timeout do
-      speak 'Sorry'
-    end
-
-    link.on_failure do
-      speak 'Goodbye'
-      hangup
-    end
-  end
-}
-
-admin {
-  speak 'You have reached the Administration department'
-}
-
-tech {
-  speak 'You have reached the Technical Support office'
-}
-</pre>
-
-The main shortcomings of this structure were mostly related to the inherent difficulty of maintaining a complex dialplan all in a single file, or breaking it up in helper components with no imposed logical structure. The old DSL was also not very intuitive, as you were specifying the target for the link before the pattern, in addition to having the block argument as a basically redundant part.
-
-#### The New & Improved Way
 
 The focus for the menu DSL in Adhearsion 2.0 was primarily on improving its functionality to work with call controllers and to fit the new framework structure. Working towards those goals, the menu definition block was streamlined while keeping readability and the general functionality of 1.x.
 
@@ -170,6 +140,12 @@ Internally, the state machine has been re-implemented without using exceptions a
 \#invalid has its associated block executed when the input does not possibly match any pattern. #timeout block is run when time expires before or between input digits, without there being at least one exact match. #failure runs its block when the maximum number of tries is reached without an input match.
 
 Execution of the current context resumes after #menu finishes. If you wish to jump to an entirely different controller, #pass can be used. #menu will return :failed if failure was reached, or :done if a match was executed.
+
+## Recording
+
+## Joining calls
+
+## Making outbound calls
 
 <div class='docs-progress-nav'>
   <span class='back'>

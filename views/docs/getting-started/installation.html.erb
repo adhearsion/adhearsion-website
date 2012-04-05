@@ -1,7 +1,7 @@
 <div class="docs">
   <div class="full-width">
     <div class="two-third">
-<h2 id="getting-started-installation"><a class="toclink" href="#getting-started-installation"><a href="/docs">Getting Started</a> &gt; Installation</a></h2>
+<h1 id="getting-started-installation"><a class="toclink" href="#getting-started-installation"><a href="/docs">Getting Started</a> &gt; Installation</a></h1>
 <div class="toc">
 <ul>
 <li><a href="#getting-started-installation">Getting Started &gt; Installation</a><ul>
@@ -16,15 +16,15 @@
 </li>
 </ul>
 </div>
-<h3 id="install-the-adhearsion-gem"><a class="toclink" href="#install-the-adhearsion-gem">Install the Adhearsion gem</a></h3>
+<h2 id="install-the-adhearsion-gem"><a class="toclink" href="#install-the-adhearsion-gem">Install the Adhearsion gem</a></h2>
 <p>First, install the Adhearsion gem and its dependencies:</p>
 <pre class="terminal">
-<div class="highlight"><pre><a name="source-getting-started-installation.sh-idio-19"></a>gem install --prerelease adhearsion
+<div class="highlight"><pre><a name="source-getting-started-installation.sh-idio-1"></a>gem install --prerelease adhearsion
 </pre></div>
 
 </pre>
 
-<h3 id="create-an-adhearsion-application"><a class="toclink" href="#create-an-adhearsion-application">Create an Adhearsion application</a></h3>
+<h2 id="create-an-adhearsion-application"><a class="toclink" href="#create-an-adhearsion-application">Create an Adhearsion application</a></h2>
 <p>Next, create your first Adhearsion application:</p>
 <pre class="terminal">
 
@@ -51,9 +51,9 @@ Shutdown completed cleanly
 $ cd myapp
 </pre>
 
-<h3 id="configure-your-application"><a class="toclink" href="#configure-your-application">Configure your application</a></h3>
+<h2 id="configure-your-application"><a class="toclink" href="#configure-your-application">Configure your application</a></h2>
 <p>Looking at the output from "ahn create", you will see several files are generated for you.  Here are the most important ones:</p>
-<h4 id="gemfile"><a class="toclink" href="#gemfile">Gemfile</a></h4>
+<h3 id="gemfile"><a class="toclink" href="#gemfile">Gemfile</a></h3>
 <p>Here is the Gemfile that is generated with your new application:</p>
 <pre class="brush: ruby;">
 source :rubygems
@@ -83,7 +83,7 @@ Using i18n (0.6.0)
 Using multi_json (1.2.0)
 Using activesupport (3.2.3)
 Using adhearsion-loquacious (1.9.2)
-Using bundler (1.0.21)
+Using bundler (1.1.0)
 Using celluloid (0.10.0)
 Using countdownlatch (1.0.0)
 Using deep_merge (1.0.0)
@@ -131,10 +131,10 @@ Using tilt (1.3.2)
 Using sinatra (1.2.6)
 Using sinatra_more (0.3.43)
 Updating .gem files in vendor/cache
-<span class="ansi32">Your bundle is complete! Use `bundle show [gemname]` to see where a bundled gem is installed.</span>
+<span class="ansi32">Your bundle is complete! It was installed into ./vendor</span>
 </pre>
 
-<h4 id="configadhearsionrb"><a class="toclink" href="#configadhearsionrb">config/adhearsion.rb</a></h4>
+<h3 id="configadhearsionrb"><a class="toclink" href="#configadhearsionrb">config/adhearsion.rb</a></h3>
 <p>Next is the main Adhearsion configuration file, config/adhearsion.rb:</p>
 <pre class="brush: ruby;">
 # encoding: utf-8
@@ -241,7 +241,7 @@ Adhearsion.config do |config|
 <span class="ansi33">  config.platform.</span><span class="ansi37">process_name      </span><span class="ansi33"> = </span><span class="ansi36">"ahn"</span>
 
 <span class="ansi33">  # </span><span class="ansi32">Adhearsion application root folder [AHN_PLATFORM_ROOT]</span>
-<span class="ansi33">  config.platform.</span><span class="ansi37">root              </span><span class="ansi33"> = </span><span class="ansi36">"/Users/bklang/src/adhearsion-website/docs/artifacts/20cdda714521b4e36e48ce7f0d4ad880/source/getting-started/myapp"</span>
+<span class="ansi33">  config.platform.</span><span class="ansi37">root              </span><span class="ansi33"> = </span><span class="ansi36">"/Users/ben/code/VoIP/adhearsion/website/docs/artifacts/dd3e3600fd2e5052b8b5ab8791db5348/source/getting-started/myapp"</span>
 
   # ******* Configuration for punchblock **************
 

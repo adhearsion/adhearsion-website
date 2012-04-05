@@ -1,4 +1,4 @@
-## [Best Practices](/docs/best-practices) > Deployment
+# [Best Practices](/docs/best-practices) > Deployment
 
 [TOC]
 

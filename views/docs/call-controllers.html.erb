@@ -1,15 +1,20 @@
 <div class="docs">
   <div class="full-width">
     <div class="two-third">
-<h2 id="call-controllers"><a class="toclink" href="#call-controllers">Call Controllers</a></h2>
+<h1 id="call-controllers"><a class="toclink" href="#call-controllers">Call Controllers</a></h1>
 <div class="toc">
 <ul>
 <li><a href="#call-controllers">Call Controllers</a><ul>
-<li><a href="#menu-dsl">Menu DSL</a><ul>
-<li><a href="#the-old-way">The Old Way</a></li>
-<li><a href="#the-new-improved-way">The New &amp; Improved Way</a></li>
+<li><a href="#basic-call-control">Basic call control</a></li>
+<li><a href="#rendering-output">Rendering Output</a></li>
+<li><a href="#collecting-input">Collecting Input</a><ul>
+<li><a href="#ask">Ask</a></li>
+<li><a href="#menu">Menu</a></li>
 </ul>
 </li>
+<li><a href="#recording">Recording</a></li>
+<li><a href="#joining-calls">Joining calls</a></li>
+<li><a href="#making-outbound-calls">Making outbound calls</a></li>
 </ul>
 </li>
 </ul>
@@ -71,43 +76,13 @@ end
 </pre>
 
 <p>Testing call controllers is easy, but we have covered quite enough for today, so that topic will be revisited in a future blog post. Additionally, there will be other features added to call controllers, probably in Adhearsion 2.1, like ticked timers (allowing, for example, to check an account balance every minute of the call). Further, Adhearsion 2 will include generators for call controllers as well as some test scaffolding. Watch out for further details coming soon.</p>
-<h3 id="menu-dsl"><a class="toclink" href="#menu-dsl">Menu DSL</a></h3>
+<h2 id="basic-call-control"><a class="toclink" href="#basic-call-control">Basic call control</a></h2>
+<h2 id="rendering-output"><a class="toclink" href="#rendering-output">Rendering Output</a></h2>
+<h2 id="collecting-input"><a class="toclink" href="#collecting-input">Collecting Input</a></h2>
+<h3 id="ask"><a class="toclink" href="#ask">Ask</a></h3>
+<h3 id="menu"><a class="toclink" href="#menu">Menu</a></h3>
 <p>Rapid and painless creation of complex IVRs has always been one of the defining features of Adhearsion for beginning and advanced programmers alike. Through the #menu DSL method, the framework abstracts and packages the output and input management and the complex state machine needed to implement a complete menu with audio prompts, digit checking, retries and failure handling, making creating menus a breeze.</p>
 <p>The menu DSL has received a major overhaul in Adhearsion 2.0, with the goals of clarifying syntax and adding functionality.</p>
-<h4 id="the-old-way"><a class="toclink" href="#the-old-way">The Old Way</a></h4>
-<p>The Adhearsion 1.x menu structure used to work as follows, with the now obsolete concept of a dialplan and context.</p>
-<pre class="brush: ruby;">
-foo {
-  menu "Press 1 for Administration", "Press 2 for Tech Support",
-       :timeout => 8.seconds, :tries => 3 do |link|
-    link.admin 1
-    link.tech 2
-    link.on_invalid do
-      speak 'Invalid input'
-    end
-
-    link.on_premature_timeout do
-      speak 'Sorry'
-    end
-
-    link.on_failure do
-      speak 'Goodbye'
-      hangup
-    end
-  end
-}
-
-admin {
-  speak 'You have reached the Administration department'
-}
-
-tech {
-  speak 'You have reached the Technical Support office'
-}
-</pre>
-
-<p>The main shortcomings of this structure were mostly related to the inherent difficulty of maintaining a complex dialplan all in a single file, or breaking it up in helper components with no imposed logical structure. The old DSL was also not very intuitive, as you were specifying the target for the link before the pattern, in addition to having the block argument as a basically redundant part.</p>
-<h4 id="the-new-improved-way"><a class="toclink" href="#the-new-improved-way">The New &amp; Improved Way</a></h4>
 <p>The focus for the menu DSL in Adhearsion 2.0 was primarily on improving its functionality to work with call controllers and to fit the new framework structure. Working towards those goals, the menu definition block was streamlined while keeping readability and the general functionality of 1.x.</p>
 <pre class="brush: ruby;">
 class MyController < Adhearsion::CallController
@@ -157,6 +132,9 @@ end
 <p>#timeout, #invalid and #failure replace #on_invalid, #on_premature_timeout and #on_failure. All of them only accept blocks as payload, but #pass or #invoke can be used to execute controllers inside them.</p>
 <p>#invalid has its associated block executed when the input does not possibly match any pattern. #timeout block is run when time expires before or between input digits, without there being at least one exact match. #failure runs its block when the maximum number of tries is reached without an input match.</p>
 <p>Execution of the current context resumes after #menu finishes. If you wish to jump to an entirely different controller, #pass can be used. #menu will return :failed if failure was reached, or :done if a match was executed.</p>
+<h2 id="recording"><a class="toclink" href="#recording">Recording</a></h2>
+<h2 id="joining-calls"><a class="toclink" href="#joining-calls">Joining calls</a></h2>
+<h2 id="making-outbound-calls"><a class="toclink" href="#making-outbound-calls">Making outbound calls</a></h2>
 <div class='docs-progress-nav'>
   <span class='back'>
     Back to <a href="/docs/getting-started/installation">Installation</a>
