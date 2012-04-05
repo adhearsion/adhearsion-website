@@ -266,9 +266,9 @@ end
 
 <div class='docs-progress-nav'>
   <span class='back'>
-    Back to <a href="/docs/call-controllers">Call Controllers</a>
+    Back to <a href="/docs/logging">Logging</a>
   </span>
   <span class='forward'>
-    Continue to <a href="/docs/routing">Routing</a>
+    Continue to <a href="/docs/best-practices">Best Practices</a>
   </span>
 </div>

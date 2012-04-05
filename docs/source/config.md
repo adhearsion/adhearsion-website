@@ -2,6 +2,12 @@
 
 [TOC]
 
+## Viewing current/default config
+
+## Configuring Adhearsion & Plugins
+
+## Storing configuration in the environment
+
 <div class='docs-progress-nav'>
   <span class='back'>
     Back to <a href="/docs/routing">Routing</a>

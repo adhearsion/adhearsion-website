@@ -149,9 +149,9 @@ Execution of the current context resumes after #menu finishes. If you wish to ju
 
 <div class='docs-progress-nav'>
   <span class='back'>
-    Back to <a href="/docs/getting-started/installation">Installation</a>
+    Back to <a href="/docs/console">Console</a>
   </span>
   <span class='forward'>
-    Continue to <a href="/docs/plugins">Plugins</a>
+    Continue to <a href="/docs/routing">Routing</a>
   </span>
 </div>

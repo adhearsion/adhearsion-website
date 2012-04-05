@@ -95,7 +95,7 @@ route 'foo', lambda { |call| Time.now.hour < 20 }
 
 <div class='docs-progress-nav'>
   <span class='back'>
-    Back to <a href="/docs/plugins">Plugins</a>
+    Back to <a href="/docs/call-controllers">Call Controllers</a>
   </span>
   <span class='forward'>
     Continue to <a href="/docs/config">Config</a>

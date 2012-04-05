@@ -9,6 +9,6 @@
     Back to <a href="/docs/logging">Logging</a>
   </span>
   <span class='forward'>
-    Continue to <a href="/docs/best-practices">Testing</a>
+    Continue to <a href="/docs/best-practices/testing">Testing</a>
   </span>
 </div>

@@ -50,6 +50,10 @@ This is just a skeleton however.  To see the full list of available configuratio
 {{ d['installation.sh|idio|shint|ansi2html']['rake-config-show'] }}
 </pre>
 
+### Connecting to your telephony engine
+
+## Make a test call
+
 <a href="#" rel="docs-nav-active" style="display:none;">docs-nav-getting-started</a>
 
 <div class='docs-progress-nav'>
