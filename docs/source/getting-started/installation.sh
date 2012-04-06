@@ -12,9 +12,6 @@ export JRUBY_OPTS="--1.9"
 rvm install 1.9.3
 rvm use 1.9.3
 
-### @export "ignore"
-bundle install
-
 ### @export "install-gem"
 gem install --prerelease adhearsion
 

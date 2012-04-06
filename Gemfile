@@ -7,11 +7,10 @@ gem "rack-cache", :require => nil
 gem 'haml'
 gem 'haml-coderay'
 
-gem 'adhearsion', '>=2.0.0.rc4', :require => nil
-
 group :development do
   gem 'capistrano'
   gem 'railsless-deploy'
   gem 'guard'
   gem 'rake'
+  gem 'heroku'
 end

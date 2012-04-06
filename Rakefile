@@ -1,9 +1,8 @@
-require 'bundler/setup'
-
-desc "Generate dexy documentation and copy to views directory"
+desc "Copy dexy documentation to views directory"
 task :docs do
+  puts 'You should run `cd docs && dexy` to re-generate the docs first'
+
   Dir.mkdir 'views/docs' rescue nil
-  puts `cd docs && dexy`
   Dir['docs/output/source/**/*.html'].each do |path|
     filename = /docs\/output\/source\/(.*).html/.match(path)[1]
     new_path = "views/docs/#{filename}.html.erb"
