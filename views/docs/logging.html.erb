@@ -17,7 +17,14 @@
 </li>
 </ul>
 </div>
+<p>Adhearsion includes a comprehensive logging system, powered by the <a href="https://github.com/TwP/logging">Logging</a> gem, where every class has a logger of its own, and every object may have a logger if it implements #logger_name. This makes for highly context-aware logging, and the possibility of easy application-specific logging.</p>
 <h2 id="writing-to-the-log"><a class="toclink" href="#writing-to-the-log">Writing to the log</a></h2>
+<p>In order to write to the log (eg at INFO level), simply do the following:</p>
+<pre class="brush: ruby;">
+logger.info "This will be printed at INFO level."
+</pre>
+
+<p>The default available log levels are TRACE, DEBUG, INFO, WARN, ERROR, FATAL.</p>
 <h2 id="send-logs-elsewhere"><a class="toclink" href="#send-logs-elsewhere">Send logs elsewhere</a></h2>
 <h3 id="change-the-log-file-location"><a class="toclink" href="#change-the-log-file-location">Change the log file location</a></h3>
 <h3 id="log-to-syslog"><a class="toclink" href="#log-to-syslog">Log to syslog</a></h3>
