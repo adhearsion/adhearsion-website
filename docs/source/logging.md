@@ -16,13 +16,28 @@ The default available log levels are TRACE, DEBUG, INFO, WARN, ERROR, FATAL.
 
 ## Send logs elsewhere
 
+By default, the logs are output to log/adhearsion.log and stdout.
+
 ### Change the log file location
+
+You may change the location of the log file by altering the 'config.platform.logging.outputters' config setting, like so:
+
+<pre class="terminal">
+<br/>
+ADHEARSION_PLATFORM_LOGGING_OUTPUTTERS=/var/log/adhearsion.log ahn start -
+</pre>
 
 ### Log to syslog
 
+See [the logging gem](https://github.com/TwP/logging/blob/master/lib/logging/appenders/syslog.rb#L23).
+
 ### Send logs by email
 
+See [the logging gem](https://github.com/TwP/logging/blob/master/lib/logging/appenders/email.rb#L25).
+
 ## Change the log format
+
+See [the logging gem](https://github.com/TwP/logging/blob/master/examples/layouts.rb).
 
 <div class='docs-progress-nav'>
   <span class='back'>
