@@ -26,7 +26,7 @@ class BlogPostAggregator
 
   def fetch
     @last_fetch = Time.now
-    @posts = Hash.from_xml(open("http://pipes.yahoo.com/pipes/pipe.run?_id=7d727342ec97cb855c218e5daba3843c&_render=rss").read)["rss"]["channel"]["item"].to_a.map do |feed_item|
+    @posts = Hash.from_xml(open(rss_url).read)["rss"]["channel"]["item"].to_a.map do |feed_item|
       pub_date = DateTime.parse(feed_item["pubDate"]) rescue Time.now
       { :title => feed_item["title"], :date => pub_date, :url => feed_item["link"], :description => feed_item["description"] }
     end
@@ -42,6 +42,10 @@ class BlogPostAggregator
 
   def hash
     posts.first.hash
+  end
+
+  def rss_url
+    @rss_url ||= "http://pipes.yahoo.com/pipes/pipe.run?_id=7d727342ec97cb855c218e5daba3843c&_render=rss"
   end
 end
 
@@ -68,7 +72,8 @@ end
 {
   '/api'          => 'http://rubydoc.info/github/adhearsion/adhearsion/file/README.markdown',
   '/wiki'         => 'https://github.com/adhearsion/adhearsion/wiki',
-  '/contributing' => 'https://github.com/adhearsion/adhearsion/wiki/Contributing'
+  '/contributing' => 'https://github.com/adhearsion/adhearsion/wiki/Contributing',
+  '/rss'          => BlogPostAggregator.instance.rss_url
 }.each_pair do |local, remote|
   get local do
     redirect remote
