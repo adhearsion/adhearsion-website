@@ -36,11 +36,11 @@ pre.terminal {
 }
 
 .docs-progress-nav .forward {
-  align:right;
+  float:right;
   text-align:right;
 }
 
 .docs-progress-nav .back {
-  align:left;
+  float:left;
   text-align:left;
 }
