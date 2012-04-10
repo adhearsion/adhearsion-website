@@ -89,7 +89,10 @@ module GreetPlugin
 end
 </pre>
 
-In plugin.rb there are three important blocks shown. The first is the #init block which is invoked by Adhearsion when the plugin is first loaded. In our case, all this does is write an informational message to the log showing that the plugin was, in fact, loaded. The second is the #config block that registers configuration options with the Adhearsion framework. This is important because it allows your users to easily discover the possible configuration options for your plugin by simply running rake config:show within their Adhearsion applications. It also allows you to document the configuration options and set default values. The third block is the #tasks block, which registers Rake tasks to be available within the Adhearsion application. In this case it adds a Rake task called greet_plugin:info that prints the version number of the plugin.
+In plugin.rb there are three important blocks shown.
+* The first is the #init block which is invoked by Adhearsion when the plugin is first loaded. In this case, all this does is write an informational message to the log showing that the plugin was, in fact, loaded.
+* The second is the #config block that registers configuration options with the Adhearsion framework. This is important because it allows your users to easily discover the possible configuration options for your plugin by simply running rake config:show within their Adhearsion applications. It also allows you to document the configuration options and set default values.
+* The third block is the #tasks block, which registers Rake tasks to be available within the Adhearsion application. In this case it adds a Rake task called greet_plugin:info that prints the version number of the plugin.
 
 ### Plugin Methods: #init and #run
 
