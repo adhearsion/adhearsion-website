@@ -266,10 +266,11 @@ lib/greet_plugin/hours_controller.rb
 module GreetPlugin
   class HoursController < Adhearsion::CallController
     def run
-      if Time.now.hour.between?(Adhearsion.config[:greet_plugin].office_hours_start, Adhearsion.config[:greet_plugin].office_hours_end)
+      config = Adhearsion.config[:greet_plugin]
+      if Time.now.hour.between?(config.office_hours_start, config.office_hours_end)
         dial "SIP/101"
       else
-        play "Office is  open between #{Adhearsion.config[:greet_plugin].office_hours_start} and #{Adhearsion.config[:greet_plugin].office_hours_end}."
+        play "Our office is open between #{config.office_hours_start} and #{config.office_hours_end}. Please call back later."
       end
     end
   end
