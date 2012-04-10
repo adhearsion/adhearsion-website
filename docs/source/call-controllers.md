@@ -113,7 +113,7 @@ Rapid and painless creation of complex IVRs has always been one of the defining 
 
 The menu DSL has received a major overhaul in Adhearsion 2.0, with the goals of clarifying syntax and adding functionality.
 
-The focus for the menu DSL in Adhearsion 2.0 was primarily on improving its functionality to work with call controllers and to fit the new framework structure. Working towards those goals, the menu definition block was streamlined while keeping readability and the general functionality of 1.x.
+The focus for the menu DSL in Adhearsion 2.0 was primarily on improving its functionality to work with call controllers and to fit the new framework structure. Working towards those goals, the menu definition block was streamlined while keeping readability and the general functionality from previous versions.
 
 <pre class="brush: ruby;">
 class MyController < Adhearsion::CallController
