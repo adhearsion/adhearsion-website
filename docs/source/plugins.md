@@ -13,21 +13,8 @@ A plugin in Adhearsion, as in many other Ruby frameworks, simply represents a co
 The easiest way to create a skeleton plugin is to use the Adhearsion command "ahn generate".
 By running the following ahn generate plugin GreetPlugin a directory named greet_plugin will be created in the current working directory. The plugin itself, being a gem, can reside anywhere, unlike components that needed to be inside the application directory. The output from this command should show the files being created, like this:
 
-<pre class="brush: ruby;">
-create  greet_plugin
-create  greet_plugin/lib
-create  greet_plugin/lib/greet_plugin
-create  greet_plugin/spec
-create  greet_plugin/greet_plugin.gemspec
-create  greet_plugin/Rakefile
-create  greet_plugin/README.md
-create  greet_plugin/Gemfile
-create  greet_plugin/lib/greet_plugin.rb
-create  greet_plugin/lib/greet_plugin/version.rb
-create  greet_plugin/lib/greet_plugin/plugin.rb
-create  greet_plugin/lib/greet_plugin/controller_methods.rb
-create  greet_plugin/spec/spec_helper.rb
-create  greet_plugin/spec/greet_plugin/controller_methods_spec.rb
+<pre class="terminal">
+{{ d['plugins.sh|idio|shint|ansi2html']['generate-plugin'] }}
 </pre>
 
 ### Gem Plugin Structure
@@ -42,13 +29,10 @@ The Rakefile contains tasks that pertain to the plugin gem itself, such as runni
 
 The entry point for the plugin, as usual with gems, resides in lib/greet_plugin.rb. It is mainly composed of requires for the plugin classes and modules. When adding functionality to a plugin, it will need to be require'd here to be available. Plugins are namespaced by package name to avoid conflicts.
 
+lib/greet_plugin.rb:
+
 <pre class="brush: ruby;">
-# lib/greet_plugin.rb
-module GreetPlugin
-  require "greet_plugin/version"
-  require "greet_plugin/plugin"
-  require "greet_plugin/controller_methods"
-end
+{{ a['plugins.sh|idio|shint|ansi2html']['generate-plugin:files:source/myapp/greet_plugin/lib/greet_plugin.rb'] }}
 </pre>
 
 In this example Adhearsion plugin:
@@ -84,7 +68,6 @@ module GreetPlugin
         end
       end
     end
-
   end
 end
 </pre>
@@ -94,7 +77,7 @@ In plugin.rb there are three important blocks shown.
 * The second is the #config block that registers configuration options with the Adhearsion framework. This is important because it allows your users to easily discover the possible configuration options for your plugin by simply running rake config:show within their Adhearsion applications. It also allows you to document the configuration options and set default values.
 * The third block is the #tasks block, which registers Rake tasks to be available within the Adhearsion application. In this case it adds a Rake task called greet_plugin:info that prints the version number of the plugin.
 
-### Plugin Methods: #init and #run
+## Plugin Initialization
 
 Every plugin goes through two separate phases before it is ready to run. While Adhearsion is starting up, and prior to taking any calls, the plugin first gets initialized through a supplied #init block. This block may be used to set up any basic requirements or validate the configuration. Later, after the Adhearsion framework has booted, the optional #run block is called to start the plugin. An example of using this two step startup of #init and #run methods might be an IRC plugin. In the #init method, the IRC class is instantiated and configured, but no connection to the server is made. Then in #run the actual connection is opened and the service begins. Both methods are optional, but if they are defined, the mandatory arguments are the name of the plugin as a symbol and a block to provide the code to be run. A plugin can also request to be initialized before or after another plugin by name, using the :before and :after options passed as an hash to #init and/or #run.
 
@@ -104,7 +87,9 @@ Note that your #run method must not block indefinitely!  If necessary, place the
 module GreetPlugin
   class Plugin < Adhearison::Plugin
     def run
-      Thread.new { catching_standard_errors { my_blocking_runner_method } }
+      Thread.new do
+        catching_standard_errors { my_blocking_runner_method }
+      end
     end
   end
 end
@@ -112,23 +97,23 @@ end
 
 Note the use of catching_standard_errors.  This ensures that any exceptions raised within your plugin are routed through Adhearsion's exception handling event system.  More information on this can be found in the best practices guide.
 
-### Plugin Methods: #config
+## Plugin Configuration
 
 The #config block allows a plugin to define configuration values in a customizable and self-documenting way. Every configuration key has a name followed by its default value, and then by a :desc key to allow for a description. This is very important!  By allowing your plugin to be configured this way, its options will be exposed via rake config:show in an application directory.  Additionally, you will be able to set configuration options via the shell environment, which is handy for services like Heroku.
 
 A config line can also validate supplied values with a transform:
 
 <pre class="brush: ruby;">
-max_connections 5, :desc => "Maximum number of connections to make", :transform => lambda { |v| v.to_i }
+max_connections 5, :desc => "Maximum number of connections to make",
+                   :transform => lambda { |v| v.to_i }
 </pre>
 The :transform will be used to modify the configuration value after it is read from the end-user's setting.
 
-### Plugin Methods: #tasks
+## Plugin Rake Tasks
 
 The #tasks method allows the plugin developer to define Rake tasks to be made available inside an Adhearsion application. Task definitions follow Rake conventions.
 
-
-### Making the plugin useful
+## Making the plugin useful
 
 In our exploration of a newly generated plugin, we have so far mostly looked at the facilities Adhearsion provides to hook into the framework and your application. While simple plugins that are nothing more than rake tasks and generators have their place, you probably want to go further.  This section will discuss how to add funtionality to Adhearsion calls.
 
@@ -144,8 +129,10 @@ lib/controller_methods.rb
 <pre class="brush: ruby;">
 module GreetPlugin
   module ControllerMethods
-    # The methods are defined in a normal method the user will then mix in their CallControllers
-    # The following also contains an example of configuration usage
+    # The methods are defined in a normal method the user will then
+    # mix in their CallControllers.
+    # The following also contains an example of configuration usage.
+    #
     def greet(name)
       play "#{Adhearsion.config[:greet_plugin].greeting}, #{name}"
     end
@@ -197,7 +184,7 @@ The plugin is a gem, so you might eventually publish it. In the meantime you can
 Gemfile
 
 <pre class="brush: ruby;">
-gem 'adhearsion', '>= 2.0.0.rc1'
+gem 'adhearsion', '>= 2.0.0'
 gem 'greet_plugin', :path => '/home/user/projects/greet_plugin'
 
 # ... whatever other gems you need
@@ -242,13 +229,13 @@ module GreetPlugin
     end
 
     it 'dials out when inside office hours' do
-      Timecop.freeze(Time.utc(2012, 3, 8, 12, 0, 0))
+      Timecop.freeze Time.utc(2012, 3, 8, 12, 0, 0)
       subject.expects(:dial).once
       subject.run
     end
 
     it 'plays a message when outside office hours' do
-      Timecop.freeze(Time.utc(2012, 3, 8, 22, 0, 0))
+      Timecop.freeze Time.utc(2012, 3, 8, 22, 0, 0)
       subject.expects(:play).once
       subject.run
     end
@@ -266,19 +253,28 @@ lib/greet_plugin/hours_controller.rb
 module GreetPlugin
   class HoursController < Adhearsion::CallController
     def run
-      config = Adhearsion.config[:greet_plugin]
-      if Time.now.hour.between?(config.office_hours_start, config.office_hours_end)
+      if in_office_hours
         dial "SIP/101"
       else
-        play "Our office is open between #{config.office_hours_start} and #{config.office_hours_end}. Please call back later."
+        say "Our office is open between #{config.office_hours_start} and #{config.office_hours_end}. Please call back later."
       end
+    end
+
+    private
+
+    def in_office_hours
+      Time.now.hour.between? config.office_hours_start, config.office_hours_end
+    end
+
+    def config
+      Adhearsion.config[:greet_plugin]
     end
   end
 end
 </pre>
 
 #### Routes
-To make calls in the application reach this controller, you will need to create a route.  The example below uses a generic route that matches all calls (no filters).
+To make calls in the application reach this controller, you will need to create a route. The example below uses a generic route that matches all calls (no filters).
 
 my_application_dir/config/adhearsion.rb
 
