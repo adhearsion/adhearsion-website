@@ -66,7 +66,7 @@ post '/get-help' do
 end
 
 {
-  '/api'          => 'http://rubydoc.info/github/adhearsion/adhearsion',
+  '/api'          => 'http://rubydoc.info/github/adhearsion/adhearsion/file/README.markdown',
   '/wiki'         => 'https://github.com/adhearsion/adhearsion/wiki',
   '/contributing' => 'https://github.com/adhearsion/adhearsion/wiki/Contributing'
 }.each_pair do |local, remote|
