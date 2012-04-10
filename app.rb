@@ -65,8 +65,14 @@ post '/get-help' do
   haml :'get-help'
 end
 
-get '/api' do
-  redirect 'http://rubydoc.info/github/adhearsion/adhearsion'
+{
+  '/api'          => 'http://rubydoc.info/github/adhearsion/adhearsion',
+  '/wiki'         => 'https://github.com/adhearsion/adhearsion/wiki',
+  '/contributing' => 'https://github.com/adhearsion/adhearsion/wiki/Contributing'
+}.each_pair do |local, remote|
+  get local do
+    redirect remote
+  end
 end
 
 get '/docs' do

@@ -39,16 +39,16 @@
       .full-width.rel
         .one-third
           .logo
-            %a{:href => "/index"}
+            %a{:href => "/"}
               %img{:src => "/images/logo.jpg", :alt => "Adhearsion"}
         .two-third
-          .rel
-            .abs.utility
-              .icon-to-left
-                %img{:src => "/images/icons/smallphone.png", :alt => ""}
-              Give us a Call: 1-800-ADHEARSION or
-              %a{:href => '/demo'} try out the demo app
-              .clear
+          / .rel
+          /   .abs.utility
+          /     .icon-to-left
+          /       %img{:src => "/images/icons/smallphone.png", :alt => ""}
+          /     Give us a Call: 1-800-ADHEARSION or
+          /     %a{:href => '/demo'} try out the demo app
+          /     .clear
           .mainmenu
             %ul
               %li#main-nav-home
@@ -79,15 +79,13 @@
               %li
                 %a{:href => "/"} Home
               %li
-                %a{:href => "/download"} Download
-              %li
                 %a{:href => "/faq"} FAQ
               %li
-                %a{:href => "/roadmap"} Roadmap
+                %a{:href => "/community"} Community
+              / %li
+              /   %a{:href => "/contact"} Contact
               %li
-                %a{:href => "/contributing"} Contributing
-              %li
-                %a{:href => "/contact"} Contact
+                %a{:href => "/conference"} Conference
               %li
                 %a{:href => "/get-help"} Get Help
           .one-fourth.footer-panel
@@ -97,19 +95,14 @@
             %h3 Documentation
             %ul
               %li
-                %a{:href => "/docs"} Getting Started
-              %li
-                %a{:href => "/usage-guide"} Usage Guide
-              %li
-                %a{:href => "/examples"} Examples
-              %li
-                %a{:href => "/screencasts"} Screencasts
+                %a{:href => "/docs"} Usage Guide
               %li
                 %a{:href => "/wiki"} Wiki
               %li
                 %a{:href => "/api"} API Docs
               %li
-                %a{:href => "/community"} Community
+                %a{:href => "/contributing"} Contributing
+
           .one-fourth.footer-panel
             %h3 Get Social &amp; Such
             %ul.social
