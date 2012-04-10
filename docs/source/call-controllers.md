@@ -164,9 +164,9 @@ The #match method takes an Integer, a String, a Range or any number of them as t
 
 \#menu executes the payload for the first exact unambiguous match it finds after each input or timing out. In a situation where there might be overlapping patterns, such as 10 and 100, #menu will wait for timeout after the second digit.
 
-Internally, the state machine has been re-implemented without using exceptions as a mean for flow control, which was a concern for #menu usage in begin..rescue blocks.
+Internally, the state machine has been re-implemented without using exceptions as a mean for flow control, which was previously a concern for #menu usage in begin..rescue blocks.
 
-\#timeout, #invalid and #failure replace #on_invalid, #on_premature_timeout and #on_failure. All of them only accept blocks as payload, but #pass or #invoke can be used to execute controllers inside them.
+\#timeout, #invalid and #failure replace #on_invalid, #on_premature_timeout and #on_failure. These methods only accept blocks as payload, but it is still possible to make use of another CallController by using #pass or #invoke within the block.
 
 \#invalid has its associated block executed when the input does not possibly match any pattern. #timeout block is run when time expires before or between input digits, without there being at least one exact match. #failure runs its block when the maximum number of tries is reached without an input match.
 
