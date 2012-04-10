@@ -52,7 +52,45 @@ This is just a skeleton however.  To see the full list of available configuratio
 
 ### Connecting to your telephony engine
 
+Adhearsion currently supports two protocols for communication with the telephony engine it is controlling; [Rayo](http://rayo.io) and Asterisk [AMI](http://www.voip-info.org/wiki/view/Asterisk+manager+API)/[AGI](http://www.voip-info.org/wiki/view/Asterisk+AGI). As such, the configuration for each is slightly different. You will notice that the generated config file contains scaffolding for each, and that the default protocol is Rayo. You are, however, encouraged to [store sensitive credentials in the application's environment](/docs/config#storing-configuration-in-the-environment) rather than in the config file.
+
+If you are using a Rayo server, there should be nothing more to do other than mapping DIDs to the JabberID you are connecting Adhearsion as. Refer to your Rayo server's documentation for how to do this.
+
+If you are using Asterisk, there are a couple of steps to configure it for use with Adhearsion:
+
+#### AMI User
+
+It is necessary to configure an AMI user as which Adhearsion can connect to Asterisk. This can be done in manager.conf, and a sample configuration is provided below:
+
+<pre class="brush: ruby;">
+[general]
+enabled = yes
+port = 5038
+bindaddr = 0.0.0.0
+
+[myuser]
+secret = mypassword
+read = system,call,log,verbose,agent,user,config,dtmf,reporting,cdr,dialplan,agi
+write = system,call,agent,user,config,command,reporting,originate,agi
+eventfilter = !Event: RTCP*
+</pre>
+
+Note that there are several non-standard permissions enabled (dialplan, agi). This is necessary to enable AsyncAGI for this AMI user. Also, we have setup an event filter here to prevent sending Adhearsion RTCP events. This is optional, and is because Asterisk generates a great number of these events, and Adhearsion cannot normally do anything useful with them. Thus, we can improve Adhearsion's performance by not sending it these events in the first place.
+
+#### Route calls to AsyncAGI
+
+You will need to route calls to AsyncAGI, which allows Adhearsion to take control of them. You should add something similar to the following config to extensions.conf:
+
+<pre class="brush: ruby;">
+[your_context_name]
+exten => _.,1,AGI(agi:async)
+</pre>
+
+This will route all calls with a numeric extension to Adhearsion
+
 ## Make a test call
+
+By default, a generated Adhearsion app includes the SimonGame. You can boot your app (ahn start) and immediately make a call to it, and you should be prompted to play a game. Enjoy your time working with Adhearsion, and feel free to explore the rest of the documentation provided here.
 
 <a href="#" rel="docs-nav-active" style="display:none;">docs-nav-getting-started</a>
 

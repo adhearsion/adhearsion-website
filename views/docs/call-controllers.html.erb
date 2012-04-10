@@ -7,10 +7,19 @@
 <li><a href="#call-controllers">Call Controllers</a><ul>
 <li><a href="#basic-call-control">Basic call control</a></li>
 <li><a href="#multiple-controllers">Multiple controllers</a></li>
-<li><a href="#rendering-output">Rendering Output</a></li>
+<li><a href="#rendering-output">Rendering Output</a><ul>
+<li><a href="#play">#play</a></li>
+<li><a href="#say">#say</a></li>
+<li><a href="#asterisk-setup">Asterisk setup</a><ul>
+<li><a href="#app_swift-cepstral">app_swift &amp; Cepstral</a></li>
+<li><a href="#unimrcp">UniMRCP</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li><a href="#collecting-input">Collecting Input</a><ul>
-<li><a href="#ask">Ask</a></li>
-<li><a href="#menu">Menu</a></li>
+<li><a href="#ask">#ask</a></li>
+<li><a href="#menu">#menu</a></li>
 </ul>
 </li>
 <li><a href="#recording">Recording</a><ul>
@@ -113,19 +122,85 @@ end
 class SuperSecretProjectCallController < Adhearsion::CallController
   def run
     pass OtherController
-    # This code is never reached
-    raise "Inconcievable!"
+    raise "Inconcievable!" # This code is never reached
   end
 end
 </pre>
 
 <h2 id="rendering-output"><a class="toclink" href="#rendering-output">Rendering Output</a></h2>
+<p>There are several methods by which to render audible output to the call. The full complement can be found in the <a href="http://rubydoc.info/github/adhearsion/adhearsion/Adhearsion/CallController/Output">Output API documentation</a>, but the main methods are described below:</p>
+<h3 id="play"><a class="toclink" href="#play">#play</a></h3>
+<p>#play allows for rendering output of several types, in a manner appropriate to that type. It will detect Date/Time objects, numbers, and paths/URLs to audio files. Additionally, it supports rendering collections of such objects in series. As always, further details can be found in the <a href="http://rubydoc.info/github/adhearsion/adhearsion/Adhearsion/CallController/Output:play">API documentation</a>, but here are some examples:</p>
+<pre class="brush: ruby;">
+class MyController < Adhearsion::CallController
+  def run
+    answer
+    play 'file://rub-dub-dub.mp3', 3, 'file://men-in-a-tub.mp3'
+    play 'file://the-time-is-now.mp3', Time.now
+  end
+end
+</pre>
+
+<h3 id="say"><a class="toclink" href="#say">#say</a></h3>
+<p>In many circumstances, it is desireable to speak certain output using a text-to-speech engine. This is simple using the #say method, providing either a simple string or an SSML document:</p>
+<pre class="brush: ruby;">
+class MyController < Adhearsion::CallController
+  def run
+    answer
+
+    say "Rub dub dub, three men in a tub."
+
+    doc = RubySpeech::SSML.draw do
+      string "The time is now"
+      say_as interpret_as: 'time' do
+        Time.now
+      end
+    end
+    say doc
+  end
+end
+</pre>
+
+<p>As usual, check out the <a href="http://rubydoc.info/github/adhearsion/adhearsion/Adhearsion/CallController/Output:say">#say API documentation</a> for more.</p>
+<h3 id="asterisk-setup"><a class="toclink" href="#asterisk-setup">Asterisk setup</a></h3>
+<p>If a text-to-speech engine is configured, all output will be rendered by the engine; otherwise, only file playback will be supported on Asterisk. The adhearsion-asterisk plugin provides helpers for Asterisk's built in complex-data rendering methods, and <a href="http://adhearsion.github.com/adhearsion-asterisk">its documentation</a> is the appropriate place to find documentation for those.</p>
+<h4 id="app_swift-cepstral"><a class="toclink" href="#app_swift-cepstral">app_swift &amp; Cepstral</a></h4>
+<p>We will not cover setting up app_swift itself here, but configuring Adhearsion to use app_swift is simple:</p>
+<pre class="brush: ruby;">
+Adhearsion.config do |config|
+  config.punchblock.media_engine = :swift
+end
+</pre>
+
+<p>Once you do this, all audio output, including audio file playback, will be delegated to app_swift. If you wish to combine this with asterisk native playback, you should use the helpers in adhearsion-asterisk.</p>
+<h4 id="unimrcp"><a class="toclink" href="#unimrcp">UniMRCP</a></h4>
+<p>It is possible to render output documents via an engine attached to Asterisk via MRCP. You should see the <a href="http://code.google.com/p/unimrcp/wiki/asteriskUniMRCP">UniMRCP site</a> for details on the Asterisk configuration, and again, the Adhearsion configuration is simple:</p>
+<pre class="brush: ruby;">
+Adhearsion.config do |config|
+  config.punchblock.media_engine = :unimrcp
+end
+</pre>
+
 <h2 id="collecting-input"><a class="toclink" href="#collecting-input">Collecting Input</a></h2>
-<h3 id="ask"><a class="toclink" href="#ask">Ask</a></h3>
-<h3 id="menu"><a class="toclink" href="#menu">Menu</a></h3>
+<p>Phone calls are fairly boring if they only involve listening to output, so Adhearsion includes several ways to gather input from the caller.</p>
+<h3 id="ask"><a class="toclink" href="#ask">#ask</a></h3>
+<p>Simple collection of a response from the caller couldn't be easier in Adhearsion. CallController provides the #ask method, which allows combining a question (rendered as above) with gathering a DTMF response.</p>
+<p>This is best demonstrated by example:</p>
+<pre class="brush: ruby;">
+class MyController < Adhearsion::CallController
+  def run
+    answer
+    result = ask "How many woodchucks? Enter a number followed by #.",
+                :terminator => '#'
+    say "Wow, #{result.response} is a lot of woodchucks!"
+  end
+end
+</pre>
+
+<p>Here, we choose to cease input using a terminator digit. Alternative strategies include a :timeout, or a digit :limit, which are described in the <a href="http://rubydoc.info/github/adhearsion/adhearsion/Adhearsion/CallController/Input:ask">#ask API documentation</a>. Additionally, it is possible to pass a block, to which #ask will yield the digit buffer after each digit is received, in order to validate the input and optionally terminate early. If the block returns a truthy value when invoked, the input will be terminated early.</p>
+<h3 id="menu"><a class="toclink" href="#menu">#menu</a></h3>
 <p>Rapid and painless creation of complex IVRs has always been one of the defining features of Adhearsion for beginning and advanced programmers alike. Through the #menu DSL method, the framework abstracts and packages the output and input management and the complex state machine needed to implement a complete menu with audio prompts, digit checking, retries and failure handling, making creating menus a breeze.</p>
-<p>The menu DSL has received a major overhaul in Adhearsion 2.0, with the goals of clarifying syntax and adding functionality.</p>
-<p>The focus for the menu DSL in Adhearsion 2.0 was primarily on improving its functionality to work with call controllers and to fit the new framework structure. Working towards those goals, the menu definition block was streamlined while keeping readability and the general functionality from previous versions.</p>
+<p>A sample menu might look something like this:</p>
 <pre class="brush: ruby;">
 class MyController < Adhearsion::CallController
   def run
@@ -133,7 +208,7 @@ class MyController < Adhearsion::CallController
     menu "Where can we take you today?",
          :timeout => 8.seconds, :tries => 3 do
       match 1, BooController
-      match "2", MyOtherController
+      match '2', MyOtherController
       match 3, 4, { pass YetAnotherController }
       match 5, FooController
       match 6..10 do |dialed|
@@ -168,12 +243,12 @@ end
 <p>The first arguments to #menu are a list of sounds to play, as accepted by #play, including strings for TTS, Date and Time objects, and file paths. #play and the other input and output methods, all renovated, will be covered in a subsequent post. Sounds will be played at the beginning of the menu and after each timeout or invalid input, if the maximum number of tries has not been reached yet.</p>
 <p>The :tries and :timeout options respectively specify the number of tries before going into failure, and the timeout in seconds allowed before the first and each subsequent digit input.</p>
 <p>The most important section is the following block, which specifies how the menu will be constructed and handled.</p>
-<p>The #match method takes an Integer, a String, a Range or any number of them as the required input(s) for the match payload to be executed. The last argument to a #match is either the name of a CallController, which will be invoked, or a block to be executed. Matched input is passed in to the associated block, or to the controller through it instance variable @options[:extension].</p>
+<p>The #match method takes an Integer, a String, a Range or any number of them as the required input(s) for the match payload to be executed. The last argument to a #match is either the name of a CallController, which will be invoked, or a block to be executed. Matched input is passed in to the associated block, or to the controller through its metadata (Controller#metadata[:extension]).</p>
 <p>#menu executes the payload for the first exact unambiguous match it finds after each input or timing out. In a situation where there might be overlapping patterns, such as 10 and 100, #menu will wait for timeout after the second digit.</p>
-<p>Internally, the state machine has been re-implemented without using exceptions as a mean for flow control, which was previously a concern for #menu usage in begin..rescue blocks.</p>
 <p>#timeout, #invalid and #failure replace #on_invalid, #on_premature_timeout and #on_failure. These methods only accept blocks as payload, but it is still possible to make use of another CallController by using #pass or #invoke within the block.</p>
 <p>#invalid has its associated block executed when the input does not possibly match any pattern. #timeout block is run when time expires before or between input digits, without there being at least one exact match. #failure runs its block when the maximum number of tries is reached without an input match.</p>
-<p>Execution of the current context resumes after #menu finishes. If you wish to jump to an entirely different controller, #pass can be used. #menu will return :failed if failure was reached, or :done if a match was executed.</p>
+<p>Execution of the current context resumes after #menu finishes. If you wish to jump to an entirely different controller, #pass can be used.</p>
+<p>#menu will return an <a href="http://rubydoc.info/github/adhearsion/adhearsion/Adhearsion/CallController/Input/Result">CallController::Input::Result</a> object detailing the success or otherwise of the menu, similarly to #ask.</p>
 <h2 id="recording"><a class="toclink" href="#recording">Recording</a></h2>
 <p>NOTE: Currently unsupported on Asterisk</p>
 <p>It is easy to record input from a call, using the #record method. There are two approaches to recording calls, satisfying different use-cases.</p>
