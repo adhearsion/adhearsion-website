@@ -81,6 +81,8 @@ It is possible to fork call control logic and drop out of the current controller
 class SuperSecretProjectCallController < Adhearsion::CallController
   def run
     invoke OtherController
+    # After OtherController the call will continue:
+    say "Thanks for using OtherController."
   end
 end
 </pre>
@@ -93,6 +95,8 @@ Sometimes, it is desireable to abandon the current controller, and hop to a new 
 class SuperSecretProjectCallController < Adhearsion::CallController
   def run
     pass OtherController
+    # This code is never reached
+    raise "Inconcievable!"
   end
 end
 </pre>
