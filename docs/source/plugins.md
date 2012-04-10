@@ -156,7 +156,7 @@ The module is intended to be used as a mixin in call controllers.
 
 ### Testing your code
 
-Module usage can be seen in action in the generated test file, which also showcases how the call controller methods can be easily tested.
+Module usage can be seen in action in the generated test file, which also illustrates how the call controller methods can be easily tested.
 
 spec/greet_plugin/controller_methods_spec.rb
 
@@ -185,12 +185,14 @@ module GreetPlugin
   end
 end
 </pre>
-Since plugin code is a normal Ruby library, it can be tested in an easy way using Rspec and some facilities provided by Adhearsion.
+Since plugin code is a normal Ruby library, it can be tested using familiar tools like Test::Unit or RSpec.
+
+Note that, at first, Adhearsion Routes or XMPP handlers may seem difficult to test.  However, a good practice is to put all your business logic into classes and methods, and then simply invoke the methods from the routes or handlers.  In this way you can maintain good code test coverage and keep your route definitions small and readable.
 
 ### Using the plugin
 
 You have generated your new plugin, built tests and are ready to use it. Now what?
-The plugin is a gem, so you might eventually publish it, but you can simply use it locally by adding a path line to your application's Gemfile.
+The plugin is a gem, so you might eventually publish it. In the meantime you can simply use it locally by adding a path line to your application's Gemfile.
 
 Gemfile
 
@@ -201,16 +203,16 @@ gem 'greet_plugin', :path => '/home/user/projects/greet_plugin'
 # ... whatever other gems you need
 </pre>
 
-Do not forget to run 'bundle install' to load eventual dependencies after adding the gem.
+Do not forget to run 'bundle install' after adding the gem.
 
 ### Adding an entire CallController
 
-It is also possible to provide a full CallController implementation that can be used out-of-the-box by your application. Ben Langfeld's excellent blog post explains how a CallController works and what you can do with it.
-We will be adding a new controller to our plugin, complete with new configuration keys and test. Our goal is to have a controller that dials a SIP device during office hours, and plays a message when the office is closed.
+It is also possible to provide a full CallController implementation that can be used out-of-the-box by your application. There is an entire section of the documentation dedicated to [CallControllers](docs/call-controllers).  Please refer to that section for full details on available methods within CallControllers.
+Below you will see how to create a new controller in the plugin, complete with new configuration keys and test. Our goal is to have a controller that dials a SIP device during office hours and plays a message when the office is closed.
 
 #### Setup
 
-First, we add configuration for the times used:
+First, add configuration variables to allow controlling the time-of-day routing:
 
 lib/greet_plugin/plugin.rb
 
@@ -222,11 +224,11 @@ config :greet_plugin do
 end
 </pre>
 
-To ease testing of time-based features, we add the excellent Timecop gem to our gemspec, under the development group, and add "require 'timecop'" at the top of spec/spec_helper.rb.
+One way to make testing time-based features easy is to use the Timecop gem. Just add it to your gemspec under the development group and add "require 'timecop'" at the top of spec/spec_helper.rb.
 
 #### Tests first!
 
-We then add a few tests, taking advantage of Adhearsion testing facility and the generated helpers. The tests describe what we will be implementing in the controller.
+Now add a few tests, taking advantage of Adhearsion's testing facilities and the generated helpers. The tests describe what will be implemented in the controller.
 
 spec/hours_controller_spec.rb
 
@@ -254,9 +256,9 @@ module GreetPlugin
 end
 </pre>
 
-#### Our CallController
+#### The CallController
 
-Last but not least, we build the actual CallController.
+Last but not least, the actual CallController.
 
 lib/greet_plugin/hours_controller.rb
 
@@ -275,7 +277,7 @@ end
 </pre>
 
 #### Routes
-To allow our application to reach the controller, we add routes in its configuration. For the purpose of this post, we will simply be using the default route.
+To make calls in the application reach this controller, you will need to create a route.  The example below uses a generic route that matches all calls (no filters).
 
 my_application_dir/config/adhearsion.rb
 
