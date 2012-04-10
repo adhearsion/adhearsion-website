@@ -41,7 +41,7 @@ See [the logging gem](https://github.com/TwP/logging/blob/master/examples/layout
 
 <div class='docs-progress-nav'>
   <span class='back'>
-    Back to <a href="/docs/config">Config</a>
+    Back to <a href="/docs/events">Events</a>
   </span>
   <span class='forward'>
     Continue to <a href="/docs/plugins">Plugins</a>

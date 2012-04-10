@@ -40,6 +40,6 @@ AHN_PUNCHBLOCK_USERNAME=testuser AHN_PUNCHBLOCK_PASSWORD=foobar ahn start .
     Back to <a href="/docs/routing">Routing</a>
   </span>
   <span class='forward'>
-    Continue to <a href="/docs/logging">Logging</a>
+    Continue to <a href="/docs/events">Events</a>
   </span>
 </div>
