@@ -89,7 +89,7 @@ end
 
 ## Multiple controllers
 
-It is possible to fork call control logic and drop out of the current controller in order to execute another. There are two approaches to this. The first is to invoke another controller *within* the current controller:
+It is possible to reuse and share functionality among call controllers. There are two approaches to this. The first is to invoke another controller *within* the current controller:
 
 <pre class="brush: ruby;">
 class SuperSecretProjectCallController < Adhearsion::CallController
@@ -101,9 +101,9 @@ class SuperSecretProjectCallController < Adhearsion::CallController
 end
 </pre>
 
-In this case, the new controller is prepared and executed, until it completes, at which point the #invoke method will unblock and control will return to the original controller.
+In this case, the new controller is prepared and executed.  When it finishes, control is returned to the original controller.
 
-Sometimes, it is desireable to abandon the current controller, and hop to a new one entirely. This is equally as trivial:
+Sometimes, it is desireable to abandon the current controller, and hop to a new one entirely.
 
 <pre class="brush: ruby;">
 class SuperSecretProjectCallController < Adhearsion::CallController
@@ -188,9 +188,7 @@ Phone calls are fairly boring if they only involve listening to output, so Adhea
 
 ### #ask
 
-Simple collection of a response from the caller couldn't be easier in Adhearsion. CallController provides the #ask method, which allows combining a question (rendered as above) with gathering a DTMF response.
-
-This is best demonstrated by example:
+CallController provides the #ask method, which simplifies input by combining a prompt (rendered as above) with gathering a response.
 
 <pre class="brush: ruby;">
 class MyController < Adhearsion::CallController
@@ -260,19 +258,21 @@ The #match method takes an Integer, a String, a Range or any number of them as t
 
 \#menu executes the payload for the first exact unambiguous match it finds after each input or timing out. In a situation where there might be overlapping patterns, such as 10 and 100, #menu will wait for timeout after the second digit.
 
-\#timeout, #invalid and #failure replace #on_invalid, #on_premature_timeout and #on_failure. These methods only accept blocks as payload, but it is still possible to make use of another CallController by using #pass or #invoke within the block.
+\#timeout, #invalid and #failure are for handling bad or missing inputs.  These methods only accept blocks as payload, but it is still possible to make use of another CallController by using #pass or #invoke within the block.
 
-\#invalid has its associated block executed when the input does not possibly match any pattern. #timeout block is run when time expires before or between input digits, without there being at least one exact match. #failure runs its block when the maximum number of tries is reached without an input match.
+* #invalid has its associated block executed when the input does not possibly match any pattern.
+* #timeout block is run when time expires before or between input digits, without there being at least one exact match.
+* #failure runs its block when the maximum number of tries is reached without an input match.
 
 Execution of the current context resumes after #menu finishes. If you wish to jump to an entirely different controller, #pass can be used.
 
-\#menu will return an [CallController::Input::Result](http://rubydoc.info/github/adhearsion/adhearsion/Adhearsion/CallController/Input/Result) object detailing the success or otherwise of the menu, similarly to #ask.
+\#menu will return a [CallController::Input::Result](http://rubydoc.info/github/adhearsion/adhearsion/Adhearsion/CallController/Input/Result) object detailing the success or otherwise of the menu, similarly to #ask.
 
 ## Recording
 
 NOTE: Currently unsupported on Asterisk
 
-It is easy to record input from a call, using the #record method. There are two approaches to recording calls, satisfying different use-cases.
+The #record method provides the ability to capture audio in a blocking or non-blocking way.
 
 ### Voicemail-like recording
 
@@ -306,7 +306,7 @@ end
 
 ## Joining calls
 
-If there are multiple calls active in Adhearsion, it is possible to join the media streams of those calls:
+If there are multiple calls active in Adhearsion, it is possible to join the media streams of those calls together so the parties may talk.
 
 <pre class="brush: ruby;">
 class SuperSecretProjectCall < Adhearsion::CallController
@@ -318,13 +318,13 @@ class SuperSecretProjectCall < Adhearsion::CallController
 end
 </pre>
 
-Here, #join will block until either the 3rd-party call hangs up, or is otherwise unjoined out-of-band. It is possible to do an asynchronous join by specifying :async => true, in which case #join will only block until the join is confirmed.
+Here, #join will block until either the 3rd-party call hangs up, or is otherwise unjoined out-of-band. It is possible to do an asynchronous join by specifying :async => true, in which case #join will only block until the join is confirmed.  Your controller will then resume executing commands on the call while the parties are talking.
 
 Calls may be unjoined out-of-band using the Call#unjoin method, which has a similar signature to #join.
 
 ## Making outbound calls
 
-Similarly to #join, it is possible to make an outbound call to a third-party, and then to join the calls on answering:
+Similarly to #join, it is possible to make an outbound call to a third-party, and then to join the calls on answering.  The #dial method handles this automatically.
 
 <pre class="brush: ruby;">
 class SuperSecretProjectCall < Adhearsion::CallController
@@ -367,7 +367,7 @@ class SuperSecretProjectCall < Adhearsion::CallController
 end
 </pre>
 
-By default, the outbound calls will have a caller ID matching that of the party which called in to the original controller. Overriding the caller ID for the outbound call is easy:
+By default, the outbound calls will have a caller ID matching that of the party which called in to the original controller. Overriding the caller ID for the outbound call is accomplished with the :from option passed to dial.
 
 <pre class="brush: ruby;">
 class SuperSecretProjectCall < Adhearsion::CallController
@@ -383,7 +383,7 @@ Further details can be found in the [#dial API documentation](http://rubydoc.inf
 
 ## Callbacks
 
-In addition, it is possible to define some callbacks to be executed at the appropriate time. These are before_call and after_call, they are class methods, and they take either a block or a symbol (called as an instance method) like so:
+Finally, it is possible to define callbacks to be executed at various stages of a call, or in response to certain events. These are before_call and after_call, they are class methods, and they take either a block or a symbol (called as an instance method) like so:
 
 lib/super_secret_project_call.rb:
 
