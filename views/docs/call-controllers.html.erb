@@ -32,10 +32,13 @@
 <li><a href="#callbacks">Callbacks</a></li>
 </ul>
 </li>
+<li><a href="#invalid-has-its-associated-block-executed-when-the-input-does-not-possibly-match-any-pattern">invalid has its associated block executed when the input does not possibly match any pattern.</a></li>
+<li><a href="#timeout-block-is-run-when-time-expires-before-or-between-input-digits-without-there-being-at-least-one-exact-match">timeout block is run when time expires before or between input digits, without there being at least one exact match.</a></li>
+<li><a href="#failure-runs-its-block-when-the-maximum-number-of-tries-is-reached-without-an-input-match">failure runs its block when the maximum number of tries is reached without an input match.</a></li>
 </ul>
 </div>
 <p>With the addition of Call Controllers to Adhearsion 2.0, Adhearsion applications become closer to real MVC applications. A CallController is the "controller" in MVC terms; the call object is the "view" (being the method of interaction between the human and the application, it qualifies here, even though it is not actually visible); models may be any backend you prefer, be they backed by a database, a directory (like LDAP) or anything else. Indeed, one might wish to make use of a second view, such as an XMPP interaction or some kind of push-based rendering to a visual display.</p>
-<p>So, how does one write an application based on call controllers? Simple: generate a controller class and route calls to it as described in <a href="/docs/routing">routing</a>. That might look something like this:</p>
+<p>So, how does one write an application based on call controllers? By generating a controller class and routing calls to it as described in <a href="/docs/routing">Routing</a>. That might look something like this:</p>
 <pre class="terminal">
 
 $ ahn generate controller SuperSecretProjectCallController
@@ -104,8 +107,21 @@ class SuperSecretProjectCallController < Adhearsion::CallController
 end
 </pre>
 
+<p>One other handy trick is rejecting a call before it is answered.  Among other things this avoids billing in most cases:</p>
+<pre class="brush: ruby;">
+class SuperSecretProjectCallController < Adhearsion::CallController
+  def run
+    reject if call.from =~ /18005551234/ # Ugh, Aunt Sally always talks my ear off...
+    # Otherwise...
+    answer
+    play "musiconhold.mp3"
+    hangup
+  end
+end
+</pre>
+
 <h2 id="multiple-controllers"><a class="toclink" href="#multiple-controllers">Multiple controllers</a></h2>
-<p>It is possible to fork call control logic and drop out of the current controller in order to execute another. There are two approaches to this. The first is to invoke another controller <em>within</em> the current controller:</p>
+<p>It is possible to reuse and share functionality among call controllers. There are two approaches to this. The first is to invoke another controller <em>within</em> the current controller:</p>
 <pre class="brush: ruby;">
 class SuperSecretProjectCallController < Adhearsion::CallController
   def run
@@ -116,8 +132,8 @@ class SuperSecretProjectCallController < Adhearsion::CallController
 end
 </pre>
 
-<p>In this case, the new controller is prepared and executed, until it completes, at which point the #invoke method will unblock and control will return to the original controller.</p>
-<p>Sometimes, it is desireable to abandon the current controller, and hop to a new one entirely. This is equally as trivial:</p>
+<p>In this case, the new controller is prepared and executed.  When it finishes, control is returned to the original controller.</p>
+<p>Sometimes, it is desireable to abandon the current controller, and hop to a new one entirely.</p>
 <pre class="brush: ruby;">
 class SuperSecretProjectCallController < Adhearsion::CallController
   def run
@@ -184,8 +200,7 @@ end
 <h2 id="collecting-input"><a class="toclink" href="#collecting-input">Collecting Input</a></h2>
 <p>Phone calls are fairly boring if they only involve listening to output, so Adhearsion includes several ways to gather input from the caller.</p>
 <h3 id="ask"><a class="toclink" href="#ask">#ask</a></h3>
-<p>Simple collection of a response from the caller couldn't be easier in Adhearsion. CallController provides the #ask method, which allows combining a question (rendered as above) with gathering a DTMF response.</p>
-<p>This is best demonstrated by example:</p>
+<p>CallController provides the #ask method, which simplifies input by combining a prompt (rendered as above) with gathering a response.</p>
 <pre class="brush: ruby;">
 class MyController < Adhearsion::CallController
   def run
@@ -245,13 +260,23 @@ end
 <p>The most important section is the following block, which specifies how the menu will be constructed and handled.</p>
 <p>The #match method takes an Integer, a String, a Range or any number of them as the required input(s) for the match payload to be executed. The last argument to a #match is either the name of a CallController, which will be invoked, or a block to be executed. Matched input is passed in to the associated block, or to the controller through its metadata (Controller#metadata[:extension]).</p>
 <p>#menu executes the payload for the first exact unambiguous match it finds after each input or timing out. In a situation where there might be overlapping patterns, such as 10 and 100, #menu will wait for timeout after the second digit.</p>
-<p>#timeout, #invalid and #failure replace #on_invalid, #on_premature_timeout and #on_failure. These methods only accept blocks as payload, but it is still possible to make use of another CallController by using #pass or #invoke within the block.</p>
-<p>#invalid has its associated block executed when the input does not possibly match any pattern. #timeout block is run when time expires before or between input digits, without there being at least one exact match. #failure runs its block when the maximum number of tries is reached without an input match.</p>
+<p>#timeout, #invalid and #failure are for handling bad or missing inputs.  These methods only accept blocks as payload, but it is still possible to make use of another CallController by using #pass or #invoke within the block.</p>
+<ul>
+<li>
+<h1 id="invalid-has-its-associated-block-executed-when-the-input-does-not-possibly-match-any-pattern"><a class="toclink" href="#invalid-has-its-associated-block-executed-when-the-input-does-not-possibly-match-any-pattern">invalid has its associated block executed when the input does not possibly match any pattern.</a></h1>
+</li>
+<li>
+<h1 id="timeout-block-is-run-when-time-expires-before-or-between-input-digits-without-there-being-at-least-one-exact-match"><a class="toclink" href="#timeout-block-is-run-when-time-expires-before-or-between-input-digits-without-there-being-at-least-one-exact-match">timeout block is run when time expires before or between input digits, without there being at least one exact match.</a></h1>
+</li>
+<li>
+<h1 id="failure-runs-its-block-when-the-maximum-number-of-tries-is-reached-without-an-input-match"><a class="toclink" href="#failure-runs-its-block-when-the-maximum-number-of-tries-is-reached-without-an-input-match">failure runs its block when the maximum number of tries is reached without an input match.</a></h1>
+</li>
+</ul>
 <p>Execution of the current context resumes after #menu finishes. If you wish to jump to an entirely different controller, #pass can be used.</p>
-<p>#menu will return an <a href="http://rubydoc.info/github/adhearsion/adhearsion/Adhearsion/CallController/Input/Result">CallController::Input::Result</a> object detailing the success or otherwise of the menu, similarly to #ask.</p>
+<p>#menu will return a <a href="http://rubydoc.info/github/adhearsion/adhearsion/Adhearsion/CallController/Input/Result">CallController::Input::Result</a> object detailing the success or otherwise of the menu, similarly to #ask.</p>
 <h2 id="recording"><a class="toclink" href="#recording">Recording</a></h2>
 <p>NOTE: Currently unsupported on Asterisk</p>
-<p>It is easy to record input from a call, using the #record method. There are two approaches to recording calls, satisfying different use-cases.</p>
+<p>The #record method provides the ability to capture audio in a blocking or non-blocking way.</p>
 <h3 id="voicemail-like-recording"><a class="toclink" href="#voicemail-like-recording">Voicemail-like recording</a></h3>
 <p>In this case, it is desireable for #record to block until the recording completes, as it is the main feature of that part of the call. This usage is simple:</p>
 <pre class="brush: ruby;">
@@ -279,7 +304,7 @@ end
 </pre>
 
 <h2 id="joining-calls"><a class="toclink" href="#joining-calls">Joining calls</a></h2>
-<p>If there are multiple calls active in Adhearsion, it is possible to join the media streams of those calls:</p>
+<p>If there are multiple calls active in Adhearsion, it is possible to join the media streams of those calls together so the parties may talk.</p>
 <pre class="brush: ruby;">
 class SuperSecretProjectCall < Adhearsion::CallController
   def run
@@ -290,10 +315,10 @@ class SuperSecretProjectCall < Adhearsion::CallController
 end
 </pre>
 
-<p>Here, #join will block until either the 3rd-party call hangs up, or is otherwise unjoined out-of-band. It is possible to do an asynchronous join by specifying :async =&gt; true, in which case #join will only block until the join is confirmed.</p>
+<p>Here, #join will block until either the 3rd-party call hangs up, or is otherwise unjoined out-of-band. It is possible to do an asynchronous join by specifying :async =&gt; true, in which case #join will only block until the join is confirmed.  Your controller will then resume executing commands on the call while the parties are talking.</p>
 <p>Calls may be unjoined out-of-band using the Call#unjoin method, which has a similar signature to #join.</p>
 <h2 id="making-outbound-calls"><a class="toclink" href="#making-outbound-calls">Making outbound calls</a></h2>
-<p>Similarly to #join, it is possible to make an outbound call to a third-party, and then to join the calls on answering:</p>
+<p>Similarly to #join, it is possible to make an outbound call to a third-party, and then to join the calls on answering.  The #dial method handles this automatically.</p>
 <pre class="brush: ruby;">
 class SuperSecretProjectCall < Adhearsion::CallController
   def run
@@ -333,7 +358,7 @@ class SuperSecretProjectCall < Adhearsion::CallController
 end
 </pre>
 
-<p>By default, the outbound calls will have a caller ID matching that of the party which called in to the original controller. Overriding the caller ID for the outbound call is easy:</p>
+<p>By default, the outbound calls will have a caller ID matching that of the party which called in to the original controller. Overriding the caller ID for the outbound call is accomplished with the :from option passed to dial.</p>
 <pre class="brush: ruby;">
 class SuperSecretProjectCall < Adhearsion::CallController
   def run
@@ -346,7 +371,7 @@ end
 
 <p>Further details can be found in the <a href="http://rubydoc.info/github/adhearsion/adhearsion/Adhearsion/CallController/Dial:dial">#dial API documentation</a>.</p>
 <h2 id="callbacks"><a class="toclink" href="#callbacks">Callbacks</a></h2>
-<p>In addition, it is possible to define some callbacks to be executed at the appropriate time. These are before_call and after_call, they are class methods, and they take either a block or a symbol (called as an instance method) like so:</p>
+<p>Finally, it is possible to define callbacks to be executed at various stages of a call, or in response to certain events. These are before_call and after_call, they are class methods, and they take either a block or a symbol (called as an instance method) like so:</p>
 <p>lib/super_secret_project_call.rb:</p>
 <pre class="brush: ruby;">
 class SuperSecretProjectCall < Adhearsion::CallController

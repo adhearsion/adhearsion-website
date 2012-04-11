@@ -7,7 +7,7 @@
 <li><a href="#routing">Routing</a></li>
 </ul>
 </div>
-<p>In Adhearsion 2, all calls come in to a single place, the Router. The VoIP platform, be it Asterisk, Voxeo PRISM, or anything else, does not instruct Adhearsion on how to route the call. Instead, we have a DSL for defining routes, which can have some interesting rules, in order to decide what should happen to each individual call. This lives in the application's config file, config/adhearsion.rb. An equivalent to the above app, minus the body of each context, might look something like this:</p>
+<p>In Adhearsion 2, all calls come in to a single place, the Router. The VoIP platform, be it Asterisk, Voxeo PRISM, or anything else, does not instruct Adhearsion on how to route the call. Instead, we have a DSL for defining routes, which can have some interesting rules, in order to decide what should happen to each individual call. This lives in the application's config file, config/adhearsion.rb.</p>
 <pre class="brush: ruby;">
 Adhearsion.router do
   route 'Authorized callers', FooController, :to => /789/
@@ -19,9 +19,9 @@ Adhearsion.router do
 end
 </pre>
 
-<p>A route is a combination of its guards and its target, which may either be a particular CallController class, or a block of code. You can see an example of the syntax for each here.</p>
-<p>In the above example the to attribute of the incoming Call object is matched against a regex. This is supplied using hash syntax. This entire matching routine uses a system extracted from Jeff Smick's excellent Blather XMPP client library, called <a href="https://adhearsion.github.com/has-guarded-handlers">has-guaded-handlers</a>, which in turn borrows from the idea of <a href="http://en.wikibooks.org/wiki/Erlang_Programming/guards">Guards</a> from <a href="http://www.erlang.org/">Erlang</a>. The route will be allowed to match a call only if all of its guards are satisfied.</p>
-<p>One may specify many different kinds of guards, and here are some examples (the same ideas work for event handlers in Adhearsion and stanza handlers in Blather, by the way):</p>
+<p>The first option is a freeform route label which is used primarily for logging.  The rest of the route is a combination of its guards and its target, which may either be a particular CallController class or a block of code. You can see an example of the syntax for each above.</p>
+<p>In the above example the :to attribute of the incoming Call object is matched against a regular expression. This is supplied using hash syntax. This matching syntax borrows from Jeff Smick's excellent Blather XMPP client library, called <a href="https://adhearsion.github.com/has-guarded-handlers">has-guaded-handlers</a>, which in turn borrows from the idea of <a href="http://en.wikibooks.org/wiki/Erlang_Programming/guards">Guards</a> from <a href="http://www.erlang.org/">Erlang</a>. The route will be allowed to match a call only if all of its guards are satisfied.</p>
+<p>One may specify many different kinds of guards. Here are some examples:</p>
 <pre class="brush: ruby;">
 # This requires the call being routed to be of the type specified.
 route 'foo', Adhearsion::OutboundCall
