@@ -8,6 +8,8 @@ Adhearsion 2.0 brings many changes.  It marks the first time since release 0.8.0
 
 Adhearsion 2.0 has an all new list of prerequisites.  Before going any further, please see the [Prerequisites](/docs/getting-started/prerequisites) page.
 
+One important thing to note for existing Adhearsion applications: Adhearsion 2.0 running with Asterisk *requires* version 1.8 or later.  1.6 and earlier are no longer supported.  Tropo AGItate applications are also currently unsupported on Adhearsion 2.0.  Work is underway to address this and announcements will be made when it is ready.
+
 ## ahn_log has become logger
 
 This is mostly a simple search & replace change.  Find all instances of "ahn_log" and replace them with "logger".  However, we have also deprecated logger namespaces.  For example, "ahn_log.myapp.info" would log messages within the "myapp" namespace.  This is no longer supported so it would need to become "logger.info".  Fortunately we have added a lot more information to the default logging formatter that includes the originating class name that generated the log message. Hopefully have a minimal or net positive impact to most applications.
