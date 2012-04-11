@@ -14,8 +14,8 @@
 <li><a href="#plugin-initialization">Plugin Initialization</a></li>
 <li><a href="#plugin-configuration">Plugin Configuration</a></li>
 <li><a href="#plugin-rake-tasks">Plugin Rake Tasks</a></li>
-<li><a href="#making-the-plugin-useful">Making the plugin useful</a><ul>
-<li><a href="#plugin-code">Plugin Code</a></li>
+<li><a href="#making-a-plugin-useful">Making a plugin useful</a></li>
+<li><a href="#plugin-code">Plugin Code</a><ul>
 <li><a href="#testing-your-code">Testing your code</a></li>
 <li><a href="#using-the-plugin">Using the plugin</a></li>
 <li><a href="#adding-an-entire-callcontroller">Adding an entire CallController</a><ul>
@@ -31,9 +31,9 @@
 </li>
 </ul>
 </div>
-<p>The ability to easily add reusable functionality to a framework is one of its most important features. The Plugin system in Adhearsion 2.0 has been completely redesigned to provide a wider range of integration points.</p>
+<p>The ability to easily add reusable functionality to a framework is one of its most important features. The Plugin system in Adhearsion 2.0 provides a wide range of integration points.</p>
 <h3 id="what-is-an-adhearsion-20-plugin"><a class="toclink" href="#what-is-an-adhearsion-20-plugin">What is an Adhearsion 2.0 Plugin?</a></h3>
-<p>A plugin in Adhearsion, as in many other Ruby frameworks, simply represents a collection of functionality. Most often plugins add new functionality to your calls in the form of modules used as mixins to the base CallController class. This functionality is packaged as a gem to facilitate its installation, reuse, and sharing with the community. CallController methods, initializer code, integrated configuration, rake tasks and code generators all are possible with the new plugin classes.</p>
+<p>A plugin in Adhearsion, as in many other Ruby frameworks, simply represents a collection of functionality. Most often plugins add new functionality to your calls in the form of modules used as mixins to the base CallController class. This functionality is packaged as a gem to facilitate its installation, reuse, and sharing with the community. CallController methods, initializer code, integrated configuration, rake tasks and code generators all are possible with the plugin classes.</p>
 <h3 id="anatomy-of-a-plugin"><a class="toclink" href="#anatomy-of-a-plugin">Anatomy of a Plugin</a></h3>
 <p>The easiest way to create a skeleton plugin is to use the Adhearsion command "ahn generate".
 By running the following ahn generate plugin GreetPlugin a directory named greet_plugin will be created in the current working directory. The plugin itself, being a gem, can reside anywhere, unlike components that needed to be inside the application directory. The output from this command should show the files being created, like this:</p>
@@ -57,11 +57,11 @@ $ ahn generate plugin GreetPlugin
 </pre>
 
 <h3 id="gem-plugin-structure"><a class="toclink" href="#gem-plugin-structure">Gem Plugin Structure</a></h3>
-<p>The greet_plugin.gemspec file contains information on your plugin, including required dependencies, contact information and other metadata. Enter your contact information, the name and description of your plugin and list any development and runtime dependencies to have a fully functional gem.</p>
-<p>The README is customarily formatted in Markdown and its use is strongly encouraged to help people understand how to use your plugin.</p>
-<p>The Rakefile contains tasks that pertain to the plugin gem itself, such as running unit tests. Note that it is separate from adding tasks to Adhearsion applications; this will be covered below.</p>
+<p>The greet_plugin.gemspec file contains information on your plugin, including required dependencies, contact information and other metadata. Edit the gemspec with contact information, the name and description of your plugin and any development and runtime dependencies to have a fully functional gem.</p>
+<p>The README is customarily formatted in Markdown. Other formats can be used as well.</p>
+<p>The Rakefile contains tasks that pertain to the plugin gem itself, such as running unit tests. Note that it is separate from adding tasks or generators to Adhearsion applications.</p>
 <h3 id="plugin-files"><a class="toclink" href="#plugin-files">Plugin Files</a></h3>
-<p>The entry point for the plugin, as usual with gems, resides in lib/greet_plugin.rb. It is mainly composed of requires for the plugin classes and modules. When adding functionality to a plugin, it will need to be require'd here to be available. Plugins are namespaced by package name to avoid conflicts.</p>
+<p>The entry point for the plugin, as with most gems, resides in lib/greet_plugin.rb. It is mainly composed of requires for the plugin classes and modules. When adding functionality to a plugin, it will need to be require'd here to be available. Plugins are namespaced by package name to avoid conflicts.</p>
 <p>lib/greet_plugin.rb:</p>
 <pre class="brush: ruby;">
 module GreetPlugin
@@ -108,9 +108,9 @@ module GreetPlugin
 end
 </pre>
 
-<p>In plugin.rb there are three important blocks shown.
+<p>Plugin.rb contains directives that pertain to various aspects of plugin functionality. Code above shows three examples.
 <em> The first is the #init block which is invoked by Adhearsion when the plugin is first loaded. In this case, all this does is write an informational message to the log showing that the plugin was, in fact, loaded.
-</em> The second is the #config block that registers configuration options with the Adhearsion framework. This is important because it allows your users to easily discover the possible configuration options for your plugin by simply running rake config:show within their Adhearsion applications. It also allows you to document the configuration options and set default values.
+</em> The second is the #config block that registers configuration options with the Adhearsion framework.
 * The third block is the #tasks block, which registers Rake tasks to be available within the Adhearsion application. In this case it adds a Rake task called greet_plugin:info that prints the version number of the plugin.</p>
 <h2 id="plugin-initialization"><a class="toclink" href="#plugin-initialization">Plugin Initialization</a></h2>
 <p>Every plugin goes through two separate phases before it is ready to run. While Adhearsion is starting up, and prior to taking any calls, the plugin first gets initialized through a supplied #init block. This block may be used to set up any basic requirements or validate the configuration. Later, after the Adhearsion framework has booted, the optional #run block is called to start the plugin. An example of using this two step startup of #init and #run methods might be an IRC plugin. In the #init method, the IRC class is instantiated and configured, but no connection to the server is made. Then in #run the actual connection is opened and the service begins. Both methods are optional, but if they are defined, the mandatory arguments are the name of the plugin as a symbol and a block to provide the code to be run. A plugin can also request to be initialized before or after another plugin by name, using the :before and :after options passed as an hash to #init and/or #run.</p>
@@ -129,7 +129,7 @@ end
 
 <p>Note the use of catching_standard_errors.  This ensures that any exceptions raised within your plugin are routed through Adhearsion's exception handling event system.  More information on this can be found in the best practices guide.</p>
 <h2 id="plugin-configuration"><a class="toclink" href="#plugin-configuration">Plugin Configuration</a></h2>
-<p>The #config block allows a plugin to define configuration values in a customizable and self-documenting way. Every configuration key has a name followed by its default value, and then by a :desc key to allow for a description. This is very important!  By allowing your plugin to be configured this way, its options will be exposed via rake config:show in an application directory.  Additionally, you will be able to set configuration options via the shell environment, which is handy for services like Heroku.</p>
+<p>The #config block allows a plugin to define configuration values in a customizable and self-documenting way. Every configuration key has a name followed by its default value, and then by a :desc key to allow for a description.  By allowing your plugin to be configured this way, its options will be exposed via rake config:show in an application directory.  Additionally, you will be able to set configuration options via the shell environment, which is handy for services like Heroku.</p>
 <p>A config line can also validate supplied values with a transform:</p>
 <pre class="brush: ruby;">
 max_connections 5, :desc => "Maximum number of connections to make",
@@ -139,12 +139,13 @@ max_connections 5, :desc => "Maximum number of connections to make",
 <p>The :transform will be used to modify the configuration value after it is read from the end-user's setting.</p>
 <h2 id="plugin-rake-tasks"><a class="toclink" href="#plugin-rake-tasks">Plugin Rake Tasks</a></h2>
 <p>The #tasks method allows the plugin developer to define Rake tasks to be made available inside an Adhearsion application. Task definitions follow Rake conventions.</p>
-<h2 id="making-the-plugin-useful"><a class="toclink" href="#making-the-plugin-useful">Making the plugin useful</a></h2>
-<p>In our exploration of a newly generated plugin, we have so far mostly looked at the facilities Adhearsion provides to hook into the framework and your application. While simple plugins that are nothing more than rake tasks and generators have their place, you probably want to go further.  This section will discuss how to add funtionality to Adhearsion calls.</p>
+<h2 id="making-a-plugin-useful"><a class="toclink" href="#making-a-plugin-useful">Making a plugin useful</a></h2>
+<p>So far, the facilities Adhearsion provides to hook into the framework and your application have been shown. While simple plugins that are nothing more than rake tasks and generators have their place, you probably want to go further.  This section will discuss how to add funtionality to Adhearsion calls.</p>
 <p>A plugin is at its heart simply a Ruby gem, and bundled code needs to be loaded through requiring the proper files.
 The generated plugin has a single business logic file in lib/controller_methods.rb. Neither the file name nor the module name are mandatory, this is just normal Ruby code.</p>
-<h3 id="plugin-code"><a class="toclink" href="#plugin-code">Plugin Code</a></h3>
-<p>Content is as follows:</p>
+<h2 id="plugin-code"><a class="toclink" href="#plugin-code">Plugin Code</a></h2>
+<p>The generated plugin has a single business logic file in lib/controller_methods.rb. Neither the file name nor the module name are mandatory
+Content is as follows:</p>
 <p>lib/controller_methods.rb</p>
 <pre class="brush: ruby;">
 module GreetPlugin
