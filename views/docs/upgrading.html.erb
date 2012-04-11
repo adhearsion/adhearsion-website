@@ -4,6 +4,8 @@
 <div class="toc">
 <ul>
 <li><a href="#upgrading-from-adhearsion-1x-to-20">Upgrading from Adhearsion 1.x to 2.0</a><ul>
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#ahn_log-has-become-logger">ahn_log has become logger</a></li>
 <li><a href="#no-more-dialplanrb">No more dialplan.rb</a></li>
 <li><a href="#no-more-eventsrb">No more events.rb</a></li>
 </ul>
@@ -12,6 +14,10 @@
 </div>
 <h1 id="upgrading-from-adhearsion-1x-to-20"><a class="toclink" href="#upgrading-from-adhearsion-1x-to-20">Upgrading from Adhearsion 1.x to 2.0</a></h1>
 <p>Adhearsion 2.0 brings many changes.  It marks the first time since release 0.8.0 in 2008 that we have broken backward compatibility with previous versions.  This means that, while you have access to a rich set of new features, it also means existing applications will need to be ported to run on Adhearsion 2.  This document aims to list the changes required to migrate an Adhearsion 1.x application up to Adhearsion 2.</p>
+<h2 id="prerequisites"><a class="toclink" href="#prerequisites">Prerequisites</a></h2>
+<p>Adhearsion 2.0 has an all new list of prerequisites.  Before going any further, please see the <a href="/docs/getting-started/prerequisites">Prerequisites</a> page.</p>
+<h2 id="ahn_log-has-become-logger"><a class="toclink" href="#ahn_log-has-become-logger">ahn_log has become logger</a></h2>
+<p>This is mostly a simple search &amp; replace change.  Find all instances of "ahn_log" and replace them with "logger".  However, we have also deprecated logger namespaces.  For example, "ahn_log.myapp.info" would log messages within the "myapp" namespace.  This is no longer supported so it would need to become "logger.info".  Fortunately we have added a lot more information to the default logging formatter that includes the originating class name that generated the log message. Hopefully have a minimal or net positive impact to most applications.</p>
 <h2 id="no-more-dialplanrb"><a class="toclink" href="#no-more-dialplanrb">No more dialplan.rb</a></h2>
 <p>This is the single most visible change.  Previously an  Adhearsion application's entry point was dialplan.rb, and the entry point in dialplan.rb was decided by the context provided by Asterisk.  Since Adhearsion 2.0 runs on multiple platforms, and the concept of a "context" is Asterisk-specific, we needed to do something different.  The recommended way to migrate dialplan.rb is to break each dialplan.rb block up into a separate <a href="/docs/call-controllers">CallController</a>. Then you will need to add routes to config/adhearsion.rb that map Asterisk contexts to the new CallControllers.  For example, given the following dialplan.rb:</p>
 <pre class="brush: ruby;">
@@ -153,6 +159,8 @@ Adhearsion::Events.ami :name => 'NewState' do |state|
   logger.info "A channel is changing state: #{state.inspect}"
 end
 </pre>
+
+<p>For examples on using the XMPP events within Adhearsion 2.0, please see <a href="https://github.com/adhearsion/adhearsion-xmpp">the adhearsion-xmpp plugin page</a>.</p>
     </div>
 
     <div class="one-third">
