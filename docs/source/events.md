@@ -39,6 +39,8 @@ The available categories of events are currently:
 
 * punchblock
 * ami
+* after_initialized
+* exception
 
 ## Per-call events
 
