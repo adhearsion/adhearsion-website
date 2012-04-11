@@ -1994,3 +1994,12 @@ form .field {
 .extra-padding-left {
   padding-left: 20px;
 }
+
+.docs-nav-box {
+  float: right;
+  width: 240px;
+}
+
+.toc {
+  margin-bottom: 20px;
+}
