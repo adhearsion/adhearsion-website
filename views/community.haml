@@ -2,36 +2,60 @@
 
 .inner
   .full-width
-    .three-fourth.last
+    .two-third
       %h1 Community
       %h4.pb20 Adhearsion has a strong community of developers and users ready to help if you get stuck! Get involved here:
 
-      %table.three-fourth.data-table-vertical{:style => 'border: none;'}
+      %table.two-third.data-table-vertical{:style => 'border: none;'}
         %tr
           %td.right
             %h3
               %a{:href => "https://groups.google.com/group/adhearsion"} Mailing List
           %td
-            %h5 Ask a whole bunch of questions here
+            %p
+              The
+              %a{:href => "https://groups.google.com/group/adhearsion"} Adhearsion Google Group
+              is available for discussing the framework, its usage and requesting help.
         %tr
           %td.right
             %h3
               %a{:href => "https://github.com/adhearsion/adhearsion/issues"} Issue Tracker
           %td
-            %h5 Ask a whole bunch of questions here
+            %p 
+              Adhearsion is an Open Source projeect, and you can find the
+              %a{:href => "https://github.com/adhearsion/adhearsion/issues"} Issue Tracker
+              page on Github to help us manage your requests.
         %tr
           %td.right
             %h3
               %a{:href => "http://ahnhub.com"} AHNHub.com
           %td
-            %h5 Ask a whole bunch of questions here
+            %p
+              %a{:href => "http://ahnhub.com"} AHNHub
+              is a repository of plugins and components available to the community.
         %tr
           %td.right
             %h3
               %a{:href => "/irc"} IRC
           %td
-            %h5 Ask a whole bunch of questions here
-
+            %p
+              You can join the #adhearsion channel using your favorite IRC client on irc.freenode.net, or use the
+              %a{:href => "/irc"} web-based version here. 
+    .one-third.last
+      %h1.extra-padding-left Sponsors
+      %p.extra-padding-left
+        %a{:href => "https://bluevia.com/"}
+          %img{:src => "/images/sponsors/sponsor_bluevia.png", :width => "280", :height => "74", :alt => "BlueVia"}
+      %p.extra-padding-left
+        %a{:href => "http://digium.com/"}
+          %img{:src => "/images/sponsors/sponsor_digium.jpg", :width => "280", :height => "173", :alt => "Digium"}
+      %p.extra-padding-left
+        %a{:href => "http://mojolingo.com/"}
+          %img{:src => "/images/sponsors/sponsor_mojolingo.jpg", :width => "280", :height => "118", :alt => "Mojo Lingo"}
+      %p.extra-padding-left
+        %a{:href => "http://tropo.com/"}
+          %img{:src => "/images/sponsors/sponsor_tropo.jpg", :width => "280", :height => "45", :alt => "Tropo"}
+      
     .clear
 
 %a{:href => "#", :id => "main-nav-active", :style => "display:none;"} #main-nav-community
