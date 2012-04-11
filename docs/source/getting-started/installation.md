@@ -99,6 +99,6 @@ By default, a generated Adhearsion app includes the SimonGame. You can boot your
     Back to <a href="/docs/getting-started/prerequisites">Prerequisites</a>
   </span>
   <span class='forward'>
-    Continue to <a href="/docs/call-controllers">Call Controllers</a>
+    Continue to <a href="/docs/console">Console</a>
   </span>
 </div>
