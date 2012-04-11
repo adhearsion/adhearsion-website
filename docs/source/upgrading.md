@@ -60,12 +60,13 @@ class MyMenu < Adhearsion::CallController
   def run
     # Important! Adhearsion 2 no longer auto-answers the call
     answer
-    menu 'welcome', do
+    menu 'welcome' do
       match 1, ShipmentStatus
       match 2, Ordering
-      match 3 do
+      match 0 do
         dial 'SIP/operator'
       end
+    end
   end
 end
 
@@ -96,7 +97,7 @@ end
 
 SimonGame is already a CallController so no wrapper class is required.
 
-Next you will need to map the Asterisk contexts back to these CallControllers. You will need the 'adhearsion-asterisk' plugin to get the route matcher for agi_context. This goes in config/adhearsion.rb:
+Next you will need to map the Asterisk contexts back to these CallControllers. You will need the [adhearsion-asterisk](http://adhearsion.com/docs/plugins#using-the-plugin) plugin to get the route matcher for agi_context. This goes in config/adhearsion.rb:
 
 <pre class="brush: ruby;">
 Adhearsion.router do
@@ -184,7 +185,7 @@ Adhearsion 1.x had a concept of a "component" which was intended to be reuseable
 
 Adhearsion 2.0 has reinvented the concept with the new plugin system.  For more information, check out the page dedicated to [Plugins](/docs/plugins).
 
-However, you do not have to jump in all the way and create a new component for your existing local components.  Adhearsion now automatically loads all files placed into the "lib/" directory.  If you want to migrate an existing component to a simple CallController, this is the fastest and easiest way to do it.  For example, if we had a component named "conference_login" like this:
+However, you do not have to jump in all the way and create a new plugin for your existing local components.  Adhearsion now automatically loads all files placed into the "lib/" directory.  If you want to migrate an existing component to a simple CallController, this is the fastest and easiest way to do it.  For example, if we had a component named "conference_login" like this:
 
 <pre class="brush: ruby;">
 methods_for :dialplan do
