@@ -1998,8 +1998,14 @@ form .field {
 .docs-nav-box {
   float: right;
   width: 240px;
+  margin-left: 10px;
+  margin-bottom: 10px;
 }
 
 .toc {
   margin-bottom: 20px;
+}
+
+#disqus_thread {
+  margin-top: 20px;
 }
