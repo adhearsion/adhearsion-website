@@ -52,11 +52,18 @@ Once the application is resident on Heroku, we can appropriately scale the numbe
 
 ## Deploying to the cloud/a VPS/bare metal
 
-### Upstart
+[Foreman](http://ddollar.github.com/foreman) is a good option for managing your application's processes both in development and production. In development, you should run foreman start, but in production you should probably export to something like Ubuntu Upstart.
 
-### Monitoring
+It is possible to instruct Foreman to include extra environment variables when executing your application. This is done by including an .env file in the app directory when running foreman or exporting to Upstart. The file should be similar to this:
 
-### Versioning
+<pre class="brush: ruby;">
+AHN_PUNCHBLOCK_USERNAME=foobar
+AHN_PUNCHBLOCK_PASSWORD=barfoo
+</pre>
+
+You can optionally place this file elsewhere and specify its location using --env.
+
+Check the Foreman docs for more details.
 
 <a href="#" rel="docs-nav-active" style="display:none;">docs-nav-best-practices</a>
 
