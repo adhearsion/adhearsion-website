@@ -11,7 +11,7 @@ A plugin in Adhearsion, as in many other Ruby frameworks, simply represents a co
 ### Anatomy of a Plugin
 
 The easiest way to create a skeleton plugin is to use the Adhearsion command "ahn generate".
-By running the following ahn generate plugin GreetPlugin a directory named greet_plugin will be created in the current working directory. The plugin itself, being a gem, can reside anywhere, unlike components that needed to be inside the application directory. The output from this command should show the files being created, like this:
+By running the following ahn generate plugin GreetPlugin a directory named greet_plugin will be created in the current working directory. The plugin itself, being a gem, can reside anywhere, though it is recommended to keep it outside any particular Adhearsion application to make packaging easier. The output from this command should show the files being created, like this:
 
 <pre class="terminal">
 {{ d['plugins.sh|idio|shint|ansi2html']['generate-plugin'] }}
@@ -21,7 +21,7 @@ By running the following ahn generate plugin GreetPlugin a directory named greet
 
 The greet_plugin.gemspec file contains information on your plugin, including required dependencies, contact information and other metadata. Edit the gemspec with contact information, the name and description of your plugin and any development and runtime dependencies to have a fully functional gem.
 
-The README is customarily formatted in Markdown. Other formats can be used as well.
+The README is customarily formatted in Markdown. Please take the time to write a brief description of your plugin, and especially how to use it!
 
 The Rakefile contains tasks that pertain to the plugin gem itself, such as running unit tests. Note that it is separate from adding tasks or generators to Adhearsion applications.
 
@@ -36,6 +36,7 @@ lib/greet_plugin.rb:
 </pre>
 
 In this example Adhearsion plugin:
+
 * version.rb contains the current version number for the plugin, and is used during packaging.
 * plugin.rb contains the hooks into the Adhearsion framework that are called when the plugin is loaded by the Adhearsion application.
 * controller_methods.rb contains a module that gets mixed into the base CallController class, making its methods available to all calls running in Adhearsion.
@@ -72,14 +73,15 @@ module GreetPlugin
 end
 </pre>
 
-Plugin.rb contains directives that pertain to various aspects of plugin functionality. Code above shows three examples.
+plugin.rb contains directives that pertain to various aspects of plugin functionality. Code above shows three examples.
+
 * The first is the #init block which is invoked by Adhearsion when the plugin is first loaded. In this case, all this does is write an informational message to the log showing that the plugin was, in fact, loaded.
 * The second is the #config block that registers configuration options with the Adhearsion framework.
 * The third block is the #tasks block, which registers Rake tasks to be available within the Adhearsion application. In this case it adds a Rake task called greet_plugin:info that prints the version number of the plugin.
 
 ## Plugin Initialization
 
-Every plugin goes through two separate phases before it is ready to run. While Adhearsion is starting up, and prior to taking any calls, the plugin first gets initialized through a supplied #init block. This block may be used to set up any basic requirements or validate the configuration. Later, after the Adhearsion framework has booted, the optional #run block is called to start the plugin. An example of using this two step startup of #init and #run methods might be an IRC plugin. In the #init method, the IRC class is instantiated and configured, but no connection to the server is made. Then in #run the actual connection is opened and the service begins. Both methods are optional, but if they are defined, the mandatory arguments are the name of the plugin as a symbol and a block to provide the code to be run. A plugin can also request to be initialized before or after another plugin by name, using the :before and :after options passed as an hash to #init and/or #run.
+Every plugin goes through two separate phases before it is ready to run. While Adhearsion is starting up, and prior to taking any calls, the plugin first gets initialized through a supplied #init block. This block may be used to set up any basic requirements or validate the configuration. Later, after the Adhearsion framework has booted, the optional #run block is called to start the plugin. An example of using this two step startup of #init and #run methods might be an IRC plugin. In the #init method, the IRC class is instantiated and configured, but no connection to the server is made. Then in #run the actual connection is opened and the service begins. Both methods are optional, but if they are defined, the mandatory argument is a block to provide the code to be run. An optional symbol representing the plugin name may be provided as the first argument.  A plugin can also request to be initialized before or after another plugin by name, using the :before and :after options passed as an hash to #init and/or #run.
 
 Note that your #run method must not block indefinitely!  If necessary, place the contents of your run block within a thread so that Adhearsion can continue to start the other plugins:
 
