@@ -29,7 +29,7 @@ Adhearsion 2 supports the following telephony engines:
 
 * [Asterisk](http://asterisk.org) version 1.8.0 or later
 * [PRISM](http://voxeolabs.com/prism/) version 11.1 with the [rayo-server](https://github.com/rayo/rayo-server) application installed.
-* Generally speaking, anything that supports the [Rayo](http://rayo.io) protocol.
+* Generally speaking, anything that supports the [Rayo](https://github.com/rayo/rayo-server/wiki) protocol.
 
 <div class='docs-progress-nav'>
   <span class='back'>
