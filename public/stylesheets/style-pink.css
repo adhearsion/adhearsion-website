@@ -100,6 +100,7 @@ a:hover { color:#975c8c;  }
 .middle ul li {
   list-style-image:url(../images/backgrounds/bullet-blue.png);
   list-style-position:inside;
+  text-indent: -20px;
 }
 .middle .home {
   background: transparent;
