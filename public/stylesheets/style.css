@@ -1989,3 +1989,7 @@ form .field {
 }
 .search .searchfield {  width:150px; }
 
+/* additional styles */
+.extra-padding-left {
+  padding-left: 20px;
+}
