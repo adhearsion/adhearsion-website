@@ -74,8 +74,8 @@ bindaddr = 0.0.0.0
 
 [myuser]
 secret = mypassword
-read = all
-write = all
+read = all,dialplan,agi
+write = all,dialplan,agi
 eventfilter = !Event: RTCP*
 </pre>
 
