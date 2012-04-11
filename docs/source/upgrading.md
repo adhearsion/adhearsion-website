@@ -1,7 +1,6 @@
 [TOC]
 
-Upgrading from Adhearsion 1.x to 2.0
-====================================
+# Upgrading from Adhearsion 1.x to 2.0
 
 Adhearsion 2.0 brings many changes.  It marks the first time since release 0.8.0 in 2008 that we have broken backward compatibility with previous versions.  This means that, while you have access to a rich set of new features, it also means existing applications will need to be ported to run on Adhearsion 2.  This document aims to list the changes required to migrate an Adhearsion 1.x application up to Adhearsion 2.
 
@@ -15,7 +14,7 @@ This is mostly a simple search & replace change.  Find all instances of "ahn_log
 
 ## No more dialplan.rb
 
-This is the single most visible change.  Previously, and Adhearsion application's entry point was dialplan.rb, and the entry point in dialplan.rb was driven by the context provided by Asterisk.  Since Adhearsion 2.0 runs on multiple platforms, and the concept of a "context" is Asterisk-specific, we needed to do something different.  The recommended way to migrate dialplan.rb is to break each dialplan.rb block up into a separate [CallController](/docs/call-controllers). Then you will need to add routes to config/adhearsion.rb that map Asterisk contexts to the new CallControllers.  For example, given the following dialplan.rb:
+This is the single most visible change.  Previously an  Adhearsion application's entry point was dialplan.rb, and the entry point in dialplan.rb was decided by the context provided by Asterisk.  Since Adhearsion 2.0 runs on multiple platforms, and the concept of a "context" is Asterisk-specific, we needed to do something different.  The recommended way to migrate dialplan.rb is to break each dialplan.rb block up into a separate [CallController](/docs/call-controllers). Then you will need to add routes to config/adhearsion.rb that map Asterisk contexts to the new CallControllers.  For example, given the following dialplan.rb:
 
 <pre class="brush: ruby;">
 adhearsion {
@@ -52,7 +51,7 @@ fibonacci {
 }
 </pre>
 
-Would become the following three CallController classes:
+Would become the following CallController classes:
 
 <pre class="brush: ruby;">
 class MyMenu < Adhearsion::CallController
@@ -92,15 +91,16 @@ class Fibonacci < Adhearsion::CallController
   end
 end
 </pre>
+
 SimonGame is already a CallController so no wrapper class is required.
 
-Next you will need to map the Asterisk contexts back to these CallControllers.  This is in config/adhearsion.rb:
+Next you will need to map the Asterisk contexts back to these CallControllers. You will need the 'adhearsion-asterisk' plugin to get the route matcher for agi_context. This goes in config/adhearsion.rb:
 
 <pre class="brush: ruby;">
 Adhearsion.router do
-  route 'adhearsion context', SimonGame, [:[], :agi_context] => 'adhearsion'
-  route 'my_menu context', MyMenu, [:[], :agi_context] => 'my_menu'
-  route 'fibonacci context', Fibonacci, [:[], :agi_context] => 'fibonacci'
+  route 'adhearsion context', SimonGame, :agi_context => 'adhearsion'
+  route 'my_menu context', MyMenu, :agi_context => 'my_menu'
+  route 'fibonacci context', Fibonacci, :agi_context => 'fibonacci'
 end
 </pre>
 
@@ -132,6 +132,7 @@ end
 </pre>
 
 Would become something like this:
+
 <pre class="brush: ruby;">
 Adhearsion::Events.draw do
   after_initialized do
@@ -144,7 +145,7 @@ Adhearsion::Events.draw do
 end
 </pre>
 
-Asterisk Manager Interface events are a little different. In the case of "NewChannel" events, we may prefer to register for Punchblock::Offer events, which will work on Asterisk as well as Rayo or any other supported telephony engine in the future. There is an important distinction here thought:
+Asterisk Manager Interface events are a little different. In the case of "NewChannel" events, we may prefer to register for Punchblock::Offer events, which will work on Asterisk as well as Rayo or any other supported telephony engine in the future. There is an important distinction here though:
 
 * AMI "NewChannel" events report every new channel that is created in Asterisk, whether or not that call is ultimately routed to Adhearsion.
 * Punchblock::Offer events only fire for calls that are routed to Adhearsion.
@@ -152,6 +153,7 @@ Asterisk Manager Interface events are a little different. In the case of "NewCha
 Most telephony backends do not offer a functional equivalent of the NewChannel event so there is no direct replacement.  Be aware of the differences here.  For the purposes of this document, we will assume that Punchblock::Offer events are sufficient for our needs.
 
 Examples:
+
 <pre class="brush: ruby;">
 Adhearsion::Events.punchblock Punchblock::Offer do |offer|
   # This block will only be invoked with Punchblock::Offer events
@@ -165,3 +167,57 @@ end
 </pre>
 
 For examples on using the XMPP events within Adhearsion 2.0, please see [the adhearsion-xmpp plugin page](https://github.com/adhearsion/adhearsion-xmpp).
+
+## Upgrading Configuration
+
+Adhearsion 1.x had a fixed configuration system for internal configuration and a separate, YAML-based system for configuring components.  In Adhearsion 2.0 we wanted to combine these concepts and make it much easier by keeping configuration in one self-documenting location.  The first change you will notice is that "config/startup.rb" has become "config/adhearsion.rb".  The second thing you will notice is how short the default configuration is.  The default configuration is the bare minimum needed to get you up and running.  However there are many more configuration options available by default.  In addition, plugins can register their own configuration variables within their own namespace and these configuration options will become visible as well.  To see the full list of configuration options, simply type "rake config:show" within your application directory.  For more information on using configuration, see the [Configuration](/docs/config) page.
+
+## Plugins are the new Components
+
+Adhearsion 1.x had a concept of a "component" which was intended to be reuseable, shareable functionality for Adhearsion.  These components could be installed locally within the components/ directory or by installing a gem.  However they had several limitations:
+
+* Configuration was tricky to manage and not always easily discoverable
+* Components had limited integration points, making plugin development frustrating
+* Components were basically impossible to test
+
+Adhearsion 2.0 has reinvented the concept with the new plugin system.  For more information, check out the page dedicated to [Plugins](/docs/plugins).
+
+However, you do not have to jump in all the way and create a new component for your existing local components.  Adhearsion now automatically loads all files placed into the "lib/" directory.  If you want to migrate an existing component to a simple CallController, this is the fastest and easiest way to do it.  For example, if we had a component named "conference_login" like this:
+
+<pre class="brush: ruby;">
+methods_for :dialplan do
+  def conference_login
+    room = input 4, :play => 'enter-room-number'
+    return nil unless (5000..6000).include? room.to_i
+    room
+  end
+end
+</pre>
+
+Just convert this to a CallController and move it to "lib/conference_login.rb":
+
+<pre class="brush: ruby;">
+class ConferenceLogin < Adhearsion::CallController
+  def run
+    room = input 4, :play => 'enter-room-number'
+    return nil unless (5000..6000).include? room.to_i
+    room
+  end
+end
+</pre>
+
+One possible problem with this approach is that, under the old system, the #conference_login method was avaialble anywhere within dialplan.rb.  Adhearsion 2.0 does offer a way to add functionality to the base CallController class, acheiving the same effect, without needing to monkeypatch.  Here is a more direct replacement for the #conference_login method, still in lib/conference_login.rb:
+
+<pre class="brush: ruby;">
+module ConferenceLogin
+  def conference_login
+    room = input 4, :play => 'enter-room-number'
+    return nil unless (5000..6000).include? room.to_i
+    room
+  end
+end
+
+CallController.mixin ConferenceLogin
+</pre>
+
+By using the #mixin method, the ConferenceLogin is added to all CallControllers and is therefore available anywhere within the scope of any existing or future CallController.
