@@ -270,8 +270,6 @@ Execution of the current context resumes after #menu finishes. If you wish to ju
 
 ## Recording
 
-NOTE: Currently unsupported on Asterisk
-
 The #record method provides the ability to capture audio in a blocking or non-blocking way.
 
 ### Voicemail-like recording
@@ -298,6 +296,20 @@ class SuperSecretProjectCall < Adhearsion::CallController
     record :async => true do |recording|
       logger.info "Async recording saved to #{recording.uri}"
     end
+    say "We are currently recording this call"
+    hangup # Triggers the end of the recording
+  end
+end
+</pre>
+
+### Asterisk
+
+The #record method is currently unsupported on Asterisk. Once must use AGI record or MixMonitor directly, via adhearsion-asterisk's [CallController#agi](http://rubydoc.info/github/adhearsion/adhearsion-asterisk/master/Adhearsion/Asterisk/CallControllerMethods:agi), eg:
+
+<pre class="brush: ruby;">
+class SuperSecretProjectCall < Adhearsion::CallController
+  def run
+    agi 'MixMonitor', 'foobar.wav'
     say "We are currently recording this call"
     hangup # Triggers the end of the recording
   end

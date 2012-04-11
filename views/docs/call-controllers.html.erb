@@ -25,6 +25,7 @@
 <li><a href="#recording">Recording</a><ul>
 <li><a href="#voicemail-like-recording">Voicemail-like recording</a></li>
 <li><a href="#monitoring-recording">Monitoring recording</a></li>
+<li><a href="#asterisk">Asterisk</a></li>
 </ul>
 </li>
 <li><a href="#joining-calls">Joining calls</a></li>
@@ -275,7 +276,6 @@ end
 <p>Execution of the current context resumes after #menu finishes. If you wish to jump to an entirely different controller, #pass can be used.</p>
 <p>#menu will return a <a href="http://rubydoc.info/github/adhearsion/adhearsion/Adhearsion/CallController/Input/Result">CallController::Input::Result</a> object detailing the success or otherwise of the menu, similarly to #ask.</p>
 <h2 id="recording"><a class="toclink" href="#recording">Recording</a></h2>
-<p>NOTE: Currently unsupported on Asterisk</p>
 <p>The #record method provides the ability to capture audio in a blocking or non-blocking way.</p>
 <h3 id="voicemail-like-recording"><a class="toclink" href="#voicemail-like-recording">Voicemail-like recording</a></h3>
 <p>In this case, it is desireable for #record to block until the recording completes, as it is the main feature of that part of the call. This usage is simple:</p>
@@ -297,6 +297,18 @@ class SuperSecretProjectCall < Adhearsion::CallController
     record :async => true do |recording|
       logger.info "Async recording saved to #{recording.uri}"
     end
+    say "We are currently recording this call"
+    hangup # Triggers the end of the recording
+  end
+end
+</pre>
+
+<h3 id="asterisk"><a class="toclink" href="#asterisk">Asterisk</a></h3>
+<p>The #record method is currently unsupported on Asterisk. Once must use AGI record or MixMonitor directly, via adhearsion-asterisk's <a href="http://rubydoc.info/github/adhearsion/adhearsion-asterisk/master/Adhearsion/Asterisk/CallControllerMethods:agi">CallController#agi</a>, eg:</p>
+<pre class="brush: ruby;">
+class SuperSecretProjectCall < Adhearsion::CallController
+  def run
+    agi 'MixMonitor', 'foobar.wav'
     say "We are currently recording this call"
     hangup # Triggers the end of the recording
   end
