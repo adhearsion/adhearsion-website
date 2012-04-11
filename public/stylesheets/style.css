@@ -410,6 +410,7 @@ small {
 /* middle area specific classes */
 .middle {
   min-height:300px;
+  min-width:960px;
 }
 .middle .home {
   padding-top:25px;
