@@ -13,7 +13,7 @@ rvm install 1.9.3
 rvm use 1.9.3
 
 ### @export "install-gem"
-gem install --prerelease adhearsion
+gem install adhearsion
 
 ### @export "create-app"
 ahn create myapp

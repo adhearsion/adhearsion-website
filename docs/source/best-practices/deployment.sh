@@ -2,7 +2,7 @@ source ~/.rvm/scripts/rvm
 rvm use 1.9.3
 
 ### @export "deploy-create-app"
-gem install --pre adhearsion
+gem install adhearsion
 ahn create myapp
 cd myapp
 

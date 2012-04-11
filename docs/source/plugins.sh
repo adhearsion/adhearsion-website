@@ -1,4 +1,4 @@
-gem install --prerelease adhearsion
+gem install adhearsion
 ahn create myapp
 cd myapp
 bundle install
