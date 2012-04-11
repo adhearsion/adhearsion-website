@@ -2,6 +2,162 @@
 
 .inner
   .full-width
-    %h1 Adhearsion Conf
+    .three-fourth
+      %h1 Adhearsion Conf
+      #conference-content
+
+        %p The second AdhearsionConf was held in San Francisco on the weekend of October 8-9, 2011.
+
+        %p Ben Klang, Ben Langfeld and Jason Goecke, the team behind Adhearsion, all were on hand for two days of talks, knowledge sharing and even some pair programming on all things Ruby and Telephony. There were also be presentations from members of the Adhearsion community on interesting Adhearsion deployments, Adhearsion at scale, and more. Finally, there was be an exciting announcement that promises to take Ruby Telephony far beyond its current state.
+
+        %p Thanks to our sponsor <a href="http://tropo.com">Tropo</a> we enjoyed the cozy spaces of NextSpace SF, as well as bagels and coffee each morning.
+
+        %p Thanks to our sponsor <a href="http://bluevia.com">BlueVia</a> those who are unable to attend AdhearsionConf in person were able to tune into our live video stream. 
+        
+        %h2 What's happening?
+        %div{:class => 'overlay', :id => 'presentation-saturdaykeynote'}
+          %h3{:class => 'title'} Welcome to AdhearsionConf / Opening Keynote
+          %p{:class => 'presenter'} Ben Klang, Mojo Lingo
+          %p{:class => 'description'}
+          %div{:class => 'video'}
+            %iframe{:src => 'http://player.vimeo.com/video/32979776?title=0&amp;byline=0&amp;portrait=0', :width => '440', :height => '248', :frameborder => '0', :mozallowfullscreen => true, :allowFullScreen => true, :webkitAllowFullScreen => true}
+          %p{:class => 'presenter-bio'} Ben Klang has more than a decade of experience in diverse technology disciplines such as telephony, system administration, networking and security. As the founder and Technology Strategist at Mojo Lingo, an Atlanta firm specializing in telephony application development, he helps bring Adhearsion and Voice applications to clients all around the world.  He is also the current project leader for Adhearsion and contributes to many other open source efforts. His interests include hacking competitions, information security, making phones do unexpected things, playing music loudly and asking lots of questions.
+
+        %div{:class => 'overlay', :id => 'presentation-ifbyphone'}
+          %h3{:class => 'title'} Developing Phone Survey Apps
+          %p{:class => 'presenter'} Stephen George
+          %p{:class => 'description'} What if you could run database-driven surveys that talked to your users? Ifbyphone was able to do just that with the help of Adhearsion and Mojo Lingo. Stephen George of Ifbyphone discussed how easily Adhearsion lends itself to developing a robust survey phone application.
+          %div{:class => 'video'}
+            %iframe{:src => 'http://player.vimeo.com/video/33406049?title=0&amp;byline=0&amp;portrait=0', :width => '440', :height => '248', :frameborder => '0', :mozallowfullscreen => true, :allowFullScreen => true, :webkitAllowFullScreen => true}
+          %p{:class => 'presenter-bio'} Stephen George is a Senior Software Developer at Ifbyphone in Chicago. When he's not making funky phone apps in Adhearsion, he's probably playing fetch with his chocolate labrador or playing air guitar with his headphones on.
+
+        %div{:class => 'overlay', :id => 'presentation-shopify'}
+          %h3{:class => 'title'} Shopify <3 Adhearsion
+          %p{:class => 'presenter'} Daniel Beauchamp & Jonathan Rudenberg, Shopify
+          %p{:class => 'description'}
+            At Shopify, we have 16,000 stores and we handle all sales and support calls in house. We needed a fast, flexible and reliable way of handling these calls, and none of the applications we found met our needs. So we did what any good geek would do: we rolled our own.
+
+            Adhearsion made this possible. It simplified the onerous task of building an Asterisk-based app. Within less than a month, we had a functional app used in production by all of our agents, serving real customers. Along with showing callers, queue stats, and agent statuses, our "Q" app also displays information about customers and their shops; allowing agents to better serve them. Not bad for a team of two!
+            %br
+            Our presentation started with a demo of "Q", and an overview of the Adhearsion components that it uses. We talked about the technologies that we also used, namely websockets, and the Sinatra and Batman.js frameworks (http://batmanjs.org/). Finally, we showed the audience how easy it is to make a simple app using Adhearsion and Batman.js.
+          %div{:class => 'video'}
+            %iframe{:src => 'http://player.vimeo.com/video/33038589?title=0&amp;byline=0&amp;portrait=0', :width => '440', :height => '248', :frameborder => '0', :mozallowfullscreen => true, :allowFullScreen => true, :webkitAllowFullScreen => true}
+          %p{:class => 'presenter-bio'}
+            Jonathan Rudenberg has always been fascinated with programming physical things. He has been using Adhearsion since 2008, and started learning Asterisk in 2006. Jonathan currently spends his time writing Internal Tools at Shopify.
+            %br
+            Daniel Beauchamp is an Internal Tools developer at Shopify, and makes sure that the team has amazing apps to use. "Q" is his personal favourite, because there's nothing cooler than instantly triggering javascript on screen when you pick up a phone.
+        %div{:class => 'overlay', :id => 'presentation-digium'}
+          %h3{:class => 'title'} Asterisk 10 for Developers
+          %p{:class => 'presenter'} Steve Sokol, Digium
+          %p{:class => 'description'} 
+            Review of the cool new things in Asterisk 10 with focus on features useful for voice application developers.  Digium wants your feedback!  We discussed what the community wants and needs for Asterisk 11.
+          %div{:class => 'video'}
+            %iframe{:src => 'http://player.vimeo.com/video/33733385?title=0&amp;byline=0&amp;portrait=0', :width => '440', :height => '248', :frameborder => '0', :mozallowfullscreen => true, :allowFullScreen => true, :webkitAllowFullScreen => true}
+          %p{:class => 'presenter-bio'}
+            Steven Sokol is the Asterisk Marketing Director at Digium. He joined the firm in the summer of 2007 when his company, Sokol & Associates, was acquired. While at Sokol & Associates he developed and marketed the Asterisk Bootcamp, a highly successful training program for Asterisk users and administrators and managed a staff of Asterisk consultants and contract developers. In 2004 Sokol & Associates and Edvina AB partnered to launch AstriCon, the annual Asterisk conference and exhibition. Prior to discovering Asterisk, Sokol architected and managed the development of e-IVR, a voice processing platform and provided communications consulting services. Mr. Sokol has a bachelor of arts degree from Westminster College in Fulton, MO. He lives in Tulsa, Oklahoma with his wife Amy and daughter Katie.
+        %div{:class => 'overlay', :id => 'presentation-tropo'}
+          %h3{:class => 'title'} Telephony in the Cloud
+          %p{:class => 'presenter'} Jason Goecke, Voxeo Labs
+          %p{:class => 'description'}
+          %div{:class => 'video'}
+            %iframe{:src => 'http://player.vimeo.com/video/33047796?title=0&amp;byline=0&amp;portrait=0', :width => '440', :height => '248', :frameborder => '0', :mozallowfullscreen => true, :allowFullScreen => true, :webkitAllowFullScreen => true}
+          %p{:class => 'presenter-bio'} Jason Goecke has an extensive background in telephony and call center related technologies. His unique perspective comes from the combination of broad commercial experience around the world coupled with an exceptional technical depth in many technology disciplines. Jason was an early Adhearsion community member that went on to form a commercial venture with Adhearsion's creator, Jay Phillips, that was subsequently acquired by Voxeo. Jason is currently the VP of Innovation at Voxeo Labs, where he is responsible for the team building next generation realtime platforms such as Tropo.com, Phono.com and SMSified.com. Voxeo Labs also maintains an active role and sponsorship in the Adhearsion project. Jason has returned to the Silicon Valley after living in Europe over a period of 10 years.
+        
+        %div{:class => 'overlay', :id => 'presentation-bluevia'}
+          %h3{:class => 'title'} Introduction to connFu
+          %p{:class => 'presenter'} Paul Golding, O2 Labs
+          %p{:class => 'description'} Learn about BlueVia's newest service for voice and mobile application developers: connFu. Code Less. Connect More.
+          %div{:class => 'video'}
+            %iframe{:src => 'http://player.vimeo.com/video/33610147?title=0&amp;byline=0&amp;portrait=0', :width => '440', :height => '248', :frameborder => '0', :mozallowfullscreen => true, :allowFullScreen => true, :webkitAllowFullScreen => true}
+          %p{:class => 'presenter-bio'} Paul Golding is connFu Master at The Lab, part of O2, Telefónica and Jahjah.
+
+        %div{:class => 'overlay', :id => 'presentation-sundaykeynote'}
+          %h3{:class => 'title'} Sunday Keynote
+          %p{:class => 'presenter'} Jason Goecke, Voxeo Labs
+          %p{:class => 'description'}
+          %div{:class => 'video'}
+            %iframe{:src => 'http://player.vimeo.com/video/33534349?title=0&amp;byline=0&amp;portrait=0', :width => '440', :height => '248', :frameborder => '0', :mozallowfullscreen => true, :allowFullScreen => true, :webkitAllowFullScreen => true}
+          %p{:class => 'presenter-bio'}
+            
+        %div{:class => 'overlay', :id => 'presentation-testingtelephony'}
+          %h3{:class => 'title'} Testing Telephony: It's Not All Terrible
+          %p{:class => 'presenter'} Ben Langfeld, Adhearsion Core Team
+          %p{:class => 'description'} Many telephony applications are poorly tested, and rarely is the media portion (the actual phone call) tested in any automated fashion. This leads to long QA sessions, heartache, and undiscovered regressions on every iteration. But we're Ruby developers (most of us!); how do we live with ourselves? As these applications become more and more complex, the situation is only going to get worse. Thankfully, we have almost everything we need to build fully automated test suites running complex assertions on voice interactions. We took a look at how we might begin to do this and redeem ourselves.
+          %div{:class => 'video'}
+            %iframe{:src => 'http://player.vimeo.com/video/33031348?title=0&amp;byline=0&amp;portrait=0', :width => '440', :height => '248', :frameborder => '0', :mozallowfullscreen => true, :allowFullScreen => true, :webkitAllowFullScreen => true}
+          
+          %p{:class => 'presenter-bio'} A recovering Physics graduate, Ben now spends approximately 25 hours per day slinging Ruby and is enjoying it a lot more than quantum field theory. Writing voice applications is a perfect fit for him, not least as a result of his addiction to talking. That this can be directed towards a robot can only make the world a better place.
+
+        %div{:class => 'overlay', :id => 'presentation-weaponizing'}
+          %h3{:class => 'title'} Weaponizing the Cloud: Wardialing with Adhearsion
+          %p{:class => 'presenter'} Nathaniel Barnes, Department of Defense
+          %p{:class => 'description'} With every advance in technology, people have found a way to use it to the detriment of others, which is why we spend so much time and effort focused on securing our servers and our applications. Developments in telephony are no exception to this idiom, and we discussed how we've integrated some of these into a next generation, open source wardialer. We also discussed some of the technical challenges involved, the dangers associated with this approach, and how you can perform penetration testing for your organization using these tools.
+          %div{:class => 'video'}
+            %iframe{:src => 'http://player.vimeo.com/video/33342840?title=0&amp;byline=0&amp;portrait=0', :width => '440', :height => '248', :frameborder => '0', :mozallowfullscreen => true, :allowFullScreen => true, :webkitAllowFullScreen => true}
+          %p{:class => 'presenter-bio'} Nathaniel Barnes is a long time developer, using different technologies and languages to adapt to the problem du jour. A Ruby convert, he's been an evangelist for open source in general and Ruby in particular in his chosen industry. He is currently a Department of Defense contractor and has been working in the intelligence community for nearly a decade.
+
+        %div{:class => 'overlay', :id => 'presentation-lightning'}
+          %h3{:class => 'title'} Lightning Talks
+          %p{:class => 'description'} Got an idea?  Something to share, but not enough for a full session? This was your chance to show your stuff among your peers.  Signups were open throughout the conference.
+          %div{:class => 'lightning_talk'}
+            %div{:class => 'video'}
+              %iframe{:src => 'http://player.vimeo.com/video/33037161?title=0&amp;byline=0&amp;portrait=0', :width => '220', :height => '124', :frameborder => '0', :mozallowfullscreen => true, :allowFullScreen => true, :webkitAllowFullScreen => true}
+            %div{:class => 'info'}
+              %h3{:class => 'title'} Survey Lulz
+              %p{:class => 'presenter'} Daniel Beauchamp
+              %p{:class => 'description'} Daniel Beauchamp presents a project he created during AdhearsionConf 2011: a demo app based on the concept of the children's game "Telephone." Hilarity and Trololo are the result
+          %div{:class => 'lightning_talk'}
+            %div{:class => 'video'}
+              %iframe{:src => 'http://player.vimeo.com/video/33552883?title=0&amp;byline=0&amp;portrait=0', :width => '220', :height => '124', :frameborder => '0', :mozallowfullscreen => true, :allowFullScreen => true, :webkitAllowFullScreen => true}
+            %div{:class => 'info'}
+              %h3{:class => 'title'} Adhearsion Console
+              %p{:class => 'presenter'} Stephen George
+              %p{:class => 'description'} Stephen George of Ifbyphone presents a lightning talk on the Adhearsion Console.
+          %div{:class => 'lightning_talk'}
+            %div{:class => 'video'}
+              %iframe{:src => 'http://player.vimeo.com/video/33551969?title=0&amp;byline=0&amp;portrait=0', :width => '220', :height => '124', :frameborder => '0', :mozallowfullscreen => true, :allowFullScreen => true, :webkitAllowFullScreen => true}
+            %div{:class => 'info'}
+              %h3{:class => 'title'} PRISM Overview
+              %p{:class => 'presenter'} Jason Goecke
+              %p{:class => 'description'} Jason gives a quick introduction to PRISM, the new telephony platform targeted for support in Adhearsion 2.0.
+          %div{:class => 'lightning_talk'}
+            %div{:class => 'video'}
+              %iframe{:src => 'http://player.vimeo.com/video/33029436?title=0&amp;byline=0&amp;portrait=0', :width => '220', :height => '124', :frameborder => '0', :mozallowfullscreen => true, :allowFullScreen => true, :webkitAllowFullScreen => true}
+            %div{:class => 'info'}
+              %h3{:class => 'title'} Deploying Adhearsion
+              %p{:class => 'presenter'} Ben Langfeld
+              %p{:class => 'description'} Ben Langfeld of Mojo Lingo shows where to find information about best practices for deploying Adhearsion applications.
+          %div{:class => 'lightning_talk'}
+            %div{:class => 'video'}
+              %iframe{:src => 'http://player.vimeo.com/video/33045421?title=0&amp;byline=0&amp;portrait=0', :width => '220', :height => '124', :frameborder => '0', :mozallowfullscreen => true, :allowFullScreen => true, :webkitAllowFullScreen => true}
+            %div{:class => 'info'}
+              %h3{:class => 'title'} How We Use Adhearsion
+              %p{:class => 'presenter'} David Ryder
+              %p{:class => 'description'} David Ryder presents how he uses Adhearsion at AdhearsionConf 2011.
+        %div{:class => 'overlay', :id => 'presentation-roadmap'}
+          %h3{:class => 'title'} Adhearsion Roadmap: 2.0 and Beyond
+          %p{:class => 'presenter'} Ben Klang and Ben Langfeld
+          %p{:class => 'description'} We will discuss Adhearsions future as a project: upcoming features, organizational evolution and technology prognostication.
+          %div{:class => 'video'}
+            %iframe{:src => 'http://player.vimeo.com/video/32990473?title=0&amp;byline=0&amp;portrait=0', :width => '440', :height => '248', :frameborder => '0', :mozallowfullscreen => true, :allowFullScreen => true, :webkitAllowFullScreen => true}
+          %p{:class => 'presenter-bio'}
+    .one-fourth.last
+      %h2 Thanks to our Adhearsion Conf 2011 sponsors
+      %p.extra-padding-left
+        %a{:href => "http://tropo.com/"}
+          %img{:src => "/images/sponsors/sponsor_tropo.jpg", :width => "220", :alt => "Tropo"}
+      %p.extra-padding-left
+        %a{:href => "http://mojolingo.com/"}
+          %img{:src => "/images/sponsors/sponsor_mojolingo.jpg", :width => "220", :alt => "Mojo Lingo"}
+      %p.extra-padding-left
+        %a{:href => "http://digium.com/"}
+          %img{:src => "/images/sponsors/sponsor_digium.jpg", :width => "220", :alt => "Digium"}
+      %p.extra-padding-left
+        %a{:href => "https://ifbyphone.com/"}
+          %img{:src => "/images/byphone.png", :width => "220", :alt => "IfByPhone"}
+      %p.extra-padding-left
+        %a{:href => "https://bluevia.com/"}
+          %img{:src => "/images/sponsors/sponsor_bluevia.png", :width => "220", :alt => "BlueVia"}
+    .clear
 
 %a{:href => "#", :id => "main-nav-active", :style => "display:none;"} #main-nav-conference
