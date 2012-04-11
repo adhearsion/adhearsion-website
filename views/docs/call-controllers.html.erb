@@ -108,7 +108,7 @@ end
 
 <p>Within a call controller, you have access to many instance methods with which to operate on the call, and you also have access to the call object (#call) itself.</p>
 <h2 id="basic-call-control"><a class="toclink" href="#basic-call-control">Basic call control</a></h2>
-<p>There are several methods available to exercise basic control over a call. The first interesting one is the method by which you answer a call. Hold on to your hats here, this is highly complex:</p>
+<p>The entry point for every CallController is the #run method, and every CallController must have a #run method.  Once launched, there are several methods available to exercise basic control over a call. The first interesting one is the method by which you answer a call. Hold on to your hats here, this is highly complex:</p>
 <pre class="brush: ruby;">
 class SuperSecretProjectCallController < Adhearsion::CallController
   def run
