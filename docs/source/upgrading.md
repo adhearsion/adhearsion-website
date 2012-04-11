@@ -187,8 +187,8 @@ However, you do not have to jump in all the way and create a new component for y
 <pre class="brush: ruby;">
 methods_for :dialplan do
   def conference_login
-    room = input 5, :play => 'enter-room-number'
-    return nil unless (50000..6000).include? room.to_i
+    room = input 4, :play => 'enter-room-number'
+    return nil unless (5000..6000).include? room.to_i
     room
   end
 end
@@ -199,8 +199,8 @@ Just convert this to a CallController and move it to "lib/conference_login.rb":
 <pre class="brush: ruby;">
 class ConferenceLogin < Adhearsion::CallController
   def run
-    room = input 5, :play => 'enter-room-number'
-    return nil unless (50000..6000).include? room.to_i
+    room = input 4, :play => 'enter-room-number'
+    return nil unless (5000..6000).include? room.to_i
     room
   end
 end
@@ -211,8 +211,8 @@ One possible problem with this approach is that, under the old system, the #conf
 <pre class="brush: ruby;">
 module ConferenceLogin
   def conference_login
-    room = input 5, :play => 'enter-room-number'
-    return nil unless (50000..6000).include? room.to_i
+    room = input 4, :play => 'enter-room-number'
+    return nil unless (5000..6000).include? room.to_i
     room
   end
 end
