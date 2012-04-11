@@ -51,7 +51,7 @@ fibonacci {
 }
 </pre>
 
-Would become the following three CallController classes:
+Would become the following CallController classes:
 
 <pre class="brush: ruby;">
 class MyMenu < Adhearsion::CallController
