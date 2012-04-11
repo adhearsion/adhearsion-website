@@ -163,3 +163,5 @@ Adhearsion::Events.ami :name => 'NewState' do |state|
   logger.info "A channel is changing state: #{state.inspect}"
 end
 </pre>
+
+For examples on using the XMPP events within Adhearsion 2.0, please see [the adhearsion-xmpp plugin page](https://github.com/adhearsion/adhearsion-xmpp).
