@@ -11,6 +11,12 @@ When a call has one or more controllers running against it, it is possible to si
 <pre class='terminal'>
   <br/>
 AHN> take
+Please choose a call:
+# (inbound/outbound) details
+0: (i) 5vg6dkqc-lx7-2zujv5xbe7zd from sip:rwkdjpmu@192.168.1.74 to sip:usera@127.0.0.1
+1: (i) 5vg6dkqc-lx7-2n2wgrzooard from sip:rwkdjpmu@192.168.1.74 to sip:usera@127.0.0.1
+#> 1
+AHN<5vg6dkqc-lx7-2n2wgrzooard>
 </pre>
 
 Once you have control of a call, other controllers will stop executing (at the next time they try to run a command against the call) and you may use any CallController methods you like. The console itself is just an interactive CallController.
