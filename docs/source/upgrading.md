@@ -189,7 +189,7 @@ However, you do not have to jump in all the way and create a new component for y
 <pre class="brush: ruby;">
 methods_for :dialplan do
   def conference_login
-    room = input 4, :play => 'enter-room-number'
+    room = input 4, :play => 'file:///prompts/enter-room-number'
     return nil unless (5000..6000).include? room.to_i
     room
   end
