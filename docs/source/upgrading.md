@@ -167,3 +167,57 @@ end
 </pre>
 
 For examples on using the XMPP events within Adhearsion 2.0, please see [the adhearsion-xmpp plugin page](https://github.com/adhearsion/adhearsion-xmpp).
+
+## Upgrading Configuration
+
+Adhearsion 1.x had a fixed configuration system for internal configuration and a separate, YAML-based system for configuring components.  In Adhearsion 2.0 we wanted to combine these concepts and make it much easier by keeping configuration in one self-documenting location.  The first change you will notice is that "config/startup.rb" has become "config/adhearsion.rb".  The second thing you will notice is how short the default configuration is.  The default configuration is the bare minimum needed to get you up and running.  However there are many more configuration options available by default.  In addition, plugins can register their own configuration variables within their own namespace and these configuration options will become visible as well.  To see the full list of configuration options, simply type "rake config:show" within your application directory.  For more information on using configuration, see the [Configuration](/docs/config) page.
+
+## Plugins are the new Components
+
+Adhearsion 1.x had a concept of a "component" which was intended to be reuseable, shareable functionality for Adhearsion.  These components could be installed locally within the components/ directory or by installing a gem.  However they had several limitations:
+
+* Configuration was tricky to manage and not always easily discoverable
+* Components had limited integration points, making plugin development frustrating
+* Components were basically impossible to test
+
+Adhearsion 2.0 has reinvented the concept with the new plugin system.  For more information, check out the page dedicated to [Plugins](/docs/plugins).
+
+However, you do not have to jump in all the way and create a new component for your existing local components.  Adhearsion now automatically loads all files placed into the "lib/" directory.  If you want to migrate an existing component to a simple CallController, this is the fastest and easiest way to do it.  For example, if we had a component named "conference_login" like this:
+
+<pre class="brush: ruby;">
+methods_for :dialplan do
+  def conference_login
+    room = input 5, :play => 'enter-room-number'
+    return nil unless (50000..6000).include? room.to_i
+    room
+  end
+end
+</pre>
+
+Just convert this to a CallController and move it to "lib/conference_login.rb":
+
+<pre class="brush: ruby;">
+class ConferenceLogin < Adhearsion::CallController
+  def run
+    room = input 5, :play => 'enter-room-number'
+    return nil unless (50000..6000).include? room.to_i
+    room
+  end
+end
+</pre>
+
+One possible problem with this approach is that, under the old system, the #conference_login method was avaialble anywhere within dialplan.rb.  Adhearsion 2.0 does offer a way to add functionality to the base CallController class, acheiving the same effect, without needing to monkeypatch.  Here is a more direct replacement for the #conference_login method, still in lib/conference_login.rb:
+
+<pre class="brush: ruby;">
+module ConferenceLogin
+  def conference_login
+    room = input 5, :play => 'enter-room-number'
+    return nil unless (50000..6000).include? room.to_i
+    room
+  end
+end
+
+CallController.mixin ConferenceLogin
+</pre>
+
+By using the #mixin method, the ConferenceLogin is added to all CallControllers and is therefore available anywhere within the scope of any existing or future CallController.
