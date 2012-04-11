@@ -6,6 +6,7 @@ gem "i18n"
 gem "rack-cache", :require => nil
 gem 'haml'
 gem 'haml-coderay'
+gem 'pony'
 
 group :development do
   gem 'capistrano'

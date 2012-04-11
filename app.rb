@@ -65,7 +65,33 @@ end
 end
 
 post '/get-help' do
-  @contact_status = 'error'
+  @has_errors = []
+  @has_errors << "Name can not be blank." if params[:yourName].empty?
+  @has_errors << "Email is empty or invalid." unless params[:email].match(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/i)
+  @has_errors << "Please fill in your inquiry." if params[:query].empty?
+  if @has_errors.empty?
+    Pony.mail({
+      :to => 'hello@mojolingo.com',
+      :subject => 'Adhearsion Contact Request',
+      :body => "Message from #{params[:yourName]} - #{params[:email]}\n\n#{params[:query]}",
+      :via => :smtp,
+      :via_options => {
+        :address              => 'smtp.gmail.com',
+        :port                 => '587',
+        :enable_starttls_auto => true,
+        :user_name            => ENV['GMAIL_USERNAME'],
+        :password             => ENV['GMAIL_PASSWORD'],
+        :authentication       => :plain, # :plain, :login, :cram_md5, no auth by default
+        :domain               => "adhearsion.com" # the HELO domain provided by the client to the server
+      }
+    })
+    @contact_status = 'success'
+  else
+    @your_name = params[:yourName]
+    @your_email = params[:email]
+    @your_query = params[:query]
+    @contact_status = 'error'
+  end
   haml :'get-help'
 end
 

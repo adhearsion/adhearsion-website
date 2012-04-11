@@ -44,13 +44,13 @@
             %ol.forms
               %li
                 %label{:for => "yourName"} Your Name
-                %input#yourName.requiredField{:type => "text", :name => "yourName", :value => "", :style => "width:370px;"}
+                %input#yourName.requiredField{:type => "text", :name => "yourName", :value => @your_name, :style => "width:370px;"}
               %li
                 %label{:for => "email"} Email
-                %input#email.requiredField.email{:type => "text", :name => "email", :value => "", :style => "width:370px;"}
+                %input#email.requiredField.email{:type => "text", :name => "email", :value => @your_email, :style => "width:370px;"}
               %li.textarea
                 %label{:for => "queryText"} Inquiry
-                %textarea#queryText.requiredField{:name => "query", :rows => "3", :cols => "56", :style => "width:370px;"}
+                %textarea#queryText.requiredField{:name => "query", :rows => "3", :cols => "56", :style => "width:370px;"}= @your_query
             .clear
             .form-button-left
               %button.form-button{:type => "submit"}
@@ -68,6 +68,12 @@
               There was an error somewhere. Please retry or
               %a{:href => 'mailto:webmaster@adhearsion.com'} mail the geeks
               \.
+              - unless @has_errors.empty?
+                %br
+                %strong Please correct the following:
+                %br
+                - @has_errors.each do |error|
+                  \- #{error}<br>
     .clear
 
 %a{:href => "#", :id => "main-nav-active", :style => "display:none;"} #main-nav-get-help
