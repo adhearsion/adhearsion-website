@@ -4,7 +4,7 @@
 
 With the addition of Call Controllers to Adhearsion 2.0, Adhearsion applications become closer to real MVC applications. A CallController is the "controller" in MVC terms; the call object is the "view" (being the method of interaction between the human and the application, it qualifies here, even though it is not actually visible); models may be any backend you prefer, be they backed by a database, a directory (like LDAP) or anything else. Indeed, one might wish to make use of a second view, such as an XMPP interaction or some kind of push-based rendering to a visual display.
 
-So, how does one write an application based on call controllers? Simple: generate a controller class and route calls to it as described in [routing](/docs/routing). That might look something like this:
+So, how does one write an application based on call controllers? By generating a controller class and routing calls to it as described in [Routing](/docs/routing). That might look something like this:
 
 <pre class="terminal">
 {{ d['call_controllers.sh|idio|shint|ansi2html']['generate-controller'] }}
@@ -68,6 +68,20 @@ class SuperSecretProjectCallController < Adhearsion::CallController
     answer
     mute
     unmute
+    hangup
+  end
+end
+</pre>
+
+One other handy trick is rejecting a call before it is answered.  Among other things this avoids billing in most cases:
+
+<pre class="brush: ruby;">
+class SuperSecretProjectCallController < Adhearsion::CallController
+  def run
+    reject if call.from =~ /18005551234/ # Ugh, Aunt Sally always talks my ear off...
+    # Otherwise...
+    answer
+    play "musiconhold.mp3"
     hangup
   end
 end
