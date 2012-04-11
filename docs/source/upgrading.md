@@ -5,6 +5,14 @@ Upgrading from Adhearsion 1.x to 2.0
 
 Adhearsion 2.0 brings many changes.  It marks the first time since release 0.8.0 in 2008 that we have broken backward compatibility with previous versions.  This means that, while you have access to a rich set of new features, it also means existing applications will need to be ported to run on Adhearsion 2.  This document aims to list the changes required to migrate an Adhearsion 1.x application up to Adhearsion 2.
 
+## Prerequisites
+
+Adhearsion 2.0 has an all new list of prerequisites.  Before going any further, please see the [Prerequisites](/docs/getting-started/prerequisites) page.
+
+## ahn_log has become logger
+
+This is mostly a simple search & replace change.  Find all instances of "ahn_log" and replace them with "logger".  However, we have also deprecated logger namespaces.  For example, "ahn_log.myapp.info" would log messages within the "myapp" namespace.  This is no longer supported so it would need to become "logger.info".  Fortunately we have added a lot more information to the default logging formatter that includes the originating class name that generated the log message. Hopefully have a minimal or net positive impact to most applications.
+
 ## No more dialplan.rb
 
 This is the single most visible change.  Previously, and Adhearsion application's entry point was dialplan.rb, and the entry point in dialplan.rb was driven by the context provided by Asterisk.  Since Adhearsion 2.0 runs on multiple platforms, and the concept of a "context" is Asterisk-specific, we needed to do something different.  The recommended way to migrate dialplan.rb is to break each dialplan.rb block up into a separate [CallController](/docs/call-controllers). Then you will need to add routes to config/adhearsion.rb that map Asterisk contexts to the new CallControllers.  For example, given the following dialplan.rb:
