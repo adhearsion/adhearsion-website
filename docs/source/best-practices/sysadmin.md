@@ -1,10 +1,8 @@
 [TOC]
 
-Notes for System Administrators
-===============================
+# Notes for System Administrators
 
 This page is for all the sysadmins and devops folks tasked with operationalizing Adhearsion applications.
-
 
 ## Interacting with the Adhearsion Process
 
@@ -29,3 +27,9 @@ There are two ways to start an Adhearsion process:
 * In the foreground with an Adhearsion console.  This is the common case while developing Adhearsion applications.  To start in this mode call ahn with the "start" argument: "ahn start /path/to/my/application"
 
 * In the background as a daemon.  This is typical for deployment scenarios.  To start in this mode call ahn with the "daemon" argument: "ahn daemon /path/to/my/application"
+
+<div class='docs-progress-nav'>
+  <span class='back'>
+    Back to <a href="/docs/best-practices/deployment">Deployment</a>
+  </span>
+</div>

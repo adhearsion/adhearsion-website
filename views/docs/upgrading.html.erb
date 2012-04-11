@@ -57,7 +57,7 @@ fibonacci {
 }
 </pre>
 
-<p>Would become the following three CallController classes:</p>
+<p>Would become the following CallController classes:</p>
 <pre class="brush: ruby;">
 class MyMenu < Adhearsion::CallController
   def run
@@ -177,8 +177,8 @@ end
 <pre class="brush: ruby;">
 methods_for :dialplan do
   def conference_login
-    room = input 5, :play => 'enter-room-number'
-    return nil unless (50000..6000).include? room.to_i
+    room = input 4, :play => 'enter-room-number'
+    return nil unless (5000..6000).include? room.to_i
     room
   end
 end
@@ -188,8 +188,8 @@ end
 <pre class="brush: ruby;">
 class ConferenceLogin < Adhearsion::CallController
   def run
-    room = input 5, :play => 'enter-room-number'
-    return nil unless (50000..6000).include? room.to_i
+    room = input 4, :play => 'enter-room-number'
+    return nil unless (5000..6000).include? room.to_i
     room
   end
 end
@@ -199,8 +199,8 @@ end
 <pre class="brush: ruby;">
 module ConferenceLogin
   def conference_login
-    room = input 5, :play => 'enter-room-number'
-    return nil unless (50000..6000).include? room.to_i
+    room = input 4, :play => 'enter-room-number'
+    return nil unless (5000..6000).include? room.to_i
     room
   end
 end
@@ -235,6 +235,7 @@ CallController.mixin ConferenceLogin
               <ul>
                 <li id="docs-nav-best-practices-testing"><a href="/docs/best-practices/testing">Testing</a></li>
                 <li id="docs-nav-best-practices-deployment"><a href="/docs/best-practices/deployment">Deployment</a></li>
+                <li id="docs-nav-best-practices-sysadmin"><a href="/docs/best-practices/sysadmin">Notes for System Administrators</a></li>
               </ul>
             </li>
             <li id="docs-nav-upgrading"><a href="/docs/upgrading">Upgrading</a></li>

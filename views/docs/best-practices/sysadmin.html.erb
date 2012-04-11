@@ -1,0 +1,84 @@
+<div class="docs">
+  <div class="full-width">
+    <div class="two-third">
+<div class="toc">
+<ul>
+<li><a href="#notes-for-system-administrators">Notes for System Administrators</a><ul>
+<li><a href="#interacting-with-the-adhearsion-process">Interacting with the Adhearsion Process</a></li>
+<li><a href="#signals">Signals</a></li>
+<li><a href="#starting-and-stopping-adhearsion-processes">Starting and Stopping Adhearsion Processes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h1 id="notes-for-system-administrators"><a class="toclink" href="#notes-for-system-administrators">Notes for System Administrators</a></h1>
+<p>This page is for all the sysadmins and devops folks tasked with operationalizing Adhearsion applications.</p>
+<h2 id="interacting-with-the-adhearsion-process"><a class="toclink" href="#interacting-with-the-adhearsion-process">Interacting with the Adhearsion Process</a></h2>
+<p>Starting with Adhearsion 2.0, all Adhearsion applications will appear in your process list with the name "ahn" and that name should work with standard tools like ps/pkill/killall.</p>
+<h2 id="signals"><a class="toclink" href="#signals">Signals</a></h2>
+<p>Adhearsion 2.0 processes respond to several signals:</p>
+<ul>
+<li>On SIGALRM, Adhearsion will toggle on or off TRACE level logging.  This can be very helpful when debugging a production system.</li>
+<li>On SIGINT or SIGQUIT Adhearsion does several things:<ul>
+<li>On first signal, Adhearsion marks its internal state as "shutting down" but continues to take and process calls normally.</li>
+<li>On second signal, Adhearsion will continue to process calls already in the system, but will reject any new calls.</li>
+<li>On the third signal, Adhearsion will send a HANGUP to all existing calls.</li>
+<li>In all of the above cases Adhearsion will shut down as soon as the call count reaches 0.</li>
+<li>On the fourth signal, Adhearsion will stop immediately (forced shutdown).</li>
+</ul>
+</li>
+</ul>
+<h2 id="starting-and-stopping-adhearsion-processes"><a class="toclink" href="#starting-and-stopping-adhearsion-processes">Starting and Stopping Adhearsion Processes</a></h2>
+<p>There are two ways to start an Adhearsion process:</p>
+<ul>
+<li>
+<p>In the foreground with an Adhearsion console.  This is the common case while developing Adhearsion applications.  To start in this mode call ahn with the "start" argument: "ahn start /path/to/my/application"</p>
+</li>
+<li>
+<p>In the background as a daemon.  This is typical for deployment scenarios.  To start in this mode call ahn with the "daemon" argument: "ahn daemon /path/to/my/application"</p>
+</li>
+</ul>
+<div class='docs-progress-nav'>
+  <span class='back'>
+    Back to <a href="/docs/best-practices/deployment">Deployment</a>
+  </span>
+</div>
+    </div>
+
+    <div class="one-third">
+      <div class="outer-rounded-box-bold">
+        <div class="inner-rounded-box-filled-grey clearfix">
+          <h3>Documentation</h3>
+          <ul class="collapsibleList">
+            <li id="docs-nav-getting-started">
+              Getting Started
+              <ul>
+                <li id="docs-nav-getting-started-prerequisites"><a href="/docs/getting-started/prerequisites">Prerequisites</a></li>
+                <li id="docs-nav-getting-started-installation"><a href="/docs/getting-started/installation">Installation</a></li>
+              </ul>
+            </li>
+            <li id="docs-nav-console"><a href="/docs/console">Console</a></li>
+            <li id="docs-nav-call-controller"><a href="/docs/call-controllers">Call Controllers</a></li>
+            <li id="docs-nav-routing"><a href="/docs/routing">Routing</a></li>
+            <li id="docs-nav-config"><a href="/docs/config">Config</a></li>
+            <li id="docs-nav-events"><a href="/docs/events">Events</a></li>
+            <li id="docs-nav-logging"><a href="/docs/logging">Logging</a></li>
+            <li id="docs-nav-plugins"><a href="/docs/plugins">Plugins</a></li>
+            <li id="docs-nav-best-practices">
+              Best Practices
+              <ul>
+                <li id="docs-nav-best-practices-testing"><a href="/docs/best-practices/testing">Testing</a></li>
+                <li id="docs-nav-best-practices-deployment"><a href="/docs/best-practices/deployment">Deployment</a></li>
+                <li id="docs-nav-best-practices-sysadmin"><a href="/docs/best-practices/sysadmin">Notes for System Administrators</a></li>
+              </ul>
+            </li>
+            <li id="docs-nav-upgrading"><a href="/docs/upgrading">Upgrading</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+</div>
+
+<a href="#" id="main-nav-active" style="display:none;">#main-nav-docs</a>
