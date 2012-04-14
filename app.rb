@@ -58,7 +58,7 @@ get '/' do
   haml :index
 end
 
-%w{community get-help conference faq irc}.each do |page|
+%w{community get-help conference faq irc media}.each do |page|
   get "/#{page}" do
     haml page.to_sym
   end
