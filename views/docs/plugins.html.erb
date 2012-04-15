@@ -151,7 +151,7 @@ end
 <p>Note that your #run method must not block indefinitely!  If necessary, place the contents of your run block within a thread so that Adhearsion can continue to start the other plugins:</p>
 <pre class="brush: ruby">
 module GreetPlugin
-  class Plugin < Adhearison::Plugin
+  class Plugin < Adhearsion::Plugin
     def run
       Thread.new do
         catching_standard_errors { my_blocking_runner_method }

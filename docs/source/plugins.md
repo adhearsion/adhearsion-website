@@ -87,7 +87,7 @@ Note that your #run method must not block indefinitely!  If necessary, place the
 
 <pre class="brush: ruby">
 module GreetPlugin
-  class Plugin < Adhearison::Plugin
+  class Plugin < Adhearsion::Plugin
     def run
       Thread.new do
         catching_standard_errors { my_blocking_runner_method }
