@@ -6,7 +6,7 @@ This page is for all the sysadmins and devops folks tasked with operationalizing
 
 ## Interacting with the Adhearsion Process
 
-Starting with Adhearsion 2.0, all Adhearsion applications will appear in your process list with the name "ahn" and that name should work with standard tools like ps/pkill/killall.
+Starting with Adhearsion 2.0, all Adhearsion applications will appear in your process list with the name "ahn" and that name should work with standard tools like ps/pkill/killall. In addition, you can configure the name the process uses by setting config.platform.process_name.  For example, setting this to "myapp" will allow you to send signals to just that application using "killall myapp".
 
 ## Signals
 
