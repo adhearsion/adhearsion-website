@@ -12,6 +12,7 @@ Starting with Adhearsion 2.0, all Adhearsion applications will appear in your pr
 
 Adhearsion 2.0 processes respond to several signals:
 
+* On SIGHUP, Adhearsion will close and reopen all logfiles.  Make sure you do this after rotating log files, for example, with logrotate.
 * On SIGALRM, Adhearsion will toggle on or off TRACE level logging.  This can be very helpful when debugging a production system.
 * On SIGINT or SIGQUIT Adhearsion does several things:
     - On first signal, Adhearsion marks its internal state as "shutting down" but continues to take and process calls normally.

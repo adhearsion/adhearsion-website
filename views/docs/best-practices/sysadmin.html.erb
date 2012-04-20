@@ -49,6 +49,7 @@
 <h2 id="signals"><a class="toclink" href="#signals">Signals</a></h2>
 <p>Adhearsion 2.0 processes respond to several signals:</p>
 <ul>
+<li>On SIGHUP, Adhearsion will close and reopen all logfiles.  Make sure you do this after rotating log files, for example, with logrotate.</li>
 <li>On SIGALRM, Adhearsion will toggle on or off TRACE level logging.  This can be very helpful when debugging a production system.</li>
 <li>On SIGINT or SIGQUIT Adhearsion does several things:<ul>
 <li>On first signal, Adhearsion marks its internal state as "shutting down" but continues to take and process calls normally.</li>
