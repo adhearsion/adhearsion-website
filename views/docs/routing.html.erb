@@ -80,6 +80,11 @@ route 'foo', [{:from => 'sip:me@there.com'}, {:to => 'sip:us@here.com'}]
 # operation upon the call object. A truthy return value passes
 # the guard.
 route 'foo', lambda { |call| Time.now.hour < 20 }
+
+# For those upgrading from Adhearsion 1.x, or simply wishing to
+# use Asterisk contexts as a routing key, the context name
+# is accessible as a guard as well:
+route 'foo', :agi_context => 'context-name'
 </pre>
 
 <div class='docs-progress-nav'>
