@@ -325,12 +325,12 @@ bindaddr = 0.0.0.0
 
 [myuser]
 secret = mypassword
-read = all,dialplan,agi
-write = all,dialplan,agi
+read = all
+write = all
 eventfilter = !Event: RTCP*
 </pre>
 
-<p>Note that there are several non-standard permissions enabled (dialplan, agi). This is necessary to enable AsyncAGI for this AMI user. Also, we have setup an event filter here to prevent sending Adhearsion RTCP events. This is optional, and is because Asterisk generates a great number of these events, and Adhearsion cannot normally do anything useful with them. Thus, we can improve Adhearsion's performance by not sending it these events in the first place.</p>
+<p>Note that the user needs acess to all AMI events and actions. Also, we have setup an event filter here to prevent sending Adhearsion RTCP events. This is optional, and is because Asterisk generates a great number of these events, and Adhearsion cannot normally do anything useful with them. Thus, we can improve Adhearsion's performance by not sending it these events in the first place.</p>
 <h4 id="route-calls-to-asyncagi"><a class="toclink" href="#route-calls-to-asyncagi">Route calls to AsyncAGI</a></h4>
 <p>You will need to route calls to AsyncAGI, which allows Adhearsion to take control of them. You should add something similar to the following config to extensions.conf:</p>
 <pre class="brush: ruby;">

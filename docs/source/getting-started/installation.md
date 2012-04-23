@@ -74,12 +74,12 @@ bindaddr = 0.0.0.0
 
 [myuser]
 secret = mypassword
-read = all,dialplan,agi
-write = all,dialplan,agi
+read = all
+write = all
 eventfilter = !Event: RTCP*
 </pre>
 
-Note that there are several non-standard permissions enabled (dialplan, agi). This is necessary to enable AsyncAGI for this AMI user. Also, we have setup an event filter here to prevent sending Adhearsion RTCP events. This is optional, and is because Asterisk generates a great number of these events, and Adhearsion cannot normally do anything useful with them. Thus, we can improve Adhearsion's performance by not sending it these events in the first place.
+Note that the user needs acess to all AMI events and actions. Also, we have setup an event filter here to prevent sending Adhearsion RTCP events. This is optional, and is because Asterisk generates a great number of these events, and Adhearsion cannot normally do anything useful with them. Thus, we can improve Adhearsion's performance by not sending it these events in the first place.
 
 #### Route calls to AsyncAGI
 
