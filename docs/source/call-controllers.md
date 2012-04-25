@@ -288,13 +288,13 @@ end
 
 ### Monitoring recording
 
-Alternatively, it may be desireable to record a call in the background while other interactions occurr, perhaps for training, fact-verification or compliance reasons. In this case, it is necessary to execute the recording asynchronously, and handle its recording as a callback:
+Alternatively, it may be desireable to record a call in the background while other interactions occurr, perhaps for training, fact-verification or compliance reasons. In this case, it is necessary to execute the recording asynchronously, and handle its recording as a callback receiving the Event object for the command:
 
 <pre class="brush: ruby;">
 class SuperSecretProjectCall < Adhearsion::CallController
   def run
-    record :async => true do |recording|
-      logger.info "Async recording saved to #{recording.uri}"
+    record :async => true do |event|
+      logger.info "Async recording saved to #{event.recording.uri}"
     end
     say "We are currently recording this call"
     hangup # Triggers the end of the recording
