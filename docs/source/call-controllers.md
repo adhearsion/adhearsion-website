@@ -279,8 +279,8 @@ In this case, it is desireable for #record to block until the recording complete
 <pre class="brush: ruby;">
 class SuperSecretProjectCall < Adhearsion::CallController
   def run
-    recording = record :start_beep => true, :max_duration => 60_000
-    logger.info "Recording saved to #{recording.uri}"
+    record_result = record :start_beep => true, :max_duration => 60_000
+    logger.info "Recording saved to #{record_result.complete_event.recording.uri}"
     say "Goodbye!"
   end
 end
