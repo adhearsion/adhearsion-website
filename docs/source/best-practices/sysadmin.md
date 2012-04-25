@@ -29,8 +29,13 @@ There are two ways to start an Adhearsion process:
 
 * In the background as a daemon.  This is typical for deployment scenarios.  To start in this mode call ahn with the "daemon" argument: "ahn daemon /path/to/my/application"
 
+<a href="#" rel="docs-nav-active" style="display:none;">docs-nav-best-practices</a>
+
 <div class='docs-progress-nav'>
   <span class='back'>
     Back to <a href="/docs/best-practices/deployment">Deployment</a>
+  </span>
+  <span class='forward'>
+    Continue to <a href="/docs/best-practices/rails">Rails Integration</a>
   </span>
 </div>
