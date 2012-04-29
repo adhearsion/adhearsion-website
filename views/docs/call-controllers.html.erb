@@ -58,7 +58,6 @@
 <li><a href="#recording">Recording</a><ul>
 <li><a href="#voicemail-like-recording">Voicemail-like recording</a></li>
 <li><a href="#monitoring-recording">Monitoring recording</a></li>
-<li><a href="#asterisk">Asterisk</a></li>
 </ul>
 </li>
 <li><a href="#joining-calls">Joining calls</a></li>
@@ -330,18 +329,6 @@ class SuperSecretProjectCall < Adhearsion::CallController
     record :async => true do |recording|
       logger.info "Async recording saved to #{recording.uri}"
     end
-    say "We are currently recording this call"
-    hangup # Triggers the end of the recording
-  end
-end
-</pre>
-
-<h3 id="asterisk"><a class="toclink" href="#asterisk">Asterisk</a></h3>
-<p>The #record method is currently unsupported on Asterisk. Once must use AGI record or MixMonitor directly, via adhearsion-asterisk's <a href="http://rubydoc.info/github/adhearsion/adhearsion-asterisk/master/Adhearsion/Asterisk/CallControllerMethods:agi">CallController#agi</a>, eg:</p>
-<pre class="brush: ruby;">
-class SuperSecretProjectCall < Adhearsion::CallController
-  def run
-    agi 'MixMonitor', 'foobar.wav'
     say "We are currently recording this call"
     hangup # Triggers the end of the recording
   end
