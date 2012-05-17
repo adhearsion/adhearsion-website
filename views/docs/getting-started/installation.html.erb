@@ -44,12 +44,12 @@
 <li><a href="#gemfile">Gemfile</a></li>
 <li><a href="#configadhearsionrb">config/adhearsion.rb</a></li>
 <li><a href="#connecting-to-your-telephony-engine">Connecting to your telephony engine</a><ul>
-<li><a href="#rayo-prism">Rayo (PRISM)</a><ul>
-<li><a href="#asterisk">Asterisk</a></li>
+<li><a href="#rayo-prism">Rayo (PRISM)</a></li>
+<li><a href="#asterisk">Asterisk</a><ul>
 <li><a href="#ami-user">AMI User</a></li>
+<li><a href="#route-calls-to-asyncagi">Route calls to AsyncAGI</a></li>
 </ul>
 </li>
-<li><a href="#route-calls-to-asyncagi">Route calls to AsyncAGI</a></li>
 </ul>
 </li>
 </ul>
@@ -333,7 +333,7 @@ eventfilter = !Event: RTCP*
 </pre>
 
 <p>Note that the user needs acess to all AMI events and actions. Also, we have setup an event filter here to prevent sending Adhearsion RTCP events. This is optional, and is because Asterisk generates a great number of these events, and Adhearsion cannot normally do anything useful with them. Thus, we can improve Adhearsion's performance by not sending it these events in the first place.</p>
-<h4 id="route-calls-to-asyncagi"><a class="toclink" href="#route-calls-to-asyncagi">Route calls to AsyncAGI</a></h4>
+<h5 id="route-calls-to-asyncagi"><a class="toclink" href="#route-calls-to-asyncagi">Route calls to AsyncAGI</a></h5>
 <p>You will need to route calls to AsyncAGI, which allows Adhearsion to take control of them. You should add something similar to the following config to extensions.conf:</p>
 <pre class="brush: ruby;">
 [your_context_name]
