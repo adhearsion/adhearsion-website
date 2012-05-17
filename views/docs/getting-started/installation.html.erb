@@ -340,7 +340,8 @@ eventfilter = !Event: RTCP*
 exten => _.,1,AGI(agi:async)
 </pre>
 
-<p>This will route all calls with a numeric extension to Adhearsion</p>
+<p>This will route all calls with a numeric extension to Adhearsion.</p>
+<p>Note also that on versions of Asterisk before 10, it is necessary to add an empty context with the name 'adhearsion-redirect'.</p>
 <h2 id="make-a-test-call"><a class="toclink" href="#make-a-test-call">Make a test call</a></h2>
 <p>By default, a generated Adhearsion app includes the SimonGame. You can boot your app by running "ahn -" and immediately make a call to it. If everything is configured correctly, you should be prompted to play a game. Enjoy your time working with Adhearsion, and feel free to explore the rest of the documentation provided here.</p>
 <p><a href="#" rel="docs-nav-active" style="display:none;">docs-nav-getting-started</a></p>

@@ -90,7 +90,9 @@ You will need to route calls to AsyncAGI, which allows Adhearsion to take contro
 exten => _.,1,AGI(agi:async)
 </pre>
 
-This will route all calls with a numeric extension to Adhearsion
+This will route all calls with a numeric extension to Adhearsion.
+
+Note also that on versions of Asterisk before 10, it is necessary to add an empty context with the name 'adhearsion-redirect'.
 
 ## Make a test call
 
