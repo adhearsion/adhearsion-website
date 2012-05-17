@@ -58,7 +58,7 @@ Adhearsion currently supports two protocols for communication with the telephony
 
 If you are using a Rayo server, you will need to configure your JID and password and ensure that the DIDs have been mapped to your selected JID. Refer to your Rayo server's documentation for how to do this.  You likely will also want to configure your root_domain to point to your Rayo server's domain name for routing outbound calls.
 
-##### Asterisk
+#### Asterisk
 
 If you are using Asterisk, there are a couple of steps to configure it for use with Adhearsion:
 
