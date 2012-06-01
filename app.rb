@@ -99,7 +99,8 @@ end
   '/api'          => 'http://rubydoc.info/github/adhearsion/adhearsion/file/README.markdown',
   '/wiki'         => 'https://github.com/adhearsion/adhearsion/wiki',
   '/contributing' => 'https://github.com/adhearsion/adhearsion/wiki/Contributing',
-  '/rss'          => BlogPostAggregator.instance.rss_url
+  '/rss'          => BlogPostAggregator.instance.rss_url,
+  '/download'     => '/docs/getting-started/installation'
 }.each_pair do |local, remote|
   get local do
     redirect remote

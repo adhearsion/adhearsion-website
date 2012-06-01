@@ -44,12 +44,12 @@
 <li><a href="#gemfile">Gemfile</a></li>
 <li><a href="#configadhearsionrb">config/adhearsion.rb</a></li>
 <li><a href="#connecting-to-your-telephony-engine">Connecting to your telephony engine</a><ul>
-<li><a href="#rayo-prism">Rayo (PRISM)</a><ul>
-<li><a href="#asterisk">Asterisk</a></li>
+<li><a href="#rayo-prism">Rayo (PRISM)</a></li>
+<li><a href="#asterisk">Asterisk</a><ul>
 <li><a href="#ami-user">AMI User</a></li>
+<li><a href="#route-calls-to-asyncagi">Route calls to AsyncAGI</a></li>
 </ul>
 </li>
-<li><a href="#route-calls-to-asyncagi">Route calls to AsyncAGI</a></li>
 </ul>
 </li>
 </ul>
@@ -315,7 +315,7 @@ end
 <p>Adhearsion currently supports two protocols for communication with the telephony engine it is controlling; <a href="https://github.com/rayo/rayo-server/wiki">Rayo</a> and Asterisk <a href="http://www.voip-info.org/wiki/view/Asterisk+manager+API">AMI</a> with <a href="http://www.voip-info.org/wiki/view/Asterisk+AGI">AsyncAGI</a>. As such, the configuration for each is slightly different. You will notice that the generated config file contains scaffolding for each, and that the default protocol is Rayo. You are, however, encouraged to <a href="/docs/config#storing-configuration-in-the-environment">store sensitive credentials in the application's environment</a> rather than in the config file.</p>
 <h4 id="rayo-prism"><a class="toclink" href="#rayo-prism">Rayo (PRISM)</a></h4>
 <p>If you are using a Rayo server, you will need to configure your JID and password and ensure that the DIDs have been mapped to your selected JID. Refer to your Rayo server's documentation for how to do this.  You likely will also want to configure your root_domain to point to your Rayo server's domain name for routing outbound calls.</p>
-<h5 id="asterisk"><a class="toclink" href="#asterisk">Asterisk</a></h5>
+<h4 id="asterisk"><a class="toclink" href="#asterisk">Asterisk</a></h4>
 <p>If you are using Asterisk, there are a couple of steps to configure it for use with Adhearsion:</p>
 <h5 id="ami-user"><a class="toclink" href="#ami-user">AMI User</a></h5>
 <p>It is necessary to configure an AMI user by which Adhearsion can connect to Asterisk. This can be done in manager.conf, and a sample configuration is provided below:</p>
@@ -333,14 +333,15 @@ eventfilter = !Event: RTCP*
 </pre>
 
 <p>Note that the user needs acess to all AMI events and actions. Also, we have setup an event filter here to prevent sending Adhearsion RTCP events. This is optional, and is because Asterisk generates a great number of these events, and Adhearsion cannot normally do anything useful with them. Thus, we can improve Adhearsion's performance by not sending it these events in the first place.</p>
-<h4 id="route-calls-to-asyncagi"><a class="toclink" href="#route-calls-to-asyncagi">Route calls to AsyncAGI</a></h4>
+<h5 id="route-calls-to-asyncagi"><a class="toclink" href="#route-calls-to-asyncagi">Route calls to AsyncAGI</a></h5>
 <p>You will need to route calls to AsyncAGI, which allows Adhearsion to take control of them. You should add something similar to the following config to extensions.conf:</p>
 <pre class="brush: ruby;">
 [your_context_name]
 exten => _.,1,AGI(agi:async)
 </pre>
 
-<p>This will route all calls with a numeric extension to Adhearsion</p>
+<p>This will route all calls with a numeric extension to Adhearsion.</p>
+<p>Note also that on versions of Asterisk before 10, it is necessary to add an empty context with the name 'adhearsion-redirect'.</p>
 <h2 id="make-a-test-call"><a class="toclink" href="#make-a-test-call">Make a test call</a></h2>
 <p>By default, a generated Adhearsion app includes the SimonGame. You can boot your app by running "ahn -" and immediately make a call to it. If everything is configured correctly, you should be prompted to play a game. Enjoy your time working with Adhearsion, and feel free to explore the rest of the documentation provided here.</p>
 <p><a href="#" rel="docs-nav-active" style="display:none;">docs-nav-getting-started</a></p>

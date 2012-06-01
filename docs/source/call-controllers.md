@@ -302,20 +302,6 @@ class SuperSecretProjectCall < Adhearsion::CallController
 end
 </pre>
 
-### Asterisk
-
-The #record method is currently unsupported on Asterisk. Once must use AGI record or MixMonitor directly, via adhearsion-asterisk's [CallController#agi](http://rubydoc.info/github/adhearsion/adhearsion-asterisk/master/Adhearsion/Asterisk/CallControllerMethods:agi), eg:
-
-<pre class="brush: ruby;">
-class SuperSecretProjectCall < Adhearsion::CallController
-  def run
-    agi 'MixMonitor', 'foobar.wav'
-    say "We are currently recording this call"
-    hangup # Triggers the end of the recording
-  end
-end
-</pre>
-
 ## Joining calls
 
 If there are multiple calls active in Adhearsion, it is possible to join the media streams of those calls together so the parties may talk.

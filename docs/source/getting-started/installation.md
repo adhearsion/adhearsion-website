@@ -58,7 +58,7 @@ Adhearsion currently supports two protocols for communication with the telephony
 
 If you are using a Rayo server, you will need to configure your JID and password and ensure that the DIDs have been mapped to your selected JID. Refer to your Rayo server's documentation for how to do this.  You likely will also want to configure your root_domain to point to your Rayo server's domain name for routing outbound calls.
 
-##### Asterisk
+#### Asterisk
 
 If you are using Asterisk, there are a couple of steps to configure it for use with Adhearsion:
 
@@ -81,7 +81,7 @@ eventfilter = !Event: RTCP*
 
 Note that the user needs acess to all AMI events and actions. Also, we have setup an event filter here to prevent sending Adhearsion RTCP events. This is optional, and is because Asterisk generates a great number of these events, and Adhearsion cannot normally do anything useful with them. Thus, we can improve Adhearsion's performance by not sending it these events in the first place.
 
-#### Route calls to AsyncAGI
+##### Route calls to AsyncAGI
 
 You will need to route calls to AsyncAGI, which allows Adhearsion to take control of them. You should add something similar to the following config to extensions.conf:
 
@@ -90,7 +90,9 @@ You will need to route calls to AsyncAGI, which allows Adhearsion to take contro
 exten => _.,1,AGI(agi:async)
 </pre>
 
-This will route all calls with a numeric extension to Adhearsion
+This will route all calls with a numeric extension to Adhearsion.
+
+Note also that on versions of Asterisk before 10, it is necessary to add an empty context with the name 'adhearsion-redirect'.
 
 ## Make a test call
 
