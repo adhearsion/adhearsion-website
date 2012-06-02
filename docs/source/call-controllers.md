@@ -87,6 +87,14 @@ class SuperSecretProjectCallController < Adhearsion::CallController
 end
 </pre>
 
+## Explicit answering and early media
+
+CallController methods will not explictly answer calls to allow the developer to take advantage of early media. EM is a way to send audio to the caller and receive DTMF without actually "raising the phone". In case of normal time-based phone billing, that will result in the call not being billed until it is actually answered.
+
+For example, this could be used to play some pricing information to a caller, or to send custom audio as a ringing tone.
+
+Early media could not work with all methods and channels, so the recommendation is to always use #answer first unless you know your application does not need that.
+
 ## Multiple controllers
 
 It is possible to reuse and share functionality among call controllers. There are two approaches to this. The first is to invoke another controller *within* the current controller:
@@ -279,8 +287,9 @@ In this case, it is desireable for #record to block until the recording complete
 <pre class="brush: ruby;">
 class SuperSecretProjectCall < Adhearsion::CallController
   def run
+    answer
     record_result = record :start_beep => true, :max_duration => 60_000
-    logger.info "Recording saved to #{record_result.complete_event.recording.uri}"
+    logger.info "Recording saved to #{record_result.recording_uri}"
     say "Goodbye!"
   end
 end
@@ -293,6 +302,7 @@ Alternatively, it may be desireable to record a call in the background while oth
 <pre class="brush: ruby;">
 class SuperSecretProjectCall < Adhearsion::CallController
   def run
+    answer
     record :async => true do |event|
       logger.info "Async recording saved to #{event.recording.uri}"
     end
