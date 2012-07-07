@@ -312,6 +312,12 @@ class SuperSecretProjectCall < Adhearsion::CallController
 end
 </pre>
 
+### Recording directory
+
+Adhearsion will check that the recording directory it uses, /var/punchblock/record, is in place when starting up on an Asterisk platform. A warning will be issued if the directory is missing. If Adhearsion and Asterisk are not running on the same machine, the warning can be disregarded, even though the directory has still to be present on the machine running Asterisk.
+
+It is additionally necessary to have sox installed on the Asterisk machine, because it provides mixing for recordings.
+
 ## Joining calls
 
 If there are multiple calls active in Adhearsion, it is possible to join the media streams of those calls together so the parties may talk.
