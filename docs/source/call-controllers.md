@@ -336,7 +336,7 @@ Here, #join will block until either the 3rd-party call hangs up, or is otherwise
 
 Calls may be unjoined out-of-band using the Call#unjoin method, which has a similar signature to #join.
 
-## Making outbound calls
+## Joining calls to an outbound call
 
 Similarly to #join, it is possible to make an outbound call to a third-party, and then to join the calls on answering.  The #dial method handles this automatically.
 
@@ -394,6 +394,43 @@ end
 </pre>
 
 Further details can be found in the [#dial API documentation](http://rubydoc.info/github/adhearsion/adhearsion/Adhearsion/CallController/Dial:dial).
+
+## Making outbound calls
+
+An outbound call may be created and sent to a new Call Controller instead of joining to an existing call. In this case it is possible to have an inbound call, or event, trigger a new call that plays a message, allows a user to be prompted for input before further action and more.
+
+When the outbound call is placed in an existing Call Controller that new call is routed to a new Call Controller via Adhearsion configuration just like any other call.
+
+<pre class="brush: ruby;">
+# config/adhearsion.rb
+Adhearsion.config do |config|
+  Adhearsion.router do  
+    route 'Outbound Notification', Adhearsion::OutboundCall, OutboundNotification
+    route 'Inbound Call', InboundProjectCall
+  end
+end
+
+# Call Controllers
+class InboundCall < Adhearsion::CallController
+  def run
+    answer
+    say "Thank you for calling, we will notify Jason that you called."
+    hangup
+    
+    Adhearsion::OutboundCall.originate 'sip:jason@adhearsion.com', :from => 'sip:foo@bar.com'
+  end
+end
+
+class OutboundNotification < Adhearsion::CallController
+  def run
+    answer
+    say "Foo called!"
+    hangup
+  end
+end
+</pre>
+
+Further details can be found in the [#originate API documentation](http://rubydoc.info/github/adhearsion/adhearsion/Adhearsion/OutboundCall#originate-class_method).
 
 ## Callbacks
 
