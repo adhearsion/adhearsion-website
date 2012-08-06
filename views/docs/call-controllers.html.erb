@@ -39,6 +39,7 @@
 <ul>
 <li><a href="#call-controllers">Call Controllers</a><ul>
 <li><a href="#basic-call-control">Basic call control</a></li>
+<li><a href="#explicit-answering-and-early-media">Explicit answering and early media</a></li>
 <li><a href="#multiple-controllers">Multiple controllers</a></li>
 <li><a href="#rendering-output">Rendering Output</a><ul>
 <li><a href="#play">#play</a></li>
@@ -58,9 +59,11 @@
 <li><a href="#recording">Recording</a><ul>
 <li><a href="#voicemail-like-recording">Voicemail-like recording</a></li>
 <li><a href="#monitoring-recording">Monitoring recording</a></li>
+<li><a href="#recording-directory">Recording directory</a></li>
 </ul>
 </li>
 <li><a href="#joining-calls">Joining calls</a></li>
+<li><a href="#joining-calls-to-an-outbound-call">Joining calls to an outbound call</a></li>
 <li><a href="#making-outbound-calls">Making outbound calls</a></li>
 <li><a href="#callbacks">Callbacks</a></li>
 </ul>
@@ -153,6 +156,10 @@ class SuperSecretProjectCallController < Adhearsion::CallController
 end
 </pre>
 
+<h2 id="explicit-answering-and-early-media"><a class="toclink" href="#explicit-answering-and-early-media">Explicit answering and early media</a></h2>
+<p>CallController methods will not explictly answer calls to allow the developer to take advantage of early media. EM is a way to send audio to the caller and receive DTMF without actually "raising the phone". In case of normal time-based phone billing, that will result in the call not being billed until it is actually answered.</p>
+<p>For example, this could be used to play some pricing information to a caller, or to send custom audio as a ringing tone.</p>
+<p>Early media could not work with all methods and channels, so the recommendation is to always use #answer first unless you know your application does not need that.</p>
 <h2 id="multiple-controllers"><a class="toclink" href="#multiple-controllers">Multiple controllers</a></h2>
 <p>It is possible to reuse and share functionality among call controllers. There are two approaches to this. The first is to invoke another controller <em>within</em> the current controller:</p>
 <pre class="brush: ruby;">
@@ -314,20 +321,22 @@ end
 <pre class="brush: ruby;">
 class SuperSecretProjectCall < Adhearsion::CallController
   def run
+    answer
     record_result = record :start_beep => true, :max_duration => 60_000
-    logger.info "Recording saved to #{record_result.complete_event.recording.uri}"
+    logger.info "Recording saved to #{record_result.recording_uri}"
     say "Goodbye!"
   end
 end
 </pre>
 
 <h3 id="monitoring-recording"><a class="toclink" href="#monitoring-recording">Monitoring recording</a></h3>
-<p>Alternatively, it may be desireable to record a call in the background while other interactions occurr, perhaps for training, fact-verification or compliance reasons. In this case, it is necessary to execute the recording asynchronously, and handle its recording as a callback:</p>
+<p>Alternatively, it may be desireable to record a call in the background while other interactions occurr, perhaps for training, fact-verification or compliance reasons. In this case, it is necessary to execute the recording asynchronously, and handle its recording as a callback receiving the Event object for the command:</p>
 <pre class="brush: ruby;">
 class SuperSecretProjectCall < Adhearsion::CallController
   def run
-    record :async => true do |recording|
-      logger.info "Async recording saved to #{recording.uri}"
+    answer
+    record :async => true do |event|
+      logger.info "Async recording saved to #{event.recording.uri}"
     end
     say "We are currently recording this call"
     hangup # Triggers the end of the recording
@@ -335,6 +344,9 @@ class SuperSecretProjectCall < Adhearsion::CallController
 end
 </pre>
 
+<h3 id="recording-directory"><a class="toclink" href="#recording-directory">Recording directory</a></h3>
+<p>Adhearsion will check that the recording directory it uses, /var/punchblock/record, is in place when starting up on an Asterisk platform. A warning will be issued if the directory is missing. If Adhearsion and Asterisk are not running on the same machine, the warning can be disregarded, even though the directory has still to be present on the machine running Asterisk.</p>
+<p>It is additionally necessary to have sox installed on the Asterisk machine, because it provides mixing for recordings.</p>
 <h2 id="joining-calls"><a class="toclink" href="#joining-calls">Joining calls</a></h2>
 <p>If there are multiple calls active in Adhearsion, it is possible to join the media streams of those calls together so the parties may talk.</p>
 <pre class="brush: ruby;">
@@ -349,7 +361,7 @@ end
 
 <p>Here, #join will block until either the 3rd-party call hangs up, or is otherwise unjoined out-of-band. It is possible to do an asynchronous join by specifying :async =&gt; true, in which case #join will only block until the join is confirmed.  Your controller will then resume executing commands on the call while the parties are talking.</p>
 <p>Calls may be unjoined out-of-band using the Call#unjoin method, which has a similar signature to #join.</p>
-<h2 id="making-outbound-calls"><a class="toclink" href="#making-outbound-calls">Making outbound calls</a></h2>
+<h2 id="joining-calls-to-an-outbound-call"><a class="toclink" href="#joining-calls-to-an-outbound-call">Joining calls to an outbound call</a></h2>
 <p>Similarly to #join, it is possible to make an outbound call to a third-party, and then to join the calls on answering.  The #dial method handles this automatically.</p>
 <pre class="brush: ruby;">
 class SuperSecretProjectCall < Adhearsion::CallController
@@ -402,6 +414,39 @@ end
 </pre>
 
 <p>Further details can be found in the <a href="http://rubydoc.info/github/adhearsion/adhearsion/Adhearsion/CallController/Dial:dial">#dial API documentation</a>.</p>
+<h2 id="making-outbound-calls"><a class="toclink" href="#making-outbound-calls">Making outbound calls</a></h2>
+<p>An outbound call may be created and sent to a new Call Controller instead of joining to an existing call. In this case it is possible to have an inbound call, or event, trigger a new call that plays a message, allows a user to be prompted for input before further action and more.</p>
+<p>When the outbound call is placed in an existing Call Controller that new call is routed to a new Call Controller via Adhearsion configuration just like any other call.</p>
+<pre class="brush: ruby;">
+# config/adhearsion.rb
+Adhearsion.config do |config|
+  Adhearsion.router do  
+    route 'Outbound Notification', Adhearsion::OutboundCall, OutboundNotification
+    route 'Inbound Call', InboundProjectCall
+  end
+end
+
+# Call Controllers
+class InboundCall < Adhearsion::CallController
+  def run
+    answer
+    say "Thank you for calling, we will notify Jason that you called."
+    hangup
+
+    Adhearsion::OutboundCall.originate 'sip:jason@adhearsion.com', :from => 'sip:foo@bar.com'
+  end
+end
+
+class OutboundNotification < Adhearsion::CallController
+  def run
+    answer
+    say "Foo called!"
+    hangup
+  end
+end
+</pre>
+
+<p>Further details can be found in the <a href="http://rubydoc.info/github/adhearsion/adhearsion/Adhearsion/OutboundCall#originate-class_method">#originate API documentation</a>.</p>
 <h2 id="callbacks"><a class="toclink" href="#callbacks">Callbacks</a></h2>
 <p>Finally, it is possible to define callbacks to be executed at various stages of a call, or in response to certain events. These are before_call and after_call, they are class methods, and they take either a block or a symbol (called as an instance method) like so:</p>
 <p>lib/super_secret_project_call.rb:</p>
