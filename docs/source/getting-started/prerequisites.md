@@ -27,6 +27,7 @@ If you prefer JRuby, RVM can also install JRuby:
 ## A Telephony Engine
 Adhearsion 2 supports the following telephony engines:
 
+* [FreeSWITCH](http://freeswitch.org) version 1.0.6 or later
 * [Asterisk](http://asterisk.org) version 1.8.0 or later
 * [PRISM](http://voxeolabs.com/prism/) version 11.1 with the [rayo-server](https://github.com/rayo/rayo-server) application installed.
 * Generally speaking, anything that supports the [Rayo](https://github.com/rayo/rayo-server/wiki) protocol.

@@ -94,6 +94,18 @@ This will route all calls with a numeric extension to Adhearsion.
 
 Note also that on versions of Asterisk before 10, it is necessary to add an empty context with the name 'adhearsion-redirect'.
 
+#### FreeSWITCH
+
+In order for Adhearsion to drive FreeSWITCH, FreeSWITCH must have the inbound event socket configured correctly (in conf/autoload_configs/event_socket.conf.xml), and inbound calls routed to 'park'. This dialplan entry will direct all calls to Adhearsion:
+
+<pre class="brush: xml;">
+<extension name='Adhearsion'>
+  <condition field="destination_number" expression=".*$">
+    <action application='park'/>
+  </condition>
+</extension>
+</pre>
+
 ## Make a test call
 
 By default, a generated Adhearsion app includes the SimonGame. You can boot your app by running "ahn -" and immediately make a call to it. If everything is configured correctly, you should be prompted to play a game. Enjoy your time working with Adhearsion, and feel free to explore the rest of the documentation provided here.
