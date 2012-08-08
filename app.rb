@@ -37,7 +37,7 @@ class BlogPostAggregator
   end
 
   def fetch?
-    !@posts || expired?
+    !@posts || @posts.empty? || expired?
   end
 
   def hash
