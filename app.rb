@@ -44,6 +44,11 @@ class BlogPostAggregator
     posts.first.hash
   end
 
+  def first_post_date
+    first_post = posts.first
+    first_post && first_post[:date]
+  end
+
   def rss_url
     @rss_url ||= "http://pipes.yahoo.com/pipes/pipe.run?_id=7d727342ec97cb855c218e5daba3843c&_render=rss"
   end
@@ -52,7 +57,7 @@ end
 get '/' do
   @blog_posts = BlogPostAggregator.instance.posts
   if ENV['RACK_ENV']
-    last_modified [app_start_time, BlogPostAggregator.instance.posts.first[:date]].max
+    last_modified [app_start_time, BlogPostAggregator.instance.first_post_date].max
     etag BlogPostAggregator.instance.hash
   end
   haml :index
