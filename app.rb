@@ -109,7 +109,8 @@ end
   '/wiki'         => 'https://github.com/adhearsion/adhearsion/wiki',
   '/contributing' => 'https://github.com/adhearsion/adhearsion/wiki/Contributing',
   '/rss'          => BlogPostAggregator.instance.rss_url,
-  '/download'     => '/docs/getting-started/installation'
+  '/download'     => '/docs/getting-started/installation',
+  '/blather'      => 'https://adhearsion.github.com/blather'
 }.each_pair do |local, remote|
   get local do
     redirect remote
