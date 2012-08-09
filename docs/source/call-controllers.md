@@ -268,9 +268,9 @@ The #match method takes an Integer, a String, a Range or any number of them as t
 
 \#timeout, #invalid and #failure are for handling bad or missing inputs.  These methods only accept blocks as payload, but it is still possible to make use of another CallController by using #pass or #invoke within the block.
 
-* #invalid has its associated block executed when the input does not possibly match any pattern.
-* #timeout block is run when time expires before or between input digits, without there being at least one exact match.
-* #failure runs its block when the maximum number of tries is reached without an input match.
+* \#invalid has its associated block executed when the input does not possibly match any pattern.
+* \#timeout block is run when time expires before or between input digits, without there being at least one exact match.
+* \#failure runs its block when the maximum number of tries is reached without an input match.
 
 Execution of the current context resumes after #menu finishes. If you wish to jump to an entirely different controller, #pass can be used.
 
