@@ -393,6 +393,24 @@ class SuperSecretProjectCall < Adhearsion::CallController
 end
 </pre>
 
+If you wish to perform some action on the outbound call prior to joining, you may pass a controller class with the option key :confirm like so:
+
+<pre class="brush: ruby;">
+class ConfirmationController < Adhearsion::CallController
+  def run
+    say "Incoming call from #{call.from}. Hang up now to reject the call."
+  end
+end
+
+class SuperSecretProjectCall < Adhearsion::CallController
+  def run
+    answer
+    dial 'sip:foo@bar.com', :confirm => ConfirmationController
+    say "We hope you had a nice chat!"
+  end
+end
+</pre>
+
 Further details can be found in the [#dial API documentation](http://rubydoc.info/github/adhearsion/adhearsion/Adhearsion/CallController/Dial:dial).
 
 ## Making outbound calls
