@@ -399,12 +399,12 @@ Further details can be found in the [#dial API documentation](http://rubydoc.inf
 
 An outbound call may be created and sent to a new Call Controller instead of joining to an existing call. In this case it is possible to have an inbound call, or event, trigger a new call that plays a message, allows a user to be prompted for input before further action and more.
 
-When the outbound call is placed in an existing Call Controller that new call is routed to a new Call Controller via Adhearsion configuration just like any other call.
+When the outbound call is placed in an existing Call Controller that new call is routed to a new Call Controller via Adhearsion configuration just like an inbound call.
 
 <pre class="brush: ruby;">
 # config/adhearsion.rb
 Adhearsion.config do |config|
-  Adhearsion.router do  
+  Adhearsion.router do
     route 'Outbound Notification', Adhearsion::OutboundCall, OutboundNotification
     route 'Inbound Call', InboundProjectCall
   end
@@ -416,7 +416,7 @@ class InboundCall < Adhearsion::CallController
     answer
     say "Thank you for calling, we will notify Jason that you called."
     hangup
-    
+
     Adhearsion::OutboundCall.originate 'sip:jason@adhearsion.com', :from => 'sip:foo@bar.com'
   end
 end
@@ -426,6 +426,46 @@ class OutboundNotification < Adhearsion::CallController
     answer
     say "Foo called!"
     hangup
+  end
+end
+</pre>
+
+Alternatively, it is possible to specify a controller for the call to execute when it is answered. You can specify either a controller class:
+
+<pre class="brush: ruby;">
+class InboundCall < Adhearsion::CallController
+  def run
+    answer
+    say "Thank you for calling, we will notify Jason that you called."
+    hangup
+
+    Adhearsion::OutboundCall.originate 'sip:jason@adhearsion.com', :from => 'sip:foo@bar.com', :controller => OutboundNotification
+  end
+end
+
+class OutboundNotification < Adhearsion::CallController
+  def run
+    answer
+    say "Foo called!"
+    hangup
+  end
+end
+</pre>
+
+or pass a block to be executed as a controller:
+
+<pre class="brush: ruby;">
+class InboundCall < Adhearsion::CallController
+  def run
+    answer
+    say "Thank you for calling, we will notify Jason that you called."
+    hangup
+
+    Adhearsion::OutboundCall.originate 'sip:jason@adhearsion.com', :from => 'sip:foo@bar.com' do
+      answer
+      say "Foo called!"
+      hangup
+    end
   end
 end
 </pre>
