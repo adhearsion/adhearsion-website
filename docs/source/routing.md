@@ -55,6 +55,61 @@ route 'foo', lambda { |call| Time.now.hour < 20 }
 route 'foo', :agi_context => 'context-name'
 </pre>
 
+## Modifiers
+
+It is possible to modify routes to achieve certain goals. In all cases, you can include multiple routes within a modifier or nest modifiers to combine them.
+
+### Do not auto-accept calls that match
+
+By default, Adhearsion will indicate ringing to any call that matches a route until you call answer in your controller. Sometimes (mostly when bridging) this is undesireable, and you can prevent it like so:
+
+<pre class="brush: ruby;">
+Adhearsion.router do
+  unaccepting do
+    route 'Everyone else' do
+      # Do some authorization or similar
+      unless authorized?
+        reject
+        return
+      end
+      accept
+      # Do some stuff before answering
+      answer
+      menu...
+    end
+  end
+end
+</pre>
+
+### Do not hangup after controller execution
+
+By default, Adhearsion will hangup the call after execution of the controller specified in the router (or any controllers it passes to or invokes). This is to ensure that calls are not left hanging around because your controller forgets to hangup, or crashes. Sometimes it is desireable to keep calls around, for example if your controller hands back control to Asterisk's extensions.conf. You can instruct Adhearsion not to automatically hang up by specifying the route as openended:
+
+<pre class="brush: ruby;">
+Adhearsion.router do
+  openended do
+    route 'Everyone else' do
+      answer
+      # hand back to extensions.conf
+    end
+  end
+end
+</pre>
+
+### Do not execute a controller
+
+Sometimes, you may not want to execute a controller on a call, but instead just manipulate it directly, perhaps by registering handlers for its events. You can do this by specifying a route as evented:
+
+<pre class="brush: ruby;">
+Adhearsion.router do
+  evented do
+    route 'Everyone else' do |call|
+      call.answer
+    end
+  end
+end
+</pre>
+
 <div class='docs-progress-nav'>
   <span class='back'>
     Back to <a href="/docs/call-controllers">Call Controllers</a>
