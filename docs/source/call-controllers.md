@@ -423,7 +423,7 @@ When the outbound call is placed in an existing Call Controller that new call is
 # config/adhearsion.rb
 Adhearsion.config do |config|
   Adhearsion.router do
-    route 'Outbound Notification', Adhearsion::OutboundCall, OutboundNotification
+    route 'Outbound Notification', OutboundNotification, Adhearsion::OutboundCall
     route 'Inbound Call', InboundProjectCall
   end
 end
