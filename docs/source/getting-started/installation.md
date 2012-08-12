@@ -54,57 +54,11 @@ This is just a skeleton however.  To see the full list of available configuratio
 
 Adhearsion currently supports two protocols for communication with the telephony engine it is controlling; [Rayo](https://github.com/rayo/rayo-server/wiki) and Asterisk [AMI](http://www.voip-info.org/wiki/view/Asterisk+manager+API) with [AsyncAGI](http://www.voip-info.org/wiki/view/Asterisk+AGI). As such, the configuration for each is slightly different. You will notice that the generated config file contains scaffolding for each, and that the default protocol is Rayo. You are, however, encouraged to [store sensitive credentials in the application's environment](/docs/config#storing-configuration-in-the-environment) rather than in the config file.
 
-#### Rayo (PRISM)
+Please see the documentation for connecting Adhearsion to the telephony engine of your choice:
 
-If you are using a Rayo server, you will need to configure your JID and password and ensure that the DIDs have been mapped to your selected JID. Refer to your Rayo server's documentation for how to do this.  You likely will also want to configure your root_domain to point to your Rayo server's domain name for routing outbound calls.
-
-#### Asterisk
-
-If you are using Asterisk, there are a couple of steps to configure it for use with Adhearsion:
-
-##### AMI User
-
-It is necessary to configure an AMI user by which Adhearsion can connect to Asterisk. This can be done in manager.conf, and a sample configuration is provided below:
-
-<pre class="brush: ruby;">
-[general]
-enabled = yes
-port = 5038
-bindaddr = 0.0.0.0
-
-[myuser]
-secret = mypassword
-read = all
-write = all
-eventfilter = !Event: RTCP*
-</pre>
-
-Note that the user needs acess to all AMI events and actions. Also, we have setup an event filter here to prevent sending Adhearsion RTCP events. This is optional, and is because Asterisk generates a great number of these events, and Adhearsion cannot normally do anything useful with them. Thus, we can improve Adhearsion's performance by not sending it these events in the first place.
-
-##### Route calls to AsyncAGI
-
-You will need to route calls to AsyncAGI, which allows Adhearsion to take control of them. You should add something similar to the following config to extensions.conf:
-
-<pre class="brush: ruby;">
-[your_context_name]
-exten => _.,1,AGI(agi:async)
-</pre>
-
-This will route all calls with a numeric extension to Adhearsion.
-
-Note also that on versions of Asterisk before 10, it is necessary to add an empty context with the name 'adhearsion-redirect'.
-
-#### FreeSWITCH
-
-In order for Adhearsion to drive FreeSWITCH, FreeSWITCH must have the inbound event socket configured correctly (in conf/autoload_configs/event_socket.conf.xml), and inbound calls routed to 'park'. This dialplan entry will direct all calls to Adhearsion:
-
-<pre class="brush: xml;">
-<extension name='Adhearsion'>
-  <condition field="destination_number" expression=".*$">
-    <action application='park'/>
-  </condition>
-</extension>
-</pre>
+* [Asterisk](/docs/getting-started/asterisk)
+* [FreeSWITCH](/docs/getting-started/freeswitch)
+* [PRISM](/docs/getting-started/prism)
 
 ## Make a test call
 
