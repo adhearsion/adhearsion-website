@@ -24,7 +24,7 @@ If you are not able to obtain packages for your operating system, Asterisk can b
 
 ## Configuring Asterisk
 
-##### AMI User
+### AMI User
 
 It is necessary to configure an AMI user by which Adhearsion can connect to Asterisk. This can be done in manager.conf, and a sample configuration is provided below:
 
@@ -43,7 +43,7 @@ eventfilter = !Event: RTCP*
 
 Note that the user needs acess to all AMI events and actions. Also, we have setup an event filter here to prevent sending Adhearsion RTCP events. This is optional, but recommended, because while Asterisk generates a great number of these events Adhearsion cannot normally do anything useful with them. Thus, we can improve Adhearsion's performance by not sending it these events in the first place.
 
-##### Route calls to AsyncAGI
+### Route calls to AsyncAGI
 
 To process calls with Adhearsion they must be routed through AsyncAGI.  Add the following context your extensions.conf:
 
