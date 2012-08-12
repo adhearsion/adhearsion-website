@@ -23,9 +23,29 @@ PRISM can be downloaded for free from
 4. Start PRISM to allow it to unpack and launch the Rayo application.  After starting PRISM wait around 2 minutes for the application to be detected and unpacked.
 5. Shut PRISM down again to begin configuration.
 6. Edit the file $PRISM_HOME/config/portappmapping.properties to map port 5060 to Rayo:
+<pre>
 5060:rayo
-
+</pre>
 Important! Ensure that only one line in this file begins with "5060".
+
+7. Edit the file $PRISM_HOME/apps/rayo/WEB-INF/xmpp.xml
+Find the section for "xmpp:serv-domains" and add the fully qualified hostname of your PRISM server to the file.  If you only intend to use PRISM locally (connecting via localhost) then you may skip this step.  In this example we have added "my-prism-server.example.com":
+<pre>
+        &lt;xmpp:serv-domains&gt;
+                &lt;xmpp:servdomain&gt;127.0.0.1&lt;/xmpp:servdomain&gt;
+                &lt;xmpp:servdomain&gt;localhost&lt;/xmpp:servdomain&gt;
+                &lt;xmpp:servdomain&gt;my-prism-server.example.com&lt;/xmpp:servdomain&gt;
+        &lt;/xmpp:serv-domains&gt;
+</pre>
+
+8. Edit the file $PRISM_HOME/apps/rayo/WEB-INF/classes/rayo-routing.properties
+In this file you will be mapping SIP addresses to XMPP JIDs.  The match is made using a regular expression on the left side of the equals sign.  To route all SIP calls to the JID "adhearsion@example.com" you would use a line like this:
+
+<pre>
+.*=adhearsion@example.com
+</pre>
+
+You may add as many mappings as you need to send calls to various different Adhearsion applications or other Rayo clients.  Note that the first matching line in the file will take the call.
 
 
 ### Licensing PRISM
