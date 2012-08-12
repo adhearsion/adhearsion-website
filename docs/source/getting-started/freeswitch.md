@@ -1,4 +1,10 @@
-#### FreeSWITCH
+# Using Adhearsion with FreeSWITCH
+
+## Requirements
+
+## Getting FreeSWITCH
+
+## Configuring FreeSWITCH
 
 In order for Adhearsion to drive FreeSWITCH, FreeSWITCH must have the inbound event socket configured correctly (in conf/autoload_configs/event_socket.conf.xml), and inbound calls routed to 'park'. This dialplan entry will direct all calls to Adhearsion:
 
@@ -10,4 +16,4 @@ In order for Adhearsion to drive FreeSWITCH, FreeSWITCH must have the inbound ev
 </extension>
 </pre>
 
-
+## Getting Help
