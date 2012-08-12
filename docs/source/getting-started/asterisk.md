@@ -20,8 +20,7 @@ In addition to the vendor-provided packages above, Digium provides packages for 
 
 ### Compiling Asterisk
 
-If you are not able to obtain packages for your operating system, Asterisk can be compiled on many additional platforms. Please see the [Asterisk installation documentation]( for further information.
-
+If you are not able to obtain packages for your operating system, Asterisk can be compiled on many additional platforms, including FreeBSD, Mac OSX and even Solaris. Please see the [Asterisk installation documentation](https://wiki.asterisk.org/wiki/display/AST/Installing+Asterisk+From+Source) for further information.
 
 ## Configuring Asterisk
 
@@ -42,7 +41,7 @@ write = all
 eventfilter = !Event: RTCP*
 </pre>
 
-Note that the user needs acess to all AMI events and actions. Also, we have setup an event filter here to prevent sending Adhearsion RTCP events. This is optional, and is because Asterisk generates a great number of these events, and Adhearsion cannot normally do anything useful with them. Thus, we can improve Adhearsion's performance by not sending it these events in the first place.
+Note that the user needs acess to all AMI events and actions. Also, we have setup an event filter here to prevent sending Adhearsion RTCP events. This is optional, but recommended, because while Asterisk generates a great number of these events Adhearsion cannot normally do anything useful with them. Thus, we can improve Adhearsion's performance by not sending it these events in the first place.
 
 ##### Route calls to AsyncAGI
 
