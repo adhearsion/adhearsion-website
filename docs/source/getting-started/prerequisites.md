@@ -2,8 +2,15 @@
 
 To use Adhearsion you will need a few things:
 
-* A Ruby Interpreter
 * A Telephony Engine
+* A Ruby Interpreter
+
+## A Telephony Engine
+Adhearsion 2 supports the following telephony engines:
+
+* [Asterisk](/docs/getting-started/asterisk)
+* [FreeSWITCH](/docs/getting-started/freeswitch) (EXPERIMENTAL)
+* [PRISM](/docs/getting-started/prism)
 
 ## A Ruby Interpreter
 Adhearsion requires [Ruby](http://ruby-lang.org) version 1.9.2 or later. [JRuby](http://jruby.org) version 1.6.5 or later running in Ruby19 mode (--1.9) is also supported.
@@ -23,14 +30,6 @@ If you prefer JRuby, RVM can also install JRuby:
 <pre class="terminal">
 {{ d['installation.sh|idio|shint|ansi2html']['rvm-install-jruby'] }}
 </pre>
-
-## A Telephony Engine
-Adhearsion 2 supports the following telephony engines:
-
-* [FreeSWITCH](http://freeswitch.org) version 1.0.6 or later
-* [Asterisk](http://asterisk.org) version 1.8.0 or later
-* [PRISM](http://voxeolabs.com/prism/) version 11.1 with the [rayo-server](https://github.com/rayo/rayo-server) application installed.
-* Generally speaking, anything that supports the [Rayo](https://github.com/rayo/rayo-server/wiki) protocol.
 
 <div class='docs-progress-nav'>
   <span class='back'>
