@@ -1,0 +1,87 @@
+<div class="docs">
+  <div class="full-width">
+    <div class="outer-rounded-box-bold docs-nav-box">
+      <div class="inner-rounded-box-filled-grey clearfix">
+        <h3>Documentation</h3>
+        <ul class="collapsibleList">
+          <li id="docs-nav-getting-started">
+            Getting Started
+            <ul>
+              <li id="docs-nav-getting-started-prerequisites"><a href="/docs/getting-started/prerequisites">Prerequisites</a></li>
+              <li id="docs-nav-getting-started-installation"><a href="/docs/getting-started/installation">Installation</a></li>
+            </ul>
+          </li>
+          <li id="docs-nav-console"><a href="/docs/console">Console</a></li>
+          <li id="docs-nav-call-controller"><a href="/docs/call-controllers">Call Controllers</a></li>
+          <li id="docs-nav-routing"><a href="/docs/routing">Routing</a></li>
+          <li id="docs-nav-config"><a href="/docs/config">Config</a></li>
+          <li id="docs-nav-events"><a href="/docs/events">Events</a></li>
+          <li id="docs-nav-logging"><a href="/docs/logging">Logging</a></li>
+          <li id="docs-nav-plugins"><a href="/docs/plugins">Plugins</a></li>
+          <li id="docs-nav-best-practices">
+            Best Practices
+            <ul>
+              <li id="docs-nav-best-practices-testing"><a href="/docs/best-practices/testing">Testing</a></li>
+              <li id="docs-nav-best-practices-deployment"><a href="/docs/best-practices/deployment">Deployment</a></li>
+              <li id="docs-nav-best-practices-sysadmin"><a href="/docs/best-practices/sysadmin">Notes for System Administrators</a></li>
+              <li id="docs-nav-best-practices-rails"><a href="/docs/best-practices/rails">Rails Integration</a></li>
+            </ul>
+          </li>
+          <li id="docs-nav-upgrading"><a href="/docs/upgrading">Upgrading</a></li>
+          <li id="docs-nav-api"><a href="/api">API Documentation</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="docs-body">
+<h1 id="using-adhearsion-with-freeswitch"><a class="toclink" href="#using-adhearsion-with-freeswitch">Using Adhearsion with FreeSWITCH</a></h1>
+<p>At the time of this writing, Adhearsion 2.1.0, FreeSWITCH support is considered EXPERIMENTAL.  We need your feedback to continue to improve our FreeSWITCH support.  Please report all issues on the <a href="http://groups.google.com/group/adhearsion">Adhearsion mailing list</a> or via <a href="https://github.com/adhearsion/adhearsion/issues">Github Issues</a>.</p>
+<h2 id="requirements"><a class="toclink" href="#requirements">Requirements</a></h2>
+<ul>
+<li><a href="http://www.freeswitch.org">FreeSWITCH</a> 1.2 or later (earlier versions may work but are not tested)</li>
+</ul>
+<h2 id="getting-freeswitch"><a class="toclink" href="#getting-freeswitch">Getting FreeSWITCH</a></h2>
+<p>Unfortunately there are no prebuilt packages available for FreeSWITCH on any common Linux distribution.  FreeSWITCH can be installed by downloading the source code and compiling it.  Full instructions can be found on the <a href="http://wiki.freeswitch.org/wiki/Installation_Guide">FreeSWITCH Install Guide</a>.</p>
+<h2 id="configuring-freeswitch"><a class="toclink" href="#configuring-freeswitch">Configuring FreeSWITCH</a></h2>
+<p>In order for Adhearsion to drive FreeSWITCH, FreeSWITCH must have the inbound event socket configured correctly (in conf/autoload_configs/event_socket.conf.xml), and inbound calls routed to 'park'. This dialplan entry will direct all calls to Adhearsion:</p>
+<pre class="brush: xml;">
+&lt;extension name='Adhearsion'&gt;
+  &lt;condition field="destination_number" expression=".*$"&gt;
+    &lt;action application='park'/&gt;
+  &lt;/condition&gt;
+&lt;/extension&gt;
+</pre>
+
+<h2 id="configuring-adhearsion-for-freeswitch"><a class="toclink" href="#configuring-adhearsion-for-freeswitch">Configuring Adhearsion for FreeSWITCH</a></h2>
+<p>As always the full list of configuration options can be viewed, along with a description and their default values, by typing "rake config:show" in your application directory.  There are a few configuration options that are particularly important:</p>
+<ul>
+<li>config.punchblock.platform must be set to :freeswitch</li>
+<li>config.punchblock.password must be set to the EventSocket password (eg. "ClueCon")</li>
+</ul>
+<p>Note that as described in our <a href="/docs/best-practices/deployment">Deployment Best Practices</a>, we recommend NOT storing the EventSocket password in the config/adhearsion.rb file.  Instead this should be stored in an environment variable (specifically: AHN_PUNCHBLOCK_PASSWORD) that is loaded by the process prior to launching.</p>
+<h2 id="getting-help"><a class="toclink" href="#getting-help">Getting Help</a></h2>
+<ul>
+<li><a href="http://wiki.freeswitch.org">The FreeSWITCH Wiki</a> is an excellent source of configuration documentation and how-to articles.</li>
+<li>The FreeSWITCH community also offers support via IRC on irc.freenode.net in #freeswitch</li>
+<li><a href="http://lists.freeswitch.org/mailman/listinfo/freeswitch-users">FreeSWITCH-Users Mailing List</a> - The FreeSWITCH-Users mailing list is a great community resource that also is monitored by the FreeSWITCH developers.</li>
+<li><a href="/community">Adhearsion Community Support</a> - As always we invite you to post your questions to the Adhearsion community via IRC or our own mailing list.</li>
+</ul>
+    </div>
+
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'adhearsion';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    <div class="clear"></div>
+  </div>
+</div>
+
+<a href="#" id="main-nav-active" style="display:none;">#main-nav-docs</a>

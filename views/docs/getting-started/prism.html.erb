@@ -1,0 +1,113 @@
+<div class="docs">
+  <div class="full-width">
+    <div class="outer-rounded-box-bold docs-nav-box">
+      <div class="inner-rounded-box-filled-grey clearfix">
+        <h3>Documentation</h3>
+        <ul class="collapsibleList">
+          <li id="docs-nav-getting-started">
+            Getting Started
+            <ul>
+              <li id="docs-nav-getting-started-prerequisites"><a href="/docs/getting-started/prerequisites">Prerequisites</a></li>
+              <li id="docs-nav-getting-started-installation"><a href="/docs/getting-started/installation">Installation</a></li>
+            </ul>
+          </li>
+          <li id="docs-nav-console"><a href="/docs/console">Console</a></li>
+          <li id="docs-nav-call-controller"><a href="/docs/call-controllers">Call Controllers</a></li>
+          <li id="docs-nav-routing"><a href="/docs/routing">Routing</a></li>
+          <li id="docs-nav-config"><a href="/docs/config">Config</a></li>
+          <li id="docs-nav-events"><a href="/docs/events">Events</a></li>
+          <li id="docs-nav-logging"><a href="/docs/logging">Logging</a></li>
+          <li id="docs-nav-plugins"><a href="/docs/plugins">Plugins</a></li>
+          <li id="docs-nav-best-practices">
+            Best Practices
+            <ul>
+              <li id="docs-nav-best-practices-testing"><a href="/docs/best-practices/testing">Testing</a></li>
+              <li id="docs-nav-best-practices-deployment"><a href="/docs/best-practices/deployment">Deployment</a></li>
+              <li id="docs-nav-best-practices-sysadmin"><a href="/docs/best-practices/sysadmin">Notes for System Administrators</a></li>
+              <li id="docs-nav-best-practices-rails"><a href="/docs/best-practices/rails">Rails Integration</a></li>
+            </ul>
+          </li>
+          <li id="docs-nav-upgrading"><a href="/docs/upgrading">Upgrading</a></li>
+          <li id="docs-nav-api"><a href="/api">API Documentation</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="docs-body">
+<h1 id="using-adhearsion-with-prism"><a class="toclink" href="#using-adhearsion-with-prism">Using Adhearsion with PRISM</a></h1>
+<h2 id="requirements"><a class="toclink" href="#requirements">Requirements</a></h2>
+<ul>
+<li><a href="http://voxeolabs.com/prism">Voxeo PRISM version 11.0 or later (11.5 recommended)</a></li>
+<li><a href="http://ci.voxeolabs.net/jenkins/job/Rayo/lastSuccessfulBuild/artifact/rayo-war/target/">rayo-server application</a></li>
+</ul>
+<p>After downloading the Rayo WAR file it will have the build number in the file name (eg. rayo.b189.war).  Rename this file to simply "rayo.war".</p>
+<p>While PRISM itself is a commercial product, a free license with 2-port concurrency is available to developers.  Also, the "rayo-server" application is open source and can be found on its <a href="https://github.com/rayo/rayo-server">Github repository</a>.</p>
+<p>Rayo is officially supported on RedHat Enterprise Linux, CentOS and Mac OSX.  Users have also reported getting it to work successfully on Debian and Ubuntu, though this may not be supported by Voxeo.</p>
+<h2 id="getting-prism"><a class="toclink" href="#getting-prism">Getting PRISM</a></h2>
+<p>PRISM can be downloaded for free from </p>
+<h2 id="configuring-prism"><a class="toclink" href="#configuring-prism">Configuring PRISM</a></h2>
+<ol>
+<li>Set PRISM_HOME to the base directory where you installed PRISM.  This is optional, but recommended to make the following instructions copy/pasteable.  For example "export PRISM_HOME=/opt/voxeo/prism"</li>
+<li>If PRISM is running, shut it down. This can be done by using the application launcher in OSX or by running "/etc/init.d/voxeo-as stop" on Linux.</li>
+<li>Rename your Rayo WAR file to simply "rayo.war" and copy it to the PRISM apps directory. By default this is $PRISM_HOME/apps</li>
+<li>Start PRISM to allow it to unpack and launch the Rayo application.  After starting PRISM wait around 2 minutes for the application to be detected and unpacked.</li>
+<li>Shut PRISM down again to begin configuration.</li>
+<li>
+<p>Edit the file $PRISM_HOME/config/portappmapping.properties to map port 5060 to Rayo:
+<pre>
+5060:rayo
+</pre>
+Important! Ensure that only one line in this file begins with "5060".</p>
+</li>
+<li>
+<p>Edit the file $PRISM_HOME/apps/rayo/WEB-INF/xmpp.xml
+Find the section for "xmpp:serv-domains" and add the fully qualified hostname of your PRISM server to the file.  If you only intend to use PRISM locally (connecting via localhost) then you may skip this step.  In this example we have added "my-prism-server.example.com":
+<pre>
+        &lt;xmpp:serv-domains&gt;
+                &lt;xmpp:servdomain&gt;127.0.0.1&lt;/xmpp:servdomain&gt;
+                &lt;xmpp:servdomain&gt;localhost&lt;/xmpp:servdomain&gt;
+                &lt;xmpp:servdomain&gt;my-prism-server.example.com&lt;/xmpp:servdomain&gt;
+        &lt;/xmpp:serv-domains&gt;
+</pre></p>
+</li>
+<li>
+<p>Edit the file $PRISM_HOME/apps/rayo/WEB-INF/classes/rayo-routing.properties
+In this file you will be mapping SIP addresses to XMPP JIDs.  The match is made using a regular expression on the left side of the equals sign.  To route all SIP calls to the JID "adhearsion@example.com" you would use a line like this:</p>
+</li>
+</ol>
+<pre>
+.*=adhearsion@example.com
+</pre>
+
+<p>You may add as many mappings as you need to send calls to various different Adhearsion applications or other Rayo clients.  Note that the first matching line in the file will take the call.</p>
+<h3 id="licensing-prism"><a class="toclink" href="#licensing-prism">Licensing PRISM</a></h3>
+<p>During the PRISM installation process you will be prompted to set up a demo license.  To see the license that is active in PRISM you can visit the administration console at http://my-prism-server.example.com:8080/console.  Refer to the PRISM documentation or Voxeo technical support for more help licensing PRISM.</p>
+<h2 id="configuring-adhearsion-for-prism"><a class="toclink" href="#configuring-adhearsion-for-prism">Configuring Adhearsion for PRISM</a></h2>
+<p>As always the full list of configuration options can be viewed, along with a description and their default values, by typing "rake config:show" in your application directory.  There are a few configuration options that are particularly important:</p>
+<ul>
+<li>config.punchblock.platform must be set to :xmpp</li>
+<li>config.punchblock.username must be set to your XMPP JID (eg. "adhearsion@example.com")</li>
+<li>config.punchblock.password must be set to the password for your JID</li>
+<li>config.punchblock.root_domain must be set to the fully qualified domain name of your PRISM server</li>
+</ul>
+<p>Note that as described in our <a href="/docs/best-practices/deployment">Deployment Best Practices</a>, we recommend NOT storing the XMPP username and password in the config/adhearsion.rb file.  Instead these should be stored in environment variables (notably: AHN_PUNCHBLOCK_USERNAME and AHN_PUNCHBLOCK_PASSWORD) that are loaded by the process prior to launching.</p>
+<h2 id="getting-help"><a class="toclink" href="#getting-help">Getting Help</a></h2>
+    </div>
+
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'adhearsion';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    <div class="clear"></div>
+  </div>
+</div>
+
+<a href="#" id="main-nav-active" style="display:none;">#main-nav-docs</a>
