@@ -981,13 +981,8 @@ a.picture-frame-fifth .play {
 
 /* code styling */
 code {
-  margin-bottom: 15px;
   font-family: "Courier New";
   font-size: 12px;
-  line-height: 19px;
-  padding: 2em;
-  display: block;
-  overflow: hidden;
 }
 code strong {
   padding: 0.5em;

@@ -12,7 +12,7 @@ Unfortunately there are no prebuilt packages available for FreeSWITCH on any com
 
 ## Configuring FreeSWITCH
 
-In order for Adhearsion to drive FreeSWITCH, FreeSWITCH must have the inbound event socket configured correctly (in conf/autoload_configs/event_socket.conf.xml), and inbound calls routed to 'park'. This dialplan entry will direct all calls to Adhearsion:
+In order for Adhearsion to drive FreeSWITCH, FreeSWITCH must have the inbound event socket configured correctly (in <code>/etc/freeswitch/conf/autoload_configs/event_socket.conf.xml</code>), and inbound calls routed to 'park'. This dialplan entry will direct all calls to Adhearsion:
 
 <pre class="brush: xml;">
 &lt;extension name='Adhearsion'&gt;
@@ -24,12 +24,12 @@ In order for Adhearsion to drive FreeSWITCH, FreeSWITCH must have the inbound ev
 
 ## Configuring Adhearsion for FreeSWITCH
 
-As always the full list of configuration options can be viewed, along with a description and their default values, by typing "rake config:show" in your application directory.  There are a few configuration options that are particularly important:
+As always the full list of configuration options can be viewed, along with a description and their default values, by typing <code>rake config:show</code> in your application directory.  There are a few configuration options that are particularly important:
 
-* config.punchblock.platform must be set to :freeswitch
+* config.punchblock.platform must be set to <code>:freeswitch</code>
 * config.punchblock.password must be set to the EventSocket password (eg. "ClueCon")
 
-Note that as described in our [Deployment Best Practices](/docs/best-practices/deployment), we recommend NOT storing the EventSocket password in the config/adhearsion.rb file.  Instead this should be stored in an environment variable (specifically: AHN_PUNCHBLOCK_PASSWORD) that is loaded by the process prior to launching.
+Note that as described in our [Deployment Best Practices](/docs/best-practices/deployment), we recommend NOT storing the EventSocket password in the <code>config/adhearsion.rb</code> file.  Instead this should be stored in an environment variable (specifically: <code>AHN_PUNCHBLOCK_PASSWORD</code>) that is loaded by the process prior to launching.
 
 
 ## Getting Help
