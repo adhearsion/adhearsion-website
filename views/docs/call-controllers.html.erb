@@ -429,7 +429,7 @@ end
 # config/adhearsion.rb
 Adhearsion.config do |config|
   Adhearsion.router do
-    route 'Outbound Notification', Adhearsion::OutboundCall, OutboundNotification
+    route 'Outbound Notification', OutboundNotification, Adhearsion::OutboundCall
     route 'Inbound Call', InboundProjectCall
   end
 end
