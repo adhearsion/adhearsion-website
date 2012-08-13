@@ -37,8 +37,15 @@
 <h1 id="getting-started-prerequisites"><a class="toclink" href="#getting-started-prerequisites"><a href="/docs">Getting Started</a> &gt; Prerequisites</a></h1>
 <p>To use Adhearsion you will need a few things:</p>
 <ul>
-<li>A Ruby Interpreter</li>
 <li>A Telephony Engine</li>
+<li>A Ruby Interpreter</li>
+</ul>
+<h2 id="a-telephony-engine"><a class="toclink" href="#a-telephony-engine">A Telephony Engine</a></h2>
+<p>Adhearsion 2 supports the following telephony engines:</p>
+<ul>
+<li><a href="/docs/getting-started/asterisk">Asterisk</a></li>
+<li><a href="/docs/getting-started/freeswitch">FreeSWITCH</a> (EXPERIMENTAL)</li>
+<li><a href="/docs/getting-started/prism">PRISM</a></li>
 </ul>
 <h2 id="a-ruby-interpreter"><a class="toclink" href="#a-ruby-interpreter">A Ruby Interpreter</a></h2>
 <p>Adhearsion requires <a href="http://ruby-lang.org">Ruby</a> version 1.9.2 or later. <a href="http://jruby.org">JRuby</a> version 1.6.5 or later running in Ruby19 mode (--1.9) is also supported.</p>
@@ -93,14 +100,6 @@ $ # JRuby must run in Ruby 1.9 mode:
 $ export JRUBY_OPTS="--1.9"
 </pre>
 
-<h2 id="a-telephony-engine"><a class="toclink" href="#a-telephony-engine">A Telephony Engine</a></h2>
-<p>Adhearsion 2 supports the following telephony engines:</p>
-<ul>
-<li><a href="http://freeswitch.org">FreeSWITCH</a> version 1.0.6 or later</li>
-<li><a href="http://asterisk.org">Asterisk</a> version 1.8.0 or later</li>
-<li><a href="http://voxeolabs.com/prism/">PRISM</a> version 11.1 with the <a href="https://github.com/rayo/rayo-server">rayo-server</a> application installed.</li>
-<li>Generally speaking, anything that supports the <a href="https://github.com/rayo/rayo-server/wiki">Rayo</a> protocol.</li>
-</ul>
 <div class='docs-progress-nav'>
   <span class='back'>
     Back to <a href="/docs">Getting Started</a>
