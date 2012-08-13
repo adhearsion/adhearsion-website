@@ -57,7 +57,7 @@ Adhearsion currently supports two protocols for communication with the telephony
 Please see the documentation for connecting Adhearsion to the telephony engine of your choice:
 
 * [Asterisk](/docs/getting-started/asterisk)
-* [FreeSWITCH](/docs/getting-started/freeswitch)
+* [FreeSWITCH](/docs/getting-started/freeswitch) (EXPERIMENTAL)
 * [PRISM](/docs/getting-started/prism)
 
 ## Make a test call
