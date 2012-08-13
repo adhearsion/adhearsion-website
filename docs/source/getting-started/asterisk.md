@@ -59,6 +59,17 @@ Note also that on versions Asterisk 1.8, it is necessary to add an empty context
 [adhearsion-redirect]
 </pre>
 
+## Configuring Adhearsion for Asterisk
+
+As always the full list of configuration options can be viewed, along with a description and their default values, by typing "rake config:show" in your application directory.  There are a few configuration options that are particularly important:
+
+* config.punchblock.platform must be set to :asterisk
+* config.punchblock.username must be set to your AMI username (eg. "myuser")
+* config.punchblock.password must be set to the password recorded in manager.com (eg. "mypassword")
+* If you are using any text-to-speech or speech recognition engine, you must set config.punchblock.media_engine appropriately.  Common values for use with Asterisk are :unimrcp or :swift.
+
+Note that as described in our [Deployment Best Practices](/docs/best-practices/deployment), we recommend NOT storing the AMI username and password in the config/adhearsion.rb file.  Instead these should be stored in environment variables (notably: AHN_PUNCHBLOCK_USERNAME and AHN_PUNCHBLOCK_PASSWORD) that are loaded by the process prior to launching.
+
 ## Getting Help
 
 If you need help configuring Asterisk there are several resources available:
