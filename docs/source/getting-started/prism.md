@@ -50,7 +50,18 @@ You may add as many mappings as you need to send calls to various different Adhe
 
 ### Licensing PRISM
 
-If you are using a Rayo server, you will need to configure your JID and password and ensure that the DIDs have been mapped to your selected JID. Refer to your Rayo server's documentation for how to do this.  You likely will also want to configure your root_domain to point to your Rayo server's domain name for routing outbound calls.
+During the PRISM installation process you will be prompted to set up a demo license.  To see the license that is active in PRISM you can visit the administration console at http://my-prism-server.example.com:8080/console.  Refer to the PRISM documentation or Voxeo technical support for more help licensing PRISM.
+
+## Configuring Adhearsion for PRISM
+
+As always the full list of configuration options can be viewed, along with a description and their default values, by typing "rake config:show" in your application directory.  There are a few configuration options that are particularly important:
+
+* config.punchblock.platform must be set to :xmpp
+* config.punchblock.username must be set to your XMPP JID (eg. "adhearsion@example.com")
+* config.punchblock.password must be set to the password for your JID
+* config.punchblock.root_domain must be set to the fully qualified domain name of your PRISM server
+
+Note that as described in our [Deployment Best Practices](/docs/best-practices/deployment), we recommend NOT storing the XMPP username and password in the config/adhearsion.rb file.  Instead these should be stored in environment variables (notably: AHN_PUNCHBLOCK_USERNAME and AHN_PUNCHBLOCK_PASSWORD) that are loaded by the process prior to launching.
 
 ## Getting Help
 
