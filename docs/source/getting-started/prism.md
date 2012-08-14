@@ -12,7 +12,7 @@ Rayo is officially supported on RedHat Enterprise Linux, CentOS and Mac OSX.  Us
 
 ## Getting PRISM
 
-PRISM can be downloaded for free from 
+PRISM can be downloaded for free from the [Voxeo Labs PRISM website](http://voxeolabs.com/prism).  It is supported on Linux (RHEL/CentOS) and Mac OSX.
 
 ## Configuring PRISM
 
