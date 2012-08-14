@@ -52,7 +52,7 @@ This is just a skeleton however.  To see the full list of available configuratio
 
 ### Connecting to your telephony engine
 
-Adhearsion currently supports two protocols for communication with the telephony engine it is controlling; [Rayo](https://github.com/rayo/rayo-server/wiki) and Asterisk [AMI](http://www.voip-info.org/wiki/view/Asterisk+manager+API) with [AsyncAGI](http://www.voip-info.org/wiki/view/Asterisk+AGI). As such, the configuration for each is slightly different. You will notice that the generated config file contains scaffolding for each, and that the default protocol is Rayo. You are, however, encouraged to [store sensitive credentials in the application's environment](/docs/config#storing-configuration-in-the-environment) rather than in the config file.
+Adhearsion currently supports three protocols for communication with the telephony engine it is controlling; [Rayo](https://github.com/rayo/rayo-server/wiki), Asterisk [AMI](http://www.voip-info.org/wiki/view/Asterisk+manager+API) with [AsyncAGI](http://www.voip-info.org/wiki/view/Asterisk+AGI) and FreeSWITCH [EventSocket](http://wiki.freeswitch.org/wiki/Event_Socket). As such, the configuration for each is slightly different. You will notice that the generated config file contains scaffolding for each, and that the default protocol is Rayo. You are, however, encouraged to [store sensitive credentials in the application's environment](/docs/config#storing-configuration-in-the-environment) rather than in the config file.
 
 Please see the documentation for connecting Adhearsion to the telephony engine of your choice:
 

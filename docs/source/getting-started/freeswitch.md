@@ -15,9 +15,9 @@ Unfortunately there are no prebuilt packages available for FreeSWITCH on any com
 In order for Adhearsion to drive FreeSWITCH, FreeSWITCH must have the inbound event socket configured correctly (in <code>/etc/freeswitch/conf/autoload_configs/event_socket.conf.xml</code>), and inbound calls routed to 'park'. This dialplan entry will direct all calls to Adhearsion:
 
 <pre class="brush: xml;">
-&lt;extension name='Adhearsion'&gt;
+&lt;extension name="Adhearsion"&gt;
   &lt;condition field="destination_number" expression=".*$"&gt;
-    &lt;action application='park'/&gt;
+    &lt;action application="park"/&gt;
   &lt;/condition&gt;
 &lt;/extension&gt;
 </pre>
