@@ -90,12 +90,12 @@ class MyApp < Adhearsion::CallController
 end
 </pre>
 
-<p>You would want to have the following in your tests:</p>
+<p>You would want to have the following in your tests (these would be satisfied across several individual tests):</p>
 <ul>
 <li>An assertion that <code>#answer</code> was invoked first</li>
-<li>An assertion that <code>#ask</code>&gt; was called with the correct question string ("How much is 2 times 2?")</li>
+<li>An assertion that <code>#ask</code> was called with the correct question string ("How much is 2 times 2?")</li>
 <li>Mocking the result from <code>#ask</code> to pretend that the caller pressed a DTMF digit</li>
-<li>An assertion that <code>#play</code> was called with 'tt-weasels' <em>only if</em> the mocked result is "2"</li>
+<li>An assertion that <code>#play</code> was called with "tt-weasels" <em>only if</em> the mocked result is "4"</li>
 <li>An assertion that <code>#hangup</code> was invoked last</li>
 </ul>
 <h3 id="plugins"><a class="toclink" href="#plugins">Plugins</a></h3>
