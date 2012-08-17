@@ -32,6 +32,7 @@ You would want to have the following tests:
 * Ensure that for a given input the output was twice the input
 * Tests to ensure that a consistent behavior is encountered when non-Fixnum inputs are used (should it raise? return nil?)
 
+<br>
 ### Call Controllers
 Beyond testing basic functionality it becomes important to test how your calls will interact with your application.  Most of that interaction happens within (Call Controllers)[/docs/call-controllers].  Because Call Controllers are simply classes that inherit from the Adhearsion::CallController class, testing these is just like testing any other Ruby class.  However you will likely want to mock out the methods where the telephone call interacts with the framework, such as <code>#ask</code>, <code>#play</code>, <code>#answer</code> and <code>#hangup</code>.  For example, a Call Controller like this:
 
@@ -57,8 +58,9 @@ You would want to have the following in your tests (these would be satisfied acr
 * An assertion that <code>#play</code> was called with "tt-weasels" *only if* the mocked result is "4"
 * An assertion that <code>#hangup</code> was invoked last
 
+<br>
 ### Plugins
-Coming Soon...
+Please see the documentation on the [Plugins](/docs/plugins#testing-your-code) page.
 
 ## Integration Testing
 <img src="/images/vertical-integration.jpg" style="float: right;">
