@@ -85,7 +85,7 @@ Adhearsion.config do |config|
 <span class="ansi33">  config.platform.</span><span class="ansi37">process_name      </span><span class="ansi33"> = </span><span class="ansi36">"ahn"</span>
 
 <span class="ansi33">  # </span><span class="ansi32">Adhearsion application root folder [AHN_PLATFORM_ROOT]</span>
-<span class="ansi33">  config.platform.</span><span class="ansi37">root              </span><span class="ansi33"> = </span><span class="ansi36">"/Users/ben/code/VoIP/adhearsion/website/docs/artifacts/49b85b2970fe8bae583a4a56b6df262f/source/getting-started/myapp"</span>
+<span class="ansi33">  config.platform.</span><span class="ansi37">root              </span><span class="ansi33"> = </span><span class="ansi36">"/Users/bklang/src/adhearsion-website/docs/artifacts/80eddf8bb53eddb83f89b24ae751ba75/source/getting-started/myapp"</span>
 
   # ******* Configuration for punchblock **************
 
@@ -95,7 +95,10 @@ Adhearsion.config do |config|
 <span class="ansi33">  # </span><span class="ansi32">The amount of time to wait for a connection [AHN_PUNCHBLOCK_CONNECTION_TIMEOUT]</span>
 <span class="ansi33">  config.punchblock.</span><span class="ansi37">connection_timeout</span><span class="ansi33"> = </span><span class="ansi36">60</span>
 
-<span class="ansi33">  # </span><span class="ansi32">Host punchblock needs to connect (where rayo or asterisk are located) [AHN_PUNCHBLOCK_HOST]</span>
+<span class="ansi33">  # </span><span class="ansi32">The default TTS voice to use. [AHN_PUNCHBLOCK_DEFAULT_VOICE]</span>
+<span class="ansi33">  config.punchblock.</span><span class="ansi37">default_voice     </span><span class="ansi33"> = </span><span class="ansi36">nil</span>
+
+<span class="ansi33">  # </span><span class="ansi32">Host punchblock needs to connect (where rayo/asterisk/freeswitch is located) [AHN_PUNCHBLOCK_HOST]</span>
 <span class="ansi33">  config.punchblock.</span><span class="ansi37">host              </span><span class="ansi33"> = </span><span class="ansi36">nil</span>
 
 <span class="ansi33">  # </span><span class="ansi32">The media engine to use. Defaults to platform default. [AHN_PUNCHBLOCK_MEDIA_ENGINE]</span>
@@ -109,11 +112,12 @@ Adhearsion.config do |config|
 
 <span class="ansi33">  # </span><span class="ansi32">Platform punchblock shall use to connect to the Telephony provider. Currently supported values:</span>
 <span class="ansi33">  # </span><span class="ansi32">- :xmpp</span>
-<span class="ansi33">  # </span><span class="ansi32">- :asterisk [AHN_PUNCHBLOCK_PLATFORM]</span>
+<span class="ansi33">  # </span><span class="ansi32">- :asterisk</span>
+<span class="ansi33">  # </span><span class="ansi32">- :freeswitch [AHN_PUNCHBLOCK_PLATFORM]</span>
 <span class="ansi33">  config.punchblock.</span><span class="ansi37">platform          </span><span class="ansi33"> = </span><span class="ansi36">:xmpp</span>
 
-<span class="ansi33">  # </span><span class="ansi32">Port punchblock needs to connect (by default 5038 for Asterisk, 5222 for Rayo) [AHN_PUNCHBLOCK_PORT]</span>
-<span class="ansi33">  config.punchblock.</span><span class="ansi37">port              </span><span class="ansi33"> = </span><span class="ansi36">nil</span>
+<span class="ansi33">  # </span><span class="ansi32">Port punchblock needs to connect [AHN_PUNCHBLOCK_PORT]</span>
+<span class="ansi33">  config.punchblock.</span><span class="ansi37">port              </span><span class="ansi33"> = </span><span class="ansi36">5222</span>
 
 <span class="ansi33">  # </span><span class="ansi32">The number of times to (re)attempt connection to the server [AHN_PUNCHBLOCK_RECONNECT_ATTEMPTS]</span>
 <span class="ansi33">  config.punchblock.</span><span class="ansi37">reconnect_attempts</span><span class="ansi33"> = </span><span class="ansi36">Infinity</span>
@@ -176,7 +180,13 @@ Adhearsion.config do |config|
   # config.punchblock.username = "" # Your AMI username
   # config.punchblock.password = "" # Your AMI password
   # config.punchblock.host = "127.0.0.1" # Your AMI host
-  # config.punchblock.port = 5038 # Your AMI port
+
+  ##
+  # Use with FreeSWITCH
+  #
+  # config.punchblock.platform = :freeswitch # Use FreeSWITCH
+  # config.punchblock.password = "" # Your Inbound EventSocket password
+  # config.punchblock.host = "127.0.0.1" # Your IES host
 end
 
 Adhearsion::Events.draw do
