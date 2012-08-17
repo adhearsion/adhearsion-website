@@ -11,6 +11,6 @@
     "*.sh|idio" : {},
     "*.sh|idio|shint|ansi2html" : {
       "timeout" : 600,
-      "shint" : {"ext" : ".json", "meta" : true}
+      "shint" : {"ext" : ".json", "meta" : true, "timeout": 60}
     }
 }
