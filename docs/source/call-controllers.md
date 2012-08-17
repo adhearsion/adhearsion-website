@@ -21,7 +21,7 @@ end
 lib/super_secret_project_call_controller.rb:
 
 <pre class="brush: ruby;">
-{{ a['call_controllers.sh|idio|shint|ansi2html']['generate-controller:files:source/myapp/lib/super_secret_project_call_controller.rb'] }}
+{{ a['call_controllers.sh|idio|shint-meta']['generate-controller:files:source/myapp/lib/super_secret_project_call_controller.rb'] }}
 </pre>
 
 Here, the controller class itself lives in the lib directory, which, by default, is auto-loaded by Adhearsion. You may configure this like so:

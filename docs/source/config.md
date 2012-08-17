@@ -25,7 +25,7 @@ The active configuration is derived from the default values for each key, overri
 In order to override an application's settings, you can set new values in config/adhearsion.rb. To get started, you can actually copy-paste the output from "rake config:show", and modify it for your needs. The syntax of the config file is hopefully self-explanatory:
 
 <pre class="brush: ruby;">
-{{ a['getting-started/installation.sh|idio|shint|ansi2html']['create-app:files:source/getting-started/myapp/config/adhearsion.rb'] }}
+{{ a['getting-started/installation.sh|idio|shint-meta']['create-app:files:source/getting-started/myapp/config/adhearsion.rb'] }}
 </pre>
 
 ## Storing configuration in the environment

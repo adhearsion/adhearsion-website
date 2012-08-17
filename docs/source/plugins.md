@@ -32,7 +32,7 @@ The entry point for the plugin, as with most gems, resides in lib/greet_plugin.r
 lib/greet_plugin.rb:
 
 <pre class="brush: ruby;">
-{{ a['plugins.sh|idio|shint|ansi2html']['generate-plugin:files:source/myapp/greet_plugin/lib/greet_plugin.rb'] }}
+{{ a['plugins.sh|idio|shint-meta']['generate-plugin:files:source/myapp/greet_plugin/lib/greet_plugin.rb'] }}
 </pre>
 
 In this example Adhearsion plugin:
