@@ -64,19 +64,16 @@ A sample controller test might look something like this:
 require 'spec_helper'
 
 describe MyController do
-
   let(:mock_call) { mock 'Call', :to => '1112223333', :from => "2223334444" }
-  let(:metadata) { {} }
-  subject { MyController.new(mock_call, metadata) }
+  let(:metadata)  { {} }
 
-  it "should have empty metadata" do
-    subject.metadata.should eq({})
-  end
+  subject { MyController.new mock_call, metadata }
 
+  its(:metadata) { should eq({}) }
 end
 </pre>
 
-This is a skeleton for controllers that will pass with a controller generated using Adhearsion's generator utility. 
+This is a skeleton for controllers that will pass with a controller generated using Adhearsion's generator utility.
 
 <br>
 ### Plugins
