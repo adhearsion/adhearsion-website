@@ -63,11 +63,11 @@ get '/' do
   haml :index
 end
 
-get '/conference' do
-  redirect '/conference/2012'
+get '/conference*' do
+  redirect 'http://adhearsionconf.com'
 end
 
-%w{community get-help conference/live conference/2012 conference/2011 faq irc media foundation}.each do |page|
+%w{community get-help faq irc media foundation}.each do |page|
   get "/#{page}" do
     haml page.to_sym
   end
