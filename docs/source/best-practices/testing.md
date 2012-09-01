@@ -58,6 +58,26 @@ You would want to have the following in your tests (these would be satisfied acr
 * An assertion that <code>#play</code> was called with "tt-weasels" *only if* the mocked result is "4"
 * An assertion that <code>#hangup</code> was invoked last
 
+A sample controller test might look something like this:
+
+<pre class="brush: ruby">
+require 'spec_helper'
+
+describe MyController do
+
+  let(:mock_call) { mock 'Call', :to => '1112223333', :from => "2223334444" }
+  let(:metadata) { {} }
+  subject { MyController.new(mock_call, metadata) }
+
+  it "should have empty metadata" do
+    subject.metadata.should eq({})
+  end
+
+end
+</pre>
+
+This is a skeleton for controllers that will pass with a controller generated using Adhearsion's generator utility. 
+
 <br>
 ### Plugins
 Please see the documentation on the [Plugins](/docs/plugins#testing-your-code) page.
