@@ -8,7 +8,7 @@ At the time of this writing, Adhearsion 2.1.0, FreeSWITCH support is considered 
 
 ## Getting FreeSWITCH
 
-Unfortunately there are no prebuilt packages available for FreeSWITCH on any common Linux distribution.  FreeSWITCH provides packages in [RPM](http://files.freeswitch.org/RPMS/) and [DPKG](http://files.freeswitch.org/repo/) formats.  FreeSWITCH can also be installed by downloading the source code and compiling it.  Full build instructions can be found on the [FreeSWITCH Install Guide](http://wiki.freeswitch.org/wiki/Installation_Guide).
+Unfortunately there are no packages for FreeSWITCH included with any common Linux distribution.  However the FreeSWITCH project provides packages in [RPM](http://files.freeswitch.org/RPMS/) and [DPKG](http://files.freeswitch.org/repo/) formats.  FreeSWITCH can also be installed by downloading the source code and compiling it.  Full build instructions can be found on the [FreeSWITCH Install Guide](http://wiki.freeswitch.org/wiki/Installation_Guide).
 
 ## Configuring FreeSWITCH
 
