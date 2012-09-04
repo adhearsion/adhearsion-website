@@ -41,7 +41,7 @@
 <li><a href="http://www.freeswitch.org">FreeSWITCH</a> 1.2 or later (earlier versions may work but are not tested)</li>
 </ul>
 <h2 id="getting-freeswitch"><a class="toclink" href="#getting-freeswitch">Getting FreeSWITCH</a></h2>
-<p>Unfortunately there are no prebuilt packages available for FreeSWITCH on any common Linux distribution. FreeSWITCH provides packages in <a href="http://files.freeswitch.org/RPMS/">RPM</a> and <a href="http://files.freeswitch.org/repo/">DPKG</a> formats. FreeSWITCH can also be installed by downloading the source code and compiling it.  Full build instructions can be found on the <a href="http://wiki.freeswitch.org/wiki/Installation_Guide">FreeSWITCH Install Guide</a>.</p>
+<p>Unfortunately there are no packages for FreeSWITCH included with any common Linux distribution.  However the FreeSWITCH project provides packages in <a href="http://files.freeswitch.org/RPMS/">RPM</a> and <a href="http://files.freeswitch.org/repo/">DPKG</a> formats.  FreeSWITCH can also be installed by downloading the source code and compiling it.  Full build instructions can be found on the <a href="http://wiki.freeswitch.org/wiki/Installation_Guide">FreeSWITCH Install Guide</a>.</p>
 <h2 id="configuring-freeswitch"><a class="toclink" href="#configuring-freeswitch">Configuring FreeSWITCH</a></h2>
 <p>In order for Adhearsion to drive FreeSWITCH, FreeSWITCH must have the inbound event socket configured correctly (in <code>/etc/freeswitch/conf/autoload_configs/event_socket.conf.xml</code>), and inbound calls routed to 'park'. This dialplan entry will direct all calls to Adhearsion:</p>
 <pre class="brush: xml;">

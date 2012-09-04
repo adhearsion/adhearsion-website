@@ -99,6 +99,21 @@ end
 <li>An assertion that <code>#play</code> was called with "tt-weasels" <em>only if</em> the mocked result is "4"</li>
 <li>An assertion that <code>#hangup</code> was invoked last</li>
 </ul>
+<p>A sample controller test might look something like this:</p>
+<pre class="brush: ruby">
+require 'spec_helper'
+
+describe MyController do
+  let(:mock_call) { mock 'Call', :to => '1112223333', :from => "2223334444" }
+  let(:metadata)  { {} }
+
+  subject { MyController.new mock_call, metadata }
+
+  its(:metadata) { should eq({}) }
+end
+</pre>
+
+<p>This is a skeleton for controllers that will pass with a controller generated using Adhearsion's generator utility.</p>
 <p><br></p>
 <h3 id="plugins"><a class="toclink" href="#plugins">Plugins</a></h3>
 <p>Please see the documentation on the <a href="/docs/plugins#testing-your-code">Plugins</a> page.</p>
