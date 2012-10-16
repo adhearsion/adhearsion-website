@@ -105,7 +105,7 @@ post '/get-help' do
 end
 
 {
-  '/api'          => 'http://rubydoc.info/github/adhearsion/adhearsion/file/README.markdown',
+  '/api'          => 'http://rubydoc.info/gems/adhearsion/frames',
   '/wiki'         => 'https://github.com/adhearsion/adhearsion/wiki',
   '/contributing' => 'https://github.com/adhearsion/adhearsion/wiki/Contributing',
   '/rss'          => BlogPostAggregator.instance.rss_url,
