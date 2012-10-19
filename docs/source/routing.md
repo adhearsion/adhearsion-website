@@ -19,40 +19,54 @@ The first option is a freeform route label which is used primarily for logging. 
 
 In the above example the :to attribute of the incoming Call object is matched against a regular expression. This is supplied using hash syntax. This matching syntax borrows from Jeff Smick's excellent Blather XMPP client library, called [has-guaded-handlers](https://adhearsion.github.com/has-guarded-handlers), which in turn borrows from the idea of [Guards](http://en.wikibooks.org/wiki/Erlang_Programming/guards) from [Erlang](http://www.erlang.org/). The route will be allowed to match a call only if all of its guards are satisfied.
 
-One may specify many different kinds of guards. Here are some examples:
+The general structure of a route definition is one of the two following formats:
 
 <pre class="brush: ruby;">
-# This requires the call being routed to be of the type specified.
-route 'foo', Adhearsion::OutboundCall
+route "Label", Controller, :filters
+
+# -or-
+
+route "Label", :filters do
+  # This block treated like an implicit CallController
+end
+</pre>
+
+You may mix and match styles as needed. In the arguments above, the "Label" is purely informational and is only used when writing to the logs. While discouraged, it is valid to use the same route label for more than one route.  The ":filters" are  series of guards, which are described below.  You must specify either a CallController class to handle calls which match the route, or provide a block which becomes an implicit CallController.
+
+One may specify many different kinds of guards, which determine whether a given call matches the route. Here are some examples:
+
+<pre class="brush: ruby;">
+# This requires the call being routed to be an object of the type specified.
+route 'Outbound Calls', OutboundCallController, Adhearsion::OutboundCall
 
 # A contrived example, but a symbol calls the matching method and
 # requires a truthy response
-route 'foo', :active?
+route 'Active Calls', ActiveCallsController, :active?
 
 # This calls the method #from and requires an exact match to the
 # string specified (this can be any other type).
-route 'foo', :from => 'sip:me@there.com'
+route 'Only calls from me@there.com', MeController, :from => 'sip:me@there.com'
 
 # An array as the hash key requires the return value of #from to
 # match one of the provided values.
-route 'foo', :from => ['sip:me@there.com', 'sip:you@other.com']
+route 'Calls from me or you', MeOrYouController, :from => ['sip:me@there.com', 'sip:you@other.com']
 
 # Multiple hash keys act like logical AND and thus all must match.
-route 'foo', :from => 'sip:me@there.com', :to => 'sip:us@here.com'
+route 'Calls between me and us', MeAndUsController, :from => 'sip:me@there.com', :to => 'sip:us@here.com'
 
 # Elements of an array act like logical OR and thus if at least
 # one matches, the guards will pass.
-route 'foo', [{:from => 'sip:me@there.com'}, {:to => 'sip:us@here.com'}]
+route 'Calls from me or to us', MeOrUsController, [{:from => 'sip:me@there.com'}, {:to => 'sip:us@here.com'}]
 
 # One may provide a lambda/Proc which can perform any arbitrary
 # operation upon the call object. A truthy return value passes
 # the guard.
-route 'foo', lambda { |call| Time.now.hour < 20 }
+route 'Calls before 8PM', DaytimeController, lambda { |call| Time.now.hour < 20 }
 
 # For those upgrading from Adhearsion 1.x, or simply wishing to
 # use Asterisk contexts as a routing key, the context name
 # is accessible as a guard as well:
-route 'foo', :agi_context => 'context-name'
+route 'Calls from Asterisk context-name', ContextNameController, :agi_context => 'context-name'
 </pre>
 
 ## Modifiers
