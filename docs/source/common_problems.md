@@ -1,0 +1,22 @@
+# Common Problems
+
+[TOC]
+
+## Unrenderable document error
+
+It is common to see the following error on Asterisk:
+
+[2012-06-14 12:08:46] ERROR Adhearsion::Call: 008410de-feb6-48a6-9390-2388a89412ef: Error playing back the prompt: Output failed for argument "5" due to #<Punchblock::ProtocolError: name="unrenderable document error" text="The provided document could not be rendered." call_id=nil component_id=nil>
+
+What this means is that the requested output document could not be rendered on the call, and ocurrs most commonly when using Asterisk or FreeSWITCH without a text to speach engine, but attempting to use the speak/say CallController methods. In this case, Asterisk cannot invoke text-to-speech and so raises this error.
+
+Many people see this error when calling into a default generated Adhearsion application on Asterisk, and this is because the SimonGame uses text-to-speech.
+
+<div class='docs-progress-nav'>
+  <span class='back'>
+    Back to <a href="/docs/upgrading">Upgrading</a>
+  </span>
+  <span class='forward'>
+    Continue to <a href="/api">API Docs</a>
+  </span>
+</div>

@@ -224,3 +224,12 @@ CallController.mixin ConferenceLogin
 </pre>
 
 By using the #mixin method, the ConferenceLogin is added to all CallControllers and is therefore available anywhere within the scope of any existing or future CallController.
+
+<div class='docs-progress-nav'>
+  <span class='back'>
+    Back to <a href="/docs/best-practices/rails">Rails Integration</a>
+  </span>
+  <span class='forward'>
+    Continue to <a href="/docs/common_problems">Common Problems</a>
+  </span>
+</div>
