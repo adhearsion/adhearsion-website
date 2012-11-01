@@ -35,19 +35,26 @@
     </div>
 
     <div class="docs-body">
-<h1 id="best-practices"><a class="toclink" href="#best-practices">Best Practices</a></h1>
+<h1 id="common-problems"><a class="toclink" href="#common-problems">Common Problems</a></h1>
 <div class="toc">
 <ul>
-<li><a href="#best-practices">Best Practices</a></li>
+<li><a href="#common-problems">Common Problems</a><ul>
+<li><a href="#unrenderable-document-error">Unrenderable document error</a></li>
+</ul>
+</li>
 </ul>
 </div>
-<p><a href="#" rel="docs-nav-active" style="display:none;">docs-nav-best-practices</a></p>
+<h2 id="unrenderable-document-error"><a class="toclink" href="#unrenderable-document-error">Unrenderable document error</a></h2>
+<p>It is common to see the following error on Asterisk:</p>
+<p>[2012-06-14 12:08:46] ERROR Adhearsion::Call: 008410de-feb6-48a6-9390-2388a89412ef: Error playing back the prompt: Output failed for argument "5" due to #<Punchblock::ProtocolError: name="unrenderable document error" text="The provided document could not be rendered." call_id=nil component_id=nil></p>
+<p>What this means is that the requested output document could not be rendered on the call, and ocurrs most commonly when using Asterisk or FreeSWITCH without a text to speach engine, but attempting to use the speak/say CallController methods. In this case, Asterisk cannot invoke text-to-speech and so raises this error.</p>
+<p>Many people see this error when calling into a default generated Adhearsion application on Asterisk, and this is because the SimonGame uses text-to-speech.</p>
 <div class='docs-progress-nav'>
   <span class='back'>
-    Back to <a href="/docs/logging">Logging</a>
+    Back to <a href="/docs/upgrading">Upgrading</a>
   </span>
   <span class='forward'>
-    Continue to <a href="/docs/best-practices/testing">Testing</a>
+    Continue to <a href="/api">API Docs</a>
   </span>
 </div>
     </div>
