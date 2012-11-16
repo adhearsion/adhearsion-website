@@ -20,3 +20,14 @@ Many people see this error when calling into a default generated Adhearsion appl
     Continue to <a href="/api">API Docs</a>
   </span>
 </div>
+
+## Stack exhaustion
+
+A stack error is sometimes encountered when running on Ruby 1.9.3 via RVM, looking similar to the following:
+
+[2012-11-15 21:32:45] ERROR Celluloid: Punchblock::Translator::Freeswitch crashed!
+SystemStackError: stack level too deep
+
+It is a known issue with Celluloid and RVM, and the best solution is to uninstall your current Ruby, update RVM using "rvm get head" and reinstall Ruby.
+
+rbenv does not exhibit this issue.
