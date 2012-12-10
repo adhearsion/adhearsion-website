@@ -10,9 +10,26 @@ At the time of this writing, Adhearsion 2.1.0, FreeSWITCH support is considered 
 
 Unfortunately there are no packages for FreeSWITCH included with any common Linux distribution.  However the FreeSWITCH project provides packages in [RPM](http://files.freeswitch.org/RPMS/) and [DPKG](http://files.freeswitch.org/repo/) formats.  FreeSWITCH can also be installed by downloading the source code and compiling it.  Full build instructions can be found on the [FreeSWITCH Install Guide](http://wiki.freeswitch.org/wiki/Installation_Guide).
 
+## Building FreeSWITCH with Text-To-Speech support
+
+FLite is a free TTS engine that comes with FreeSWITCH but is disabled by default. More information at [FreeSWITCH Mod flite](http://wiki.freeswitch.org/wiki/Mod_flite). Follow this guide to install the FLite module. (In this guide, keep in mind that modules.conf is in the source code directory and modules.conf.xml is in the directory where FreeSWITCH was installed into).
+
 ## Configuring FreeSWITCH
 
-In order for Adhearsion to drive FreeSWITCH, FreeSWITCH must have the inbound event socket configured correctly (in <code>/etc/freeswitch/conf/autoload_configs/event_socket.conf.xml</code>), and inbound calls routed to 'park'. This dialplan entry will direct all calls to Adhearsion:
+In order for Adhearsion to drive FreeSWITCH, FreeSWITCH must have the inbound event socket configured correctly (in <code>/etc/freeswitch/conf/autoload_configs/event_socket.conf.xml</code>):
+
+<pre class="brush: xml;">
+&lt;configuration name="event_socket.conf" description="Socket Client"&gt;
+  &lt;settings&gt;
+    &lt;param name="nat-map" value="false"/&gt;
+    &lt;param name="listen-ip" value="127.0.0.1"/&gt;
+    &lt;param name="listen-port" value="8021"/&gt;
+    &lt;param name="password" value="<your secret password>"/&gt;
+  &lt;/settings&gt;
+&lt;/configuration&gt;
+</pre>
+
+Next, edit the dialplan <code>/etc/freeswitch/conf/dialplan/public/00_inbound.xml</code> or create a new dialplan file that routes all inbound calls to 'park' on an 'Adhearsion' extension:
 
 <pre class="brush: xml;">
 &lt;extension name="Adhearsion"&gt;
@@ -27,9 +44,9 @@ In order for Adhearsion to drive FreeSWITCH, FreeSWITCH must have the inbound ev
 As always the full list of configuration options can be viewed, along with a description and their default values, by typing <code>rake config:show</code> in your application directory.  There are a few configuration options that are particularly important:
 
 * config.punchblock.platform must be set to <code>:freeswitch</code>
-* config.punchblock.password must be set to the EventSocket password (eg. "ClueCon")
+* config.punchblock.password must be set to the EventSocket password (the <your secret password> above, the default is "ClueCon")
 
-Note that as described in our [Deployment Best Practices](/docs/best-practices/deployment), we recommend NOT storing the EventSocket password in the <code>config/adhearsion.rb</code> file.  Instead this should be stored in an environment variable (specifically: <code>AHN_PUNCHBLOCK_PASSWORD</code>) that is loaded by the process prior to launching.
+Note that as described in our [Deployment Best Practices](/docs/best-practices/deployment), we recommend NOT storing the EventSocket password in the <code>config/adhearsion.rb</code> file.  Instead this should be stored in an environment variable (specifically: <code>AHN_PUNCHBLOCK_PASSWORD</code>) that is loaded by the process prior to launching. For example, start up Adhearsion with AHN_PUNCHBLOCK_PASSWORD=<your secret password> ahn start </path/to/app>
 
 
 ## Getting Help
