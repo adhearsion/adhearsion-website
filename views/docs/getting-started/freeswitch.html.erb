@@ -43,8 +43,22 @@
 </ul>
 <h2 id="getting-freeswitch"><a class="toclink" href="#getting-freeswitch">Getting FreeSWITCH</a></h2>
 <p>Unfortunately there are no packages for FreeSWITCH included with any common Linux distribution.  However the FreeSWITCH project provides packages in <a href="http://files.freeswitch.org/RPMS/">RPM</a> and <a href="http://files.freeswitch.org/repo/">DPKG</a> formats.  FreeSWITCH can also be installed by downloading the source code and compiling it.  Full build instructions can be found on the <a href="http://wiki.freeswitch.org/wiki/Installation_Guide">FreeSWITCH Install Guide</a>.</p>
+<h2 id="building-freeswitch-with-text-to-speech-support"><a class="toclink" href="#building-freeswitch-with-text-to-speech-support">Building FreeSWITCH with Text-To-Speech support</a></h2>
+<p>FLite is a free TTS engine that comes with FreeSWITCH but is disabled by default. More information at <a href="http://wiki.freeswitch.org/wiki/Mod_flite">FreeSWITCH Mod flite</a>. Follow this guide to install the FLite module. (In this guide, keep in mind that modules.conf is in the source code directory and modules.conf.xml is in the directory where FreeSWITCH was installed into).</p>
 <h2 id="configuring-freeswitch"><a class="toclink" href="#configuring-freeswitch">Configuring FreeSWITCH</a></h2>
-<p>In order for Adhearsion to drive FreeSWITCH, FreeSWITCH must have the inbound event socket configured correctly (in <code>/etc/freeswitch/conf/autoload_configs/event_socket.conf.xml</code>), and inbound calls routed to 'park'. This dialplan entry will direct all calls to Adhearsion:</p>
+<p>In order for Adhearsion to drive FreeSWITCH, FreeSWITCH must have the inbound event socket configured correctly (in <code>/etc/freeswitch/conf/autoload_configs/event_socket.conf.xml</code>):</p>
+<pre class="brush: xml;">
+&lt;configuration name="event_socket.conf" description="Socket Client"&gt;
+  &lt;settings&gt;
+    &lt;param name="nat-map" value="false"/&gt;
+    &lt;param name="listen-ip" value="127.0.0.1"/&gt;
+    &lt;param name="listen-port" value="8021"/&gt;
+    &lt;param name="password" value="<your secret password>"/&gt;
+  &lt;/settings&gt;
+&lt;/configuration&gt;
+</pre>
+
+<p>Next, edit the dialplan <code>/etc/freeswitch/conf/dialplan/public/00_inbound.xml</code> or create a new dialplan file that routes all inbound calls to 'park' on an 'Adhearsion' extension:</p>
 <pre class="brush: xml;">
 &lt;extension name="Adhearsion"&gt;
   &lt;condition field="destination_number" expression=".*$"&gt;
@@ -57,9 +71,9 @@
 <p>As always the full list of configuration options can be viewed, along with a description and their default values, by typing <code>rake config:show</code> in your application directory.  There are a few configuration options that are particularly important:</p>
 <ul>
 <li>config.punchblock.platform must be set to <code>:freeswitch</code></li>
-<li>config.punchblock.password must be set to the EventSocket password (eg. "ClueCon")</li>
+<li>config.punchblock.password must be set to the EventSocket password (the <your secret password> above, the default is "ClueCon")</li>
 </ul>
-<p>Note that as described in our <a href="/docs/best-practices/deployment">Deployment Best Practices</a>, we recommend NOT storing the EventSocket password in the <code>config/adhearsion.rb</code> file.  Instead this should be stored in an environment variable (specifically: <code>AHN_PUNCHBLOCK_PASSWORD</code>) that is loaded by the process prior to launching.</p>
+<p>Note that as described in our <a href="/docs/best-practices/deployment">Deployment Best Practices</a>, we recommend NOT storing the EventSocket password in the <code>config/adhearsion.rb</code> file.  Instead this should be stored in an environment variable (specifically: <code>AHN_PUNCHBLOCK_PASSWORD</code>) that is loaded by the process prior to launching. For example, start up Adhearsion with AHN_PUNCHBLOCK_PASSWORD=<your secret password> ahn start </path/to/app></p>
 <h2 id="getting-help"><a class="toclink" href="#getting-help">Getting Help</a></h2>
 <ul>
 <li><a href="http://wiki.freeswitch.org">The FreeSWITCH Wiki</a> is an excellent source of configuration documentation and how-to articles.</li>

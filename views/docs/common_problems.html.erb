@@ -40,6 +40,7 @@
 <ul>
 <li><a href="#common-problems">Common Problems</a><ul>
 <li><a href="#unrenderable-document-error">Unrenderable document error</a></li>
+<li><a href="#stack-exhaustion">Stack exhaustion</a></li>
 </ul>
 </li>
 </ul>
@@ -57,6 +58,13 @@
     Continue to <a href="/api">API Docs</a>
   </span>
 </div>
+
+<h2 id="stack-exhaustion"><a class="toclink" href="#stack-exhaustion">Stack exhaustion</a></h2>
+<p>A stack error is sometimes encountered when running on Ruby 1.9.3 via RVM, looking similar to the following:</p>
+<p>[2012-11-15 21:32:45] ERROR Celluloid: Punchblock::Translator::Freeswitch crashed!
+SystemStackError: stack level too deep</p>
+<p>It is a known issue with Celluloid and RVM, and the best solution is to uninstall your current Ruby, update RVM using "rvm get head" and reinstall Ruby.</p>
+<p>rbenv does not exhibit this issue.</p>
     </div>
 
     <div id="disqus_thread"></div>
