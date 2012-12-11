@@ -12,15 +12,6 @@ What this means is that the requested output document could not be rendered on t
 
 Many people see this error when calling into a default generated Adhearsion application on Asterisk, and this is because the SimonGame uses text-to-speech.
 
-<div class='docs-progress-nav'>
-  <span class='back'>
-    Back to <a href="/docs/upgrading">Upgrading</a>
-  </span>
-  <span class='forward'>
-    Continue to <a href="/api">API Docs</a>
-  </span>
-</div>
-
 ## Stack exhaustion
 
 A stack error is sometimes encountered when running on Ruby 1.9.3 via RVM, looking similar to the following:
@@ -31,3 +22,12 @@ SystemStackError: stack level too deep
 It is a known issue with Celluloid and RVM, and the best solution is to uninstall your current Ruby, update RVM using "rvm get head" and reinstall Ruby.
 
 rbenv does not exhibit this issue.
+
+<div class='docs-progress-nav'>
+  <span class='back'>
+    Back to <a href="/docs/upgrading">Upgrading</a>
+  </span>
+  <span class='forward'>
+    Continue to <a href="/api">API Docs</a>
+  </span>
+</div>
