@@ -58,3 +58,4 @@ Note that as described in our [Deployment Best Practices](/docs/best-practices/d
 * [FreeSWITCH-Users Mailing List](http://lists.freeswitch.org/mailman/listinfo/freeswitch-users) - The FreeSWITCH-Users mailing list is a great community resource that also is monitored by the FreeSWITCH developers.
 * [Adhearsion Community Support](/community) - As always we invite you to post your questions to the Adhearsion community via IRC or our own mailing list.
 
+<a href="#" rel="docs-nav-active" style="display:none;">docs-nav-getting-started</a>

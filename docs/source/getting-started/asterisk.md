@@ -79,3 +79,4 @@ If you need help configuring Asterisk there are several resources available:
 * [Asterisk-Users Mailing List](http://lists.digium.com/mailman/listinfo/asterisk-users/) - The Asterisk-Users mailing list is a great community resource that also is monitored by the Asterisk developers at Digium.
 * [Adhearsion Community Support](/community) - As always we invite you to post your questions to the Adhearsion community via IRC or our own mailing list.
 
+<a href="#" rel="docs-nav-active" style="display:none;">docs-nav-getting-started</a>
