@@ -80,3 +80,4 @@ If you need help configuring Asterisk there are several resources available:
 * [Adhearsion Community Support](/community) - As always we invite you to post your questions to the Adhearsion community via IRC or our own mailing list.
 
 <a href="#" rel="docs-nav-active" style="display:none;">docs-nav-getting-started</a>
+<a href="#" rel="docs-nav-active" style="display:none;">docs-nav-getting-started-installation</a>

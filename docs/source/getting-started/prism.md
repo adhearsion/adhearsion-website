@@ -66,3 +66,4 @@ Note that as described in our [Deployment Best Practices](/docs/best-practices/d
 ## Getting Help
 
 <a href="#" rel="docs-nav-active" style="display:none;">docs-nav-getting-started</a>
+<a href="#" rel="docs-nav-active" style="display:none;">docs-nav-getting-started-installation</a>
