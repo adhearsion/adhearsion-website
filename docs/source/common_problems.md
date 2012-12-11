@@ -28,6 +28,6 @@ rbenv does not exhibit this issue.
     Back to <a href="/docs/upgrading">Upgrading</a>
   </span>
   <span class='forward'>
-    Continue to <a href="/api">API Docs</a>
+    Continue to <a href="/docs/dealing-with-bugs">Dealing with bugs</a>
   </span>
 </div>
