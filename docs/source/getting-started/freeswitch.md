@@ -45,10 +45,14 @@ The 'park' application essentially puts the call on hold. The event socket notif
 
 As always the full list of configuration options can be viewed, along with a description and their default values, by typing <code>rake config:show</code> in your application directory.  There are a few configuration options that are particularly important:
 
-* config.punchblock.platform must be set to <code>:freeswitch</code>
-* config.punchblock.password must be set to the EventSocket password (the your-secret-password above, the default is "ClueCon")
+* ```config.punchblock.platform``` must be set to ```:freeswitch```
+* ```config.punchblock.password``` must be a string, the EventSocket password (the your-secret-password above, the default is "ClueCon")
+* ```config.punchblock.host``` is an optional string, defaults to localhost (127.0.0.1) or you can specify the host ip
+* ```config.punchblock.port``` is an optional integer, defaults to 8021 (FreeSWITCH default) or you can specify a custom port
+* ```config.punchblock.media_engine``` for Text-To-Speech, must be a symbol. FreeSWITCH ships with support for ```:flite``` or ```:cepstral``` (NB: you must compile FreeSWITCH with one and only one of these engines, and enable one and only one of these engines -- see above section on compiling with TTS support)
+* ```config.punchblock.default_voice``` for TTS, must be a symbol, and depends on the TTS engine you choose. For example, with ```:flite``` this can be set to ```:slt```, ```:rms```, ```:awb```, or ```:kal```. (```:slt``` is a female voice and the others are male voices.)
 
-Note that as described in our [Deployment Best Practices](/docs/best-practices/deployment), we recommend NOT storing the EventSocket password in the <code>config/adhearsion.rb</code> file.  Instead this should be stored in an environment variable (specifically: <code>AHN_PUNCHBLOCK_PASSWORD</code>) that is loaded by the process prior to launching. For example, start up Adhearsion with AHN_PUNCHBLOCK_PASSWORD=your-secret-password ahn start </path/to/app>
+Note that as described in our [Deployment Best Practices](/docs/best-practices/deployment), we recommend NOT storing the EventSocket password in the <code>config/adhearsion.rb</code> file.  Instead this should be stored in an environment variable (specifically: <code>AHN_PUNCHBLOCK_PASSWORD</code>) that is loaded by the process prior to launching. For example, start up Adhearsion with AHN_PUNCHBLOCK_PASSWORD=your-secret-password ahn start /path/to/app
 
 
 ## Getting Help
