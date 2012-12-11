@@ -59,12 +59,12 @@
     &lt;param name="nat-map" value="false"/&gt;
     &lt;param name="listen-ip" value="127.0.0.1"/&gt;
     &lt;param name="listen-port" value="8021"/&gt;
-    &lt;param name="password" value="<your secret password>"/&gt;
+    &lt;param name="password" value="your-secret-password"/&gt;
   &lt;/settings&gt;
 &lt;/configuration&gt;
 </pre>
 
-<p>Next, edit the dialplan <code>/etc/freeswitch/conf/dialplan/public/00_inbound.xml</code> or create a new dialplan file that routes all inbound calls to 'park' on an 'Adhearsion' extension:</p>
+<p>Next, we need to route all inbound calls to Adhearsion. Edit the dialplan <code>/etc/freeswitch/conf/dialplan/public/00_inbound.xml</code> (or you can create a new file in the same directory):</p>
 <pre class="brush: xml;">
 &lt;extension name="Adhearsion"&gt;
   &lt;condition field="destination_number" expression=".*$"&gt;
@@ -73,13 +73,14 @@
 &lt;/extension&gt;
 </pre>
 
+<p>The 'park' application essentially puts the call on hold. The event socket notifies Adhearsion of the call as an event.</p>
 <h2 id="configuring-adhearsion-for-freeswitch"><a class="toclink" href="#configuring-adhearsion-for-freeswitch">Configuring Adhearsion for FreeSWITCH</a></h2>
 <p>As always the full list of configuration options can be viewed, along with a description and their default values, by typing <code>rake config:show</code> in your application directory.  There are a few configuration options that are particularly important:</p>
 <ul>
 <li>config.punchblock.platform must be set to <code>:freeswitch</code></li>
-<li>config.punchblock.password must be set to the EventSocket password (the <your secret password> above, the default is "ClueCon")</li>
+<li>config.punchblock.password must be set to the EventSocket password (the your-secret-password above, the default is "ClueCon")</li>
 </ul>
-<p>Note that as described in our <a href="/docs/best-practices/deployment">Deployment Best Practices</a>, we recommend NOT storing the EventSocket password in the <code>config/adhearsion.rb</code> file.  Instead this should be stored in an environment variable (specifically: <code>AHN_PUNCHBLOCK_PASSWORD</code>) that is loaded by the process prior to launching. For example, start up Adhearsion with AHN_PUNCHBLOCK_PASSWORD=<your secret password> ahn start </path/to/app></p>
+<p>Note that as described in our <a href="/docs/best-practices/deployment">Deployment Best Practices</a>, we recommend NOT storing the EventSocket password in the <code>config/adhearsion.rb</code> file.  Instead this should be stored in an environment variable (specifically: <code>AHN_PUNCHBLOCK_PASSWORD</code>) that is loaded by the process prior to launching. For example, start up Adhearsion with AHN_PUNCHBLOCK_PASSWORD=your-secret-password ahn start </path/to/app></p>
 <h2 id="getting-help"><a class="toclink" href="#getting-help">Getting Help</a></h2>
 <ul>
 <li><a href="http://wiki.freeswitch.org">The FreeSWITCH Wiki</a> is an excellent source of configuration documentation and how-to articles.</li>
