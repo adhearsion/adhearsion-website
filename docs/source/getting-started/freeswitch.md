@@ -12,7 +12,7 @@ Unfortunately there are no packages for FreeSWITCH included with any common Linu
 
 ## Building FreeSWITCH with Text-To-Speech support
 
-FLite is a free TTS engine that comes with FreeSWITCH but is disabled by default. More information at [FreeSWITCH Mod flite](http://wiki.freeswitch.org/wiki/Mod_flite). Follow this guide to install the FLite module. (In this guide, keep in mind that modules.conf is in the source code directory and modules.conf.xml is in the directory where FreeSWITCH was installed into).
+FLite is a free TTS engine that comes with FreeSWITCH but is disabled by default. Follow [this guide](http://wiki.freeswitch.org/wiki/Mod_flite) to install the free FLite module. When following this guide, keep in mind that ```modules.conf``` is in the source code directory and ```modules.conf.xml``` is in the directory where FreeSWITCH was installed. NB: you can compile and enable _only one_ TTS engine at a time, due to conflicts between the various engines.
 
 ## Configuring FreeSWITCH
 
@@ -45,10 +45,14 @@ The 'park' application essentially puts the call on hold. The event socket notif
 
 As always the full list of configuration options can be viewed, along with a description and their default values, by typing <code>rake config:show</code> in your application directory.  There are a few configuration options that are particularly important:
 
-* config.punchblock.platform must be set to <code>:freeswitch</code>
-* config.punchblock.password must be set to the EventSocket password (the your-secret-password above, the default is "ClueCon")
+* ```config.punchblock.platform``` must be set to ```:freeswitch```
+* ```config.punchblock.password``` must be a string, the EventSocket password (the your-secret-password above, the default is "ClueCon")
+* ```config.punchblock.host``` is an optional string, defaults to localhost (127.0.0.1) or you can specify the host ip
+* ```config.punchblock.port``` is an optional integer, defaults to 8021 (FreeSWITCH default) or you can specify a custom port
+* ```config.punchblock.media_engine``` for Text-To-Speech, can be a string or symbol. FreeSWITCH ships with support for ```:flite```, ```:cepstral```, ```:unimrcp```, and ```:shout```. [See more information](http://wiki.freeswitch.org/wiki/Mod_unimrcp) on the various TTS engines and [see above section](#building-freeswitch-with-text-to-speech-support) for help on compiling FreeSWITCH with TTS support.
+* ```config.punchblock.default_voice``` for TTS, can be a string or symbol, and depends on the TTS engine you choose. For example, with ```:flite``` you can set this to ```slt```, ```rms```, ```awb```, or ```kal```.
 
-Note that as described in our [Deployment Best Practices](/docs/best-practices/deployment), we recommend NOT storing the EventSocket password in the <code>config/adhearsion.rb</code> file.  Instead this should be stored in an environment variable (specifically: <code>AHN_PUNCHBLOCK_PASSWORD</code>) that is loaded by the process prior to launching. For example, start up Adhearsion with AHN_PUNCHBLOCK_PASSWORD=your-secret-password ahn start </path/to/app>
+Note that as described in our [Deployment Best Practices](/docs/best-practices/deployment), we recommend NOT storing the EventSocket password in the <code>config/adhearsion.rb</code> file.  Instead this should be stored in an environment variable (specifically: <code>AHN_PUNCHBLOCK_PASSWORD</code>) that is loaded by the process prior to launching. For example, start up Adhearsion with AHN_PUNCHBLOCK_PASSWORD=your-secret-password ahn start /path/to/app
 
 
 ## Getting Help
