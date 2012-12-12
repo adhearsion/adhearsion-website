@@ -225,7 +225,7 @@ class MyController < Adhearsion::CallController
          :timeout => 8.seconds, :tries => 3 do
       match 1, BooController
       match '2', MyOtherController
-      match 3, 4, { pass YetAnotherController }
+      match(3, 4) { pass YetAnotherController }
       match 5, FooController
       match 6..10 do |dialed|
         say_dialed dialed
