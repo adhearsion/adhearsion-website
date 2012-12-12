@@ -1,230 +1,77 @@
-!!! 5
-%html
-  %head
-    %title
-      Adhearsion:
-      = yield_content(:title) || ''
+.docs
+  .full-width
+    .outer-rounded-box-bold.docs-nav-box
+      .inner-rounded-box-filled-grey.clearfix
+        %h3 Documentation
+        %ul.collapsibleList
+          %li#docs-nav-getting-started
+            Getting Started
+            %ul
+              %li#docs-nav-getting-started-prerequisites
+                %a{:href => "/docs/getting-started/prerequisites"} Prerequisites
+              %li#docs-nav-getting-started-installation
+                %a{:href => "/docs/getting-started/installation"} Installation
+                %ul
+                  %li#docs-nav-getting-started-installation-asterisk
+                    %a{:href => "/docs/getting-started/asterisk"} Asterisk
+                  %li#docs-nav-getting-started-installation-freeswitch
+                    %a{:href => "/docs/getting-started/freeswitch"} FreeSWITCH
+                  %li#docs-nav-getting-started-installation-prism
+                    %a{:href => "/docs/getting-started/prism"} Voxeo PRISM
+          %li#docs-nav-console
+            %a{:href => "/docs/console"} Console
+          %li#docs-nav-call-controller
+            %a{:href => "/docs/call-controllers"} Call Controllers
+          %li#docs-nav-routing
+            %a{:href => "/docs/routing"} Routing
+          %li#docs-nav-config
+            %a{:href => "/docs/config"} Config
+          %li#docs-nav-events
+            %a{:href => "/docs/events"} Events
+          %li#docs-nav-logging
+            %a{:href => "/docs/logging"} Logging
+          %li#docs-nav-plugins
+            %a{:href => "/docs/plugins"} Plugins
+          %li#docs-nav-best-practices
+            Best Practices
+            %ul
+              %li#docs-nav-best-practices-testing
+                %a{:href => "/docs/best-practices/testing"} Testing
+              %li#docs-nav-best-practices-deployment
+                %a{:href => "/docs/best-practices/deployment"} Deployment
+              %li#docs-nav-best-practices-sysadmin
+                %a{:href => "/docs/best-practices/sysadmin"} Notes for System Administrators
+              %li#docs-nav-best-practices-rails
+                %a{:href => "/docs/best-practices/rails"} Rails Integration
+          %li#docs-nav-upgrading
+            %a{:href => "/docs/upgrading"} Upgrading
+          %li#docs-nav-common-problems
+            %a{:href => "/docs/common_problems"} Common Problems
+          %li#docs-nav-dealing-with-bugs
+            %a{:href => "/docs/dealing-with-bugs"} Dealing with bugs
+          %li#docs-nav-contributing
+            %a{:href => "/docs/contributing"} Contributing
+          %li#docs-nav-api
+            %a{:href => "/api"} API Documentation
 
-    = stylesheet_link_tag "theme/ui.all", "jquery.prettyPhoto", "jquery.bubbletip", "style", "style-pink", "style-enhance", "ansi2html", "terminal", 'collapsibleList', 'github'
+    .docs-body
+      = docs
 
-    :css
-      {{ pygments['pastie.css'] }}
-      .syntaxhighlighter code {
-        display: inline;
-      }
-
-    %link{:rel => "stylesheet", :href => "/fonts/Inconsolata.ttf"}
-    %link{:rel => "shortcut icon", :href => "/favicon.ico"}
-
-    %meta{:'http-equiv' => "content-type", :content => "text/html; charset=utf-8"}
-    %meta{:name => "description", :content => "description"}
-    %meta{:name => "keywords", :content => "keywords"}
-    %meta{:name => "author", :content => "author"}
-    %meta{:name => "copyright", :content => "&copy; 2011 Bogdan Rosu. All rights reserved."}
-
-    = javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js', 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js', 'http://cdn.jquerytools.org/1.2.5/full/jquery.tools.min.js', 'jquery.easing.js', 'jquery.css-transform.js', 'jquery.css-rotate-scale.js', 'cufon.js', 'fonts/arials.font.js', 'fonts/ptsans.font.js', 'fonts/gnuolane.font.js', 'fonts/yanone.font.js', 'http://www.bogdanrosu.com/temp/fonts/zurich.font.js', 'jquery.prettyPhoto.js', 'jquery.captify.js', 'jquery.bubbletip.js', 'browserdetect.js', 'roundies.js', 'jquery.tweet.js', 'custom.js', 'jquery.timeago.js', 'CollapsibleLists.compressed', 'linkbolder.js'
-
+    #disqus_thread
     :javascript
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-22818641-1']);
-      _gaq.push(['_trackPageview']);
-
+      var disqus_shortname = 'adhearsion';
       (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
       })();
 
-  %body
-    .top
-      .full-width.rel
-        .one-third
-          .logo
-            %a{:href => "/"}
-              %img{:src => "/images/logo.jpg", :alt => "Adhearsion"}
-        .two-third
-          / .rel
-          /   .abs.utility
-          /     .icon-to-left
-          /       %img{:src => "/images/icons/smallphone.png", :alt => ""}
-          /     Give us a Call: 1-800-ADHEARSION or
-          /     %a{:href => '/demo'} try out the demo app
-          /     .clear
-          .mainmenu
-            %ul
-              %li#main-nav-home
-                %a{:href => "/"}
-                  %span Home
-              %li#main-nav-docs
-                %a{:href => "/docs"}
-                  %span Documentation
-              %li#main-nav-community
-                %a{:href => "/community"}
-                  %span Community
-              %li#main-nav-get-help
-                %a{:href => "/get-help"}
-                  %span Get Help
-              %li#main-nav-conference
-                %a{:href => "/conference"}
-                  %span AdhearsionConf
-              %li#main-nav-cloud
-                %a{:href => "/cloud"}
-                  %span Cloud
+    %noscript Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    %a.dsq-brlink{:href => "http://disqus.com"}
+      blog comments powered by
+      %span.logo-disqus Disqus
 
-        .clear
-    .middle
-      .docs
-        .full-width
-          .outer-rounded-box-bold.docs-nav-box
-            .inner-rounded-box-filled-grey.clearfix
-              %h3 Documentation
-              %ul.collapsibleList
-                %li#docs-nav-getting-started
-                  Getting Started
-                  %ul
-                    %li#docs-nav-getting-started-prerequisites
-                      %a{:href => "/docs/getting-started/prerequisites"} Prerequisites
-                    %li#docs-nav-getting-started-installation
-                      %a{:href => "/docs/getting-started/installation"} Installation
-                      %ul
-                        %li#docs-nav-getting-started-installation-asterisk
-                          %a{:href => "/docs/getting-started/asterisk"} Asterisk
-                        %li#docs-nav-getting-started-installation-freeswitch
-                          %a{:href => "/docs/getting-started/freeswitch"} FreeSWITCH
-                        %li#docs-nav-getting-started-installation-prism
-                          %a{:href => "/docs/getting-started/prism"} Voxeo PRISM
-                %li#docs-nav-console
-                  %a{:href => "/docs/console"} Console
-                %li#docs-nav-call-controller
-                  %a{:href => "/docs/call-controllers"} Call Controllers
-                %li#docs-nav-routing
-                  %a{:href => "/docs/routing"} Routing
-                %li#docs-nav-config
-                  %a{:href => "/docs/config"} Config
-                %li#docs-nav-events
-                  %a{:href => "/docs/events"} Events
-                %li#docs-nav-logging
-                  %a{:href => "/docs/logging"} Logging
-                %li#docs-nav-plugins
-                  %a{:href => "/docs/plugins"} Plugins
-                %li#docs-nav-best-practices
-                  Best Practices
-                  %ul
-                    %li#docs-nav-best-practices-testing
-                      %a{:href => "/docs/best-practices/testing"} Testing
-                    %li#docs-nav-best-practices-deployment
-                      %a{:href => "/docs/best-practices/deployment"} Deployment
-                    %li#docs-nav-best-practices-sysadmin
-                      %a{:href => "/docs/best-practices/sysadmin"} Notes for System Administrators
-                    %li#docs-nav-best-practices-rails
-                      %a{:href => "/docs/best-practices/rails"} Rails Integration
-                %li#docs-nav-upgrading
-                  %a{:href => "/docs/upgrading"} Upgrading
-                %li#docs-nav-common-problems
-                  %a{:href => "/docs/common_problems"} Common Problems
-                %li#docs-nav-dealing-with-bugs
-                  %a{:href => "/docs/dealing-with-bugs"} Dealing with bugs
-                %li#docs-nav-contributing
-                  %a{:href => "/docs/contributing"} Contributing
-                %li#docs-nav-api
-                  %a{:href => "/api"} API Documentation
+    .clear
 
-          .docs-body
-            = yield
+%a#main-nav-active{:href => "#", :style => "display:none;"} #main-nav-docs
 
-          #disqus_thread
-          :javascript
-            var disqus_shortname = 'adhearsion';
-            (function() {
-                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-            })();
-
-          %noscript Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-          %a.dsq-brlink{:href => "http://disqus.com"}
-            blog comments powered by
-            %span.logo-disqus Disqus
-
-          .clear
-
-      %a#main-nav-active{:href => "#", :style => "display:none;"} #main-nav-docs
-    .footer
-      .footer-big
-        .full-width
-          .one-fourth.footer-panel
-            %h3 Adhearsion
-            %ul
-              %li
-                %a{:href => "/"} Home
-              %li
-                %a{:href => "/faq"} FAQ
-              %li
-                %a{:href => "/community"} Community
-              / %li
-              /   %a{:href => "/contact"} Contact
-              %li
-                %a{:href => "/conference"} Conference
-              %li
-                %a{:href => "/get-help"} Get Help
-              %li
-                %a{:href => "/foundation"} Adhearsion Foundation
-              %li
-                %a{:href => "/cloud"} Adhearsion Cloud
-          .one-fourth.footer-panel
-            %h3 Latest Tweets
-            .tweet
-          .one-fourth.footer-panel
-            %h3 Documentation
-            %ul
-              %li
-                %a{:href => "/docs"} Usage Guide
-              %li
-                %a{:href => "/wiki"} Wiki
-              %li
-                %a{:href => "/api"} API Docs
-              %li
-                %a{:href => "/contributing"} Contributing
-              %li
-                %a{:href => "/media"} Media
-
-          .one-fourth.footer-panel
-            %h3 Get Social &amp; Such
-            %ul.social
-              %li
-                %a.github{:href => "https://github.com/adhearsion/adhearsion"} Github
-              %li.last
-                %a.vimeo{:href => "http://vimeo.com/adhearsion"} Vimeo
-              %li
-                %a.twitter{:href => "http://twitter.com/adhearsion"} Twitter
-              %li.last
-                %a.slideshare{:href => "http://www.slideshare.net/tag/adhearsion"} Slideshare
-              %li
-                %a.google-groups{:href => "https://groups.google.com/group/adhearsion"} Mailing List
-              %li.last
-                %a.rss{:href => "/rss"} RSS
-            .clear
-            .rel.mt10
-
-            .clear
-          .clear
-      .footer-small
-        .full-width
-          .one-half.left &copy; 2012 Adhearsion Foundation Inc. All rights reserved.
-          .one-half.right Page rendered at #{Time.now}
-          .clear
-
-    :javascript
-      jQuery(document).ready(function() {
-        Cufon.now();
-        CollapsibleLists.apply();
-        var activeDocNavElements = $("a[rel^='docs-nav-active']");
-        for(var i = 0; i < activeDocNavElements.size(); i++) {
-          CollapsibleLists.expand(document.getElementById(activeDocNavElements[i].text));
-        }
-
-        var activeMainNavElements = $("a#main-nav-active");
-        for(var i = 0; i < activeMainNavElements.size(); i++) {
-          $(activeMainNavElements[i].text).addClass('active');
-        }
-      });

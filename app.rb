@@ -136,7 +136,10 @@ get '/docs/*' do |page|
 end
 
 def render_docs_page(page = 'index')
-  markdown :"docs/#{page}", layout_engine: :haml, layout: :docs
+  toc = markdown :"docs/#{page}", renderer: Redcarpet::Render::HTML_TOC
+  docs = markdown :"docs/#{page}"
+
+  haml :docs, locals: {docs: docs.sub('[TOC]', toc)}
 end
 
 def title(page_title, show_title = true)
