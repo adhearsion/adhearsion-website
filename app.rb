@@ -56,6 +56,8 @@ end
 
 Tilt.register Tilt::RedcarpetTemplate::Redcarpet2, 'markdown', 'mkd', 'md'
 
+set :markdown, renderer: Redcarpet::Render::HTML.new(with_toc_data: true)
+
 get '/' do
   @blog_posts = BlogPostAggregator.instance.posts
   if ENV['RACK_ENV']
@@ -128,7 +130,7 @@ get '/docs/*' do |page|
 end
 
 def render_docs_page(page = 'index')
-  markdown :"docs/#{page}", :layout_engine => :haml, :layout => :docs
+  markdown :"docs/#{page}", layout_engine: :haml, layout: :docs
 end
 
 def title(page_title, show_title = true)
