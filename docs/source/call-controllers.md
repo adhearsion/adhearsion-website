@@ -41,7 +41,7 @@ Within a call controller, you have access to many instance methods with which to
 The entry point for every CallController is the #run method, and every CallController must have a #run method.  Once launched, there are several methods available to exercise basic control over a call. The first interesting one is the method by which you answer a call. Hold on to your hats here, this is highly complex:
 
 <pre class="brush: ruby;">
-class SuperSecretProjectCallController < Adhearsion::CallController
+class SuperSecretProjectCallController &lt; Adhearsion::CallController
   def run
     answer
   end
@@ -51,7 +51,7 @@ end
 Hanging up a call is equally hard work:
 
 <pre class="brush: ruby;">
-class SuperSecretProjectCallController < Adhearsion::CallController
+class SuperSecretProjectCallController &lt; Adhearsion::CallController
   def run
     hangup
   end
@@ -63,7 +63,7 @@ You're beginning to see now why telephony consulting is so profitable!
 It is also possible to mute and unmute the call:
 
 <pre class="brush: ruby;">
-class SuperSecretProjectCallController < Adhearsion::CallController
+class SuperSecretProjectCallController &lt; Adhearsion::CallController
   def run
     answer
     mute
@@ -76,7 +76,7 @@ end
 One other handy trick is rejecting a call before it is answered.  Among other things this avoids billing in most cases:
 
 <pre class="brush: ruby;">
-class SuperSecretProjectCallController < Adhearsion::CallController
+class SuperSecretProjectCallController &lt; Adhearsion::CallController
   def run
     reject if call.from =~ /18005551234/ # Ugh, Aunt Sally always talks my ear off...
     # Otherwise...
@@ -100,7 +100,7 @@ Early media could not work with all methods and channels, so the recommendation 
 It is possible to reuse and share functionality among call controllers. There are two approaches to this. The first is to invoke another controller *within* the current controller:
 
 <pre class="brush: ruby;">
-class SuperSecretProjectCallController < Adhearsion::CallController
+class SuperSecretProjectCallController &lt; Adhearsion::CallController
   def run
     invoke OtherController
     # After OtherController the call will continue:
@@ -114,7 +114,7 @@ In this case, the new controller is prepared and executed.  When it finishes, co
 Sometimes, it is desireable to abandon the current controller, and hop to a new one entirely.
 
 <pre class="brush: ruby;">
-class SuperSecretProjectCallController < Adhearsion::CallController
+class SuperSecretProjectCallController &lt; Adhearsion::CallController
   def run
     pass OtherController
     raise "Inconcievable!" # This code is never reached
@@ -131,7 +131,7 @@ There are several methods by which to render audible output to the call. The ful
 \#play allows for rendering output of several types, in a manner appropriate to that type. It will detect Date/Time objects, numbers, and paths/URLs to audio files. Additionally, it supports rendering collections of such objects in series. As always, further details can be found in the [API documentation](http://rubydoc.info/github/adhearsion/adhearsion/Adhearsion/CallController/Output:play), but here are some examples:
 
 <pre class="brush: ruby;">
-class MyController < Adhearsion::CallController
+class MyController &lt; Adhearsion::CallController
   def run
     answer
     play 'file://rub-dub-dub.mp3', 3, 'file://men-in-a-tub.mp3'
@@ -145,7 +145,7 @@ end
 In many circumstances, it is desireable to speak certain output using a text-to-speech engine. This is simple using the #say method, providing either a simple string or an SSML document:
 
 <pre class="brush: ruby;">
-class MyController < Adhearsion::CallController
+class MyController &lt; Adhearsion::CallController
   def run
     answer
 
@@ -199,7 +199,7 @@ Phone calls are fairly boring if they only involve listening to output, so Adhea
 CallController provides the #ask method, which simplifies input by combining a prompt (rendered as above) with gathering a response.
 
 <pre class="brush: ruby;">
-class MyController < Adhearsion::CallController
+class MyController &lt; Adhearsion::CallController
   def run
     answer
     result = ask "How many woodchucks? Enter a number followed by #.",
@@ -218,7 +218,7 @@ Rapid and painless creation of complex IVRs has always been one of the defining 
 A sample menu might look something like this:
 
 <pre class="brush: ruby;">
-class MyController < Adhearsion::CallController
+class MyController &lt; Adhearsion::CallController
   def run
     answer
     menu "Where can we take you today?",
@@ -285,7 +285,7 @@ The #record method provides the ability to capture audio in a blocking or non-bl
 In this case, it is desireable for #record to block until the recording completes, as it is the main feature of that part of the call. This usage is simple:
 
 <pre class="brush: ruby;">
-class SuperSecretProjectCall < Adhearsion::CallController
+class SuperSecretProjectCall &lt; Adhearsion::CallController
   def run
     answer
     record_result = record :start_beep => true, :max_duration => 60_000
@@ -300,7 +300,7 @@ end
 Alternatively, it may be desireable to record a call in the background while other interactions occurr, perhaps for training, fact-verification or compliance reasons. In this case, it is necessary to execute the recording asynchronously, and handle its recording as a callback receiving the Event object for the command:
 
 <pre class="brush: ruby;">
-class SuperSecretProjectCall < Adhearsion::CallController
+class SuperSecretProjectCall &lt; Adhearsion::CallController
   def run
     answer
     record :async => true do |event|
@@ -323,7 +323,7 @@ It is additionally necessary to have sox installed on the Asterisk machine, beca
 If there are multiple calls active in Adhearsion, it is possible to join the media streams of those calls together so the parties may talk.
 
 <pre class="brush: ruby;">
-class SuperSecretProjectCall < Adhearsion::CallController
+class SuperSecretProjectCall &lt; Adhearsion::CallController
   def run
     answer
     join some_other_call # or some_other_call_id
@@ -341,7 +341,7 @@ Calls may be unjoined out-of-band using the Call#unjoin method, which has a simi
 Similarly to #join, it is possible to make an outbound call to a third-party, and then to join the calls on answering.  The #dial method handles this automatically.
 
 <pre class="brush: ruby;">
-class SuperSecretProjectCall < Adhearsion::CallController
+class SuperSecretProjectCall &lt; Adhearsion::CallController
   def run
     answer
     dial 'sip:foo@bar.com'
@@ -353,7 +353,7 @@ end
 It is also possible to make multiple calls in paralell, under a first-to-answer-wins policy:
 
 <pre class="brush: ruby;">
-class SuperSecretProjectCall < Adhearsion::CallController
+class SuperSecretProjectCall &lt; Adhearsion::CallController
   def run
     answer
     dial 'sip:foo@bar.com', 'tel:+1404....'
@@ -365,7 +365,7 @@ end
 It is additionally possible to set a timeout on attempting to dial out, and to check the status of the dial after the fact:
 
 <pre class="brush: ruby;">
-class SuperSecretProjectCall < Adhearsion::CallController
+class SuperSecretProjectCall &lt; Adhearsion::CallController
   def run
     answer
     status = dial 'sip:foo@bar.com', :for => 30.seconds
@@ -384,7 +384,7 @@ end
 By default, the outbound calls will have a caller ID matching that of the party which called in to the original controller. Overriding the caller ID for the outbound call is accomplished with the :from option passed to dial.
 
 <pre class="brush: ruby;">
-class SuperSecretProjectCall < Adhearsion::CallController
+class SuperSecretProjectCall &lt; Adhearsion::CallController
   def run
     answer
     dial 'sip:foo@bar.com', :from => 'sip:me@here.com'
@@ -396,13 +396,13 @@ end
 If you wish to perform some action on the outbound call prior to joining, you may pass a controller class with the option key :confirm like so:
 
 <pre class="brush: ruby;">
-class ConfirmationController < Adhearsion::CallController
+class ConfirmationController &lt; Adhearsion::CallController
   def run
     say "Incoming call from #{call.from}. Hang up now to reject the call."
   end
 end
 
-class SuperSecretProjectCall < Adhearsion::CallController
+class SuperSecretProjectCall &lt; Adhearsion::CallController
   def run
     answer
     dial 'sip:foo@bar.com', :confirm => ConfirmationController
@@ -429,7 +429,7 @@ Adhearsion.config do |config|
 end
 
 # Call Controllers
-class InboundCall < Adhearsion::CallController
+class InboundCall &lt; Adhearsion::CallController
   def run
     answer
     say "Thank you for calling, we will notify Jason that you called."
@@ -439,7 +439,7 @@ class InboundCall < Adhearsion::CallController
   end
 end
 
-class OutboundNotification < Adhearsion::CallController
+class OutboundNotification &lt; Adhearsion::CallController
   def run
     answer
     say "Foo called!"
@@ -451,7 +451,7 @@ end
 Alternatively, it is possible to specify a controller for the call to execute when it is answered. You can specify either a controller class:
 
 <pre class="brush: ruby;">
-class InboundCall < Adhearsion::CallController
+class InboundCall &lt; Adhearsion::CallController
   def run
     answer
     say "Thank you for calling, we will notify Jason that you called."
@@ -461,7 +461,7 @@ class InboundCall < Adhearsion::CallController
   end
 end
 
-class OutboundNotification < Adhearsion::CallController
+class OutboundNotification &lt; Adhearsion::CallController
   def run
     answer
     say "Foo called!"
@@ -473,7 +473,7 @@ end
 or pass a block to be executed as a controller:
 
 <pre class="brush: ruby;">
-class InboundCall < Adhearsion::CallController
+class InboundCall &lt; Adhearsion::CallController
   def run
     answer
     say "Thank you for calling, we will notify Jason that you called."
@@ -497,7 +497,7 @@ Finally, it is possible to define callbacks to be executed at various stages of 
 lib/super_secret_project_call.rb:
 
 <pre class="brush: ruby;">
-class SuperSecretProjectCall < Adhearsion::CallController
+class SuperSecretProjectCall &lt; Adhearsion::CallController
   before_call do
     @user = User.find_by_phone_number call.from
   end
