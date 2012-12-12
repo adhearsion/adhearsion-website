@@ -28,7 +28,7 @@ Adhearsion lives in a Git repository [hosted on Github](http://github.com/adhear
   * Tickets - github issues, use "[closes]#271" where 'closes' is optional and '#271' references the issue number
   * Mailing list discussions - provide a URL for the appropriate Google Groups page
 
-### Patch submissions
+## Patch submissions
 
 * Always prepare patch submissions on an appropriately named branch, following the git-flow conventions.
 * Ensure that patch submissions address only one issue, or one closely related set of issues. This ensures that unrelated patches are not unnecessarily delayed by being grouped together with a patch that cannot be merged right away.
@@ -40,7 +40,7 @@ Adhearsion lives in a Git repository [hosted on Github](http://github.com/adhear
   * Changelog entries should be marked with with the commit tags as listed above.
   * Changelog entries should be sorted by significance, and grouped by tag in the same order as presented above.
 
-#### Testing
+### Testing
 
 * New features must have sufficient test coverage.  Without test coverage, we cannot ensure that future changes will not break this feature.
 * Bug fixes should come with a test to demonstrate the issue. This should be committed first, such that it can be shown to fail, with the resolution committed separately in order to make the test pass.
