@@ -35,6 +35,6 @@ You may then run <code>bundle install</code> to get the correct dependencies, an
     Back to <a href="/docs/common_problems">Common Problems</a>
   </span>
   <span class='forward'>
-    Continue to <a href="/api">API Docs</a>
+    Continue to <a href="/docs/contributing">Contributing</a>
   </span>
 </div>

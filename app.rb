@@ -107,7 +107,7 @@ end
 {
   '/api'          => 'http://rubydoc.info/gems/adhearsion/frames',
   '/wiki'         => 'https://github.com/adhearsion/adhearsion/wiki',
-  '/contributing' => 'https://github.com/adhearsion/adhearsion/wiki/Contributing',
+  '/contributing' => '/docs/contributing',
   '/rss'          => BlogPostAggregator.instance.rss_url,
   '/download'     => '/docs/getting-started/installation',
   '/blather'      => 'http://adhearsion.github.com/blather'
