@@ -7,7 +7,12 @@ With the addition of Call Controllers to Adhearsion 2.0, Adhearsion applications
 So, how does one write an application based on call controllers? By generating a controller class and routing calls to it as described in [Routing](/docs/routing). That might look something like this:
 
 <pre class="terminal">
-{{ d['call_controllers.sh|idio|shint|ansi2html']['generate-controller'] }}
+
+$ ahn generate controller SuperSecretProjectCallController
+<span class="ansi1"><span class="ansi34">       exist</span></span>  lib
+<span class="ansi1"><span class="ansi34">       exist</span></span>  spec
+<span class="ansi1"><span class="ansi32">      create</span></span>  lib/super_secret_project_call_controller.rb
+<span class="ansi1"><span class="ansi32">      create</span></span>  spec/super_secret_project_call_controller_spec.rb
 </pre>
 
 config/adhearsion.rb:
@@ -21,7 +26,12 @@ end
 lib/super_secret_project_call_controller.rb:
 
 <pre class="brush: ruby;">
-{{ a['call_controllers.sh|idio|shint-meta']['generate-controller:files:source/myapp/lib/super_secret_project_call_controller.rb'] }}
+# encoding: utf-8
+
+class SuperSecretProjectCallController < Adhearsion::CallController
+  def run
+  end
+end
 </pre>
 
 Here, the controller class itself lives in the lib directory, which, by default, is auto-loaded by Adhearsion. You may configure this like so:

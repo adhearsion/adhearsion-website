@@ -1,75 +1,20 @@
-<div class="docs">
-  <div class="full-width">
-    <div class="outer-rounded-box-bold docs-nav-box">
-      <div class="inner-rounded-box-filled-grey clearfix">
-        <h3>Documentation</h3>
-        <ul class="collapsibleList">
-          <li id="docs-nav-getting-started">
-            Getting Started
-            <ul>
-              <li id="docs-nav-getting-started-prerequisites"><a href="/docs/getting-started/prerequisites">Prerequisites</a></li>
-              <li id="docs-nav-getting-started-installation"><a href="/docs/getting-started/installation">Installation</a>
-                <ul>
-                  <li id="docs-nav-getting-started-installation-asterisk"><a href="/docs/getting-started/asterisk">Asterisk</a></li>
-                  <li id="docs-nav-getting-started-installation-freeswitch"><a href="/docs/getting-started/freeswitch">FreeSWITCH</a></li>
-                  <li id="docs-nav-getting-started-installation-prism"><a href="/docs/getting-started/prism">Voxeo PRISM</a></li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li id="docs-nav-console"><a href="/docs/console">Console</a></li>
-          <li id="docs-nav-call-controller"><a href="/docs/call-controllers">Call Controllers</a></li>
-          <li id="docs-nav-routing"><a href="/docs/routing">Routing</a></li>
-          <li id="docs-nav-config"><a href="/docs/config">Config</a></li>
-          <li id="docs-nav-events"><a href="/docs/events">Events</a></li>
-          <li id="docs-nav-logging"><a href="/docs/logging">Logging</a></li>
-          <li id="docs-nav-plugins"><a href="/docs/plugins">Plugins</a></li>
-          <li id="docs-nav-best-practices">
-            Best Practices
-            <ul>
-              <li id="docs-nav-best-practices-testing"><a href="/docs/best-practices/testing">Testing</a></li>
-              <li id="docs-nav-best-practices-deployment"><a href="/docs/best-practices/deployment">Deployment</a></li>
-              <li id="docs-nav-best-practices-sysadmin"><a href="/docs/best-practices/sysadmin">Notes for System Administrators</a></li>
-              <li id="docs-nav-best-practices-rails"><a href="/docs/best-practices/rails">Rails Integration</a></li>
-            </ul>
-          </li>
-          <li id="docs-nav-upgrading"><a href="/docs/upgrading">Upgrading</a></li>
-          <li id="docs-nav-common-problems"><a href="/docs/common_problems">Common Problems</a></li>
-          <li id="docs-nav-dealing-with-bugs"><a href="/docs/dealing-with-bugs">Dealing with bugs</a></li>
-          <li id="docs-nav-contributing"><a href="/docs/contributing">Contributing</a></li>
-          <li id="docs-nav-api"><a href="/api">API Documentation</a></li>
-        </ul>
-      </div>
-    </div>
+# [Getting Started](/docs) > Installation
 
-    <div class="docs-body">
-<h1 id="getting-started-installation"><a class="toclink" href="#getting-started-installation"><a href="/docs">Getting Started</a> &gt; Installation</a></h1>
-<div class="toc">
-<ul>
-<li><a href="#getting-started-installation">Getting Started &gt; Installation</a><ul>
-<li><a href="#install-the-adhearsion-gem">Install the Adhearsion gem</a></li>
-<li><a href="#create-an-adhearsion-application">Create an Adhearsion application</a></li>
-<li><a href="#configure-your-application">Configure your application</a><ul>
-<li><a href="#gemfile">Gemfile</a></li>
-<li><a href="#configadhearsionrb">config/adhearsion.rb</a></li>
-<li><a href="#connecting-to-your-telephony-engine">Connecting to your telephony engine</a></li>
-</ul>
-</li>
-<li><a href="#make-a-test-call">Make a test call</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<h2 id="install-the-adhearsion-gem"><a class="toclink" href="#install-the-adhearsion-gem">Install the Adhearsion gem</a></h2>
-<p>First, install the Adhearsion gem and its dependencies:</p>
+[TOC]
+
+## Install the Adhearsion gem
+
+First, install the Adhearsion gem and its dependencies:
+
 <pre class="terminal">
-<div class="highlight"><pre><a name="source--getting-started--installation.sh-idio.html-16"></a>gem install adhearsion
-</pre></div>
 
+$ gem install adhearsion
 </pre>
 
-<h2 id="create-an-adhearsion-application"><a class="toclink" href="#create-an-adhearsion-application">Create an Adhearsion application</a></h2>
-<p>Next, create your first Adhearsion application:</p>
+## Create an Adhearsion application
+
+Next, create your first Adhearsion application:
+
 <pre class="terminal">
 
 $ ahn create myapp
@@ -94,10 +39,14 @@ $ ahn create myapp
 $ cd myapp
 </pre>
 
-<h2 id="configure-your-application"><a class="toclink" href="#configure-your-application">Configure your application</a></h2>
-<p>Looking at the output from "ahn create", you will see several files are generated for you.  Here are the most important ones:</p>
-<h3 id="gemfile"><a class="toclink" href="#gemfile">Gemfile</a></h3>
-<p>Here is the Gemfile that is generated with your new application:</p>
+## Configure your application
+
+Looking at the output from "ahn create", you will see several files are generated for you.  Here are the most important ones:
+
+### Gemfile
+
+Here is the Gemfile that is generated with your new application:
+
 <pre class="brush: ruby;">
 source :rubygems
 
@@ -114,10 +63,10 @@ gem "adhearsion", "~> 2.1.0"
 # gem 'adhearsion-ldap'
 # gem 'adhearsion-xmpp'
 # gem 'adhearsion-drb'
-
 </pre>
 
-<p>In it you can see the Adhearsion framework itself is required.  Also included, but commented out, are several popular or useful plugins.  To enable their usage, simply uncomment the line from the Gemfile.  When you are done with that, install all the plugins you selected by running "bundle install":</p>
+In it you can see the Adhearsion framework itself is required.  Also included, but commented out, are several popular or useful plugins.  To enable their usage, simply uncomment the line from the Gemfile.  When you are done with that, install all the plugins you selected by running "bundle install":
+
 <pre class="terminal">
 
 $ bundle install
@@ -161,8 +110,10 @@ Using adhearsion (2.1.0)
 <span class="ansi32">Your bundle is complete! Use `bundle show [gemname]` to see where a bundled gem is installed.</span>
 </pre>
 
-<h3 id="configadhearsionrb"><a class="toclink" href="#configadhearsionrb">config/adhearsion.rb</a></h3>
-<p>Next is the main Adhearsion configuration file, config/adhearsion.rb:</p>
+### config/adhearsion.rb
+
+Next is the main Adhearsion configuration file, config/adhearsion.rb:
+
 <pre class="brush: ruby;">
 # encoding: utf-8
 
@@ -174,13 +125,13 @@ Adhearsion.config do |config|
   # To update a plugin configuration you can write either:
   #
   #    * Option 1
-  #        Adhearsion.config.<plugin-name> do |config|
-  #          config.<key> = <value>
+  #        Adhearsion.config.&lt;plugin-name&gt; do |config|
+  #          config.&lt;key&gt; = &lt;value&gt;
   #        end
   #
   #    * Option 2
   #        Adhearsion.config do |config|
-  #          config.<plugin-name>.<key> = <value>
+  #          config.&lt;plugin-name&gt;.&lt;key&gt; = &lt;value&gt;
   #        end
 
   config.development do |dev|
@@ -233,10 +184,10 @@ Adhearsion.router do
 
   route 'default', SimonGame
 end
-
 </pre>
 
-<p>This is just a skeleton however.  To see the full list of available configuration options avaiable, you can always run "rake config:show".  Note that your output may be different, depending on which plugins you selected above:</p>
+This is just a skeleton however.  To see the full list of available configuration options avaiable, you can always run "rake config:show".  Note that your output may be different, depending on which plugins you selected above:
+
 <pre class="terminal">
 
 $ rake config:show
@@ -323,17 +274,22 @@ Adhearsion.config do |config|
 end
 </pre>
 
-<h3 id="connecting-to-your-telephony-engine"><a class="toclink" href="#connecting-to-your-telephony-engine">Connecting to your telephony engine</a></h3>
-<p>Adhearsion currently supports three protocols for communication with the telephony engine it is controlling; <a href="https://github.com/rayo/rayo-server/wiki">Rayo</a>, Asterisk <a href="http://www.voip-info.org/wiki/view/Asterisk+manager+API">AMI</a> with <a href="http://www.voip-info.org/wiki/view/Asterisk+AGI">AsyncAGI</a> and FreeSWITCH <a href="http://wiki.freeswitch.org/wiki/Event_Socket">EventSocket</a>. As such, the configuration for each is slightly different. You will notice that the generated config file contains scaffolding for each, and that the default protocol is Rayo. You are, however, encouraged to <a href="/docs/config#storing-configuration-in-the-environment">store sensitive credentials in the application's environment</a> rather than in the config file.</p>
-<p>Please see the documentation for connecting Adhearsion to the telephony engine of your choice:</p>
-<ul>
-<li><a href="/docs/getting-started/asterisk">Asterisk</a></li>
-<li><a href="/docs/getting-started/freeswitch">FreeSWITCH</a></li>
-<li><a href="/docs/getting-started/prism">PRISM</a></li>
-</ul>
-<h2 id="make-a-test-call"><a class="toclink" href="#make-a-test-call">Make a test call</a></h2>
-<p>By default, a generated Adhearsion app includes the SimonGame. You can boot your app by running "ahn -" and immediately make a call to it. If everything is configured correctly, you should be prompted to play a game. Enjoy your time working with Adhearsion, and feel free to explore the rest of the documentation provided here.</p>
-<p><a href="#" rel="docs-nav-active" style="display:none;">docs-nav-getting-started</a></p>
+### Connecting to your telephony engine
+
+Adhearsion currently supports three protocols for communication with the telephony engine it is controlling; [Rayo](https://github.com/rayo/rayo-server/wiki), Asterisk [AMI](http://www.voip-info.org/wiki/view/Asterisk+manager+API) with [AsyncAGI](http://www.voip-info.org/wiki/view/Asterisk+AGI) and FreeSWITCH [EventSocket](http://wiki.freeswitch.org/wiki/Event_Socket). As such, the configuration for each is slightly different. You will notice that the generated config file contains scaffolding for each, and that the default protocol is Rayo. You are, however, encouraged to [store sensitive credentials in the application's environment](/docs/config#storing-configuration-in-the-environment) rather than in the config file.
+
+Please see the documentation for connecting Adhearsion to the telephony engine of your choice:
+
+* [Asterisk](/docs/getting-started/asterisk)
+* [FreeSWITCH](/docs/getting-started/freeswitch)
+* [PRISM](/docs/getting-started/prism)
+
+## Make a test call
+
+By default, a generated Adhearsion app includes the SimonGame. You can boot your app by running "ahn -" and immediately make a call to it. If everything is configured correctly, you should be prompted to play a game. Enjoy your time working with Adhearsion, and feel free to explore the rest of the documentation provided here.
+
+<a href="#" rel="docs-nav-active" style="display:none;">docs-nav-getting-started</a>
+
 <div class='docs-progress-nav'>
   <span class='back'>
     Back to <a href="/docs/getting-started/prerequisites">Prerequisites</a>
@@ -342,22 +298,3 @@ end
     Continue to <a href="/docs/console">Console</a>
   </span>
 </div>
-    </div>
-
-    <div id="disqus_thread"></div>
-    <script type="text/javascript">
-        var disqus_shortname = 'adhearsion';
-        (function() {
-            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
-
-    <div class="clear"></div>
-  </div>
-</div>
-
-<a href="#" id="main-nav-active" style="display:none;">#main-nav-docs</a>

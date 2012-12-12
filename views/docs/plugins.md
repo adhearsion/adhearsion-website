@@ -14,7 +14,22 @@ The easiest way to create a skeleton plugin is to use the Adhearsion command "ah
 By running the following ahn generate plugin GreetPlugin a directory named greet_plugin will be created in the current working directory. The plugin itself, being a gem, can reside anywhere, though it is recommended to keep it outside any particular Adhearsion application to make packaging easier. The output from this command should show the files being created, like this:
 
 <pre class="terminal">
-{{ d['plugins.sh|idio|shint|ansi2html']['generate-plugin'] }}
+
+$ ahn generate plugin GreetPlugin
+<span class="ansi1"><span class="ansi32">      create</span></span>  greet_plugin
+<span class="ansi1"><span class="ansi32">      create</span></span>  greet_plugin/lib
+<span class="ansi1"><span class="ansi32">      create</span></span>  greet_plugin/lib/greet_plugin
+<span class="ansi1"><span class="ansi32">      create</span></span>  greet_plugin/spec
+<span class="ansi1"><span class="ansi32">      create</span></span>  greet_plugin/greet_plugin.gemspec
+<span class="ansi1"><span class="ansi32">      create</span></span>  greet_plugin/Rakefile
+<span class="ansi1"><span class="ansi32">      create</span></span>  greet_plugin/README.md
+<span class="ansi1"><span class="ansi32">      create</span></span>  greet_plugin/Gemfile
+<span class="ansi1"><span class="ansi32">      create</span></span>  greet_plugin/lib/greet_plugin.rb
+<span class="ansi1"><span class="ansi32">      create</span></span>  greet_plugin/lib/greet_plugin/version.rb
+<span class="ansi1"><span class="ansi32">      create</span></span>  greet_plugin/lib/greet_plugin/plugin.rb
+<span class="ansi1"><span class="ansi32">      create</span></span>  greet_plugin/lib/greet_plugin/controller_methods.rb
+<span class="ansi1"><span class="ansi32">      create</span></span>  greet_plugin/spec/spec_helper.rb
+<span class="ansi1"><span class="ansi32">      create</span></span>  greet_plugin/spec/greet_plugin/controller_methods_spec.rb
 </pre>
 
 ### Gem Plugin Structure
@@ -32,7 +47,10 @@ The entry point for the plugin, as with most gems, resides in lib/greet_plugin.r
 lib/greet_plugin.rb:
 
 <pre class="brush: ruby;">
-{{ a['plugins.sh|idio|shint-meta']['generate-plugin:files:source/myapp/greet_plugin/lib/greet_plugin.rb'] }}
+GreetPlugin = Module.new
+require "greet_plugin/version"
+require "greet_plugin/plugin"
+require "greet_plugin/controller_methods"
 </pre>
 
 In this example Adhearsion plugin:

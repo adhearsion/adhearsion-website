@@ -1,62 +1,13 @@
-<div class="docs">
-  <div class="full-width">
-    <div class="outer-rounded-box-bold docs-nav-box">
-      <div class="inner-rounded-box-filled-grey clearfix">
-        <h3>Documentation</h3>
-        <ul class="collapsibleList">
-          <li id="docs-nav-getting-started">
-            Getting Started
-            <ul>
-              <li id="docs-nav-getting-started-prerequisites"><a href="/docs/getting-started/prerequisites">Prerequisites</a></li>
-              <li id="docs-nav-getting-started-installation"><a href="/docs/getting-started/installation">Installation</a>
-                <ul>
-                  <li id="docs-nav-getting-started-installation-asterisk"><a href="/docs/getting-started/asterisk">Asterisk</a></li>
-                  <li id="docs-nav-getting-started-installation-freeswitch"><a href="/docs/getting-started/freeswitch">FreeSWITCH</a></li>
-                  <li id="docs-nav-getting-started-installation-prism"><a href="/docs/getting-started/prism">Voxeo PRISM</a></li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li id="docs-nav-console"><a href="/docs/console">Console</a></li>
-          <li id="docs-nav-call-controller"><a href="/docs/call-controllers">Call Controllers</a></li>
-          <li id="docs-nav-routing"><a href="/docs/routing">Routing</a></li>
-          <li id="docs-nav-config"><a href="/docs/config">Config</a></li>
-          <li id="docs-nav-events"><a href="/docs/events">Events</a></li>
-          <li id="docs-nav-logging"><a href="/docs/logging">Logging</a></li>
-          <li id="docs-nav-plugins"><a href="/docs/plugins">Plugins</a></li>
-          <li id="docs-nav-best-practices">
-            Best Practices
-            <ul>
-              <li id="docs-nav-best-practices-testing"><a href="/docs/best-practices/testing">Testing</a></li>
-              <li id="docs-nav-best-practices-deployment"><a href="/docs/best-practices/deployment">Deployment</a></li>
-              <li id="docs-nav-best-practices-sysadmin"><a href="/docs/best-practices/sysadmin">Notes for System Administrators</a></li>
-              <li id="docs-nav-best-practices-rails"><a href="/docs/best-practices/rails">Rails Integration</a></li>
-            </ul>
-          </li>
-          <li id="docs-nav-upgrading"><a href="/docs/upgrading">Upgrading</a></li>
-          <li id="docs-nav-common-problems"><a href="/docs/common_problems">Common Problems</a></li>
-          <li id="docs-nav-dealing-with-bugs"><a href="/docs/dealing-with-bugs">Dealing with bugs</a></li>
-          <li id="docs-nav-contributing"><a href="/docs/contributing">Contributing</a></li>
-          <li id="docs-nav-api"><a href="/api">API Documentation</a></li>
-        </ul>
-      </div>
-    </div>
+# Config
 
-    <div class="docs-body">
-<h1 id="config"><a class="toclink" href="#config">Config</a></h1>
-<div class="toc">
-<ul>
-<li><a href="#config">Config</a><ul>
-<li><a href="#viewing-currentdefault-config">Viewing current/default config</a></li>
-<li><a href="#configuring-adhearsion-plugins">Configuring Adhearsion &amp; Plugins</a></li>
-<li><a href="#storing-configuration-in-the-environment">Storing configuration in the environment</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<p>Adhearsion 2.0 brings a brand new configuration system which is environment-aware, self-describing and both programatically- and human-inspectable. The application's central configuration system holds settings for adhearsion core as well as all 3rd-party or local plugins.</p>
-<h2 id="viewing-currentdefault-config"><a class="toclink" href="#viewing-currentdefault-config">Viewing current/default config</a></h2>
-<p>In order to visually inspect the current state of the application's configuration, run the rake task config:show, like so:</p>
+[TOC]
+
+Adhearsion 2.0 brings a brand new configuration system which is environment-aware, self-describing and both programatically- and human-inspectable. The application's central configuration system holds settings for adhearsion core as well as all 3rd-party or local plugins.
+
+## Viewing current/default config
+
+In order to visually inspect the current state of the application's configuration, run the rake task config:show, like so:
+
 <pre class="terminal">
 
 $ rake config:show
@@ -143,15 +94,18 @@ Adhearsion.config do |config|
 end
 </pre>
 
-<p>This output shows the currently active configuration as a combination of default values and overrides. It also provides brief documentation relating to each option.</p>
-<p>The active configuration is derived from the default values for each key, overridden first by the on-disk configuration (in config/adhearsion.rb) and then by any provided in the application's environment (see below). Thus the order of precedence is:</p>
-<ul>
-<li>Environment Variables</li>
-<li>Hard-coded configuration</li>
-<li>Default values</li>
-</ul>
-<h2 id="configuring-adhearsion-plugins"><a class="toclink" href="#configuring-adhearsion-plugins">Configuring Adhearsion &amp; Plugins</a></h2>
-<p>In order to override an application's settings, you can set new values in config/adhearsion.rb. To get started, you can actually copy-paste the output from "rake config:show", and modify it for your needs. The syntax of the config file is hopefully self-explanatory:</p>
+This output shows the currently active configuration as a combination of default values and overrides. It also provides brief documentation relating to each option.
+
+The active configuration is derived from the default values for each key, overridden first by the on-disk configuration (in config/adhearsion.rb) and then by any provided in the application's environment (see below). Thus the order of precedence is:
+
+* Environment Variables
+* Hard-coded configuration
+* Default values
+
+## Configuring Adhearsion & Plugins
+
+In order to override an application's settings, you can set new values in config/adhearsion.rb. To get started, you can actually copy-paste the output from "rake config:show", and modify it for your needs. The syntax of the config file is hopefully self-explanatory:
+
 <pre class="brush: ruby;">
 # encoding: utf-8
 
@@ -163,13 +117,13 @@ Adhearsion.config do |config|
   # To update a plugin configuration you can write either:
   #
   #    * Option 1
-  #        Adhearsion.config.<plugin-name> do |config|
-  #          config.<key> = <value>
+  #        Adhearsion.config.&lt;plugin-name&gt; do |config|
+  #          config.&lt;key&gt; = &lt;value&gt;
   #        end
   #
   #    * Option 2
   #        Adhearsion.config do |config|
-  #          config.<plugin-name>.<key> = <value>
+  #          config.&lt;plugin-name&gt;.&lt;key&gt; = &lt;value&gt;
   #        end
 
   config.development do |dev|
@@ -222,12 +176,14 @@ Adhearsion.router do
 
   route 'default', SimonGame
 end
-
 </pre>
 
-<h2 id="storing-configuration-in-the-environment"><a class="toclink" href="#storing-configuration-in-the-environment">Storing configuration in the environment</a></h2>
-<p>It is considered bad practice to store sensitive data (such as database credentials or API keys) in source control, or to mix environment-specific configuration with your application's standard behaviour. You can read more about this philosophy as part of the <a href="http://www.12factor.net/config">twelve-factor manifesto</a>. Adhearsion allows you to configure any part of the core system or plugins using environment variables. The output from "rake config:show" includes a capitalised reference to the environment variable name corresponding to each configuration key.</p>
-<p>For example, to override the punchblock username and password at runtime, you may do this:</p>
+## Storing configuration in the environment
+
+It is considered bad practice to store sensitive data (such as database credentials or API keys) in source control, or to mix environment-specific configuration with your application's standard behaviour. You can read more about this philosophy as part of the [twelve-factor manifesto](http://www.12factor.net/config). Adhearsion allows you to configure any part of the core system or plugins using environment variables. The output from "rake config:show" includes a capitalised reference to the environment variable name corresponding to each configuration key.
+
+For example, to override the punchblock username and password at runtime, you may do this:
+
 <pre class="terminal">
   <br/>
 AHN_PUNCHBLOCK_USERNAME=testuser AHN_PUNCHBLOCK_PASSWORD=foobar ahn start .
@@ -241,22 +197,3 @@ AHN_PUNCHBLOCK_USERNAME=testuser AHN_PUNCHBLOCK_PASSWORD=foobar ahn start .
     Continue to <a href="/docs/events">Events</a>
   </span>
 </div>
-    </div>
-
-    <div id="disqus_thread"></div>
-    <script type="text/javascript">
-        var disqus_shortname = 'adhearsion';
-        (function() {
-            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
-
-    <div class="clear"></div>
-  </div>
-</div>
-
-<a href="#" id="main-nav-active" style="display:none;">#main-nav-docs</a>

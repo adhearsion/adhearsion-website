@@ -53,6 +53,7 @@ GEM
       rack
     railsless-deploy (1.0.2)
     rake (0.9.2.2)
+    redcarpet (2.2.2)
     rest-client (1.6.7)
       mime-types (>= 1.16)
     rubyzip (0.9.6.1)
@@ -86,5 +87,6 @@ DEPENDENCIES
   rack-cache
   railsless-deploy
   rake
+  redcarpet
   sinatra
   sinatra_more

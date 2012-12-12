@@ -7,6 +7,7 @@ gem "rack-cache", :require => nil
 gem 'haml'
 gem 'haml-coderay'
 gem 'pony'
+gem 'redcarpet'
 
 group :development do
   gem 'capistrano'
