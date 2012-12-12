@@ -8,9 +8,9 @@ Adhearsion includes a comprehensive logging system, powered by the [Logging](htt
 
 In order to write to the log (eg at INFO level), simply do the following:
 
-<pre class="brush: ruby;">
+```ruby
 logger.info "This will be printed at INFO level."
-</pre>
+```
 
 The default available log levels are TRACE, DEBUG, INFO, WARN, ERROR, FATAL.
 

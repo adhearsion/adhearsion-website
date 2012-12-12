@@ -164,17 +164,17 @@ ahn create .  18.81s user 0.80s system 20% cpu 1:33.57 total
 
 The differences in environment.rb and .gitignore are such that retaining the rails version is appropriate. Adhearsion must, however, be added to the Gemfile:
 
-<pre class="brush: ruby;">
+```ruby
 gem 'adhearsion', '~>2.0'
-</pre>
+```
 
 Additionally, Adhearsion's rake tasks must be loaded, by placing the following content in lib/tasks/adhearsion.rake:
 
-<pre class="brush: ruby;">
+```ruby
 namespace :adhearsion do
   require 'adhearsion/tasks'
 end
-</pre>
+```
 
 You may start the rails application as normal. Additionally, starting the Adhearsion application may be done as usual, along with a specification of the appropriate rails environment:
 

@@ -8,6 +8,7 @@ gem 'haml'
 gem 'haml-coderay'
 gem 'pony'
 gem 'redcarpet'
+gem 'pygments.rb'
 
 group :development do
   gem 'capistrano'

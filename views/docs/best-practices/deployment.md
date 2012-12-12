@@ -314,10 +314,10 @@ Scaling web processes... done, now running 0
 
 It is possible to instruct Foreman to include extra environment variables when executing your application. This is done by including an .env file in the app directory when running foreman or exporting to Upstart. The file should be similar to this:
 
-<pre class="brush: ruby;">
+```ruby
 AHN_PUNCHBLOCK_USERNAME=foobar
 AHN_PUNCHBLOCK_PASSWORD=barfoo
-</pre>
+```
 
 You can optionally place this file elsewhere and specify its location using --env.
 

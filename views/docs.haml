@@ -5,7 +5,7 @@
       Adhearsion:
       = yield_content(:title) || ''
 
-    = stylesheet_link_tag "theme/ui.all", "jquery.prettyPhoto", "jquery.bubbletip", "style", "style-pink", "style-enhance", "ansi2html", "terminal", 'shCore', 'shThemeDefault', 'collapsibleList'
+    = stylesheet_link_tag "theme/ui.all", "jquery.prettyPhoto", "jquery.bubbletip", "style", "style-pink", "style-enhance", "ansi2html", "terminal", 'collapsibleList', 'github'
 
     :css
       {{ pygments['pastie.css'] }}
@@ -22,7 +22,7 @@
     %meta{:name => "author", :content => "author"}
     %meta{:name => "copyright", :content => "&copy; 2011 Bogdan Rosu. All rights reserved."}
 
-    = javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js', 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js', 'http://cdn.jquerytools.org/1.2.5/full/jquery.tools.min.js', 'jquery.easing.js', 'jquery.css-transform.js', 'jquery.css-rotate-scale.js', 'cufon.js', 'fonts/arials.font.js', 'fonts/ptsans.font.js', 'fonts/gnuolane.font.js', 'fonts/yanone.font.js', 'http://www.bogdanrosu.com/temp/fonts/zurich.font.js', 'jquery.prettyPhoto.js', 'jquery.captify.js', 'jquery.bubbletip.js', 'browserdetect.js', 'roundies.js', 'jquery.tweet.js', 'custom.js', 'jquery.timeago.js', 'shCore.js', 'shAutoloader.js', 'shBrushRuby.js', 'shBrushXml.js', 'CollapsibleLists.compressed', 'linkbolder.js'
+    = javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js', 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js', 'http://cdn.jquerytools.org/1.2.5/full/jquery.tools.min.js', 'jquery.easing.js', 'jquery.css-transform.js', 'jquery.css-rotate-scale.js', 'cufon.js', 'fonts/arials.font.js', 'fonts/ptsans.font.js', 'fonts/gnuolane.font.js', 'fonts/yanone.font.js', 'http://www.bogdanrosu.com/temp/fonts/zurich.font.js', 'jquery.prettyPhoto.js', 'jquery.captify.js', 'jquery.bubbletip.js', 'browserdetect.js', 'roundies.js', 'jquery.tweet.js', 'custom.js', 'jquery.timeago.js', 'CollapsibleLists.compressed', 'linkbolder.js'
 
     :javascript
       var _gaq = _gaq || [];
@@ -217,7 +217,6 @@
     :javascript
       jQuery(document).ready(function() {
         Cufon.now();
-        SyntaxHighlighter.all();
         CollapsibleLists.apply();
         var activeDocNavElements = $("a[rel^='docs-nav-active']");
         for(var i = 0; i < activeDocNavElements.size(); i++) {

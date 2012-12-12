@@ -8,10 +8,10 @@ If you encounter an issue with an Adhearsion application, and you are not certai
 
 If you encounter a bug, it's entirely possible that it has already been fixed in Adhearsion but not yet included in a released version. You can establish this by trying to run your application with a pre-release version of Adhearsion direct from source control. You can do this by modifying your application's Gemfile as follows:
 
-<pre class="brush: ruby;">
+```ruby
   gem 'adhearsion', github: 'adhearsion', branch: 'develop'
   gem 'punchblock', github: 'adhearsion/punchblock', branch: 'develop'
-</pre>
+```
 
 If it is suggested to you that you try a different branch, substitute that for 'develop' in your Gemfile.
 

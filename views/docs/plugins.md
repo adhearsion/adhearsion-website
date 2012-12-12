@@ -46,12 +46,12 @@ The entry point for the plugin, as with most gems, resides in lib/greet_plugin.r
 
 lib/greet_plugin.rb:
 
-<pre class="brush: ruby;">
+```ruby
 GreetPlugin = Module.new
 require "greet_plugin/version"
 require "greet_plugin/plugin"
 require "greet_plugin/controller_methods"
-</pre>
+```
 
 In this example Adhearsion plugin:
 
@@ -59,7 +59,7 @@ In this example Adhearsion plugin:
 * plugin.rb contains the hooks into the Adhearsion framework that are called when the plugin is loaded by the Adhearsion application.
 * controller_methods.rb contains a module that gets mixed into the base CallController class, making its methods available to all calls running in Adhearsion.
 
-<pre class="brush: ruby;">
+```ruby
 # lib/greet_plugin/plugin.rb
 module GreetPlugin
   class Plugin < Adhearsion::Plugin
@@ -89,7 +89,7 @@ module GreetPlugin
     end
   end
 end
-</pre>
+```
 
 plugin.rb contains directives that pertain to various aspects of plugin functionality. Code above shows three examples.
 
@@ -103,7 +103,7 @@ Every plugin goes through two separate phases before it is ready to run. While A
 
 Note that your #run method must not block indefinitely!  If necessary, place the contents of your run block within a thread so that Adhearsion can continue to start the other plugins:
 
-<pre class="brush: ruby">
+```ruby
 module GreetPlugin
   class Plugin < Adhearsion::Plugin
     def run
@@ -113,7 +113,7 @@ module GreetPlugin
     end
   end
 end
-</pre>
+```
 
 Note the use of catching_standard_errors.  This ensures that any exceptions raised within your plugin are routed through Adhearsion's exception handling event system.  More information on this can be found in the best practices guide.
 
@@ -123,10 +123,10 @@ The #config block allows a plugin to define configuration values in a customizab
 
 A config line can also validate supplied values with a transform:
 
-<pre class="brush: ruby;">
+```ruby
 max_connections 5, :desc => "Maximum number of connections to make",
                    :transform => lambda { |v| v.to_i }
-</pre>
+```
 The :transform will be used to modify the configuration value after it is read from the end-user's setting.
 
 ## Plugin Rake Tasks
@@ -146,7 +146,7 @@ Content is as follows:
 
 lib/controller_methods.rb
 
-<pre class="brush: ruby;">
+```ruby
 module GreetPlugin
   module ControllerMethods
     # The methods are defined in a normal method the user will then
@@ -158,7 +158,7 @@ module GreetPlugin
     end
   end
 end
-</pre>
+```
 The module is intended to be used as a mixin in call controllers.
 
 ### Testing your code
@@ -167,7 +167,7 @@ Module usage can be seen in action in the generated test file, which also illust
 
 spec/greet_plugin/controller_methods_spec.rb
 
-<pre class="brush: ruby;">
+```ruby
 require 'spec_helper'
 module GreetPlugin
   describe Plugin do
@@ -191,7 +191,7 @@ module GreetPlugin
     end
   end
 end
-</pre>
+```
 Since plugin code is a normal Ruby library, it can be tested using familiar tools like Test::Unit or RSpec.
 
 Note that, at first, Adhearsion Routes or XMPP handlers may seem difficult to test.  However, a good practice is to put all your business logic into classes and methods, and then simply invoke the methods from the routes or handlers.  In this way you can maintain good code test coverage and keep your route definitions small and readable.
@@ -203,12 +203,12 @@ The plugin is a gem, so you might eventually publish it. In the meantime you can
 
 Gemfile
 
-<pre class="brush: ruby;">
+```ruby
 gem 'adhearsion', '>= 2.0.0'
 gem 'greet_plugin', :path => '/home/user/projects/greet_plugin'
 
 # ... whatever other gems you need
-</pre>
+```
 
 Do not forget to run 'bundle install' after adding the gem.
 
@@ -223,13 +223,13 @@ First, add configuration variables to allow controlling the time-of-day routing:
 
 lib/greet_plugin/plugin.rb
 
-<pre class="brush: ruby;">
+```ruby
 config :greet_plugin do
   greeting "Hello", :desc => "What to use to greet users"
   office_hours_start 8, :desc => "Start of office hours, integer, 24 hour format"
   office_hours_end 18, :desc => "End of office hours, integer, 24 hour format"
 end
-</pre>
+```
 
 One way to make testing time-based features easy is to use the Timecop gem. Just add it to your gemspec under the development group and add "require 'timecop'" at the top of spec/spec_helper.rb.
 
@@ -239,7 +239,7 @@ Now add a few tests, taking advantage of Adhearsion's testing facilities and the
 
 spec/hours_controller_spec.rb
 
-<pre class="brush: ruby;">
+```ruby
 require 'spec_helper'
 module GreetPlugin
   describe HoursController do
@@ -261,7 +261,7 @@ module GreetPlugin
     end
   end
 end
-</pre>
+```
 
 #### The CallController
 
@@ -269,7 +269,7 @@ Last but not least, the actual CallController.
 
 lib/greet_plugin/hours_controller.rb
 
-<pre class="brush: ruby;">
+```ruby
 module GreetPlugin
   class HoursController < Adhearsion::CallController
     def run
@@ -291,18 +291,18 @@ module GreetPlugin
     end
   end
 end
-</pre>
+```
 
 #### Routes
 To make calls in the application reach this controller, you will need to create a route. The example below uses a generic route that matches all calls (no filters).
 
 my_application_dir/config/adhearsion.rb
 
-<pre class="brush: ruby;">
+```ruby
 Adhearsion.router do
   route 'default', GreetPlugin::HoursController
 end
-</pre>
+```
 
 <div class='docs-progress-nav'>
   <span class='back'>

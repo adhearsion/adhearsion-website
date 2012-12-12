@@ -46,6 +46,10 @@ GEM
     polyglot (0.3.3)
     pony (1.4)
       mail (> 2.0)
+    posix-spawn (0.3.6)
+    pygments.rb (0.3.2)
+      posix-spawn (~> 0.3.6)
+      yajl-ruby (~> 1.1.0)
     rack (1.4.1)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -72,6 +76,7 @@ GEM
     treetop (1.4.10)
       polyglot
       polyglot (>= 0.3.1)
+    yajl-ruby (1.1.0)
 
 PLATFORMS
   ruby
@@ -84,6 +89,7 @@ DEPENDENCIES
   heroku
   i18n
   pony
+  pygments.rb
   rack-cache
   railsless-deploy
   rake

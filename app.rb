@@ -54,9 +54,15 @@ class BlogPostAggregator
   end
 end
 
+class HTMLwithPygments < Redcarpet::Render::HTML
+  def block_code(code, language)
+    Pygments.highlight(code, lexer: language)
+  end
+end
+
 Tilt.register Tilt::RedcarpetTemplate::Redcarpet2, 'markdown', 'mkd', 'md'
 
-set :markdown, renderer: Redcarpet::Render::HTML.new(with_toc_data: true)
+set :markdown, renderer: HTMLwithPygments.new(with_toc_data: true), fenced_code_blocks: true
 
 get '/' do
   @blog_posts = BlogPostAggregator.instance.posts

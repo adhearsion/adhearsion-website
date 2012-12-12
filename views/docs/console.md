@@ -25,14 +25,14 @@ Once you have control of a call, other controllers will stop executing (at the n
 
 It is not currently possible to route calls directly to the console, but this feature is coming soon. In the meantime, the following hack is a potential solution, giving you enough time after the call comes in to grab it in the same way as any other:
 
-<pre class="brush: ruby;">
+```ruby
 Adhearsion.routes do
   route 'ConsoleCatch' do
     logger.info "Call #{call.id} waiting..."
     sleep 10
   end
 end
-</pre>
+```
 
 ## Making outbound calls
 

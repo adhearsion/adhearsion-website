@@ -47,7 +47,7 @@ Looking at the output from "ahn create", you will see several files are generate
 
 Here is the Gemfile that is generated with your new application:
 
-<pre class="brush: ruby;">
+```ruby
 source :rubygems
 
 gem "adhearsion", "~> 2.1.0"
@@ -63,7 +63,7 @@ gem "adhearsion", "~> 2.1.0"
 # gem 'adhearsion-ldap'
 # gem 'adhearsion-xmpp'
 # gem 'adhearsion-drb'
-</pre>
+```
 
 In it you can see the Adhearsion framework itself is required.  Also included, but commented out, are several popular or useful plugins.  To enable their usage, simply uncomment the line from the Gemfile.  When you are done with that, install all the plugins you selected by running "bundle install":
 
@@ -114,7 +114,7 @@ Using adhearsion (2.1.0)
 
 Next is the main Adhearsion configuration file, config/adhearsion.rb:
 
-<pre class="brush: ruby;">
+```ruby
 # encoding: utf-8
 
 Adhearsion.config do |config|
@@ -184,7 +184,7 @@ Adhearsion.router do
 
   route 'default', SimonGame
 end
-</pre>
+```
 
 This is just a skeleton however.  To see the full list of available configuration options avaiable, you can always run "rake config:show".  Note that your output may be different, depending on which plugins you selected above:
 

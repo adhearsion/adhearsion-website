@@ -41,9 +41,9 @@ Find the section for <code>xmpp:serv-domains</code> and add the fully qualified 
 8. Edit the file <code>$PRISM_HOME/apps/rayo/WEB-INF/classes/rayo-routing.properties</code>
 In this file you will be mapping SIP addresses to XMPP JIDs.  The match is made using a regular expression on the left side of the equals sign.  To route all SIP calls to the JID "adhearsion@example.com" you would use a line like this:
 
-<pre>
+```
 .*=adhearsion@example.com
-</pre>
+```
 
 You may add as many mappings as you need to send calls to various different Adhearsion applications or other Rayo clients.  Note that the first matching line in the file will take the call.
 
@@ -54,14 +54,14 @@ During the PRISM installation process you will be prompted to set up a demo lice
 
 ## Configuring Adhearsion for PRISM
 
-As always the full list of configuration options can be viewed, along with a description and their default values, by typing <code>rake config:show</code> in your application directory.  There are a few configuration options that are particularly important:
+As always the full list of configuration options can be viewed, along with a description and their default values, by typing `rake config:show` in your application directory.  There are a few configuration options that are particularly important:
 
 * config.punchblock.platform must be set to <code>:xmpp</code>
 * config.punchblock.username must be set to your XMPP JID (eg. "adhearsion@example.com")
 * config.punchblock.password must be set to the password for your JID
 * config.punchblock.root_domain must be set to the fully qualified domain name of your PRISM server
 
-Note that as described in our [Deployment Best Practices](/docs/best-practices/deployment), we recommend NOT storing the XMPP username and password in the <code>config/adhearsion.rb</code> file.  Instead these should be stored in environment variables (notably: <code>AHN_PUNCHBLOCK_USERNAME</code> and <code>AHN_PUNCHBLOCK_PASSWORD</code>) that are loaded by the process prior to launching.
+Note that as described in our [Deployment Best Practices](/docs/best-practices/deployment), we recommend NOT storing the XMPP username and password in the `config/adhearsion.rb` file.  Instead these should be stored in environment variables (notably: `AHN_PUNCHBLOCK_USERNAME` and `AHN_PUNCHBLOCK_PASSWORD`) that are loaded by the process prior to launching.
 
 ## Getting Help
 

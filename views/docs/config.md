@@ -106,7 +106,7 @@ The active configuration is derived from the default values for each key, overri
 
 In order to override an application's settings, you can set new values in config/adhearsion.rb. To get started, you can actually copy-paste the output from "rake config:show", and modify it for your needs. The syntax of the config file is hopefully self-explanatory:
 
-<pre class="brush: ruby;">
+```ruby
 # encoding: utf-8
 
 Adhearsion.config do |config|
@@ -176,7 +176,7 @@ Adhearsion.router do
 
   route 'default', SimonGame
 end
-</pre>
+```
 
 ## Storing configuration in the environment
 

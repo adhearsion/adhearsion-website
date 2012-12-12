@@ -10,7 +10,7 @@ In order to handle events global to the whole system, one must declare a (potent
 
 config/adhearsion.rb:
 
-<pre class="brush: ruby;">
+```ruby
 Adhearsion::Events.draw do
 
   # eg. Handling Punchblock events
@@ -24,16 +24,16 @@ Adhearsion::Events.draw do
   # end
 
 end
-</pre>
+```
 
 or, elsewhere in your code:
 
-<pre class="brush: ruby;">
+```ruby
 # eg. Handling Punchblock events
 # Adhearsion::Events.punchblock do |event|
 #   ...
 # end
-</pre>
+```
 
 The available categories of events are currently:
 
@@ -44,7 +44,7 @@ The available categories of events are currently:
 
 ## Per-call events
 
-<pre class="brush: ruby;">
+```ruby
 class MyController < Adhearsion::CallController
   before_call do
     call.register_event_handler do |event|
@@ -52,7 +52,7 @@ class MyController < Adhearsion::CallController
     end
   end
 end
-</pre>
+```
 
 ## Guards
 
