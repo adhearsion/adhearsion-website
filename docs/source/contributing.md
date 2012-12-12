@@ -37,7 +37,7 @@ Adhearsion lives in a Git repository [hosted on Github](http://github.com/adhear
 * All patches should have an appropriate CHANGELOG entry:
   * "A good changelog doesn’t just disassemble version control logs. It presents an executive summary of a whole slew of changes, in terms that make it clear why I, the end user, should be giving a damn." - http://blog.natulte.net/posts/2009-12-21-how-to-write-a-good-changelog.html
   * Changelog entries should be added to the section of the changelog which applies to the target branch, and not to any specific version.
-  * Changelog entries should be marked with with the commit tags as listed above.
+  * Changelog entries should be marked with the commit tags as listed above.
   * Changelog entries should be sorted by significance, and grouped by tag in the same order as presented above.
 
 ### Testing
