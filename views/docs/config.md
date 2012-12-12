@@ -117,13 +117,13 @@ Adhearsion.config do |config|
   # To update a plugin configuration you can write either:
   #
   #    * Option 1
-  #        Adhearsion.config.&lt;plugin-name&gt; do |config|
-  #          config.&lt;key&gt; = &lt;value&gt;
+  #        Adhearsion.config.<plugin-name> do |config|
+  #          config.<key> = <value>
   #        end
   #
   #    * Option 2
   #        Adhearsion.config do |config|
-  #          config.&lt;plugin-name&gt;.&lt;key&gt; = &lt;value&gt;
+  #          config.<plugin-name>.<key> = <value>
   #        end
 
   config.development do |dev|
