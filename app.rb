@@ -139,6 +139,9 @@ def render_docs_page(page = 'index')
   toc = markdown :"docs/#{page}", renderer: Redcarpet::Render::HTML_TOC
   docs = markdown :"docs/#{page}"
 
+  toc.sub! /\n<\/li>\n<\/ul>\n$/, ''
+  toc.sub! /^<ul>\n<li>\n<a href=\"#toc_0\">.*<\/a>\n/, ''
+
   haml :docs, locals: {docs: docs.sub('[TOC]', toc)}
 end
 
