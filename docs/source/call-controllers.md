@@ -429,7 +429,7 @@ Adhearsion.config do |config|
 end
 
 # Call Controllers
-class InboundCall &lt; Adhearsion::CallController
+class InboundProjectCall &lt; Adhearsion::CallController
   def run
     answer
     say "Thank you for calling, we will notify Jason that you called."
