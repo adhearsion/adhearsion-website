@@ -9,13 +9,13 @@ When starting an Adhearsion app in the foreground (ahn start), a console is prov
 When a call has one or more controllers running against it, it is possible to sieze control of the call using the console #take method. You may either supply the call's ID or the call object itself, or supply no parameters and be presented with a list of calls to choose from. If there is only one active call, you will not be presented with a choice.
 
 <pre class='terminal'>
-  <br/>
+
 AHN> take
 Please choose a call:
-# (inbound/outbound) details
+ # (inbound/outbound) details
 0: (i) 5vg6dkqc-lx7-2zujv5xbe7zd from sip:rwkdjpmu@192.168.1.74 to sip:usera@127.0.0.1
 1: (i) 5vg6dkqc-lx7-2n2wgrzooard from sip:rwkdjpmu@192.168.1.74 to sip:usera@127.0.0.1
-#> 1
+ #> 1
 AHN<5vg6dkqc-lx7-2n2wgrzooard>
 </pre>
 
@@ -39,7 +39,7 @@ end
 The current preferred method of making an outbound call is like so:
 
 <pre class='terminal'>
-  <br/>
+
 AHN> Adhearsion::OutboundCall.originate 'sip:arabbit@mojolingo.com', :from => 'sip:foo@bar.com'
 </pre>
 

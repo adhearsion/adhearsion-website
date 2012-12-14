@@ -23,7 +23,7 @@ By default, the logs are output to log/adhearsion.log and stdout.
 You may change the location of the log file by altering the 'config.platform.logging.outputters' config setting, like so:
 
 <pre class="terminal">
-<br/>
+
 ADHEARSION_PLATFORM_LOGGING_OUTPUTTERS=/var/log/adhearsion.log ahn start -
 </pre>
 

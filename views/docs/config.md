@@ -185,7 +185,7 @@ It is considered bad practice to store sensitive data (such as database credenti
 For example, to override the punchblock username and password at runtime, you may do this:
 
 <pre class="terminal">
-  <br/>
+
 AHN_PUNCHBLOCK_USERNAME=testuser AHN_PUNCHBLOCK_PASSWORD=foobar ahn start .
 </pre>
 

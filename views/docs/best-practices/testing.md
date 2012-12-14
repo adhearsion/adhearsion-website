@@ -13,7 +13,6 @@ However there are some important differences, especially with how you think abou
 * But you also need to consider what happens when mixing in inputs from sources like XMPP or Speech Recognition.  When using Speech Recognition in particular it is important to consider the ways in which your expected input may be interpreted incorrectly.
 * Most importantly, in the context of a call, lots of things are happening concurrently: call events (joined/unjoined, active speaker notifications, billing events) and external events (XMPP instant messages or presence updates, interaction from other calls, etc).
 
-
 ## Unit testing
 Unit testing is attempting to test an individual unit in isolation.  You will construct a set of inputs, define expectations (or mocks, if necessary) on any external behavior, and validate the result returned.  Typically a unit is a single method within a class.
 
@@ -32,9 +31,8 @@ You would want to have the following tests:
 * Ensure that for a given input the output was twice the input
 * Tests to ensure that a consistent behavior is encountered when non-Fixnum inputs are used (should it raise? return nil?)
 
-<br>
 ### Call Controllers
-Beyond testing basic functionality it becomes important to test how your calls will interact with your application.  Most of that interaction happens within [Call Controllers](/docs/call-controllers).  Because Call Controllers are simply classes that inherit from the Adhearsion::CallController class, testing these is just like testing any other Ruby class.  However you will likely want to mock out the methods where the telephone call interacts with the framework, such as <code>#ask</code>, <code>#play</code>, <code>#answer</code> and <code>#hangup</code>.  For example, a Call Controller like this:
+Beyond testing basic functionality it becomes important to test how your calls will interact with your application.  Most of that interaction happens within [Call Controllers](/docs/call-controllers).  Because Call Controllers are simply classes that inherit from the Adhearsion::CallController class, testing these is just like testing any other Ruby class.  However you will likely want to mock out the methods where the telephone call interacts with the framework, such as `#ask`, `#play`, `#answer` and `#hangup`.  For example, a Call Controller like this:
 
 ```ruby
 class MyApp < Adhearsion::CallController
@@ -52,11 +50,11 @@ end
 
 You would want to have the following in your tests (these would be satisfied across several individual tests):
 
-* An assertion that <code>#answer</code> was invoked first
-* An assertion that <code>#ask</code> was called with the correct question string ("How much is 2 times 2?")
-* Mocking the result from <code>#ask</code> to pretend that the caller pressed a DTMF digit
-* An assertion that <code>#play</code> was called with "tt-weasels" *only if* the mocked result is "4"
-* An assertion that <code>#hangup</code> was invoked last
+* An assertion that `#answer` was invoked first
+* An assertion that `#ask` was called with the correct question string ("How much is 2 times 2?")
+* Mocking the result from `#ask` to pretend that the caller pressed a DTMF digit
+* An assertion that `#play` was called with "tt-weasels" *only if* the mocked result is "4"
+* An assertion that `#hangup` was invoked last
 
 A sample controller test might look something like this:
 
@@ -75,12 +73,11 @@ end
 
 This is a skeleton for controllers that will pass with a controller generated using Adhearsion's generator utility.
 
-<br>
 ### Plugins
 Please see the documentation on the [Plugins](/docs/plugins#testing-your-code) page.
 
 ## Integration Testing
-<img src="/images/vertical-integration.jpg" style="float: right;">
+
 Integration testing is the attempt to test the interaction between two or more pieces of an application.  This may even be an entire application end-to-end. The goal then is to provide your inputs and measure their results without making assertions on *how* the code makes them happen.  Said another way: the implementation details are unimportant, but the observable behavior is.  For example, you may describe test inputs like this:
 
 * Caller dials 14045551234

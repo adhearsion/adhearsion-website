@@ -12,47 +12,47 @@ Unfortunately there are no packages for FreeSWITCH included with any common Linu
 
 ## Building FreeSWITCH with Text-To-Speech support
 
-FLite is a free TTS engine that comes with FreeSWITCH but is disabled by default. Follow [this guide](http://wiki.freeswitch.org/wiki/Mod_flite) to install the free FLite module. When following this guide, keep in mind that ```modules.conf``` is in the source code directory and ```modules.conf.xml``` is in the directory where FreeSWITCH was installed. NB: you can compile and enable _only one_ TTS engine at a time, due to conflicts between the various engines.
+FLite is a free TTS engine that comes with FreeSWITCH but is disabled by default. Follow [this guide](http://wiki.freeswitch.org/wiki/Mod_flite) to install the free FLite module. When following this guide, keep in mind that `modules.conf` is in the source code directory and `modules.conf.xml` is in the directory where FreeSWITCH was installed. NB: you can compile and enable _only one_ TTS engine at a time, due to conflicts between the various engines.
 
 ## Configuring FreeSWITCH
 
-In order for Adhearsion to drive FreeSWITCH, FreeSWITCH must have the inbound event socket configured correctly (in <code>/etc/freeswitch/conf/autoload_configs/event_socket.conf.xml</code>):
+In order for Adhearsion to drive FreeSWITCH, FreeSWITCH must have the inbound event socket configured correctly (in `/etc/freeswitch/conf/autoload_configs/event_socket.conf.xml`):
 
-<pre class="brush: xml;">
-&lt;configuration name="event_socket.conf" description="Socket Client"&gt;
-  &lt;settings&gt;
-    &lt;param name="nat-map" value="false"/&gt;
-    &lt;param name="listen-ip" value="127.0.0.1"/&gt;
-    &lt;param name="listen-port" value="8021"/&gt;
-    &lt;param name="password" value="your-secret-password"/&gt;
-  &lt;/settings&gt;
-&lt;/configuration&gt;
-</pre>
+```xml
+<configuration name="event_socket.conf" description="Socket Client">
+  <settings>
+    <param name="nat-map" value="false"/>
+    <param name="listen-ip" value="127.0.0.1"/>
+    <param name="listen-port" value="8021"/>
+    <param name="password" value="your-secret-password"/>
+  </settings>
+</configuration>
+```
 
-Next, we need to route all inbound calls to Adhearsion. Edit the dialplan <code>/etc/freeswitch/conf/dialplan/public/00_inbound.xml</code> (or you can create a new file in the same directory):
+Next, we need to route all inbound calls to Adhearsion. Edit the dialplan `/etc/freeswitch/conf/dialplan/public/00_inbound.xml` (or you can create a new file in the same directory):
 
-<pre class="brush: xml;">
-&lt;extension name="Adhearsion"&gt;
-  &lt;condition field="destination_number" expression=".*$"&gt;
-    &lt;action application="park"/&gt;
-  &lt;/condition&gt;
-&lt;/extension&gt;
-</pre>
+```xml
+<extension name="Adhearsion">
+  <condition field="destination_number" expression=".*$">
+    <action application="park"/>
+  </condition>
+</extension>
+```
 
 The 'park' application essentially puts the call on hold. The event socket notifies Adhearsion of the call as an event.
 
 ## Configuring Adhearsion for FreeSWITCH
 
-As always the full list of configuration options can be viewed, along with a description and their default values, by typing <code>rake config:show</code> in your application directory.  There are a few configuration options that are particularly important:
+As always the full list of configuration options can be viewed, along with a description and their default values, by typing `rake config:show` in your application directory.  There are a few configuration options that are particularly important:
 
-* ```config.punchblock.platform``` must be set to ```:freeswitch```
-* ```config.punchblock.password``` must be a string, the EventSocket password (the your-secret-password above, the default is "ClueCon")
-* ```config.punchblock.host``` is an optional string, defaults to localhost (127.0.0.1) or you can specify the host ip
-* ```config.punchblock.port``` is an optional integer, defaults to 8021 (FreeSWITCH default) or you can specify a custom port
-* ```config.punchblock.media_engine``` for Text-To-Speech, can be a string or symbol. FreeSWITCH ships with support for ```:flite```, ```:cepstral```, ```:unimrcp```, and ```:shout```. [See more information](http://wiki.freeswitch.org/wiki/Mod_unimrcp) on the various TTS engines and [see above section](#building-freeswitch-with-text-to-speech-support) for help on compiling FreeSWITCH with TTS support.
-* ```config.punchblock.default_voice``` for TTS, can be a string or symbol, and depends on the TTS engine you choose. For example, with ```:flite``` you can set this to ```slt```, ```rms```, ```awb```, or ```kal```.
+* `config.punchblock.platform` must be set to `:freeswitch`
+* `config.punchblock.password` must be a string, the EventSocket password (the your-secret-password above, the default is "ClueCon")
+* `config.punchblock.host` is an optional string, defaults to localhost (127.0.0.1) or you can specify the host ip
+* `config.punchblock.port` is an optional integer, defaults to 8021 (FreeSWITCH default) or you can specify a custom port
+* `config.punchblock.media_engine` for Text-To-Speech, can be a string or symbol. FreeSWITCH ships with support for `:flite`, `:cepstral`, `:unimrcp`, and `:shout`. [See more information](http://wiki.freeswitch.org/wiki/Mod_unimrcp) on the various TTS engines and [see above section](#building-freeswitch-with-text-to-speech-support) for help on compiling FreeSWITCH with TTS support.
+* `config.punchblock.default_voice` for TTS, can be a string or symbol, and depends on the TTS engine you choose. For example, with `:flite` you can set this to `slt`, `rms`, `awb`, or `kal`.
 
-Note that as described in our [Deployment Best Practices](/docs/best-practices/deployment), we recommend NOT storing the EventSocket password in the <code>config/adhearsion.rb</code> file.  Instead this should be stored in an environment variable (specifically: <code>AHN_PUNCHBLOCK_PASSWORD</code>) that is loaded by the process prior to launching. For example, start up Adhearsion with AHN_PUNCHBLOCK_PASSWORD=your-secret-password ahn start /path/to/app
+Note that as described in our [Deployment Best Practices](/docs/best-practices/deployment), we recommend NOT storing the EventSocket password in the `config/adhearsion.rb` file.  Instead this should be stored in an environment variable (specifically: `AHN_PUNCHBLOCK_PASSWORD`) that is loaded by the process prior to launching. For example, start up Adhearsion with `AHN_PUNCHBLOCK_PASSWORD=your-secret-password ahn start /path/to/app`
 
 
 ## Getting Help

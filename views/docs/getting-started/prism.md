@@ -16,29 +16,28 @@ PRISM can be downloaded for free from the [Voxeo Labs PRISM website](http://voxe
 
 ## Configuring PRISM
 
-
-1. Set PRISM_HOME to the base directory where you installed PRISM.  This is optional, but recommended to make the following instructions copy/pasteable.  For example <code>export PRISM_HOME=/opt/voxeo/prism</code>.
-2. If PRISM is running, shut it down. This can be done by using the application launcher in OSX or by running <code>/etc/init.d/voxeo-as stop</code> on Linux.
-3. Rename your Rayo WAR file to simply "rayo.war" and copy it to the PRISM apps directory. By default this is <code>$PRISM_HOME/apps</code>
-4. Start PRISM (<code>/etc/init.d/voxeo-as start</code>) to allow it to unpack and launch the Rayo application.  After starting PRISM wait around 2 minutes for the application to be detected and unpacked.
+1. Set PRISM_HOME to the base directory where you installed PRISM.  This is optional, but recommended to make the following instructions copy/pasteable.  For example `export PRISM_HOME=/opt/voxeo/prism`.
+2. If PRISM is running, shut it down. This can be done by using the application launcher in OSX or by running `/etc/init.d/voxeo-as stop` on Linux.
+3. Rename your Rayo WAR file to simply "rayo.war" and copy it to the PRISM apps directory. By default this is `$PRISM_HOME/apps`
+4. Start PRISM (`/etc/init.d/voxeo-as start`) to allow it to unpack and launch the Rayo application.  After starting PRISM wait around 2 minutes for the application to be detected and unpacked.
 5. Shut PRISM down again to begin configuration.
-6. Edit the file <code>$PRISM_HOME/config/portappmapping.properties</code> to map port 5060 to Rayo:
+6. Edit the file `$PRISM_HOME/config/portappmapping.properties` to map port 5060 to Rayo:
 <pre>
 5060:rayo
 </pre>
 Important! Ensure that only one line in this file begins with "5060".
 
-7. Edit the file <code>$PRISM_HOME/apps/rayo/WEB-INF/xmpp.xml</code>
-Find the section for <code>xmpp:serv-domains</code> and add the fully qualified hostname of your PRISM server to the file.  If you only intend to use PRISM locally (connecting via localhost) then you may skip this step.  In this example we have added "my-prism-server.example.com":
-<pre class="brush: xml">
-        &lt;xmpp:serv-domains&gt;
-                &lt;xmpp:servdomain&gt;127.0.0.1&lt;/xmpp:servdomain&gt;
-                &lt;xmpp:servdomain&gt;localhost&lt;/xmpp:servdomain&gt;
-                &lt;xmpp:servdomain&gt;my-prism-server.example.com&lt;/xmpp:servdomain&gt;
-        &lt;/xmpp:serv-domains&gt;
-</pre>
+7. Edit the file `$PRISM_HOME/apps/rayo/WEB-INF/xmpp.xml`
+Find the section for `xmpp:serv-domains`and add the fully qualified hostname of your PRISM server to the file.  If you only intend to use PRISM locally (connecting via localhost) then you may skip this step.  In this example we have added "my-prism-server.example.com":
+```xml
+<xmpp:serv-domains>
+  <xmpp:servdomain>127.0.0.1</xmpp:servdomain>
+  <xmpp:servdomain>localhost</xmpp:servdomain>
+  <xmpp:servdomain>my-prism-server.example.com</xmpp:servdomain>
+</xmpp:serv-domains>
+```
 
-8. Edit the file <code>$PRISM_HOME/apps/rayo/WEB-INF/classes/rayo-routing.properties</code>
+8. Edit the file `$PRISM_HOME/apps/rayo/WEB-INF/classes/rayo-routing.properties`
 In this file you will be mapping SIP addresses to XMPP JIDs.  The match is made using a regular expression on the left side of the equals sign.  To route all SIP calls to the JID "adhearsion@example.com" you would use a line like this:
 
 ```
@@ -56,7 +55,7 @@ During the PRISM installation process you will be prompted to set up a demo lice
 
 As always the full list of configuration options can be viewed, along with a description and their default values, by typing `rake config:show` in your application directory.  There are a few configuration options that are particularly important:
 
-* config.punchblock.platform must be set to <code>:xmpp</code>
+* config.punchblock.platform must be set to `:xmpp`
 * config.punchblock.username must be set to your XMPP JID (eg. "adhearsion@example.com")
 * config.punchblock.password must be set to the password for your JID
 * config.punchblock.root_domain must be set to the fully qualified domain name of your PRISM server

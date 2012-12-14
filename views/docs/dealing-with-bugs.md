@@ -15,7 +15,7 @@ If you encounter a bug, it's entirely possible that it has already been fixed in
 
 If it is suggested to you that you try a different branch, substitute that for 'develop' in your Gemfile.
 
-You may then run <code>bundle install</code> to get the correct dependencies, and then boot your application. If the problem is resolved, feel free to voice your desire for a new release of Adhearsion to the [community](/community). If it persists, you should consider [filing a bug report](#filing-a-bug-report).
+You may then run `bundle install` to get the correct dependencies, and then boot your application. If the problem is resolved, feel free to voice your desire for a new release of Adhearsion to the [community](/community). If it persists, you should consider [filing a bug report](#filing-a-bug-report).
 
 ## Filing a bug report
 
