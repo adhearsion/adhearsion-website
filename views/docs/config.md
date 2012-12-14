@@ -6,7 +6,7 @@ Adhearsion 2.0 brings a brand new configuration system which is environment-awar
 
 ## Viewing current/default config
 
-In order to visually inspect the current state of the application's configuration, run the rake task config:show, like so:
+In order to visually inspect the current state of the application's configuration, run `rake config:show`, like so:
 
 <pre class="terminal">
 
@@ -96,7 +96,7 @@ end
 
 This output shows the currently active configuration as a combination of default values and overrides. It also provides brief documentation relating to each option.
 
-The active configuration is derived from the default values for each key, overridden first by the on-disk configuration (in config/adhearsion.rb) and then by any provided in the application's environment (see below). Thus the order of precedence is:
+The active configuration is derived from the default values for each key, overridden first by the on-disk configuration (in `config/adhearsion.rb`) and then by any provided in the application's environment (see below). Thus the order of precedence is:
 
 * Environment Variables
 * Hard-coded configuration
@@ -104,7 +104,7 @@ The active configuration is derived from the default values for each key, overri
 
 ## Configuring Adhearsion & Plugins
 
-In order to override an application's settings, you can set new values in config/adhearsion.rb. To get started, you can actually copy-paste the output from "rake config:show", and modify it for your needs. The syntax of the config file is hopefully self-explanatory:
+In order to override an application's settings, you can set new values in `config/adhearsion.rb`. To get started, you can actually copy-paste the output from `rake config:show`, and modify it for your needs. The syntax of the config file is hopefully self-explanatory:
 
 ```ruby
 # encoding: utf-8
@@ -162,7 +162,7 @@ Adhearsion::Events.draw do
   # end
   #
   # eg Handling PeerStatus AMI events
-  # ami :name => 'PeerStatus' do |event|
+  # ami name: 'PeerStatus' do |event|
   #   ...
   # end
   #

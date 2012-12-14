@@ -19,7 +19,7 @@ Adhearsion::Events.draw do
   # end
   #
   # eg Handling PeerStatus AMI events
-  # ami :name => 'PeerStatus' do |event|
+  # ami name: 'PeerStatus' do |event|
   #   ...
   # end
 

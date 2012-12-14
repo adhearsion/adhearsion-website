@@ -41,7 +41,7 @@ $ cd myapp
 
 ## Configure your application
 
-Looking at the output from "ahn create", you will see several files are generated for you.  Here are the most important ones:
+Looking at the output from `ahn create`, you will see several files are generated for you.  Here are the most important ones:
 
 ### Gemfile
 
@@ -65,7 +65,7 @@ gem "adhearsion", "~> 2.1.0"
 # gem 'adhearsion-drb'
 ```
 
-In it you can see the Adhearsion framework itself is required.  Also included, but commented out, are several popular or useful plugins.  To enable their usage, simply uncomment the line from the Gemfile.  When you are done with that, install all the plugins you selected by running "bundle install":
+In it you can see the Adhearsion framework itself is required.  Also included, but commented out, are several popular or useful plugins.  To enable their usage, simply uncomment the line from the Gemfile.  When you are done with that, install all the plugins you selected by running `bundle install`:
 
 <pre class="terminal">
 
@@ -112,7 +112,7 @@ Using adhearsion (2.1.0)
 
 ### config/adhearsion.rb
 
-Next is the main Adhearsion configuration file, config/adhearsion.rb:
+Next is the main Adhearsion configuration file, `config/adhearsion.rb`:
 
 ```ruby
 # encoding: utf-8
@@ -170,7 +170,7 @@ Adhearsion::Events.draw do
   # end
   #
   # eg Handling PeerStatus AMI events
-  # ami :name => 'PeerStatus' do |event|
+  # ami name: 'PeerStatus' do |event|
   #   ...
   # end
   #
@@ -186,7 +186,7 @@ Adhearsion.router do
 end
 ```
 
-This is just a skeleton however.  To see the full list of available configuration options avaiable, you can always run "rake config:show".  Note that your output may be different, depending on which plugins you selected above:
+This is just a skeleton however.  To see the full list of available configuration options avaiable, you can always run `rake config:show`.  Note that your output may be different, depending on which plugins you selected above:
 
 <pre class="terminal">
 
@@ -286,7 +286,7 @@ Please see the documentation for connecting Adhearsion to the telephony engine o
 
 ## Make a test call
 
-By default, a generated Adhearsion app includes the SimonGame. You can boot your app by running "ahn -" and immediately make a call to it. If everything is configured correctly, you should be prompted to play a game. Enjoy your time working with Adhearsion, and feel free to explore the rest of the documentation provided here.
+By default, a generated Adhearsion app includes the SimonGame. You can boot your app by running `ahn -` and immediately make a call to it. If everything is configured correctly, you should be prompted to play a game. Enjoy your time working with Adhearsion, and feel free to explore the rest of the documentation provided here.
 
 <a href="#" rel="docs-nav-active" style="display:none;">docs-nav-getting-started</a>
 

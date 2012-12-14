@@ -6,7 +6,7 @@ This page is for all the sysadmins and devops folks tasked with operationalizing
 
 ## Interacting with the Adhearsion Process
 
-Starting with Adhearsion 2.0, all Adhearsion applications will appear in your process list with the name "ahn" and that name should work with standard tools like ps/pkill/killall. In addition, you can configure the name the process uses by setting config.platform.process_name.  For example, setting this to "myapp" will allow you to send signals to just that application using "killall myapp".
+Starting with Adhearsion 2.0, all Adhearsion applications will appear in your process list with the name "ahn" and that name should work with standard tools like ps/pkill/killall. In addition, you can configure the name the process uses by setting `config.platform.process_name`.  For example, setting this to "myapp" will allow you to send signals to just that application using `killall myapp`.
 
 ## Signals
 
@@ -25,9 +25,9 @@ Adhearsion 2.0 processes respond to several signals:
 
 There are two ways to start an Adhearsion process:
 
-* In the foreground with an Adhearsion console.  This is the common case while developing Adhearsion applications.  To start in this mode call ahn with the "start" argument: "ahn start /path/to/my/application"
+* In the foreground with an Adhearsion console.  This is the common case while developing Adhearsion applications.  To start in this mode call ahn with the "start" argument: `ahn start /path/to/my/application`
 
-* In the background as a daemon.  This is typical for deployment scenarios.  To start in this mode call ahn with the "daemon" argument: "ahn daemon /path/to/my/application"
+* In the background as a daemon.  This is typical for deployment scenarios.  To start in this mode call ahn with the "daemon" argument: `ahn daemon /path/to/my/application`
 
 <a href="#" rel="docs-nav-active" style="display:none;">docs-nav-best-practices</a>
 

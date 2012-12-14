@@ -23,7 +23,7 @@ A stack error is sometimes encountered when running on Ruby 1.9.3 via RVM, looki
 SystemStackError: stack level too deep
 ```
 
-It is a known issue with Celluloid and RVM, and the best solution is to uninstall your current Ruby, update RVM using "rvm get head" and reinstall Ruby.
+It is a [known issue with Celluloid and RVM](https://github.com/celluloid/celluloid/wiki/Fiber-stack-errors), and the best solution is to uninstall your current Ruby, update RVM using "rvm get head" and reinstall Ruby.
 
 rbenv does not exhibit this issue.
 

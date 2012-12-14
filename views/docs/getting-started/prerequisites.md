@@ -13,9 +13,9 @@ Adhearsion 2 supports the following telephony engines:
 * [PRISM](/docs/getting-started/prism)
 
 ## A Ruby Interpreter
-Adhearsion requires [Ruby](http://ruby-lang.org) version 1.9.2 or later. [JRuby](http://jruby.org) version 1.6.5 or later running in Ruby19 mode (--1.9) is also supported.
+Adhearsion requires [Ruby](http://ruby-lang.org) version 1.9.2 or later. [JRuby](http://jruby.org) version 1.7.0 or later is also supported.
 
-Most operating systems come with a version of Ruby installed.  However, it is very important to check the version.  Mac OS X ships with a version of Ruby based on 1.8.7, which is too old.  Debian and its derivatives, including Ubuntu, provide a version of Ruby 1.9 with the package called "ruby19".
+Most operating systems come with a version of Ruby installed.  However, it is very important to check the version.  Mac OS X ships with a version of Ruby based on 1.8.7, which is too old.  Debian and its derivatives, including Ubuntu, provide a version of Ruby 1.9 with the package called `ruby19`.
 
 One easy, cross-platform way to install an acceptable version of Ruby is to use the [Ruby Version Manager](http://rvm.beginrescueend.com), also called ["RVM"](http://rvm.beginrescueend.com).
 
@@ -54,20 +54,18 @@ If you prefer JRuby, RVM can also install JRuby:
 <pre class="terminal">
 
 $ rvm install jruby
-<span class="ansi32">jruby-1.6.7 - #fetching </span>
-<span class="ansi32">jruby-1.6.7 - #extracting jruby-bin-1.6.7 to /Users/ben/Developer/.rvm/src/jruby-1.6.7</span>
-<span class="ansi32">jruby-1.6.7 - #extracted to /Users/ben/Developer/.rvm/src/jruby-1.6.7</span>
+<span class="ansi32">jruby-1.7.0 - #fetching </span>
+<span class="ansi32">jruby-1.7.0 - #extracting jruby-bin-1.7.0 to /Users/ben/Developer/.rvm/src/jruby-1.7.0</span>
+<span class="ansi32">jruby-1.7.0 - #extracted to /Users/ben/Developer/.rvm/src/jruby-1.7.0</span>
 <span class="ansi32">Building Nailgun</span>
-<span class="ansi32">jruby-1.6.7 - #installing to /Users/ben/Developer/.rvm/rubies/jruby-1.6.7</span>
-<span class="ansi32">jruby-1.6.7 - #importing default gemsets (/Users/ben/Developer/.rvm/gemsets/)</span>
+<span class="ansi32">jruby-1.7.0 - #installing to /Users/ben/Developer/.rvm/rubies/jruby-1.7.0</span>
+<span class="ansi32">jruby-1.7.0 - #importing default gemsets (/Users/ben/Developer/.rvm/gemsets/)</span>
 <span class="ansi32">Copying across included gems</span>
 Building native extensions.  This could take a while...
 Successfully installed jruby-launcher-1.0.12-java
 1 gem installed
 $ rvm use jruby
-<span class="ansi32">Using /Users/ben/Developer/.rvm/gems/jruby-1.6.7</span>
-$ # JRuby must run in Ruby 1.9 mode:
-$ export JRUBY_OPTS="--1.9"
+<span class="ansi32">Using /Users/ben/Developer/.rvm/gems/jruby-1.7.0</span>
 </pre>
 
 <div class='docs-progress-nav'>

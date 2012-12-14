@@ -72,7 +72,7 @@ module GreetPlugin
     # Basic configuration for the plugin
     #
     config :greet_plugin do
-      greeting "Hello", :desc => "What to use to greet users"
+      greeting "Hello", desc: "What to use to greet users"
     end
 
     # Defining a Rake task is easy
@@ -124,8 +124,8 @@ The #config block allows a plugin to define configuration values in a customizab
 A config line can also validate supplied values with a transform:
 
 ```ruby
-max_connections 5, :desc => "Maximum number of connections to make",
-                   :transform => lambda { |v| v.to_i }
+max_connections 5, desc: "Maximum number of connections to make",
+                   transform: lambda { |v| v.to_i }
 ```
 The :transform will be used to modify the configuration value after it is read from the end-user's setting.
 
@@ -205,7 +205,7 @@ Gemfile
 
 ```ruby
 gem 'adhearsion', '>= 2.0.0'
-gem 'greet_plugin', :path => '/home/user/projects/greet_plugin'
+gem 'greet_plugin', path: '/home/user/projects/greet_plugin'
 
 # ... whatever other gems you need
 ```
@@ -225,9 +225,9 @@ lib/greet_plugin/plugin.rb
 
 ```ruby
 config :greet_plugin do
-  greeting "Hello", :desc => "What to use to greet users"
-  office_hours_start 8, :desc => "Start of office hours, integer, 24 hour format"
-  office_hours_end 18, :desc => "End of office hours, integer, 24 hour format"
+  greeting "Hello", desc: "What to use to greet users"
+  office_hours_start 8, desc: "Start of office hours, integer, 24 hour format"
+  office_hours_end 18, desc: "End of office hours, integer, 24 hour format"
 end
 ```
 

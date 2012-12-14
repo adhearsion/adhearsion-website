@@ -6,7 +6,7 @@ When starting an Adhearsion app in the foreground (ahn start), a console is prov
 
 ## Taking a currently active call
 
-When a call has one or more controllers running against it, it is possible to sieze control of the call using the console #take method. You may either supply the call's ID or the call object itself, or supply no parameters and be presented with a list of calls to choose from. If there is only one active call, you will not be presented with a choice.
+When a call has one or more controllers running against it, it is possible to sieze control of the call using the console `#take` method. You may either supply the call's ID or the call object itself, or supply no parameters and be presented with a list of calls to choose from. If there is only one active call, you will not be presented with a choice.
 
 <pre class='terminal'>
 
@@ -40,7 +40,7 @@ The current preferred method of making an outbound call is like so:
 
 <pre class='terminal'>
 
-AHN> Adhearsion::OutboundCall.originate 'sip:arabbit@mojolingo.com', :from => 'sip:foo@bar.com'
+AHN> Adhearsion::OutboundCall.originate 'sip:arabbit@mojolingo.com', from: 'sip:foo@bar.com'
 </pre>
 
 The call will pass through the router in the same way as an incoming call.

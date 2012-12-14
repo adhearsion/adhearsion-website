@@ -12,11 +12,11 @@ One important thing to note for existing Adhearsion applications: Adhearsion 2.0
 
 ## ahn_log has become logger
 
-This is mostly a simple search & replace change.  Find all instances of "ahn_log" and replace them with "logger".  However, we have also deprecated logger namespaces.  For example, "ahn_log.myapp.info" would log messages within the "myapp" namespace.  This is no longer supported so it would need to become "logger.info".  Fortunately we have added a lot more information to the default logging formatter that includes the originating class name that generated the log message. Hopefully have a minimal or net positive impact to most applications.
+This is mostly a simple search & replace change.  Find all instances of `ahn_log` and replace them with `logger`.  However, we have also removed logger namespaces.  For example, `ahn_log.myapp.info` would log messages within the "myapp" namespace.  This is no longer supported so it would need to become `logger.info`.  Fortunately we have added a lot more information to the default logging formatter that includes the originating class name that generated the log message. Hopefully have a minimal or net positive impact to most applications.
 
 ## No more dialplan.rb
 
-This is the single most visible change.  Previously an  Adhearsion application's entry point was dialplan.rb, and the entry point in dialplan.rb was decided by the context provided by Asterisk.  Since Adhearsion 2.0 runs on multiple platforms, and the concept of a "context" is Asterisk-specific, we needed to do something different.  The recommended way to migrate dialplan.rb is to break each dialplan.rb block up into a separate [CallController](/docs/call-controllers). Then you will need to add routes to config/adhearsion.rb that map Asterisk contexts to the new CallControllers.  For example, given the following dialplan.rb:
+This is the single most visible change.  Previously an  Adhearsion application's entry point was `dialplan.rb`, and the entry point in `dialplan.rb` was decided by the context provided by Asterisk.  Since Adhearsion 2.0 runs on multiple platforms, and the concept of a "context" is Asterisk-specific, we needed to do something different.  The recommended way to migrate dialplan.rb is to break each dialplan.rb block up into a separate [CallController](/docs/call-controllers). Then you will need to add routes to `config/adhearsion.rb` that map Asterisk contexts to the new CallControllers.  For example, given the following dialplan.rb:
 
 ```ruby
 adhearsion {
@@ -97,19 +97,19 @@ end
 
 SimonGame is already a CallController so no wrapper class is required.
 
-Next you will need to map the Asterisk contexts back to these CallControllers. You will need the [adhearsion-asterisk](http://adhearsion.com/docs/plugins#using-the-plugin) plugin to get the route matcher for agi_context. This goes in config/adhearsion.rb:
+Next you will need to map the Asterisk contexts back to these CallControllers. You will need the [adhearsion-asterisk](http://adhearsion.com/docs/plugins#using-the-plugin) plugin to get the route matcher for `agi_context`. This goes in `config/adhearsion.rb`:
 
 ```ruby
 Adhearsion.router do
-  route 'adhearsion context', SimonGame, :agi_context => 'adhearsion'
-  route 'my_menu context', MyMenu, :agi_context => 'my_menu'
-  route 'fibonacci context', Fibonacci, :agi_context => 'fibonacci'
+  route 'adhearsion context', SimonGame, agi_context: 'adhearsion'
+  route 'my_menu context', MyMenu, agi_context: 'my_menu'
+  route 'fibonacci context', Fibonacci, agi_context: 'fibonacci'
 end
 ```
 
 ## No more events.rb
 
-Just as with dialplan.rb, events.rb has been deprecated and removed.  However the powerful event handling system has only become more powerful in Adhearsion 2.0.  Events can now easily be defined anywhere in your application.  You may choose to put them into config/adhearsion.rb if you have a small number of events.  However, in most cases it makes sense to package your event handling code either as a standalone class or along with a related CallController.  This approach makes testing event handlers much easier.
+Just as with `dialplan.rb`, `events.rb` has been removed.  However the powerful event handling system has only become more powerful in Adhearsion 2.0.  Events can now easily be defined anywhere in your application.  You may choose to put them into `config/adhearsion.rb` if you have a small number of events.  However, in most cases it makes sense to package your event handling code either as a standalone class or along with a related CallController.  This approach makes testing event handlers much easier.
 
 One other advantage to the new eventing system is the flexibility with which you can subscribe to events.  Instead of receiving all Asterisk Manager Interface events and then filtering in application code based on the name, you may elect to register to receive only specific events.  More on this is described in the [Events documentation](/docs/events).
 
@@ -148,12 +148,12 @@ Adhearsion::Events.draw do
 end
 ```
 
-Asterisk Manager Interface events are a little different. In the case of "NewChannel" events, we may prefer to register for Punchblock::Offer events, which will work on Asterisk as well as Rayo or any other supported telephony engine in the future. There is an important distinction here though:
+Asterisk Manager Interface events are a little different. In the case of `NewChannel` events, we may prefer to register for `Punchblock::Offer` events, which will work on Asterisk as well as Rayo or any other supported telephony engine in the future. There is an important distinction here though:
 
-* AMI "NewChannel" events report every new channel that is created in Asterisk, whether or not that call is ultimately routed to Adhearsion.
-* Punchblock::Offer events only fire for calls that are routed to Adhearsion.
+* AMI `NewChannel` events report every new channel that is created in Asterisk, whether or not that call is ultimately routed to Adhearsion.
+* `Punchblock::Offer` events only fire for calls that are routed to Adhearsion.
 
-Most telephony backends do not offer a functional equivalent of the NewChannel event so there is no direct replacement.  Be aware of the differences here.  For the purposes of this document, we will assume that Punchblock::Offer events are sufficient for our needs.
+Generally, telephony backends do not offer a functional equivalent of the `NewChannel` event so there is no direct replacement.  Be aware of the differences here.  For the purposes of this document, we will assume that `Punchblock::Offer` events are sufficient for our needs.
 
 Examples:
 
@@ -163,7 +163,7 @@ Adhearsion::Events.punchblock Punchblock::Offer do |offer|
   logger.info "A new channel has been created: #{offer.inspect}"
 end
 
-Adhearsion::Events.ami :name => 'NewState' do |state|
+Adhearsion::Events.ami name: 'NewState' do |state|
   # This block will only be invoked with "NewState" AMI events
   logger.info "A channel is changing state: #{state.inspect}"
 end
@@ -173,11 +173,11 @@ For examples on using the XMPP events within Adhearsion 2.0, please see [the adh
 
 ## Upgrading Configuration
 
-Adhearsion 1.x had a fixed configuration system for internal configuration and a separate, YAML-based system for configuring components.  In Adhearsion 2.0 we wanted to combine these concepts and make it much easier by keeping configuration in one self-documenting location.  The first change you will notice is that "config/startup.rb" has become "config/adhearsion.rb".  The second thing you will notice is how short the default configuration is.  The default configuration is the bare minimum needed to get you up and running.  However there are many more configuration options available by default.  In addition, plugins can register their own configuration variables within their own namespace and these configuration options will become visible as well.  To see the full list of configuration options, simply type "rake config:show" within your application directory.  For more information on using configuration, see the [Configuration](/docs/config) page.
+Adhearsion 1.x had a fixed configuration system for internal configuration and a separate, YAML-based system for configuring components.  In Adhearsion 2.0 we wanted to combine these concepts and make it much easier by keeping configuration in one self-documenting location.  The first change you will notice is that `config/startup.rb` has become `config/adhearsion.rb`.  The second thing you will notice is how short the default configuration is.  The default configuration is the bare minimum needed to get you up and running.  However there are many more configuration options available by default.  In addition, plugins can register their own configuration variables within their own namespace and these configuration options will become visible as well.  To see the full list of configuration options, simply type `rake config:show` within your application directory.  For more information on using configuration, see the [Configuration](/docs/config) page.
 
 ## Plugins are the new Components
 
-Adhearsion 1.x had a concept of a "component" which was intended to be reuseable, shareable functionality for Adhearsion.  These components could be installed locally within the components/ directory or by installing a gem.  However they had several limitations:
+Adhearsion 1.x had a concept of a "component" which was intended to be reuseable, shareable functionality for Adhearsion.  These components could be installed locally within the `components/` directory or by installing a gem.  However they had several limitations:
 
 * Configuration was tricky to manage and not always easily discoverable
 * Components had limited integration points, making plugin development frustrating
@@ -185,37 +185,41 @@ Adhearsion 1.x had a concept of a "component" which was intended to be reuseable
 
 Adhearsion 2.0 has reinvented the concept with the new plugin system.  For more information, check out the page dedicated to [Plugins](/docs/plugins).
 
-However, you do not have to jump in all the way and create a new plugin for your existing local components.  Adhearsion now automatically loads all files placed into the "lib/" directory.  If you want to migrate an existing component to a simple CallController, this is the fastest and easiest way to do it.  For example, if we had a component named "conference_login" like this:
+However, you do not have to jump in all the way and create a new plugin for your existing local components.  Adhearsion now automatically loads all files placed into the `lib/` directory.  If you want to migrate an existing component to a simple CallController, this is the fastest and easiest way to do it.  For example, if we had a component named "conference_login" like this:
 
 ```ruby
 methods_for :dialplan do
   def conference_login
-    room = input 4, :play => 'file:///prompts/enter-room-number'
-    return nil unless (5000..6000).include? room.to_i
+    room = input 4, play: 'file:///prompts/enter-room-number'
+    return unless (5000..6000).include? room.to_i
     room
   end
 end
 ```
 
-Just convert this to a CallController and move it to "lib/conference_login.rb":
+Just convert this to a CallController and move it to `lib/conference_login.rb`:
 
 ```ruby
 class ConferenceLogin < Adhearsion::CallController
   def run
-    room = input 4, :play => 'enter-room-number'
-    return nil unless (5000..6000).include? room.to_i
+    ...
+  end
+
+  def conference_login
+    room = input 4, play: 'enter-room-number'
+    return unless (5000..6000).include? room.to_i
     room
   end
 end
 ```
 
-One possible problem with this approach is that, under the old system, the #conference_login method was avaialble anywhere within dialplan.rb.  Adhearsion 2.0 does offer a way to add functionality to the base CallController class, acheiving the same effect, without needing to monkeypatch.  Here is a more direct replacement for the #conference_login method, still in lib/conference_login.rb:
+One possible problem with this approach is that, under the old system, the `#conference_login` method was avaialble anywhere within `dialplan.rb`.  Adhearsion 2.0 does offer a way to add functionality to the base CallController class, acheiving the same effect, without needing to monkeypatch.  Here is a more direct replacement for the `#conference_login` method, still in `lib/conference_login.rb`:
 
 ```ruby
 module ConferenceLogin
   def conference_login
-    room = input 4, :play => 'enter-room-number'
-    return nil unless (5000..6000).include? room.to_i
+    room = input 4, play: 'enter-room-number'
+    return unless (5000..6000).include? room.to_i
     room
   end
 end
@@ -223,7 +227,7 @@ end
 CallController.mixin ConferenceLogin
 ```
 
-By using the #mixin method, the ConferenceLogin is added to all CallControllers and is therefore available anywhere within the scope of any existing or future CallController.
+By using the `#mixin` method, the ConferenceLogin is added to all CallControllers and is therefore available anywhere within the scope of any existing or future CallController.
 
 <div class='docs-progress-nav'>
   <span class='back'>

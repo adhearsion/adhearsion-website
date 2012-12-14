@@ -2,6 +2,8 @@
 
 [TOC]
 
+Note: This documentation is stale. Please consult with the [community](/community) before following the advice here. Specifically, it is considered preferable to separate your Adhearsion application from a Rails application over the wire, via either an HTTP API or some sort of message bus.
+
 It is possible to integrate an Adhearsion application with a Rails application, such that Adhearsion has access to the environment of the rails app, including its models. To do this, it is preferable to merge the directory structure of the applications.
 
 First, generate a new rails app:
@@ -128,7 +130,7 @@ Using uglifier (1.2.4)
 Your bundle is complete! Use `bundle show [gemname]` to see where a bundled gem is installed.
 </pre>
 
-Next, generate an Adhearsion application by the same name, without overwriting config/environment.rb, Gemfile, .gitignore or Rakefile:
+Next, generate an Adhearsion application by the same name, without overwriting `config/environment.rb`, `Gemfile`, `.gitignore` or `Rakefile`:
 
 <pre class="terminal">
 
@@ -162,13 +164,13 @@ Overwrite /Users/ben/Downloads/testapp/Rakefile? (enter "h" for help) [Ynaqdh] n
 ahn create .  18.81s user 0.80s system 20% cpu 1:33.57 total
 </pre>
 
-The differences in environment.rb and .gitignore are such that retaining the rails version is appropriate. Adhearsion must, however, be added to the Gemfile:
+The differences in `environment.rb` and `.gitignore` are such that retaining the rails version is appropriate. Adhearsion must, however, be added to the Gemfile:
 
 ```ruby
 gem 'adhearsion', '~>2.0'
 ```
 
-Additionally, Adhearsion's rake tasks must be loaded, by placing the following content in lib/tasks/adhearsion.rake:
+Additionally, Adhearsion's rake tasks must be loaded, by placing the following content in `lib/tasks/adhearsion.rake`:
 
 ```ruby
 namespace :adhearsion do

@@ -44,11 +44,11 @@ Adhearsion.config do |config|
 end
 ```
 
-Within a call controller, you have access to many instance methods with which to operate on the call, and you also have access to the call object (#call) itself.
+Within a call controller, you have access to many instance methods with which to operate on the call, and you also have access to the call object (`#call`) itself.
 
 ## Basic call control
 
-The entry point for every CallController is the #run method, and every CallController must have a #run method.  Once launched, there are several methods available to exercise basic control over a call. The first interesting one is the method by which you answer a call. Hold on to your hats here, this is highly complex:
+The entry point for every CallController is the `#run` method, and every CallController must have a `#run` method.  Once launched, there are several methods available to exercise basic control over a call. The first interesting one is the method by which you answer a call. Hold on to your hats here, this is highly complex:
 
 ```ruby
 class SuperSecretProjectCallController < Adhearsion::CallController
@@ -103,7 +103,7 @@ CallController methods will not explictly answer calls to allow the developer to
 
 For example, this could be used to play some pricing information to a caller, or to send custom audio as a ringing tone.
 
-Early media could not work with all methods and channels, so the recommendation is to always use #answer first unless you know your application does not need that.
+Early media could not work with all methods and channels, so the recommendation is to always use `#answer` first unless you know your application does not need that.
 
 ## Multiple controllers
 
@@ -138,7 +138,7 @@ There are several methods by which to render audible output to the call. The ful
 
 ### #play
 
-\#play allows for rendering output of several types, in a manner appropriate to that type. It will detect Date/Time objects, numbers, and paths/URLs to audio files. Additionally, it supports rendering collections of such objects in series. As always, further details can be found in the [API documentation](http://rubydoc.info/github/adhearsion/adhearsion/Adhearsion/CallController/Output:play), but here are some examples:
+`#play` allows for rendering output of several types, in a manner appropriate to that type. It will detect Date/Time objects, numbers, and paths/URLs to audio files. Additionally, it supports rendering collections of such objects in series. As always, further details can be found in the [API documentation](http://rubydoc.info/github/adhearsion/adhearsion/Adhearsion/CallController/Output:play), but here are some examples:
 
 ```ruby
 class MyController < Adhearsion::CallController
@@ -152,7 +152,7 @@ end
 
 ### #say
 
-In many circumstances, it is desireable to speak certain output using a text-to-speech engine. This is simple using the #say method, providing either a simple string or an SSML document:
+In many circumstances, it is desireable to speak certain output using a text-to-speech engine. This is simple using the `#say` method, providing either a simple string or an SSML document:
 
 ```ruby
 class MyController < Adhearsion::CallController
@@ -206,24 +206,23 @@ Phone calls are fairly boring if they only involve listening to output, so Adhea
 
 ### #ask
 
-CallController provides the #ask method, which simplifies input by combining a prompt (rendered as above) with gathering a response.
+CallController provides the `#ask` method, which simplifies input by combining a prompt (rendered as above) with gathering a response.
 
 ```ruby
 class MyController < Adhearsion::CallController
   def run
     answer
-    result = ask "How many woodchucks? Enter a number followed by #.",
-                :terminator => '#'
+    result = ask "How many woodchucks? Enter a number followed by #.", terminator: '#'
     say "Wow, #{result.response} is a lot of woodchucks!"
   end
 end
 ```
 
-Here, we choose to cease input using a terminator digit. Alternative strategies include a :timeout, or a digit :limit, which are described in the [#ask API documentation](http://rubydoc.info/github/adhearsion/adhearsion/Adhearsion/CallController/Input:ask). Additionally, it is possible to pass a block, to which #ask will yield the digit buffer after each digit is received, in order to validate the input and optionally terminate early. If the block returns a truthy value when invoked, the input will be terminated early.
+Here, we choose to cease input using a terminator digit. Alternative strategies include a `:timeout`, or a digit `:limit`, which are described in the [#ask API documentation](http://rubydoc.info/github/adhearsion/adhearsion/Adhearsion/CallController/Input:ask). Additionally, it is possible to pass a block, to which `#ask` will yield the digit buffer after each digit is received, in order to validate the input and optionally terminate early. If the block returns a truthy value when invoked, the input will be terminated early.
 
 ### #menu
 
-Rapid and painless creation of complex IVRs has always been one of the defining features of Adhearsion for beginning and advanced programmers alike. Through the #menu DSL method, the framework abstracts and packages the output and input management and the complex state machine needed to implement a complete menu with audio prompts, digit checking, retries and failure handling, making creating menus a breeze.
+Rapid and painless creation of complex IVRs has always been one of the defining features of Adhearsion for beginning and advanced programmers alike. Through the `#menu` DSL method, the framework abstracts and packages the output and input management and the complex state machine needed to implement a complete menu with audio prompts, digit checking, retries and failure handling, making creating menus a breeze.
 
 A sample menu might look something like this:
 
@@ -231,8 +230,7 @@ A sample menu might look something like this:
 class MyController < Adhearsion::CallController
   def run
     answer
-    menu "Where can we take you today?",
-         :timeout => 8.seconds, :tries => 3 do
+    menu "Where can we take you today?", timeout: 8.seconds, tries: 3 do
       match 1, BooController
       match '2', MyOtherController
       match(3, 4) { pass YetAnotherController }
@@ -266,29 +264,29 @@ class MyController < Adhearsion::CallController
 end
 ```
 
-The first arguments to #menu are a list of sounds to play, as accepted by #play, including strings for TTS, Date and Time objects, and file paths. #play and the other input and output methods, all renovated, will be covered in a subsequent post. Sounds will be played at the beginning of the menu and after each timeout or invalid input, if the maximum number of tries has not been reached yet.
+The first arguments to `#menu` are a list of sounds to play, as accepted by `#play`, including strings for TTS, Date and Time objects, and file paths. Sounds will be played at the beginning of the menu and after each timeout or invalid input, if the maximum number of tries has not been reached yet.
 
-The :tries and :timeout options respectively specify the number of tries before going into failure, and the timeout in seconds allowed before the first and each subsequent digit input.
+The `:tries` and `:timeout` options respectively specify the number of tries before going into failure, and the timeout in seconds allowed before the first and each subsequent digit input.
 
 The most important section is the following block, which specifies how the menu will be constructed and handled.
 
-The #match method takes an Integer, a String, a Range or any number of them as the required input(s) for the match payload to be executed. The last argument to a #match is either the name of a CallController, which will be invoked, or a block to be executed. Matched input is passed in to the associated block, or to the controller through its metadata (Controller#metadata[:extension]).
+The `#match` method takes an `Integer`, a `String`, a `Range` or any number of them as the required input(s) for the match payload to be executed. The last argument to a `#match` is either the name of a CallController, which will be invoked, or a block to be executed. Matched input is passed in to the associated block, or to the controller through its metadata (`Controller#metadata[:extension]`).
 
-\#menu executes the payload for the first exact unambiguous match it finds after each input or timing out. In a situation where there might be overlapping patterns, such as 10 and 100, #menu will wait for timeout after the second digit.
+`#menu` executes the payload for the first exact unambiguous match it finds after each input or timing out. In a situation where there might be overlapping patterns, such as 10 and 100, `#menu` will wait for timeout after the second digit.
 
-\#timeout, #invalid and #failure are for handling bad or missing inputs.  These methods only accept blocks as payload, but it is still possible to make use of another CallController by using #pass or #invoke within the block.
+`#timeout`, `#invalid` and `#failure` are for handling bad or missing inputs.  These methods only accept blocks as payload, but it is still possible to make use of another CallController by using `#pass` or `#invoke` within the block.
 
-* \#invalid has its associated block executed when the input does not possibly match any pattern.
-* \#timeout block is run when time expires before or between input digits, without there being at least one exact match.
-* \#failure runs its block when the maximum number of tries is reached without an input match.
+* `#invalid` has its associated block executed when the input does not possibly match any pattern.
+* `#timeout` block is run when time expires before or between input digits, without there being at least one exact match.
+* `#failure` runs its block when the maximum number of tries is reached without an input match.
 
-Execution of the current context resumes after #menu finishes. If you wish to jump to an entirely different controller, #pass can be used.
+Execution of the current context resumes after `#menu` finishes. If you wish to jump to an entirely different controller, `#pass` can be used.
 
-\#menu will return a [CallController::Input::Result](http://rubydoc.info/github/adhearsion/adhearsion/Adhearsion/CallController/Input/Result) object detailing the success or otherwise of the menu, similarly to #ask.
+`#menu` will return a [CallController::Input::Result](http://rubydoc.info/github/adhearsion/adhearsion/Adhearsion/CallController/Input/Result) object detailing the success or otherwise of the menu, similarly to `#ask`.
 
 ## Recording
 
-The #record method provides the ability to capture audio in a blocking or non-blocking way.
+The `#record` method provides the ability to capture audio in a blocking or non-blocking way.
 
 ### Voicemail-like recording
 
@@ -298,7 +296,7 @@ In this case, it is desireable for #record to block until the recording complete
 class SuperSecretProjectCall < Adhearsion::CallController
   def run
     answer
-    record_result = record :start_beep => true, :max_duration => 60_000
+    record_result = record start_beep: true, max_duration: 60_000
     logger.info "Recording saved to #{record_result.recording_uri}"
     say "Goodbye!"
   end
@@ -313,7 +311,7 @@ Alternatively, it may be desireable to record a call in the background while oth
 class SuperSecretProjectCall < Adhearsion::CallController
   def run
     answer
-    record :async => true do |event|
+    record async: true do |event|
       logger.info "Async recording saved to #{event.recording.uri}"
     end
     say "We are currently recording this call"
@@ -324,7 +322,7 @@ end
 
 ### Recording directory
 
-Adhearsion will check that the recording directory it uses, /var/punchblock/record, is in place when starting up on an Asterisk platform. A warning will be issued if the directory is missing. If Adhearsion and Asterisk are not running on the same machine, the warning can be disregarded, even though the directory has still to be present on the machine running Asterisk.
+Adhearsion will check that the recording directory it uses, `/var/punchblock/record`, is in place when starting up on an Asterisk platform. A warning will be issued if the directory is missing. If Adhearsion and Asterisk are not running on the same machine, the warning can be disregarded, even though the directory has still to be present on the machine running Asterisk.
 
 It is additionally necessary to have sox installed on the Asterisk machine, because it provides mixing for recordings.
 
@@ -342,13 +340,13 @@ class SuperSecretProjectCall < Adhearsion::CallController
 end
 ```
 
-Here, #join will block until either the 3rd-party call hangs up, or is otherwise unjoined out-of-band. It is possible to do an asynchronous join by specifying :async => true, in which case #join will only block until the join is confirmed.  Your controller will then resume executing commands on the call while the parties are talking.
+Here, `#join` will block until either the 3rd-party call hangs up, or is otherwise unjoined out-of-band. It is possible to do an asynchronous join by specifying `async: true`, in which case `#join` will only block until the join is confirmed.  Your controller will then resume executing commands on the call while the parties are talking.
 
-Calls may be unjoined out-of-band using the Call#unjoin method, which has a similar signature to #join.
+Calls may be unjoined out-of-band using the `Call#unjoin` method, which has a similar signature to `#join`.
 
 ## Joining calls to an outbound call
 
-Similarly to #join, it is possible to make an outbound call to a third-party, and then to join the calls on answering.  The #dial method handles this automatically.
+Similarly to `#join`, it is possible to make an outbound call to a third-party, and then to join the calls on answering.  The `#dial` method handles this automatically.
 
 ```ruby
 class SuperSecretProjectCall < Adhearsion::CallController
@@ -378,7 +376,7 @@ It is additionally possible to set a timeout on attempting to dial out, and to c
 class SuperSecretProjectCall < Adhearsion::CallController
   def run
     answer
-    status = dial 'sip:foo@bar.com', :for => 30.seconds
+    status = dial 'sip:foo@bar.com', for: 30.seconds
     case status.result
     when :answer
       say "We hope you had a nice chat!"
@@ -391,19 +389,19 @@ class SuperSecretProjectCall < Adhearsion::CallController
 end
 ```
 
-By default, the outbound calls will have a caller ID matching that of the party which called in to the original controller. Overriding the caller ID for the outbound call is accomplished with the :from option passed to dial.
+By default, the outbound calls will have a caller ID matching that of the party which called in to the original controller. Overriding the caller ID for the outbound call is accomplished with the `:from` option passed to dial.
 
 ```ruby
 class SuperSecretProjectCall < Adhearsion::CallController
   def run
     answer
-    dial 'sip:foo@bar.com', :from => 'sip:me@here.com'
+    dial 'sip:foo@bar.com', from: 'sip:me@here.com'
     say "We hope you had a nice chat!"
   end
 end
 ```
 
-If you wish to perform some action on the outbound call prior to joining, you may pass a controller class with the option key :confirm like so:
+If you wish to perform some action on the outbound call prior to joining, you may pass a controller class with the option key `:confirm` like so:
 
 ```ruby
 class ConfirmationController < Adhearsion::CallController
@@ -415,7 +413,7 @@ end
 class SuperSecretProjectCall < Adhearsion::CallController
   def run
     answer
-    dial 'sip:foo@bar.com', :confirm => ConfirmationController
+    dial 'sip:foo@bar.com', confirm: ConfirmationController
     say "We hope you had a nice chat!"
   end
 end
@@ -425,9 +423,9 @@ Further details can be found in the [#dial API documentation](http://rubydoc.inf
 
 ## Making outbound calls
 
-An outbound call may be created and sent to a new Call Controller instead of joining to an existing call. In this case it is possible to have an inbound call, or event, trigger a new call that plays a message, allows a user to be prompted for input before further action and more.
+An outbound call may be created and sent to a new CallController instead of joining to an existing call. In this case it is possible to have an inbound call, or event, trigger a new call that plays a message, allows a user to be prompted for input before further action and more.
 
-When the outbound call is placed in an existing Call Controller that new call is routed to a new Call Controller via Adhearsion configuration just like an inbound call.
+When the outbound call is placed in an existing CallController that new call is routed to a new CallController via Adhearsion configuration just like an inbound call.
 
 ```ruby
 # config/adhearsion.rb
@@ -445,7 +443,7 @@ class InboundProjectCall < Adhearsion::CallController
     say "Thank you for calling, we will notify Jason that you called."
     hangup
 
-    Adhearsion::OutboundCall.originate 'sip:jason@adhearsion.com', :from => 'sip:foo@bar.com'
+    Adhearsion::OutboundCall.originate 'sip:jason@adhearsion.com', from: 'sip:foo@bar.com'
   end
 end
 
@@ -467,7 +465,7 @@ class InboundCall < Adhearsion::CallController
     say "Thank you for calling, we will notify Jason that you called."
     hangup
 
-    Adhearsion::OutboundCall.originate 'sip:jason@adhearsion.com', :from => 'sip:foo@bar.com', :controller => OutboundNotification
+    Adhearsion::OutboundCall.originate 'sip:jason@adhearsion.com', from: 'sip:foo@bar.com', controller: OutboundNotification
   end
 end
 
@@ -489,7 +487,7 @@ class InboundCall < Adhearsion::CallController
     say "Thank you for calling, we will notify Jason that you called."
     hangup
 
-    Adhearsion::OutboundCall.originate 'sip:jason@adhearsion.com', :from => 'sip:foo@bar.com' do
+    Adhearsion::OutboundCall.originate 'sip:jason@adhearsion.com', from: 'sip:foo@bar.com' do
       answer
       say "Foo called!"
       hangup
@@ -502,7 +500,7 @@ Further details can be found in the [#originate API documentation](http://rubydo
 
 ## Callbacks
 
-Finally, it is possible to define callbacks to be executed at various stages of a call, or in response to certain events. These are before_call and after_call, they are class methods, and they take either a block or a symbol (called as an instance method) like so:
+Finally, it is possible to define callbacks to be executed at various stages of a call, or in response to certain events. These are `before_call` and `after_call`, they are class methods, and they take either a block or a symbol (called as an instance method) like so:
 
 lib/super_secret_project_call.rb:
 

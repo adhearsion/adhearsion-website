@@ -214,11 +214,11 @@ $ git commit -a -m "Initial commit"
  create mode 100644 vendor/cache/uuidtools-2.1.2.gem
 </pre>
 
-Now we can create the Heroku application, taking care to specify the target stack as 'cedar'.
+Now we can create the Heroku application.
 
 <pre class="terminal">
 
-$ heroku apps:create --stack cedar
+$ heroku apps:create
 Creating blazing-meadow-8760... done, stack is cedar
 http://blazing-meadow-8760.herokuapp.com/ | git@heroku.com:blazing-meadow-8760.git
 Git remote heroku added
@@ -312,14 +312,14 @@ Scaling web processes... done, now running 0
 
 [Foreman](http://ddollar.github.com/foreman) is a good option for managing your application's processes both in development and production. In development, you should run foreman start, but in production you should probably export to something like Ubuntu Upstart.
 
-It is possible to instruct Foreman to include extra environment variables when executing your application. This is done by including an .env file in the app directory when running foreman or exporting to Upstart. The file should be similar to this:
+It is possible to instruct Foreman to include extra environment variables when executing your application. This is done by including an `.env` file in the app directory when running foreman or exporting to Upstart. The file should be similar to this:
 
 ```ruby
 AHN_PUNCHBLOCK_USERNAME=foobar
 AHN_PUNCHBLOCK_PASSWORD=barfoo
 ```
 
-You can optionally place this file elsewhere and specify its location using --env.
+You can optionally place this file elsewhere and specify its location using `--env`.
 
 Check the Foreman docs for more details.
 

@@ -2,11 +2,11 @@
 
 [TOC]
 
-In Adhearsion 2, all calls come in to a single place, the Router. The VoIP platform, be it Asterisk, Voxeo PRISM, or anything else, does not instruct Adhearsion on how to route the call. Instead, we have a DSL for defining routes, which can have some interesting rules, in order to decide what should happen to each individual call. This lives in the application's config file, config/adhearsion.rb.
+In Adhearsion 2, all calls come in to a single place, the Router. The VoIP platform, be it Asterisk, Voxeo PRISM, or anything else, does not instruct Adhearsion on how to route the call. Instead, we have a DSL for defining routes, which can have some interesting rules, in order to decide what should happen to each individual call. This lives in the application's config file, `config/adhearsion.rb`.
 
 ```ruby
 Adhearsion.router do
-  route 'Authorized callers', FooController, :to => /789/
+  route 'Authorized callers', FooController, to: /789/
 
   route 'Everyone else' do
     answer
@@ -31,7 +31,7 @@ route "Label", :filters do
 end
 ```
 
-You may mix and match styles as needed. In the arguments above, the "Label" is purely informational and is only used when writing to the logs. While discouraged, it is valid to use the same route label for more than one route.  The ":filters" are  series of guards, which are described below.  You must specify either a CallController class to handle calls which match the route, or provide a block which becomes an implicit CallController.
+You may mix and match styles as needed. In the arguments above, the "Label" is purely informational and is only used when writing to the logs. While discouraged, it is valid to use the same route label for more than one route.  The `:filters` are  series of guards, which are described below.  You must specify either a CallController class to handle calls which match the route, or provide a block which becomes an implicit CallController.
 
 One may specify many different kinds of guards, which determine whether a given call matches the route. Here are some examples:
 
@@ -45,18 +45,18 @@ route 'Active Calls', ActiveCallsController, :active?
 
 # This calls the method #from and requires an exact match to the
 # string specified (this can be any other type).
-route 'Only calls from me@there.com', MeController, :from => 'sip:me@there.com'
+route 'Only calls from me@there.com', MeController, from: 'sip:me@there.com'
 
 # An array as the hash key requires the return value of #from to
 # match one of the provided values.
-route 'Calls from me or you', MeOrYouController, :from => ['sip:me@there.com', 'sip:you@other.com']
+route 'Calls from me or you', MeOrYouController, from: ['sip:me@there.com', 'sip:you@other.com']
 
 # Multiple hash keys act like logical AND and thus all must match.
-route 'Calls between me and us', MeAndUsController, :from => 'sip:me@there.com', :to => 'sip:us@here.com'
+route 'Calls between me and us', MeAndUsController, from: 'sip:me@there.com', to: 'sip:us@here.com'
 
 # Elements of an array act like logical OR and thus if at least
 # one matches, the guards will pass.
-route 'Calls from me or to us', MeOrUsController, [{:from => 'sip:me@there.com'}, {:to => 'sip:us@here.com'}]
+route 'Calls from me or to us', MeOrUsController, [{from: 'sip:me@there.com'}, {to: 'sip:us@here.com'}]
 
 # One may provide a lambda/Proc which can perform any arbitrary
 # operation upon the call object. A truthy return value passes
@@ -66,7 +66,7 @@ route 'Calls before 8PM', DaytimeController, lambda { |call| Time.now.hour < 20 
 # For those upgrading from Adhearsion 1.x, or simply wishing to
 # use Asterisk contexts as a routing key, the context name
 # is accessible as a guard as well:
-route 'Calls from Asterisk context-name', ContextNameController, :agi_context => 'context-name'
+route 'Calls from Asterisk context-name', ContextNameController, agi_context: 'context-name'
 ```
 
 ## Modifiers
