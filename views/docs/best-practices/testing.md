@@ -34,7 +34,7 @@ You would want to have the following tests:
 
 <br>
 ### Call Controllers
-Beyond testing basic functionality it becomes important to test how your calls will interact with your application.  Most of that interaction happens within (Call Controllers)[/docs/call-controllers].  Because Call Controllers are simply classes that inherit from the Adhearsion::CallController class, testing these is just like testing any other Ruby class.  However you will likely want to mock out the methods where the telephone call interacts with the framework, such as <code>#ask</code>, <code>#play</code>, <code>#answer</code> and <code>#hangup</code>.  For example, a Call Controller like this:
+Beyond testing basic functionality it becomes important to test how your calls will interact with your application.  Most of that interaction happens within [Call Controllers](/docs/call-controllers).  Because Call Controllers are simply classes that inherit from the Adhearsion::CallController class, testing these is just like testing any other Ruby class.  However you will likely want to mock out the methods where the telephone call interacts with the framework, such as <code>#ask</code>, <code>#play</code>, <code>#answer</code> and <code>#hangup</code>.  For example, a Call Controller like this:
 
 ```ruby
 class MyApp < Adhearsion::CallController
