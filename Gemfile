@@ -11,7 +11,5 @@ gem 'redcarpet'
 gem 'pygments.rb'
 
 group :development do
-  gem 'capistrano'
-  gem 'railsless-deploy'
   gem 'heroku'
 end
