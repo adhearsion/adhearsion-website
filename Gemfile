@@ -13,7 +13,5 @@ gem 'pygments.rb'
 group :development do
   gem 'capistrano'
   gem 'railsless-deploy'
-  gem 'guard'
-  gem 'rake'
   gem 'heroku'
 end
