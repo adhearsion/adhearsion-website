@@ -23,13 +23,14 @@ Once you have control of a call, other controllers will stop executing (at the n
 
 ## Routing calls directly to the console
 
-It is not currently possible to route calls directly to the console, but this feature is coming soon. In the meantime, the following hack is a potential solution, giving you enough time after the call comes in to grab it in the same way as any other:
+It is not currently possible to route calls directly to the console, but this feature is coming soon. In the meantime, the following hack is a potential solution, preventing the router from hanging up the call so that you can grab control in the console:
 
 ```ruby
 Adhearsion.routes do
-  route 'ConsoleCatch' do
-    logger.info "Call #{call.id} waiting..."
-    sleep 10
+  openended do
+    route 'ConsoleCatch' do
+      logger.info "Call #{call.id} waiting..."
+    end
   end
 end
 ```
