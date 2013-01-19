@@ -41,6 +41,8 @@ Next, we need to route all inbound calls to Adhearsion. Edit the dialplan <code>
 
 The 'park' application essentially puts the call on hold. The event socket notifies Adhearsion of the call as an event.
 
+If you plan to record calls, whether voicemail or for auditing, make sure there is a `recordings` directory in the FreeSWITCH application directory. Otherwise, depending upon the Adhearsion version, FS may fail to record and Adhearsion will not report the error (see [issue #243](https://github.com/adhearsion/adhearsion/issues/243).
+
 ## Configuring Adhearsion for FreeSWITCH
 
 As always the full list of configuration options can be viewed, along with a description and their default values, by typing <code>rake config:show</code> in your application directory.  There are a few configuration options that are particularly important:
@@ -49,8 +51,13 @@ As always the full list of configuration options can be viewed, along with a des
 * ```config.punchblock.password``` must be a string, the EventSocket password (the your-secret-password above, the default is "ClueCon")
 * ```config.punchblock.host``` is an optional string, defaults to localhost (127.0.0.1) or you can specify the host ip
 * ```config.punchblock.port``` is an optional integer, defaults to 8021 (FreeSWITCH default) or you can specify a custom port
+
+If you plan to use Text-To-Speech, you need to set these:
+
 * ```config.punchblock.media_engine``` for Text-To-Speech, can be a string or symbol. FreeSWITCH ships with support for ```:flite```, ```:cepstral```, ```:unimrcp```, and ```:shout```. [See more information](http://wiki.freeswitch.org/wiki/Mod_unimrcp) on the various TTS engines and [see above section](#building-freeswitch-with-text-to-speech-support) for help on compiling FreeSWITCH with TTS support.
 * ```config.punchblock.default_voice``` for TTS, can be a string or symbol, and depends on the TTS engine you choose. For example, with ```:flite``` you can set this to ```slt```, ```rms```, ```awb```, or ```kal```.
+
+If you plan to playback audio files, leave these settings out or set them to nil. If you plan to use audio files and TTS in your application, see [issue #225](https://github.com/adhearsion/adhearsion/issues/225).
 
 Note that as described in our [Deployment Best Practices](/docs/best-practices/deployment), we recommend NOT storing the EventSocket password in the <code>config/adhearsion.rb</code> file.  Instead this should be stored in an environment variable (specifically: <code>AHN_PUNCHBLOCK_PASSWORD</code>) that is loaded by the process prior to launching. For example, start up Adhearsion with AHN_PUNCHBLOCK_PASSWORD=your-secret-password ahn start /path/to/app
 
