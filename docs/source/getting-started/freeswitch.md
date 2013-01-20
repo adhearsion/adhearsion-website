@@ -41,7 +41,7 @@ Next, we need to route all inbound calls to Adhearsion. Edit the dialplan <code>
 
 The 'park' application essentially puts the call on hold. The event socket notifies Adhearsion of the call as an event.
 
-If you plan to record calls, whether voicemail or for auditing, make sure there is a `recordings` directory in the FreeSWITCH application directory. Otherwise, depending upon the Adhearsion version, FS may fail to record and Adhearsion will not report the error (see [issue #243](https://github.com/adhearsion/adhearsion/issues/243).
+If you plan to record calls, whether voicemail or for auditing, make sure there is a `/var/punchblock/record` directory with permissions set to allow the user running freeswitch to access the directory. Otherwise, depending upon your Adhearsion version, FS may fail to record and Adhearsion will not report the error (see [issue #243](https://github.com/adhearsion/adhearsion/issues/243).
 
 ## Configuring Adhearsion for FreeSWITCH
 
