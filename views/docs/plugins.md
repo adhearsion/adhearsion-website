@@ -93,20 +93,20 @@ end
 
 plugin.rb contains directives that pertain to various aspects of plugin functionality. Code above shows three examples.
 
-* The first is the #init block which is invoked by Adhearsion when the plugin is first loaded. In this case, all this does is write an informational message to the log showing that the plugin was, in fact, loaded.
+* The first is the init block which is invoked by Adhearsion when the plugin is first loaded. In this case, all this does is write an informational message to the log showing that the plugin was, in fact, loaded.
 * The second is the #config block that registers configuration options with the Adhearsion framework.
 * The third block is the #tasks block, which registers Rake tasks to be available within the Adhearsion application. In this case it adds a Rake task called greet_plugin:info that prints the version number of the plugin.
 
 ## Plugin Initialization
 
-Every plugin goes through two separate phases before it is ready to run. While Adhearsion is starting up, and prior to taking any calls, the plugin first gets initialized through a supplied #init block. This block may be used to set up any basic requirements or validate the configuration. Later, after the Adhearsion framework has booted, the optional #run block is called to start the plugin. An example of using this two step startup of #init and #run methods might be an IRC plugin. In the #init method, the IRC class is instantiated and configured, but no connection to the server is made. Then in #run the actual connection is opened and the service begins. Both methods are optional, but if they are defined, the mandatory argument is a block to provide the code to be run. An optional symbol representing the plugin name may be provided as the first argument.  A plugin can also request to be initialized before or after another plugin by name, using the :before and :after options passed as an hash to #init and/or #run.
+Every plugin goes through two separate phases before it is ready to run. While Adhearsion is starting up, and prior to taking any calls, the plugin first gets initialized through a supplied init block. This block may be used to set up any basic requirements or validate the configuration. Later, after the Adhearsion framework has booted, the optional run block is called to start the plugin. An example of using this two step startup of init and run blocks might be an IRC plugin. In the init block, the IRC class is instantiated and configured, but no connection to the server is made. Then in run the actual connection is opened and the service begins. Both blocks are optional. An optional symbol representing the plugin name may be provided as the first argument.  A plugin can also request to be initialized before or after another plugin by name, using the :before and :after options passed as an hash to init and/or run.
 
-Note that your #run method must not block indefinitely!  If necessary, place the contents of your run block within a thread so that Adhearsion can continue to start the other plugins:
+Note that your run block must not block indefinitely!  If necessary, place the contents of your run block within a thread so that Adhearsion can continue to start the other plugins:
 
 ```ruby
 module GreetPlugin
   class Plugin < Adhearsion::Plugin
-    def run
+    run :greet_plugin do
       Thread.new do
         catching_standard_errors { my_blocking_runner_method }
       end
