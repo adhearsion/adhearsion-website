@@ -41,6 +41,8 @@ Next, we need to route all inbound calls to Adhearsion. Edit the dialplan `/etc/
 
 The 'park' application essentially puts the call on hold. The event socket notifies Adhearsion of the call as an event.
 
+To record calls, make sure the `/var/punchblock/record` directory with permissions set to allow the user running freeswitch to access this directory.
+
 ## Configuring Adhearsion for FreeSWITCH
 
 As always the full list of configuration options can be viewed, along with a description and their default values, by typing `rake config:show` in your application directory.  There are a few configuration options that are particularly important:
@@ -51,6 +53,13 @@ As always the full list of configuration options can be viewed, along with a des
 * `config.punchblock.port` is an optional integer, defaults to 8021 (FreeSWITCH default) or you can specify a custom port
 * `config.punchblock.media_engine` for Text-To-Speech, can be a string or symbol. FreeSWITCH ships with support for `:flite`, `:cepstral`, `:unimrcp`, and `:shout`. [See more information](http://wiki.freeswitch.org/wiki/Mod_unimrcp) on the various TTS engines and [see above section](#building-freeswitch-with-text-to-speech-support) for help on compiling FreeSWITCH with TTS support.
 * `config.punchblock.default_voice` for TTS, can be a string or symbol, and depends on the TTS engine you choose. For example, with `:flite` you can set this to `slt`, `rms`, `awb`, or `kal`.
+
+For Text-To-Speech (TTS), you need:
+
+* ```config.punchblock.media_engine``` for Text-To-Speech, can be a string or symbol. FreeSWITCH ships with support for ```:flite```, ```:cepstral```, ```:unimrcp```, and ```:shout```. [See more information](http://wiki.freeswitch.org/wiki/Mod_unimrcp) on the various TTS engines and [see above section](#building-freeswitch-with-text-to-speech-support) for help on compiling FreeSWITCH with TTS support.
+* ```config.punchblock.default_voice``` for TTS, can be a string or symbol, and depends on the TTS engine you choose. For example, with ```:flite``` you can set this to ```slt```, ```rms```, ```awb```, or ```kal```.
+
+**For audio file playback, leave these settings out or set them to nil. At this time, you cannot use both TTS and audio file playback.**
 
 Note that as described in our [Deployment Best Practices](/docs/best-practices/deployment), we recommend NOT storing the EventSocket password in the `config/adhearsion.rb` file.  Instead this should be stored in an environment variable (specifically: `AHN_PUNCHBLOCK_PASSWORD`) that is loaded by the process prior to launching. For example, start up Adhearsion with `AHN_PUNCHBLOCK_PASSWORD=your-secret-password ahn start /path/to/app`
 
