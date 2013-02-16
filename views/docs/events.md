@@ -56,7 +56,7 @@ end
 
 ## Guards
 
-The available guards are the same as those which apply in the Routing DSL, and are documented on the [has-guarded-handlers wesbite](https://github.com/adhearsion/has-guarded-handlers).
+The available guards are the same as those which apply in the Routing DSL, and are documented on the [has-guarded-handlers wesbite](http://adhearsion.github.com/has-guarded-handlers).
 
 <div class='docs-progress-nav'>
   <span class='back'>
