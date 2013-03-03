@@ -184,7 +184,7 @@ module GreetPlugin
 
       describe "#greet" do
         it "greets with the correct parameter" do
-          subject.expects(:play).once.with("Hello, Luca")
+          subject.should_receive(:play).once.with("Hello, Luca")
           subject.greet "Luca"
         end
       end
@@ -250,13 +250,13 @@ module GreetPlugin
 
     it 'dials out when inside office hours' do
       Timecop.freeze Time.utc(2012, 3, 8, 12, 0, 0)
-      subject.expects(:dial).once
+      subject.should_receive(:dial).once
       subject.run
     end
 
     it 'plays a message when outside office hours' do
       Timecop.freeze Time.utc(2012, 3, 8, 22, 0, 0)
-      subject.expects(:play).once
+      subject.should_receive(:play).once
       subject.run
     end
   end
