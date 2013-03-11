@@ -1,7 +1,5 @@
 # Using Adhearsion with FreeSWITCH
 
-At the time of this writing, Adhearsion 2.1.0, FreeSWITCH support is considered EXPERIMENTAL.  We need your feedback to continue to improve our FreeSWITCH support.  Please report all issues on the [Adhearsion mailing list](http://groups.google.com/group/adhearsion) or via [Github Issues](https://github.com/adhearsion/adhearsion/issues).
-
 ## Requirements
 
 * [FreeSWITCH](http://www.freeswitch.org) 1.2 or later (earlier versions may work but are not tested)

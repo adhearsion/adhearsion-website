@@ -9,7 +9,7 @@ To use Adhearsion you will need a few things:
 Adhearsion 2 supports the following telephony engines:
 
 * [Asterisk](/docs/getting-started/asterisk)
-* [FreeSWITCH](/docs/getting-started/freeswitch) (EXPERIMENTAL)
+* [FreeSWITCH](/docs/getting-started/freeswitch)
 * [PRISM](/docs/getting-started/prism)
 
 ## A Ruby Interpreter
