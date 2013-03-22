@@ -418,7 +418,6 @@ small {
 }
 .middle .inner {
   padding-top:25px;
-  padding-bottom:25px;
 }
 .middle .inner .hr , .middle .home .hr{
   height:2px;
@@ -1637,7 +1636,7 @@ ul.checklist li {
 }
 
 ul.pricing-col {
-  width:232px;
+  width:212px;
   position:relative;
   z-index:22;
   float:left;
@@ -1705,7 +1704,7 @@ ul.pricing-col .price {
 
 /* Pricing col one fourth size Highlighted */
 ul.pricing-col-highlight {
-  width:232px;
+  width:252px;
   position:relative;
   z-index:22;
   top:-35px;
@@ -1733,12 +1732,15 @@ ul.pricing-col-highlight li .yes {
   background:url(../images/icons/icon-check.png) no-repeat;
   background-position:20px 0px;
   padding-left:50px;
+  color: #333;
 }
 ul.pricing-col-highlight li .no {
   display:block;
   background:url(../images/icons/icon-no.png) no-repeat;
   background-position:20px 0px;
   padding-left:50px;
+  text-decoration: line-through;
+  color: #999;
 }
 ul.pricing-col-highlight li.button {
   background:#ffffff;

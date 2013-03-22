@@ -610,6 +610,10 @@ ul.checklist li {
   background:url(../images/backgrounds/wide-shadow-faded.png) no-repeat bottom center;
   padding-bottom:15px;
 }
+.pricing ul li {
+  list-style: none;
+  text-indent: 0;
+}
 .pricing .first li {
   background: #ffffff url(../images/backgrounds/pricing-shadow-right.png) right repeat-y;
 }
