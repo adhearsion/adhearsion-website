@@ -20,6 +20,79 @@
           %td
             %p Including DSL methods for collecting and interpreting speech, and renovating the existing input methods to do barge-in correctly.
 
+        %tr
+          %td.right
+            %h3 Declarative IVR dialogs / dialog states
+          %td
+            %p Many applications which implement IVR functionality have to create a state machine for dialogs by hand, and write tests for them. Baking in support for a declarative IVR DSL to standardise this and centralise the implementation and testing burden would simplify many of these applications and make them faster to write and cheaper to maintain, as well as more understandable.
+
+        %tr
+          %td.right
+            %h3 Async CallController API
+          %td
+            %p
+
+        %tr
+          %td.right
+            %h3 First-class mixers
+          %td
+            %p Adhearsion currently has no support for audio mixing. Adhearsion needs to be able to track state for mixers, including participant details, simple joining and management, seamlessly moving collections of calls into a mixer, etc. This would include adding support for mixers on Asterisk based on ConfBridge.
+
+        %tr
+          %td.right
+            %h3 Call center plugin (agent queue) with live dashboard
+          %td
+            %p
+              %ul
+                %li Allow hotdesking (login via user ID + PIN)
+                %li Select from multiple distribution methods (round-robin, least-recently-used, ring-all)
+                %li Configure multiple queues
+                %li Handle agents logging in and out of individual queues
+                %li Visualization for agents logged-in, calls waiting in queue
+
+        %tr
+          %td.right
+            %h3 Conference call plugin with live dashboard
+          %td
+            %p Depends on first class mixer support
+
+            %p
+              Short list of possible features:
+              %ul
+                %li Enable PIN-based conference logins
+                %li Creation of conference rooms via web UI
+                %li Invite/Kick/Mute/Unmute individual call legs via web UI
+                %li Create separate listen-only PINs and speaker PINs for the same room
+
+        %tr
+          %td.right
+            %h3
+              %a{:href => "https://github.com/dwilkie/adhearsion-twilio"} Adhearsion-Twilio
+          %td
+            %p
+              %ul
+                %li Add support for missing TwiML syntax
+                %li Add unit tests
+                %li Create example apps
+
+        %tr
+          %td.right
+            %h3 SIP stress-tester profile generator with dashboard
+          %td
+            %p
+              Often, after creating an Adhearsion application, we need to test it at scale. This usually means hand-crafting a SIPp profile and associated pcap-formatted audio file to test the application. It's a time-consuming process, and much of it could be automated. The idea is to be able to specify the load test actions in a simple format, likely YAML, and have a program convert that YAML to XML and a PCAP file. A prototype (not using SIPp) can be seen in
+              %a{:href => "https://github.com/mojolingo/ahn-loadbot"} ahn_loadbot.
+
+            %p
+              The features:
+              %ul
+                %li
+                  Take a YAML with simplified syntax and use it to generate an XML file and a PCAP audio file suitable for use with
+                  %a{:href => "http://sipp.sourceforge.net/"} SIPp
+                %li Ability to quickly set DTMF playtimes during the call (after pickup, wait 10 seconds, then 1-2-3..), play media, automate run-throughs of full stack components
+                %li Use queuing mechanism to allow for high concurrency.
+                %li Create a browser-accessible live dashboard showing the number of active calls, the number of completed calls, and the number of calls resulting in error
+
       %h2 How do I apply as a student?
       %p
         Send an email to
