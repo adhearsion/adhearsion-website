@@ -40,6 +40,12 @@
           %td
             %p Adhearsion currently has no support for audio mixing. Adhearsion needs to be able to track state for mixers, including participant details, simple joining and management, seamlessly moving collections of calls into a mixer, etc. This would include adding support for mixers on Asterisk based on ConfBridge.
 
+        %tr
+          %td.right
+            %h3 Core performance analysis & improvement
+          %td
+            %p Adhearsion currently supports something in the region of 100 concurrent calls per instance on typical hardware, while the engines it drives tend to support many more. Currently, the performance characteristics of various Ruby implementations is not well known (other than that GIL-less JRuby and rubinius should perform better in theory), and the difference in performance of implementations across platforms is also not known well, other than that platforms with native Rayo support (Voxeo PRSIM and soon FreeSWITCH) should perform better. As at present, the precise performance bottlenecks are not well understood, and there are limited strategies known to improve performance. This task would involve a thorough analysis of the situation, a set of recommendations for making progress, and implementation of some of those recommendations, in an attempt to improve concurrent call handling by an order of magnitude.
+
       %h3 Adhearsion Plugins
 
       %table.two-third.data-table-vertical{:style => 'border: none;'}
