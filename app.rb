@@ -77,6 +77,10 @@ get '/conference*' do
   redirect 'http://adhearsionconf.com'
 end
 
+get '/examples' do
+  redirect '/docs/call-controllers'
+end
+
 %w{community get-help faq irc media foundation cloud support gsoc}.each do |page|
   get "/#{page}" do
     haml page.to_sym
