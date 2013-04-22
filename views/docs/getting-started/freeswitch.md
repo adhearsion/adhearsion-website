@@ -32,6 +32,8 @@ Next, we need to route all inbound calls to Adhearsion. Edit the dialplan `/etc/
 ```xml
 <extension name="Adhearsion">
   <condition field="destination_number" expression=".*$">
+    <action application="set" data="hangup_after_bridge=false"/>
+    <action application="set" data="park_after_bridge=true"/>
     <action application="park"/>
   </condition>
 </extension>
