@@ -27,6 +27,11 @@ It is a [known issue with Celluloid and RVM](https://github.com/celluloid/cellul
 
 rbenv does not exhibit this issue.
 
+If after following the above steps, you have not reached a resolution, please take the following steps:
+
+1. [File an issue](http://github.com/adhearsion/adhearsion/issues) following the [usual guidelines](http://adhearsion.com/docs/dealing-with-bugs#toc_2).
+2. [Fill in a form providing extra details](https://docs.google.com/a/langfeld.co.uk/forms/d/1MDaKgRK8-4nbY3IropyQrTzc7ofqrVvDZr4Ejm68sEQ/viewform), making sure to link to the ticket you created.
+
 <div class='docs-progress-nav'>
   <span class='back'>
     Back to <a href="/docs/upgrading">Upgrading</a>
