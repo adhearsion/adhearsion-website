@@ -29,7 +29,7 @@ In order for Adhearsion to drive FreeSWITCH, FreeSWITCH must have the inbound ev
 </configuration>
 ```
 
-Next, we need to route all inbound calls to Adhearsion. Edit the dialplan `/etc/freeswitch/conf/dialplan/public/00_inbound_did.xml` (or you can create a new file in the same directory):
+Next, we need to route all inbound calls to Adhearsion. Edit the dialplan `/etc/freeswitch/conf/dialplan/default.xml` and place the following configuration block near the top, immediately following the `<context name="default">` tag:
 
 ```xml
 <extension name="Adhearsion">
@@ -44,6 +44,10 @@ Next, we need to route all inbound calls to Adhearsion. Edit the dialplan `/etc/
 The 'park' application essentially puts the call on hold. The event socket notifies Adhearsion of the call as an event.
 
 To record calls, make sure to create the `/var/punchblock/record` directory with permissions set to allow the user running freeswitch to access this directory.
+
+## Installing and Configuring Adhearsion
+
+Please read and follow the instructions in the general [Installation](/docs/getting-started/installation) guide before continuing on to the following FreeSWITCH-specific Adhearsion configuration.
 
 ## Configuring Adhearsion for FreeSWITCH
 
