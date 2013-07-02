@@ -45,6 +45,10 @@ The 'park' application essentially puts the call on hold. The event socket notif
 
 To record calls, make sure to create the `/var/punchblock/record` directory with permissions set to allow the user running freeswitch to access this directory.
 
+## Installing and Configuring Adhearsion
+
+Please read and follow the instructions in the general [Installation](/docs/getting-started/installation) guide before continuing on to the following FreeSWITCH-specific Adhearsion configuration.
+
 ## Configuring Adhearsion for FreeSWITCH
 
 As always the full list of configuration options can be viewed, along with a description and their default values, by typing `rake config:show` in your application directory.  There are a few configuration options that are particularly important:
