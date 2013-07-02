@@ -14,6 +14,8 @@ FLite is a free TTS engine that comes with FreeSWITCH but is disabled by default
 
 ## Configuring FreeSWITCH
 
+Note: Depending on your manner of install (RPM, source, etc), your FreeSWITCH conf directory is likely either `/etc/freeswitch/conf` or `/usr/local/freeswitch/conf`. Please substitute the correct one for your situation when following these instructions.
+
 In order for Adhearsion to drive FreeSWITCH, FreeSWITCH must have the inbound event socket configured correctly (in `/etc/freeswitch/conf/autoload_configs/event_socket.conf.xml`):
 
 ```xml
@@ -27,7 +29,7 @@ In order for Adhearsion to drive FreeSWITCH, FreeSWITCH must have the inbound ev
 </configuration>
 ```
 
-Next, we need to route all inbound calls to Adhearsion. Edit the dialplan `/etc/freeswitch/conf/dialplan/public/00_inbound.xml` (or you can create a new file in the same directory):
+Next, we need to route all inbound calls to Adhearsion. Edit the dialplan `/etc/freeswitch/conf/dialplan/public/00_inbound_did.xml` (or you can create a new file in the same directory):
 
 ```xml
 <extension name="Adhearsion">
@@ -41,7 +43,7 @@ Next, we need to route all inbound calls to Adhearsion. Edit the dialplan `/etc/
 
 The 'park' application essentially puts the call on hold. The event socket notifies Adhearsion of the call as an event.
 
-To record calls, make sure the `/var/punchblock/record` directory with permissions set to allow the user running freeswitch to access this directory.
+To record calls, make sure to create the `/var/punchblock/record` directory with permissions set to allow the user running freeswitch to access this directory.
 
 ## Configuring Adhearsion for FreeSWITCH
 
@@ -51,8 +53,6 @@ As always the full list of configuration options can be viewed, along with a des
 * `config.punchblock.password` must be a string, the EventSocket password (the your-secret-password above, the default is "ClueCon")
 * `config.punchblock.host` is an optional string, defaults to localhost (127.0.0.1) or you can specify the host ip
 * `config.punchblock.port` is an optional integer, defaults to 8021 (FreeSWITCH default) or you can specify a custom port
-* `config.punchblock.media_engine` for Text-To-Speech, can be a string or symbol. FreeSWITCH ships with support for `:flite`, `:cepstral`, `:unimrcp`, and `:shout`. [See more information](http://wiki.freeswitch.org/wiki/Mod_unimrcp) on the various TTS engines and [see above section](#building-freeswitch-with-text-to-speech-support) for help on compiling FreeSWITCH with TTS support.
-* `config.punchblock.default_voice` for TTS, can be a string or symbol, and depends on the TTS engine you choose. For example, with `:flite` you can set this to `slt`, `rms`, `awb`, or `kal`.
 
 For Text-To-Speech (TTS), you need:
 
