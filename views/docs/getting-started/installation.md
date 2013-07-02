@@ -65,7 +65,9 @@ gem "adhearsion", "~> 2.1.0"
 # gem 'adhearsion-drb'
 ```
 
-In it you can see the Adhearsion framework itself is required.  Also included, but commented out, are several popular or useful plugins.  To enable their usage, simply uncomment the line from the Gemfile.  When you are done with that, install all the plugins you selected by running `bundle install`:
+In it you can see the Adhearsion framework itself is required, along with other gems that Adhearsion depends on (such as `rspec`).  Also included, but commented out, are several popular or useful plugins.  To enable their usage, simply uncomment the appropriate line from the Gemfile.
+
+When you are done with that, exit your editor and run `bundle install`.  This will ensure that all gems referenced in the Gemfile are installed and version-locked.  It's important to do this now whether or not you've modified the Gemfile in order to ensure that all dependencies are met; otherwise you might experience errors.
 
 <pre class="terminal">
 
