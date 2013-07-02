@@ -59,7 +59,7 @@ For Text-To-Speech (TTS), you need:
 * ```config.punchblock.media_engine``` for Text-To-Speech, can be a string or symbol. FreeSWITCH ships with support for ```:flite```, ```:cepstral```, ```:unimrcp```, and ```:shout```. [See more information](http://wiki.freeswitch.org/wiki/Mod_unimrcp) on the various TTS engines and [see above section](#building-freeswitch-with-text-to-speech-support) for help on compiling FreeSWITCH with TTS support.
 * ```config.punchblock.default_voice``` for TTS, can be a string or symbol, and depends on the TTS engine you choose. For example, with ```:flite``` you can set this to ```slt```, ```rms```, ```awb```, or ```kal```.
 
-**For audio file playback, leave these settings out or set them to nil. At this time, you cannot use both TTS and audio file playback.**
+**For audio file playback, leave these settings out or set them to nil.**
 
 Note that as described in our [Deployment Best Practices](/docs/best-practices/deployment), we recommend NOT storing the EventSocket password in the `config/adhearsion.rb` file.  Instead this should be stored in an environment variable (specifically: `AHN_PUNCHBLOCK_PASSWORD`) that is loaded by the process prior to launching. For example, start up Adhearsion with `AHN_PUNCHBLOCK_PASSWORD=your-secret-password ahn start /path/to/app`
 
