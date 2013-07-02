@@ -29,7 +29,7 @@ In order for Adhearsion to drive FreeSWITCH, FreeSWITCH must have the inbound ev
 </configuration>
 ```
 
-Next, we need to route all inbound calls to Adhearsion. Edit the dialplan `/etc/freeswitch/conf/dialplan/public/00_inbound_did.xml` (or you can create a new file in the same directory):
+Next, we need to route all inbound calls to Adhearsion. Edit the dialplan `/etc/freeswitch/conf/dialplan/default.xml` and place the following configuration block near the top, immediately following the `<context name="default">` tag:
 
 ```xml
 <extension name="Adhearsion">
