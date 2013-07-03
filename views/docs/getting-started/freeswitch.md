@@ -45,6 +45,8 @@ The 'park' application essentially puts the call on hold. The event socket notif
 
 To record calls, make sure to create the `/var/punchblock/record` directory with permissions set to allow the user running freeswitch to access this directory.
 
+Lastly, if FreeSWITCH was already running, remember to run the `reloadxml` command via the FreeSWITCH console to reload the config files.
+
 ## Installing and Configuring Adhearsion
 
 Please read and follow the instructions in the general [Installation](/docs/getting-started/installation) guide before continuing on to the following FreeSWITCH-specific Adhearsion configuration.
