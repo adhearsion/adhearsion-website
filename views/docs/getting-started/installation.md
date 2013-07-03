@@ -288,7 +288,11 @@ Please see the documentation for connecting Adhearsion to the telephony engine o
 
 ## Make a test call
 
-By default, a generated Adhearsion app includes the SimonGame. You can boot your app by running `ahn -` and immediately make a call to it. If everything is configured correctly, you should be prompted to play a game. Enjoy your time working with Adhearsion, and feel free to explore the rest of the documentation provided here.
+You will need a [softphone](http://en.wikipedia.org/wiki/Softphone) or physical [IP phone](https://en.wikipedia.org/wiki/VoIP_phone) to make a test call and ensure everything is working correctly.  Installation/configuration will vary by the phone you use and the telephony engine you intend to connect to.  Check the docs for your telephony engine of choice for guidance on making an initial test call, and be sure to test call the standalone engine first before attempting to integrate with Adhearsion in order to simplify troubleshooting.
+
+Start your Adhearsion app by running `ahn -`, then try to make a call to it by calling your telephony engine.  If you've configuring intregation with Adhearsion correctly, all calls made to the engine should be immediately forwarded to Adhearsion.  By default, a generated Adhearsion app responds to all incoming calls with the [SimonGame](http://en.wikipedia.org/wiki/Simon_(game).  If everything is configured correctly, the SimonGame will begin reading numbers to you and respond with 'good' or 'try again' when you enter the numbers via the dialpad.
+
+Enjoy your time working with Adhearsion, and feel free to explore the rest of the documentation provided here.
 
 <a href="#" rel="docs-nav-active" style="display:none;">docs-nav-getting-started</a>
 
