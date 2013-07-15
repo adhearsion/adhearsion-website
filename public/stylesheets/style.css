@@ -979,8 +979,8 @@ a.picture-frame-fifth .play {
 
 
 /* code styling */
-code {
-  font-family: "Courier New";
+pre, code {
+  font-family: "Inconsolata", "Courier New";
   font-size: 12px;
 }
 code strong {
