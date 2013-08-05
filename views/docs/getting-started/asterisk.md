@@ -39,7 +39,7 @@ secret = mypassword
 read = all
 write = all
 eventfilter = !Event: RTCP*
-eventfilter = !*Variable: RTPAUDIOQOS*
+eventfilter = !Variable: RTPAUDIOQOS*
 ```
 
 Note that the user needs acess to all AMI events and actions. Also, we have setup an event filter here to prevent sending Adhearsion RTCP and QOS events. This is optional, but recommended, because while Asterisk generates a great number of these events Adhearsion cannot normally do anything useful with them. Thus, we can improve Adhearsion's performance by not sending it these events in the first place.
