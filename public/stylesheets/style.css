@@ -2013,7 +2013,7 @@ img {
 
 #ahnconf {
   display: table;
-  padding-left: 60px;
+  padding-left: 40px;
 }
 
 #ahnconf .conf {
@@ -2024,7 +2024,7 @@ img {
 }
 
 .conf.left {
-  width: 15%;
+  width: 16%;
 }
 
 .conf.right {
