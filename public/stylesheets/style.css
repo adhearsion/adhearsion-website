@@ -2013,24 +2013,31 @@ img {
 
 #ahnconf {
   display: table;
+  padding-left: 60px;
 }
 
 #ahnconf .conf {
   display: table-cell;
-  text-align: center;
-  height: 135px;
+  height: 50px;
   vertical-align: middle;
   color: #333;
 }
 
-.conf.left, .conf.right {
-  width: 45%;
+.conf.left {
+  width: 15%;
+}
+
+.conf.right {
+  width: auto;
+  text-align: left;
 }
 
 .conf.center {
-  width: 8%;
+  width: auto;
   text-align: center;
-  font-size: 6em;
+  font-size: 3em;
+  width: auto;
+  padding: 0 10px;
 }
 
 #ahnconf .conf.right p {
@@ -2041,21 +2048,22 @@ img {
   text-align: center;
 }
 
-.conf.right p.first {
-  font-size: 3em;
+#ahnconf .conf.right {
+  font-size: 1.6em;
 }
 
-.conf.right p.second {
-  font-size: 2.4em;
+#ahnconf .conf.right .pop {
+  letter-spacing: 1px;
+  color: #555555;
+  font-size: 1.05em;
+  position: relative;
+  bottom: 1px;
 }
 
-.conf.right p.third {
-  letter-spacing: 4px;
-  font-size: 3em;
-  font-weight: bold;
-}
-
-#ahnconf:hover .conf.right p {
+#ahnconf:hover .conf {
   color: #733768;
 }
 
+#ahnconf:hover .conf .pop {
+  color: #9C6692;
+}
