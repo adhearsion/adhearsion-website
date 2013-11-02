@@ -4,7 +4,9 @@
 
 ## Install the Adhearsion gem
 
-First, install the Adhearsion gem and its dependencies:
+First, install the [ruby_speech dependencies](https://github.com/benlangfeld/ruby_speech#dependencies)
+
+Then, the Adhearsion gem and its dependencies:
 
 <pre class="terminal">
 
