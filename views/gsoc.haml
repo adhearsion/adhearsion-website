@@ -1,14 +1,12 @@
-- title "Google Summer of Code 2013", false
+- title "Google Summer of Code 2014", false
 
 .inner
   .full-width
     .two-third
-      %h1 Google Summer of Code 2013
+      %h1 Google Summer of Code 2014
 
       %p
-        The Adhearsion Foundation has applied to the Google Summer of Code programme. Please feel free to
-        %a{:href => "https://google-melange.appspot.com/gsoc/org/application/show/google/gsoc2013/8376202"} take a look at our application
-        and peruse the ideas below. Please also feel free to
+        The Adhearsion Foundation will apply to the Google Summer of Code programme in conjunction with RubyCentral. Please feel free to peruse the ideas below. Please also feel free to
         %a{:href => "http://adhearsion.com/community"} comment on these ideas
         or suggest others.
 
@@ -23,12 +21,6 @@
             %h3 Internationalization
           %td
             %p Support for internationalisation built in to the framework as a first class feature, ensuring that applications are built internationalisation-ready by default with little effort. Should include both prompt files and TTS, and allow for a variety of methods for adding languages to an application, including a UI.
-        %tr
-          %td.right
-            %h3 Speech Recognition
-          %td
-            %p Including DSL methods for collecting and interpreting speech, and renovating the existing input methods to do barge-in correctly.
-
         %tr
           %td.right
             %h3 Declarative IVR dialogs / dialog states
@@ -93,28 +85,6 @@
                 %li Add support for missing TwiML syntax
                 %li Add unit tests
                 %li Create example apps
-
-      %h3 Adhearsion Support Tools
-
-      %table.two-third.data-table-vertical{:style => 'border: none;'}
-
-        %tr
-          %td.right
-            %h3 SIP stress-tester profile generator with dashboard
-          %td
-            %p
-              Often, after creating an Adhearsion application, we need to test it at scale. This usually means hand-crafting a SIPp profile and associated pcap-formatted audio file to test the application. It's a time-consuming process, and much of it could be automated. The idea is to be able to specify the load test actions in a simple format, likely YAML, and have a program convert that YAML to XML and a PCAP file. A prototype (not using SIPp) can be seen in
-              %a{:href => "https://github.com/mojolingo/ahn-loadbot"} ahn_loadbot.
-
-            %p
-              The features:
-              %ul
-                %li
-                  Take a YAML with simplified syntax and use it to generate an XML file and a PCAP audio file suitable for use with
-                  %a{:href => "http://sipp.sourceforge.net/"} SIPp
-                %li Ability to quickly set DTMF playtimes during the call (after pickup, wait 10 seconds, then 1-2-3..), play media, automate run-throughs of full stack components
-                %li Use queuing mechanism to allow for high concurrency.
-                %li Create a browser-accessible live dashboard showing the number of active calls, the number of completed calls, and the number of calls resulting in error
 
       %h2 How do I apply as a student?
       %p
