@@ -46,20 +46,17 @@ Note that the user needs acess to all AMI events and actions. Also, we have setu
 
 ### Route calls to AsyncAGI
 
-To process calls with Adhearsion they must be routed through AsyncAGI.  Add the following context your `/etc/asterisk/extensions.conf`:
+To process calls with Adhearsion they must be routed through AsyncAGI.  Add the following contexts your `/etc/asterisk/extensions.conf`:
 
 ```
 [adhearsion]
 exten => _.,1,AGI(agi:async)
+
+[adhearsion-redirect]
+exten => 1,1,AGI(agi:async)
 ```
 
 This will route all calls that hit the "adhearsion" context to your Adhearsion application.  To get calls into the "adhearsion" context, you should configure your SIP peers or Dahdi or other channels to have "context=adhearsion" in their configuration.  Please consult the Asterisk documentation for more information on setting up peers and channels.
-
-Note also that on versions Asterisk 1.8, it is necessary to add an empty context with the name 'adhearsion-redirect':
-
-```
-[adhearsion-redirect]
-```
 
 ## Configuring Adhearsion for Asterisk
 
