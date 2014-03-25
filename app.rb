@@ -13,6 +13,11 @@ before do
   cache_control :public, :must_revalidate, :max_age => 1.hour if ENV['RACK_ENV']
 end
 
+$twitter = Twitter::REST::Client.new do |config|
+  config.consumer_key     = ENV["TWITTER_CONSUMER_KEY"]
+  config.consumer_secret  = ENV["TWITTER_CONSUMER_SECRET"]
+end
+
 require 'singleton'
 
 class BlogPostAggregator
@@ -156,4 +161,8 @@ end
 
 def show_title?
   @show_title
+end
+
+def tweets
+  $twitter.user_timeline('adhearsion', count: 2)
 end

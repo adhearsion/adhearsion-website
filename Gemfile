@@ -12,6 +12,7 @@ gem 'pony'
 gem 'redcarpet'
 gem 'pygments.rb'
 gem 'unicorn'
+gem 'twitter'
 
 group :development do
   gem 'heroku'
