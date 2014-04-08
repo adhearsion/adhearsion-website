@@ -41,6 +41,8 @@ The available categories of events are currently:
 * ami
 * after_initialized
 * exception
+* stop_requested
+* shutdown
 
 ## Per-call events
 
