@@ -51,6 +51,6 @@ The call will pass through the router in the same way as an incoming call.
     Back to <a href="/docs/getting-started/installation">Installation</a>
   </span>
   <span class='forward'>
-    Continue to <a href="/docs/call-controllers">Call Controllers</a>
+    Continue to <a href="/docs/calls">Calls</a>
   </span>
 </div>
