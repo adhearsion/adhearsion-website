@@ -29,6 +29,18 @@ There are two ways to start an Adhearsion process:
 
 * In the background as a daemon.  This is typical for deployment scenarios.  To start in this mode call ahn with the "daemon" argument: `ahn daemon /path/to/my/application`
 
+## Choice of Ruby VM
+
+While Adhearsion will run well on CRuby (MRI/YARV) 1.9.3 and above, we generally recommend the use of JRuby for high volume deployments.
+
+### JRuby
+
+On JRuby, several options can be helpful for the smooth running of an Adhearsion application. On one project we have had success with the following options:
+
+```
+JRUBY_OPTS="-J-Xmx2048m -J-Xms2048m -J-Xmn512m -J-XX:+CMSClassUnloadingEnabled -J-XX:+UseConcMarkSweepGC -J-XX:MaxPermSize=512M --server"
+```
+
 <a href="#" rel="docs-nav-active" style="display:none;">docs-nav-best-practices</a>
 
 <div class='docs-progress-nav'>
