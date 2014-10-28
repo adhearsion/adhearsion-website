@@ -150,6 +150,12 @@ class MyController < Adhearsion::CallController
 end
 ```
 
+**IMPORTANT: Notes on audio file URLs**
+
+Fetching the audio file and playing it back is the job of the telephony engine (or, in some cases, of the media server when using SSML documents that contain both audio and text). This is important because when referencing a `file:///` URL it needs to be visible from the telephony engine (Asterisk or FreeSWITCH). Additionally:
+* Asterisk *only* supports `file:///` URLs for playback
+* FreeSWITCH supports both `http:///` and `file:///` URLs for playback
+
 ### #say
 
 In many circumstances, it is desireable to speak certain output using a text-to-speech engine. This is simple using the `#say` method, providing either a simple string or an SSML document:
