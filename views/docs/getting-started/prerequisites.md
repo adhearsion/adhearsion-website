@@ -17,7 +17,7 @@ Adhearsion requires [Ruby](http://ruby-lang.org) version 1.9.2 or later. [JRuby]
 
 Most operating systems come with a version of Ruby installed.  However, it is very important to check the version.  Mac OS X ships with a version of Ruby based on 1.8.7, which is too old.  Debian and its derivatives, including Ubuntu, provide a version of Ruby 1.9 with the package called `ruby19`.
 
-One easy, cross-platform way to install an acceptable version of Ruby is to use the [Ruby Version Manager](http://rvm.beginrescueend.com), also called ["RVM"](http://rvm.beginrescueend.com).
+One easy, cross-platform way to install an acceptable version of Ruby is to use the [Ruby Version Manager](https://rvm.io), also called ["RVM"](https://rvm.io).
 
 After you have RVM installed, installing Ruby 1.9.3 with RVM is easy:
 
