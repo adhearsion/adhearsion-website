@@ -190,7 +190,7 @@ We will not cover setting up app_swift itself here, but configuring Adhearsion t
 
 ```ruby
 Adhearsion.config do |config|
-  config.punchblock.media_engine = :swift
+  config.platform.media.default_renderer = :swift
 end
 ```
 
@@ -202,7 +202,7 @@ It is possible to render output documents via an engine attached to Asterisk via
 
 ```ruby
 Adhearsion.config do |config|
-  config.punchblock.media_engine = :unimrcp
+  config.platform.media.default_renderer = :unimrcp
 end
 ```
 
