@@ -2,7 +2,7 @@
 
 [TOC]
 
-In Adhearsion 2, all calls come in to a single place, the Router. The VoIP platform, be it Asterisk, Voxeo PRISM, or anything else, does not instruct Adhearsion on how to route the call. Instead, we have a DSL for defining routes, which can have some interesting rules, in order to decide what should happen to each individual call. This lives in the application's config file, `config/adhearsion.rb`.
+In Adhearsion 2, all calls come in to a single place, the Router. The VoIP platform, be it Asterisk, Voxeo PRISM, or anything else, does not instruct Adhearsion on how to route the call. Instead, we have a DSL for defining routes, which can have some interesting rules, in order to decide what should happen to each individual call. This lives in the application's config file, `config/routes.rb`.
 
 ```ruby
 Adhearsion.router do
@@ -17,7 +17,7 @@ end
 
 The first option is a freeform route label which is used primarily for logging.  The rest of the route is a combination of its guards and its target, which may either be a particular CallController class or a block of code. You can see an example of the syntax for each above.
 
-In the above example the :to attribute of the incoming Call object is matched against a regular expression. This is supplied using hash syntax. This matching syntax borrows from Jeff Smick's excellent Blather XMPP client library, called [has-guaded-handlers](https://adhearsion.github.com/has-guarded-handlers), which in turn borrows from the idea of [Guards](http://en.wikibooks.org/wiki/Erlang_Programming/guards) from [Erlang](http://www.erlang.org/). The route will be allowed to match a call only if all of its guards are satisfied.
+In the above example the `:to` attribute of the incoming Call object is matched against a regular expression. This is supplied using hash syntax. This matching syntax borrows from Jeff Smick's excellent Blather XMPP client library, called [has-guaded-handlers](https://adhearsion.github.com/has-guarded-handlers), which in turn borrows from the idea of [Guards](http://en.wikibooks.org/wiki/Erlang_Programming/guards) from [Erlang](http://www.erlang.org/). The route will be allowed to match a call only if all of its guards are satisfied.
 
 The general structure of a route definition is one of the two following formats:
 
@@ -75,7 +75,7 @@ It is possible to modify routes to achieve certain goals. In all cases, you can 
 
 ### Do not auto-accept calls that match
 
-By default, Adhearsion will indicate ringing to any call that matches a route until you call answer in your controller. Sometimes (mostly when bridging) this is undesireable, and you can prevent it like so:
+By default, Adhearsion will indicate ringing to any call that matches a route until you call `answer` in your controller. Sometimes (mostly when bridging) this is undesireable, and you can prevent it like so:
 
 ```ruby
 Adhearsion.router do
@@ -97,7 +97,7 @@ end
 
 ### Do not hangup after controller execution
 
-By default, Adhearsion will hangup the call after execution of the controller specified in the router (or any controllers it passes to or invokes). This is to ensure that calls are not left hanging around because your controller forgets to hangup, or crashes. Sometimes it is desireable to keep calls around, for example if your controller hands back control to Asterisk's extensions.conf. You can instruct Adhearsion not to automatically hang up by specifying the route as openended:
+By default, Adhearsion will hangup the call after execution of the controller specified in the router (or any controllers it passes to or invokes). This is to ensure that calls are not left hanging around because your controller forgets to hangup, or crashes. Sometimes it is desireable to keep calls around, for example if your controller hands back control to Asterisk's `extensions.conf`. You can instruct Adhearsion not to automatically hang up by specifying the route as openended:
 
 ```ruby
 Adhearsion.router do
