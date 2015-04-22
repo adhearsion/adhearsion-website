@@ -55,7 +55,7 @@ class BlogPostAggregator
   end
 
   def rss_url
-    @rss_url ||= "http://pipes.yahoo.com/pipes/pipe.run?_id=7d727342ec97cb855c218e5daba3843c&_render=rss"
+    @rss_url ||= "http://mojolingo.com/tagged/adhearsion/feed/"
   end
 end
 
