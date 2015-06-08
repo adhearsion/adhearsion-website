@@ -50,7 +50,7 @@ To process calls with Adhearsion they must be routed through AsyncAGI.  Add the 
 
 ```
 [adhearsion]
-exten => _.,1,AGI(agi:async)
+exten => _X.,1,AGI(agi:async)
 
 [adhearsion-redirect]
 exten => 1,1,AGI(agi:async)
