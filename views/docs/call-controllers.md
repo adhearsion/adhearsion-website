@@ -219,16 +219,106 @@ class MyController < Adhearsion::CallController
   def run
     answer
     result = ask "How many woodchucks? Enter a number followed by #.", terminator: '#'
-    say "Wow, #{result.response} is a lot of woodchucks!"
+    case result.status
+    when :match
+      say "Wow, #{result.utterance} is a lot of woodchucks!"
+    when :noinput
+      speak "Hellooo? Anyone there?"
+    when :nomatch
+      speak "That doesn't make sense."
+    end
   end
 end
 ```
 
-Here, we choose to cease input using a terminator digit. Alternative strategies include a `:timeout`, or a digit `:limit`, which are described in the [#ask API documentation](http://rubydoc.info/github/adhearsion/adhearsion/Adhearsion/CallController/Input:ask). Additionally, it is possible to pass a block, to which `#ask` will yield the digit buffer after each digit is received, in order to validate the input and optionally terminate early. If the block returns a truthy value when invoked, the input will be terminated early.
+Here, we choose to cease input using a terminator digit. Alternative strategies include a `:timeout`, or a digit `:limit`, which are described in the [#ask API documentation](http://rubydoc.info/github/adhearsion/adhearsion/Adhearsion/CallController/Input:ask), as well as the option of passing custom SRGS grammars for more complex input formats.
+
+Some examples of usage follow:
+
+#### Simple collection of 5 DTMF digits
+
+```ruby
+class MyController < Adhearsion::CallController
+  def run
+    result = ask limit: 5
+    case result.status
+    when :match
+      speak "You entered #{result.utterance}"
+    when :noinput
+      speak "Hellooo? Anyone there?"
+    when :nomatch
+      speak "That doesn't make sense."
+    end
+  end
+end
+```
+
+#### Collecting an arbitrary number of digits until '#' is received:
+
+```ruby
+class MyController < Adhearsion::CallController
+  def run
+    result = ask terminator: '#'
+    case result.status
+    when :match
+      speak "You entered #{result.utterance}"
+    when :noinput
+      speak "Hellooo? Anyone there?"
+    when :nomatch
+      speak "That doesn't make sense."
+    end
+  end
+end
+```
+
+#### Collecting input from an inline speech grammar
+
+```ruby
+class MyController < Adhearsion::CallController
+  def run
+    grammar = RubySpeech::GRXML.draw root: 'main', language: 'en-us', mode: :voice do
+      rule id: 'main', scope: 'public' do
+        one_of do
+          item { 'yes' }
+          item { 'no' }
+        end
+      end
+    end
+
+    result = ask grammar: grammar, input_options: { mode: :voice }
+    case result.status
+    when :match
+      speak "You said #{result.utterance}"
+    when :noinput
+      speak "Hellooo? Anyone there?"
+    when :nomatch
+      speak "That doesn't make sense."
+    end
+  end
+end
+```
+
+#### Collecting input from a speech grammar by URL
+
+```ruby
+class MyController < Adhearsion::CallController
+  def run
+    result = ask grammar_url: 'http://example.com/mygrammar.grxml', input_options: { mode: :voice }
+    case result.status
+    when :match
+      speak "You said #{result.utterance}"
+    when :noinput
+      speak "Hellooo? Anyone there?"
+    when :nomatch
+      speak "That doesn't make sense."
+    end
+  end
+end
+```
 
 ### #menu
 
-Rapid and painless creation of complex IVRs has always been one of the defining features of Adhearsion for beginning and advanced programmers alike. Through the `#menu` DSL method, the framework abstracts and packages the output and input management and the complex state machine needed to implement a complete menu with audio prompts, digit checking, retries and failure handling, making creating menus a breeze.
+Rapid and painless creation of complex IVRs has always been one of the defining features of Adhearsion for beginner and advanced programmers alike. Through the `#menu` DSL method, the framework abstracts and packages the output and input management and the complex state machine needed to implement a complete menu with audio prompts, digit checking, retries and failure handling, making creating menus a breeze.
 
 A sample menu might look something like this:
 
@@ -288,7 +378,7 @@ The `#match` method takes an `Integer`, a `String`, a `Range` or any number of t
 
 Execution of the current context resumes after `#menu` finishes. If you wish to jump to an entirely different controller, `#pass` can be used.
 
-`#menu` will return a [CallController::Input::Result](http://rubydoc.info/github/adhearsion/adhearsion/Adhearsion/CallController/Input/Result) object detailing the success or otherwise of the menu, similarly to `#ask`.
+`#menu` will return an [Adhearsion::CallController::Input::Result](http://rubydoc.info/github/adhearsion/adhearsion/Adhearsion/CallController/Input/Result) object detailing the success or otherwise of the menu, similarly to `#ask`.
 
 ## Recording
 
