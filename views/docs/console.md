@@ -49,6 +49,7 @@ The call will pass through the router in the same way as an incoming call.
 Note that if you are using Asterisk, the format is slightly different. The example below is SIP, but you can use any channel tecnology that Asterisk supports: SIP, IAX2, SKINNY, etc
 
 <pre class='terminal'>
+
 AHN> Adhearsion::OutboundCall.originate 'SIP/user1'
 </pre>
 
