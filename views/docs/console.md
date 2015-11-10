@@ -52,6 +52,22 @@ Note that if you are using Asterisk, the format is slightly different. The examp
 AHN> Adhearsion::OutboundCall.originate 'SIP/user1'
 </pre>
 
+If you need to place calls out into the outside world, you may get an error message 
+such as "I don't know how to authenticate..." if you try to call directly. 
+A solution to this is to use the Local channel which allows you to call an extension in a context.
+ 
+So, for example, if in your extensions.conf, you could have something such as:
+```ruby
+[outbound]
+exten => _X!,1,Dial(SIP/sip-outbound/${EXTEN})
+```
+Then you could do the following:
+<pre class='terminal'>
+AHN> Adhearsion::OutboundCall.originate 'Local/4443@outbound/n'
+</pre>
+
+Note the "/n" at the end as otherwise you end up with dead channels (see: http://www.voip-info.org/wiki/view/Asterisk+local+channels)
+
 <div class='docs-progress-nav'>
   <span class='back'>
     Back to <a href="/docs/getting-started/installation">Installation</a>
