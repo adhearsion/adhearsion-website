@@ -46,9 +46,10 @@ AHN> Adhearsion::OutboundCall.originate 'sip:arabbit@mojolingo.com', from: 'sip:
 
 The call will pass through the router in the same way as an incoming call.
 
-The following is an example of how to place an outbound call to a specific extension off Asterisk.
+Note that if you are using Asterisk, the format is slightly different. The example below is SIP, but you can use any channel tecnology that Asterisk supports: SIP, IAX2, SKINNY, etc
+
 <pre class='terminal'>
-AHN> Adhearsion::OutboundCall.originate 'IAX2/user1'
+AHN> Adhearsion::OutboundCall.originate 'SIP/user1'
 </pre>
 
 <div class='docs-progress-nav'>
