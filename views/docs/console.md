@@ -52,7 +52,7 @@ Note that if you are using Asterisk, the format is slightly different. The examp
 AHN> Adhearsion::OutboundCall.originate 'SIP/user1'
 </pre>
 
-If you need to place calls out into the outside world, you may get an error message 
+As well, if you need to place calls out into the outside world, you may get an error message 
 such as "I don't know how to authenticate..." if you try to call directly. 
 A solution to this is to use the Local channel which allows you to call an extension in a context.
  
