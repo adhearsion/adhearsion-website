@@ -52,7 +52,11 @@ Note that if you are using Asterisk, the format is slightly different. The examp
 AHN> Adhearsion::OutboundCall.originate 'SIP/user1'
 </pre>
 
-As well, if you need to place calls out into the outside world, remember you cannot call directly to SIP/user@sipproider.full.dns, you may get an error message
+As well, if you need to place calls out into the outside world, remember you cannot call directly to, for example:
+
+AHN> Adhearsion::OutboundCall.originate SIP/4443@sipprovider.full.dns 
+
+You will likely get an error message
 such as: chan_sip.c:23322 handle_response_invite: Failed to authenticate on INVITE to '"Anonymous" .... 
 
 Make sure that you have your peer set up in sip.conf and call that context (in this case 'sip-provider')
