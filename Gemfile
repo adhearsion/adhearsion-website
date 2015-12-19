@@ -1,6 +1,6 @@
 source "http://rubygems.org"
 
-ruby "2.1.2"
+ruby "2.2.2", engine: 'jruby', engine_version: '9.0.5.0'
 
 gem "sinatra"
 gem "sinatra_more", :require => 'sinatra_more/markup_plugin'
