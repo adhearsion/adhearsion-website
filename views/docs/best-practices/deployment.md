@@ -4,9 +4,9 @@
 
 Adhearsion can be deployed any way you like, but here are some guidelines to make the process easier. These will evolve over time:
 
-## Deploying to Heroku
+## Deploying to PaaS
 
-Heroku is the current preferred deployment environment, because of the simplicity with which applications may be deployed there.
+Heroku is one of the easiest deployment targets to get up and running with. Other PaaS systems follow similar patterns to Heroku, and you should consult their documentation in order to figure out how to deploy an Adhearsion app to them.
 
 The first step is to generate an Adhearsion application:
 
@@ -308,20 +308,33 @@ Scaling ahn processes... done, now running 1
 Scaling web processes... done, now running 0
 </pre>
 
-## Deploying to the cloud/a VPS/bare metal
+## Deploying to IaaS/a VPS/bare metal
 
-[Foreman](http://ddollar.github.com/foreman) is a good option for managing your application's processes both in development and production. In development, you should run foreman start, but in production you should probably export to something like Ubuntu Upstart.
+If you wish to deploy an Adhearsion application to your own servers, be they IaaS-based, traditional VMs or bare metal, it is suggested to utilise a 12factor-compliant pipeline. Our suggestion is to utilise [pkgr](https://github.com/crohr/pkgr) (or the hosted version, [Packager.io](https://packager.io/)). This way, you can ship your applications as a fully self-contained package compatible with various operating systems and already setup for a PaaS-like management approach.
 
-It is possible to instruct Foreman to include extra environment variables when executing your application. This is done by including an `.env` file in the app directory when running foreman or exporting to Upstart. The file should be similar to this:
+You should build packages as part of your application build pipeline, perhaps using a CI system like Jenkins. Your packages should then be stored in a package repository, which you might host on your own infrastructure, or rent from a SaaS provider. If you utilise the hosted version of Packager, both of these things are provided for you. Note that if you are installing on CentOS, you will need to explicitly specify a dependency on PCRE in your `.pkgr.yml`. On other platforms, you can simply run `pkgr package` on a freshly generated Adhearsion app to produce a working package.
+
+```yaml
+targets:
+  centos-6:
+    build_dependencies:
+      - pcre-devel
+```
+
+Once you have your package safely in a repository, you can then install it on your system using your operating system's standard package management, in much the same way as you would install other software such as Apache or MySQL.
+
+Once installed, a pkgr-built Adhearsion application will install a command-line utility for managing your application. It will be named after the name of your app directory or source control repository (or you can manually specify a name in `.pkgr.yml`) and you can run it without any arguments to see using info.
+
+Importantly, you can set your application config in a 12factor compatible way using `myapp config:set`, including viewing your application configuration using `myapp run rake config:show`. If you want to manage your application configuration using some configuration management system, you can simply write key-value pairs of environment variables to a file in `/etc/myapp` and these will be read on startup. The file should be similar to this:
 
 ```ruby
 AHN_PUNCHBLOCK_USERNAME=foobar
 AHN_PUNCHBLOCK_PASSWORD=barfoo
 ```
 
-You can optionally place this file elsewhere and specify its location using `--env`.
+You can run your application in the foreground using `myapp run ahn`. Alternatively, you can daemonize your application by running `myapp scale ahn=1` and manipulate the service by running `service myapp start/stop/restart/status`; your operating system's standard service management (systemd, upstart or SysV init) will be used to manage the process, and your application's logs will be written to `/var/log/myapp`.
 
-Check the Foreman docs for more details.
+Check the [pkgr docs](https://github.com/crohr/pkgr) for more details.
 
 <a href="#" rel="docs-nav-active" style="display:none;">docs-nav-best-practices</a>
 

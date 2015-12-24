@@ -16,24 +16,7 @@ The default available log levels are TRACE, DEBUG, INFO, WARN, ERROR, FATAL.
 
 ## Send logs elsewhere
 
-By default, the logs are output to log/adhearsion.log and stdout.
-
-### Change the log file location
-
-You may change the location of the log file by altering the `config.platform.logging.outputters` config setting, like so:
-
-<pre class="terminal">
-
-ADHEARSION_PLATFORM_LOGGING_OUTPUTTERS=/var/log/adhearsion.log ahn start -
-</pre>
-
-### Log to syslog
-
-See [the logging gem](https://github.com/TwP/logging/blob/master/lib/logging/appenders/syslog.rb#L23).
-
-### Send logs by email
-
-See [the logging gem](https://github.com/TwP/logging/blob/master/lib/logging/appenders/email.rb#L25).
+By default, logs are streamed to stdout in accordance with [12factor guidance](http://12factor.net/logs). If you wish to persist logs to disk or route them to some sort of aggregation system, you must do so within the platform that hosts your Adhearsion application. If you've followed the [deployment instructions](/docs/best-practices/deployment) then you already have this setup.
 
 ## Change the log format
 

@@ -12,7 +12,6 @@ Starting with Adhearsion 2.0, all Adhearsion applications will appear in your pr
 
 Adhearsion 2.0 processes respond to several signals:
 
-* On SIGHUP, Adhearsion will close and reopen all logfiles.  Make sure you do this after rotating log files, for example, with logrotate.
 * On SIGALRM, Adhearsion will toggle on or off TRACE level logging.  This can be very helpful when debugging a production system.
 * On SIGINT or SIGTERM Adhearsion does several things:
     - On first signal, Adhearsion marks its internal state as "shutting down" but continues to take and process calls normally.
@@ -23,11 +22,7 @@ Adhearsion 2.0 processes respond to several signals:
 
 ## Starting and Stopping Adhearsion Processes
 
-There are two ways to start an Adhearsion process:
-
-* In the foreground with an Adhearsion console.  This is the common case while developing Adhearsion applications.  To start in this mode call ahn with the "start" argument: `ahn start /path/to/my/application`
-
-* In the background as a daemon.  This is typical for deployment scenarios.  To start in this mode call ahn with the "daemon" argument: `ahn daemon /path/to/my/application`
+To start an application, run `ahn start` like so: `ahn start /path/to/my/application`. You may also pass `--no-console` to boot the app without a console attached.
 
 <a href="#" rel="docs-nav-active" style="display:none;">docs-nav-best-practices</a>
 

@@ -1,5 +1,30 @@
 [TOC]
 
+# Upgrading from Adhearsion 2.x to 3.0
+
+Adhearsion 3 builds on the Adhearsion 2 release and the lessons we learned from using it, cleaning up a number of rough edges. As such, deprecations and eventually removals happened, and there is work to be done to make an existing Adhearsion app work on 3.0.
+
+## Prerequisites
+
+* Ruby version
+* No more FreeSWITCH
+
+## Media input
+
+* Migrate first to adhearsion-asr with Adhearsion 2 (including details)
+* Removal of adhearsion-asr from app
+* Moving configuration from adhearsion-asr to core
+
+## Dial confirmation
+
+* No more #dial_and_confirm
+* #dial now confirms in parallel
+
+## Misc
+
+* No more integration with RAILS_ENV
+* New operational guidelines
+
 # Upgrading from Adhearsion 1.x to 2.0
 
 Adhearsion 2.0 brings many changes.  It marks the first time since release 0.8.0 in 2008 that we have broken backward compatibility with previous versions.  This means that, while you have access to a rich set of new features, it also means existing applications will need to be ported to run on Adhearsion 2.  This document aims to list the changes required to migrate an Adhearsion 1.x application up to Adhearsion 2.

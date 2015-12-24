@@ -180,6 +180,107 @@ end
 
 As usual, check out the [#say API documentation](http://rubydoc.info/github/adhearsion/adhearsion/Adhearsion/CallController/Output:say) for more.
 
+### Internationalisation
+
+Adhearsion supports internationalisation of prompts in your CallControllers using the `CallController#t` method, via the [i18n gem](https://github.com/svenfuchs/i18n).
+
+Make sure to create your locales in `config/locales` within your Adhearsion app, and you can change the default locale by putting something like this in config/adhearsion.rb:
+
+```ruby
+I18n.default_locale = :de
+```
+
+More docs (though admittedly Rails-specific - read carefully) can be found at http://guides.rubyonrails.org/i18n.html
+
+#### Examples
+
+en.yml:
+
+```yaml
+en:
+  string1:
+    audio: /path/to/string1.wav
+    text: 'String One'
+
+  string2:
+    audio: '/path/to/string2.wav'
+
+  string3:
+    text: 'String Three'
+```
+
+example_controller.rb:
+
+```ruby
+class ExampleController < Adhearsion::CallController
+  def run
+    answer
+
+    play t(:string1)
+    # SSML generated: <speak><audio src="/path/to/string1.wav">String One</audio></speak>
+
+    play t(:string2)
+    # SSML generated: <speak><audio src="/path/to/string2.wav"></audio></speak>
+
+    play t(:string3)
+    # SSML generated: <speak>String Three</speak>
+  end
+end
+```
+
+#### String interpolations
+
+Adhearsion supports string interpolations just as i18n itself does. However there are some guidelines we recommend:
+
+* When you want to craft TTS strings that contain variable data, use SSML instead
+* Use interpolations only for audio files, not for TTS text strings
+
+The reason for this is that it is not practical to assume that you can interpolate text into a recorded audio file. Thus while your app may start with TTS-only today, following this practice will ensure that you can more easily convert to recorded audio in the future.
+
+Example:
+
+Bad:
+
+```ruby
+play t(:hello, name: 'Ben')
+```
+
+Good:
+
+```ruby
+play t(:hello), 'Ben'
+```
+
+Further discussion on this issue can be found in [adhearsion-i18n issue #3](https://github.com/adhearsion/adhearsion-i18n/issues/3).
+
+#### Verifying audio prompts
+
+Adhearsion includes a rake task that will check to ensure each defined audio file is present in the application. This assumes that the audio files are kept in the Adhearsion application itself and not hosted externally.
+
+Given a YAML locale file like:
+
+```yaml
+en:
+  hello:
+    audio: hello.wav
+  missing_prompt:
+    audio: missing_prompt.wav
+```
+
+Assuming the default location of `#{Adhearsion.root}/audio`, this example assumes that `hello.wav` is present, but `missing_prompt.wav` is missing.
+
+Then run the rake task to validate the prompts and see output like this:
+
+```Bash
+$ rake i18n:validate_files
+[2014-05-07 16:03:00.792] DEBUG Adhearsion::Initializer: Adding /Users/bklang/myapp/config/locales to the I18n load path
+
+Adhearsion configured environment: development
+[2014-05-07 16:03:00.833] INFO  Object: [en] Missing audio file: /Users/bklang/myapp/audio/en/missing_prompt.wav
+[2014-05-07 16:03:00.833] ERROR Object: Errors detected! Number of errors by locale:
+[2014-05-07 16:03:00.833] ERROR Object: [en]: 1 missing prompts
+```
+
 ### Asterisk setup
 
 If a text-to-speech engine is configured, all output will be rendered by the engine; otherwise, only file playback will be supported on Asterisk. The adhearsion-asterisk plugin provides helpers for Asterisk's built in complex-data rendering methods, and [its documentation](http://adhearsion.github.com/adhearsion-asterisk) is the appropriate place to find documentation for those.
@@ -219,16 +320,106 @@ class MyController < Adhearsion::CallController
   def run
     answer
     result = ask "How many woodchucks? Enter a number followed by #.", terminator: '#'
-    say "Wow, #{result.response} is a lot of woodchucks!"
+    case result.status
+    when :match
+      say "Wow, #{result.utterance} is a lot of woodchucks!"
+    when :noinput
+      speak "Hellooo? Anyone there?"
+    when :nomatch
+      speak "That doesn't make sense."
+    end
   end
 end
 ```
 
-Here, we choose to cease input using a terminator digit. Alternative strategies include a `:timeout`, or a digit `:limit`, which are described in the [#ask API documentation](http://rubydoc.info/github/adhearsion/adhearsion/Adhearsion/CallController/Input:ask). Additionally, it is possible to pass a block, to which `#ask` will yield the digit buffer after each digit is received, in order to validate the input and optionally terminate early. If the block returns a truthy value when invoked, the input will be terminated early.
+Here, we choose to cease input using a terminator digit. Alternative strategies include a `:timeout`, or a digit `:limit`, which are described in the [#ask API documentation](http://rubydoc.info/github/adhearsion/adhearsion/Adhearsion/CallController/Input:ask), as well as the option of passing custom SRGS grammars for more complex input formats.
+
+Some examples of usage follow:
+
+#### Simple collection of 5 DTMF digits
+
+```ruby
+class MyController < Adhearsion::CallController
+  def run
+    result = ask limit: 5
+    case result.status
+    when :match
+      speak "You entered #{result.utterance}"
+    when :noinput
+      speak "Hellooo? Anyone there?"
+    when :nomatch
+      speak "That doesn't make sense."
+    end
+  end
+end
+```
+
+#### Collecting an arbitrary number of digits until '#' is received:
+
+```ruby
+class MyController < Adhearsion::CallController
+  def run
+    result = ask terminator: '#'
+    case result.status
+    when :match
+      speak "You entered #{result.utterance}"
+    when :noinput
+      speak "Hellooo? Anyone there?"
+    when :nomatch
+      speak "That doesn't make sense."
+    end
+  end
+end
+```
+
+#### Collecting input from an inline speech grammar
+
+```ruby
+class MyController < Adhearsion::CallController
+  def run
+    grammar = RubySpeech::GRXML.draw root: 'main', language: 'en-us', mode: :voice do
+      rule id: 'main', scope: 'public' do
+        one_of do
+          item { 'yes' }
+          item { 'no' }
+        end
+      end
+    end
+
+    result = ask grammar: grammar, input_options: { mode: :voice }
+    case result.status
+    when :match
+      speak "You said #{result.utterance}"
+    when :noinput
+      speak "Hellooo? Anyone there?"
+    when :nomatch
+      speak "That doesn't make sense."
+    end
+  end
+end
+```
+
+#### Collecting input from a speech grammar by URL
+
+```ruby
+class MyController < Adhearsion::CallController
+  def run
+    result = ask grammar_url: 'http://example.com/mygrammar.grxml', input_options: { mode: :voice }
+    case result.status
+    when :match
+      speak "You said #{result.utterance}"
+    when :noinput
+      speak "Hellooo? Anyone there?"
+    when :nomatch
+      speak "That doesn't make sense."
+    end
+  end
+end
+```
 
 ### #menu
 
-Rapid and painless creation of complex IVRs has always been one of the defining features of Adhearsion for beginning and advanced programmers alike. Through the `#menu` DSL method, the framework abstracts and packages the output and input management and the complex state machine needed to implement a complete menu with audio prompts, digit checking, retries and failure handling, making creating menus a breeze.
+Rapid and painless creation of complex IVRs has always been one of the defining features of Adhearsion for beginner and advanced programmers alike. Through the `#menu` DSL method, the framework abstracts and packages the output and input management and the complex state machine needed to implement a complete menu with audio prompts, digit checking, retries and failure handling, making creating menus a breeze.
 
 A sample menu might look something like this:
 
@@ -288,7 +479,7 @@ The `#match` method takes an `Integer`, a `String`, a `Range` or any number of t
 
 Execution of the current context resumes after `#menu` finishes. If you wish to jump to an entirely different controller, `#pass` can be used.
 
-`#menu` will return a [CallController::Input::Result](http://rubydoc.info/github/adhearsion/adhearsion/Adhearsion/CallController/Input/Result) object detailing the success or otherwise of the menu, similarly to `#ask`.
+`#menu` will return an [Adhearsion::CallController::Input::Result](http://rubydoc.info/github/adhearsion/adhearsion/Adhearsion/CallController/Input/Result) object detailing the success or otherwise of the menu, similarly to `#ask`.
 
 ## Recording
 
