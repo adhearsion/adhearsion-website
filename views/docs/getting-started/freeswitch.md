@@ -36,6 +36,8 @@ Lastly, if FreeSWITCH was already running, remember to run the `reloadxml` comma
 
 Please read and follow the instructions in the general [Installation](/docs/getting-started/installation) guide before continuing on to the following FreeSWITCH-specific Adhearsion configuration.
 
+If you plan to record calls, either voicemail or call auditing, make sure there is a directory named `recordings` in your FreeSWITCH application directory to store the audio files. Otherwise, depending upon your version of Adhearsion, the recording will not be saved and there will be no error indication.
+
 ## Configuring Adhearsion for FreeSWITCH
 
 As always the full list of configuration options can be viewed, along with a description and their default values, by typing `rake config:show` in your application directory.  There are a few configuration options that are particularly important:
