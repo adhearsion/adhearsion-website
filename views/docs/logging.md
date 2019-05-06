@@ -24,7 +24,7 @@ You may change the location of the log file by altering the `config.platform.log
 
 <pre class="terminal">
 
-ADHEARSION_PLATFORM_LOGGING_OUTPUTTERS=/var/log/adhearsion.log ahn start -
+AHN_PLATFORM_LOGGING_OUTPUTTERS=/var/log/adhearsion.log ahn start -
 </pre>
 
 ### Log to syslog
